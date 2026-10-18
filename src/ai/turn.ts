@@ -8,7 +8,7 @@ import { manageSettlements } from './settlements';
 import { analyseSituation, evaluateStrategy } from './strategy';
 import { manageTrade } from './trade';
 import { manageUnits } from './units';
-import { handleMerchants, proposeAgreements } from './commerce';
+import { claimTiles, fulfillQuests, handleMerchants, proposeAgreements } from './commerce';
 
 /**
  * Führt einen vollständigen Zug für einen Computerspieler aus und beendet ihn.
@@ -60,6 +60,8 @@ function playMajorTurn(ctx: AiContext): void {
   manageTrade(ctx);
   proposeAgreements(ctx);
   handleMerchants(ctx);
+  fulfillQuests(ctx);
+  claimTiles(ctx);
   // Forschung kann durch Kuriositäten abgeschlossen worden sein
   manageResearch(ctx);
   mem.settlementCount = ctx.view.ownSettlements().length;

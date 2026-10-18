@@ -1,3 +1,4 @@
+import { canClaimTile, claimTileCost } from '../core/systems/cityStates';
 import { isPassableLand } from '../core/map/passability';
 import { isAtWar, type GameState, type Settlement, type Unit } from '../core/state';
 import { canEstablishRoute, canProposeAgreement, hasAgreement, routeYield, homeSettlement, setAgreementEvaluator } from '../core/systems/trade';
@@ -98,4 +99,42 @@ export function handleMerchants(ctx: AiContext): void {
     // Kein erreichbares, lohnendes Ziel: Händler auflösen statt ihn ewig warten zu lassen
     if (!progressed && ctx.state.units[u.id] && u.movesLeft > 0) ctx.issue({ type: 'unitAction', unitId: u.id, action: 'disband' });
   }
+}
+
+/** Aufträge von Stadtstaaten erfüllen, wenn die Güter entbehrlich sind. */
+export function fulfillQuests(ctx: AiContext): void {
+  for (const cs of ctx.state.players) {
+    if (cs.kind !== 'cityState' || !cs.alive || !cs.quest) continue;
+    if (!ctx.view.knownForeignSettlements().some((k) => k.info.owner === cs.id)) continue;
+    // nur liefern, wenn danach noch ein Polster bleibt
+    const have = ctx.player.stock[cs.quest.good] ?? 0;
+    if (have < cs.quest.amount * 1.5 + 2) continue;
+    ctx.issue({ type: 'fulfillQuest', target: cs.id });
+  }
+}
+
+/** Überschüssigen Einfluss in Felder mit Ressourcen am Gebietsrand investieren. */
+export function claimTiles(ctx: AiContext): void {
+  const reserve = 40 + ctx.player.era * 10;
+  if (ctx.player.influence < reserve) return;
+  const grid = ctx.view.grid;
+  const candidates = new Set<number>();
+  for (const s of ctx.view.ownSettlements()) for (const t of grid.range(s.tile, 3)) candidates.add(t);
+  const scored = [...candidates]
+    .filter((t) => ctx.state.tileOwner[t] === -1 && ctx.view.knownTile(t) && canClaimTileFor(ctx, t))
+    .map((t) => {
+      const tile = ctx.view.knownTile(t)!;
+      return { t, score: (tile.resource ? 3 : 0) + (tile.river ? 1 : 0) + (tile.feature === 'forest' ? 0.5 : 0) };
+    })
+    // bei großem Einflussüberschuss auch einfache Felder (Wachstum des Reiches)
+    .filter((c) => c.score >= 3 || (ctx.player.influence > reserve * 4 && c.score >= 0))
+    .sort((a, b) => b.score - a.score || a.t - b.t);
+  for (const c of scored.slice(0, ctx.player.influence > reserve * 4 ? 4 : 2)) {
+    if (ctx.player.influence - claimTileCost(ctx.state, ctx.pid, c.t) < reserve) break;
+    ctx.issue({ type: 'claimTile', tile: c.t });
+  }
+}
+
+function canClaimTileFor(ctx: AiContext, tile: number): boolean {
+  return canClaimTile(ctx.state, ctx.pid, tile) === null;
 }

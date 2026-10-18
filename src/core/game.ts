@@ -53,6 +53,7 @@ import {
   upgradeSettlement,
 } from './systems/settlements';
 import { computeVisibility, updateExplored } from './systems/vision';
+import { CITY_STATE_TYPE_ORDER, canClaimTile, canFulfillQuest, claimTile, fulfillQuest, processCityState, setLevyHook } from './systems/cityStates';
 import { agreementEvaluator, canEstablishRoute, canProposeAgreement, cancelAgreement, establishRoute, hasAgreement, signAgreement, validateTrade } from './systems/trade';
 import { canBuildRoad, logRoadDone, nextAutoRoadTile, progressRoadWork, startRoadWork } from './systems/transport';
 
@@ -220,6 +221,7 @@ function placeCityStates(state: GameState, rng: Rng, count: number, starts: numb
     if (minDist < 8) continue;
     const id = state.players.length;
     const p = newPlayer(id, names[made % names.length], 'citystate', 'cityState', colors[made % colors.length], grid.size);
+    p.cityStateType = CITY_STATE_TYPE_ORDER[made % CITY_STATE_TYPE_ORDER.length];
     p.era = 0;
     state.players.push(p);
     const s = foundSettlement(state, id, c, 'settlement', 4);
@@ -281,6 +283,8 @@ export type Command =
   | { type: 'establishTrade'; unitId: number; settlementId: number }
   | { type: 'proposeAgreement'; target: number }
   | { type: 'cancelAgreement'; target: number }
+  | { type: 'fulfillQuest'; target: number }
+  | { type: 'claimTile'; tile: number }
   | { type: 'endTurn' };
 
 export interface CommandResult {
@@ -437,6 +441,19 @@ export function applyCommand(state: GameState, playerId: number, cmd: Command): 
       refreshReports(state, playerId);
       return ok;
     }
+    case 'fulfillQuest': {
+      const err = canFulfillQuest(state, playerId, cmd.target);
+      if (err) return fail(err);
+      fulfillQuest(state, playerId, cmd.target);
+      return ok;
+    }
+    case 'claimTile': {
+      const err = canClaimTile(state, playerId, cmd.tile);
+      if (err) return fail(err);
+      claimTile(state, playerId, cmd.tile);
+      afterChange(state, playerId);
+      return ok;
+    }
     case 'cancelAgreement':
       if (!hasAgreement(state, playerId, cmd.target)) return fail('Kein Abkommen');
       cancelAgreement(state, playerId, cmd.target);
@@ -473,6 +490,10 @@ export function validateItem(state: GameState, s: Settlement, item: ProductionIt
     }
   }
 }
+
+setLevyHook((state, owner, type, tile) => {
+  createUnit(state, owner, type, tile).movesLeft = 0;
+});
 
 setCompleteItemHandler((state, s, item) => {
   switch (item.kind) {
@@ -914,17 +935,7 @@ function cityStateTurn(state: GameState, pid: number): void {
     const defenders = Object.values(state.units).filter((u) => u.owner === pid && u.tile === s.tile).length;
     if (defenders === 0 && !s.queue.length) s.queue.push({ kind: 'unit', id: 'clubman' });
   }
-  // Suzerän: Spieler mit der höchsten Gunst (mind. 3) erhält Güterlieferungen
-  const best = Object.entries(cs.favor).sort((a, b) => b[1] - a[1])[0];
-  if (best && best[1] >= 3) {
-    const suz = state.players[Number(best[0])];
-    if (suz?.alive) {
-      const goods: GoodId[] = ['wood', 'stone', 'tools', 'cloth'];
-      const g = goods[state.turn % goods.length];
-      addStock(suz.stock, g, 1 + Math.floor(best[1] / 3));
-      suz.influence += 1;
-    }
-  }
+  processCityState(state, pid);
 }
 
 // ---------------------------------------------------------------------------

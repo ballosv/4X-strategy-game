@@ -13,6 +13,7 @@ import { isAtWar, playerSettlements, playerUnits, totalPop, type GameState, type
 import { canBuildBuilding, canTrainUnit, canUpgradeImprovement, collectJobs, improvementOptions, itemCost, ownedTiles } from '../core/systems/economy';
 import { MILESTONES, score } from '../core/systems/legacy';
 import { canResearch, eraProgress } from '../core/systems/research';
+import { CITY_STATE_TYPES, FRIEND_FAVOR, QUEST_FAVOR, SUZERAIN_FAVOR, canFulfillQuest, relationTo, suzerainOf } from '../core/systems/cityStates';
 import { AGREEMENT_GOLD, canProposeAgreement, hasAgreement, maxTradeRoutes, routeYield, routesOf } from '../core/systems/trade';
 import { h } from './dom';
 import { costText, fmt } from './format';
@@ -329,7 +330,7 @@ export function diplomacyScreen(host: ScreenHost): HTMLElement {
           ? h(
               'div',
               null,
-              h('div', { class: 'hint' }, p.kind === 'cityState' ? `Stadtstaat · Gunst: ${p.favor[host.viewer] ?? 0}` : p.kind === 'machine' ? 'Die erwachte Maschinenintelligenz' : `${civ ? civ.traits.map((t) => TRAITS[t].name).join(', ') : ''} · ${ERAS[p.era].name}`),
+              h('div', { class: 'hint' }, p.kind === 'cityState' ? `${CITY_STATE_TYPES[p.cityStateType ?? 'trade'].icon} ${CITY_STATE_TYPES[p.cityStateType ?? 'trade'].name} · Gunst: ${p.favor[host.viewer] ?? 0}` : p.kind === 'machine' ? 'Die erwachte Maschinenintelligenz' : `${civ ? civ.traits.map((t) => TRAITS[t].name).join(', ') : ''} · ${ERAS[p.era].name}`),
               h('div', { style: 'margin:8px 0' }, h('span', { class: `pill ${war ? 'warn' : 'ok'}` }, war ? '⚔️ Krieg' : '🕊️ Frieden')),
               p.kind !== 'machine'
                 ? war
@@ -343,7 +344,7 @@ export function diplomacyScreen(host: ScreenHost): HTMLElement {
                 : null,
               hasAgreement(state, host.viewer, p.id) ? h('div', null, h('span', { class: 'pill ok' }, '🤝 Handelsabkommen')) : null,
               p.kind === 'cityState' ? h('button', { class: 'btn small', style: 'margin-left:6px', disabled: me.influence < ENVOY_COST, onclick: () => { host.command({ type: 'sendEnvoy', target: p.id }); host.rerender(); } }, `📯 Gesandter (${ENVOY_COST} Einfluss)`) : null,
-              p.kind === 'cityState' ? h('div', { class: 'hint' }, 'Ab 3 Gunst und höchster Gunst aller Spieler liefert der Stadtstaat Güter und Einfluss.') : null,
+              p.kind === 'cityState' ? cityStateDetails(host, p.id) : null,
             )
           : h('div', { class: 'hint' }, 'Noch nicht begegnet.'),
       );
@@ -458,5 +459,30 @@ function tradeRoutesCard(host: ScreenHost): HTMLElement {
           }),
         )
       : h('div', { class: 'hint' }, 'Bilde Händler aus (Währung) und schicke sie zu einer eigenen Siedlung, einem Stadtstaat oder einem Volk mit Handelsabkommen.'),
+  );
+}
+
+function cityStateDetails(host: ScreenHost, csId: number): HTMLElement {
+  const { state } = host;
+  const cs = state.players[csId];
+  const type = CITY_STATE_TYPES[cs.cityStateType ?? 'trade'];
+  const rel = relationTo(cs, host.viewer);
+  const suz = suzerainOf(cs);
+  const quest = cs.quest;
+  const why = canFulfillQuest(state, host.viewer, csId);
+  return h(
+    'div',
+    { style: 'margin-top:8px;font-size:13px' },
+    h('div', null, h('span', { class: `pill ${rel !== 'neutral' ? 'ok' : ''}` }, rel === 'suzerain' ? '👑 Suzerän' : rel === 'friend' ? '🤝 Freund' : 'Neutral'), suz !== null && suz !== host.viewer ? h('span', { class: 'pill' }, `Suzerän: ${knows(state, host.viewer, suz) ? state.players[suz].name : 'unbekannt'}`) : null),
+    h('div', { class: 'hint' }, `Freund (ab ${FRIEND_FAVOR} Gunst): ${type.friend}`),
+    h('div', { class: 'hint' }, `Suzerän (höchste Gunst, ab ${SUZERAIN_FAVOR}): ${type.suzerain}`),
+    quest
+      ? h(
+          'div',
+          { style: 'margin-top:6px' },
+          h('div', null, `📦 Auftrag: ${quest.amount} ${GOODS[quest.good].icon} ${GOODS[quest.good].name} liefern (bis Runde ${quest.until}, +${QUEST_FAVOR} Gunst)`),
+          h('button', { class: 'btn small primary', style: 'margin-top:4px', disabled: !!why, title: why ?? '', onclick: () => { host.command({ type: 'fulfillQuest', target: csId }); host.rerender(); } }, 'Liefern'),
+        )
+      : null,
   );
 }
