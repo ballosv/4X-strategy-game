@@ -66,6 +66,8 @@ export interface Player {
   stats: PlayerStats;
   /** Diplomatischer Status gegenüber anderen Spielern (fehlend = Frieden). */
   relations: Record<number, DiplomaticStatus>;
+  /** Partner mit Handelsabkommen. */
+  agreements?: number[];
   /** Für Stadtstaaten: Gunst je Spieler. */
   favor: Record<number, number>;
   /** Letzte Einnahmen/Ausgaben für die Anzeige. */
@@ -159,6 +161,16 @@ export interface SettlementReport {
   stalled?: string;
 }
 
+export interface TradeRoute {
+  id: number;
+  owner: number;
+  /** Eigene Heimatsiedlung. */
+  from: number;
+  /** Zielsiedlung (eigene, fremde oder Stadtstaat). */
+  to: number;
+  since: number;
+}
+
 export interface Improvement {
   type: string;
   level: number;
@@ -206,6 +218,8 @@ export interface GameState {
   roads?: Record<number, number>;
   /** Spieler-ID der KI-Fraktion, sobald sie erwacht ist. */
   machinePlayer: number | null;
+  /** Handelsrouten aller Spieler. */
+  tradeRoutes?: TradeRoute[];
   gameOver: GameOver | null;
   /**
    * Gedächtnis der Computergegner je Spieler-ID (JSON-serialisierbar, Teil des Spielstands).

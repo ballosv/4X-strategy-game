@@ -13,6 +13,7 @@ import { isAtWar, playerSettlements, playerUnits, totalPop, type GameState, type
 import { canBuildBuilding, canTrainUnit, canUpgradeImprovement, collectJobs, improvementOptions, itemCost, ownedTiles } from '../core/systems/economy';
 import { MILESTONES, score } from '../core/systems/legacy';
 import { canResearch, eraProgress } from '../core/systems/research';
+import { AGREEMENT_GOLD, canProposeAgreement, hasAgreement, maxTradeRoutes, routeYield, routesOf } from '../core/systems/trade';
 import { h } from './dom';
 import { costText, fmt } from './format';
 
@@ -225,6 +226,7 @@ export function civScreen(host: ScreenHost, tab: string, setTab: (t: string) => 
     body = h(
       'div',
       null,
+      tradeRoutesCard(host),
       h('div', { class: 'hint', style: 'margin-bottom:10px' }, tradeOk ? `Weltmarkt: kaufen und verkaufen. Gold: ${fmt(p.gold)}` : 'Handel mit dem Weltmarkt erfordert die Technologie „Währung“.'),
       h(
         'table',
@@ -334,6 +336,12 @@ export function diplomacyScreen(host: ScreenHost): HTMLElement {
                   ? h('button', { class: 'btn small', onclick: () => { host.command({ type: 'makePeace', target: p.id }); host.rerender(); } }, '🕊️ Frieden schließen')
                   : h('button', { class: 'btn small danger', onclick: () => { if (confirm(`${p.name} den Krieg erklären?`)) { host.command({ type: 'declareWar', target: p.id }); host.rerender(); } } }, '⚔️ Krieg erklären')
                 : null,
+              (p.kind === 'ai' || p.kind === 'human')
+                ? hasAgreement(state, host.viewer, p.id)
+                  ? h('button', { class: 'btn small', style: 'margin-left:6px', onclick: () => { host.command({ type: 'cancelAgreement', target: p.id }); host.rerender(); } }, '📜 Abkommen kündigen')
+                  : h('button', { class: 'btn small', style: 'margin-left:6px', disabled: !!canProposeAgreement(state, host.viewer, p.id), title: canProposeAgreement(state, host.viewer, p.id) ?? `+${AGREEMENT_GOLD} Gold je Runde für beide, erlaubt Handelsrouten`, onclick: () => { host.command({ type: 'proposeAgreement', target: p.id }); host.rerender(); } }, '🤝 Handelsabkommen anbieten')
+                : null,
+              hasAgreement(state, host.viewer, p.id) ? h('div', null, h('span', { class: 'pill ok' }, '🤝 Handelsabkommen')) : null,
               p.kind === 'cityState' ? h('button', { class: 'btn small', style: 'margin-left:6px', disabled: me.influence < ENVOY_COST, onclick: () => { host.command({ type: 'sendEnvoy', target: p.id }); host.rerender(); } }, `📯 Gesandter (${ENVOY_COST} Einfluss)`) : null,
               p.kind === 'cityState' ? h('div', { class: 'hint' }, 'Ab 3 Gunst und höchster Gunst aller Spieler liefert der Stadtstaat Güter und Einfluss.') : null,
             )
@@ -428,5 +436,27 @@ function laborTable(host: ScreenHost, s: Settlement): HTMLElement {
           }),
         )
       : h('div', { class: 'hint' }, 'Noch keine Arbeitsplätze – baue Geländeausbauten oder Produktionsgebäude.'),
+  );
+}
+
+function tradeRoutesCard(host: ScreenHost): HTMLElement {
+  const { state } = host;
+  const routes = routesOf(state, host.viewer);
+  return h(
+    'div',
+    { class: 'card', style: 'margin-bottom:12px' },
+    h('h2', null, `Handelsrouten ${routes.length} / ${maxTradeRoutes(state, host.viewer)}`),
+    routes.length
+      ? h(
+          'table',
+          { class: 'tbl' },
+          routes.map((r) => {
+            const y = routeYield(state, r);
+            const from = state.settlements[r.from];
+            const to = state.settlements[r.to];
+            return h('tr', null, h('td', null, `${from?.name ?? '?'} → ${to?.name ?? '?'}`), h('td', null, to ? state.players[to.owner].name : ''), h('td', null, `+${y.gold} 🪙${y.influence ? ` · +${y.influence} ✴️` : ''}`));
+          }),
+        )
+      : h('div', { class: 'hint' }, 'Bilde Händler aus (Währung) und schicke sie zu einer eigenen Siedlung, einem Stadtstaat oder einem Volk mit Handelsabkommen.'),
   );
 }

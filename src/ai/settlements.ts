@@ -1,3 +1,5 @@
+import { hasRouteTarget } from './commerce';
+import { maxTradeRoutes, routesOf } from '../core/systems/trade';
 import { BUILDINGS } from '../core/data/buildings';
 import { FOOD_GOODS, GOODS, addStock, stockOf, type GoodId, type Stock } from '../core/data/goods';
 import { IMPROVEMENTS } from '../core/data/improvements';
@@ -321,6 +323,17 @@ function unitCandidates(ctx: AiContext, plan: EconomyPlan, s: Settlement): Candi
       // Einfluss muss für die Gründung reichen (bis zur Ankunft wächst er weiter)
       if (ctx.player.influence + 12 * Math.max(0.5, ctx.player.lastIncome.influence) < campCost(ctx.state, ctx.pid)) u -= 30;
       out.push({ item: { kind: 'unit', id }, utility: u, upkeep: unitType(id).upkeep });
+    }
+  }
+
+  // Händler für freie Handelsrouten
+  if (ctx.player.techs.includes('currency') && sit.settlements >= 2 && threat < 5) {
+    const busy = routesOf(ctx.state, ctx.pid).length + ctx.view.ownUnits().filter((u) => u.type === 'merchant').length + queuedCount(ctx, 'merchant');
+    if (busy < maxTradeRoutes(ctx.state, ctx.pid) && !validateItem(ctx.state, s, { kind: 'unit', id: 'merchant' }) && hasRouteTarget(ctx, s.tile)) {
+      const cost = itemCost(ctx.state, s, { kind: 'unit', id: 'merchant' });
+      if (goodsObtainable(ctx, plan, cost.goods, cost.labor / constructionLabor(s))) {
+        out.push({ item: { kind: 'unit', id: 'merchant' }, utility: 20 + 25 * g.economy, upkeep: 0 });
+      }
     }
   }
 

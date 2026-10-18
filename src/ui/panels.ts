@@ -23,6 +23,7 @@ import { drawUnitFigure } from '../render/units';
 import { h } from './dom';
 import { costText, fmt, signed, stockText } from './format';
 import { CONNECTION_NAMES, ROAD_WORK, canBuildRoad } from '../core/systems/transport';
+import { homeSettlement, routeYield, tradeTargetsFor } from '../core/systems/trade';
 
 export interface PanelHost {
   state: GameState;
@@ -114,6 +115,11 @@ export function unitPanel(host: PanelHost, unit: Unit): [HTMLElement, HTMLElemen
       actions.push(action('🛤️', 'Straße bauen', act('buildRoad'), { disabled: !!roadErr || unit.movesLeft <= 0, title: roadErr ?? `${ROAD_WORK.road.turns} Runden · ${stockText(ROAD_WORK.road.goods)}` }));
       if (state.players[unit.owner].techs.includes('railroad')) actions.push(action('🚂', 'Eisenbahn bauen', act('buildRail'), { disabled: !!railErr || unit.movesLeft <= 0, title: railErr ?? `${ROAD_WORK.rail.turns} Runden · ${stockText(ROAD_WORK.rail.goods)}` }));
       actions.push(action('🔗', 'Siedlungen verbinden', act('autoRoad'), { active: unit.status === 'autoRoad', title: 'Baut automatisch Straßen zwischen Siedlungen und Hauptstadt' }));
+    }
+    if (def.abilities.includes('trade')) {
+      const targets = tradeTargetsFor(state, unit);
+      for (const t of targets) actions.push(action('🐪', `Handel mit ${t.name}`, () => host.command({ type: 'establishTrade', unitId: unit.id, settlementId: t.id }), { title: `+${routeYield(state, { id: 0, owner: unit.owner, from: homeSettlement(state, unit.owner, t, unit.tile)?.id ?? -1, to: t.id, since: 0 }).gold} Gold je Runde` }));
+      if (!targets.length) actions.push(action('🐪', 'Handelsroute', () => {}, { disabled: true, title: 'Ziehe neben eine eigene Siedlung, einen Stadtstaat oder eine Siedlung eines Abkommenspartners' }));
     }
     if (def.strength > 0) actions.push(action('🛡️', 'Befestigen', act('fortify'), { active: unit.status === 'fortified' }));
     actions.push(action('👁️', 'Wachen', act('sentry'), { active: unit.status === 'sentry' }));

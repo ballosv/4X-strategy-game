@@ -1,3 +1,4 @@
+import { tradeIncome } from './trade';
 import { computeConnections, transportCapacityWith, type Connection } from './transport';
 import { BUILDINGS, type BuildingDef } from '../data/buildings';
 import { addStock, FOOD_GOODS, GOODS, stockOf, type GoodId, type Stock } from '../data/goods';
@@ -502,6 +503,9 @@ export function processEconomy(state: GameState, playerId: number): { gold: numb
   // Die ersten zwei Einheiten-Unterhaltspunkte sind frei (Stammesgefolge)
   unitUpkeep = Math.max(0, unitUpkeep - 2);
   const goldExpenses = unitUpkeep + buildingUpkeep;
+  const trade = tradeIncome(state, playerId);
+  goldIncome += trade.gold;
+  influence += trade.influence;
   const net = goldIncome - goldExpenses;
   player.gold += net;
   player.influence += influence;
@@ -535,5 +539,8 @@ export function refreshReports(state: GameState, playerId: number): void {
   for (const u of Object.values(state.units)) if (u.owner === playerId) unitUpkeep += unitType(u.type).upkeep;
   unitUpkeep = Math.max(0, pct(unitUpkeep, mods.upkeepPct) - 2);
   const goldExpenses = unitUpkeep + buildingUpkeep;
+  const trade = tradeIncome(state, playerId);
+  goldIncome += trade.gold;
+  influence += trade.influence;
   state.players[playerId].lastIncome = { gold: goldIncome - goldExpenses, goldIncome, goldExpenses, research, influence };
 }
