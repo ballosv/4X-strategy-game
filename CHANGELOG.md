@@ -1,5 +1,37 @@
 # Changelog
 
+## v0.2.0 – Wirtschaft & Infrastruktur (2026-10-18)
+
+### Transportnetz
+- Neue Einheit **Arbeiter**: baut Straßen (Rad) und Eisenbahnen (Eisenbahn) oder verbindet Siedlungen
+  automatisch mit dem Netz der Hauptstadt
+- Transportkapazität ergibt sich aus der Anbindung an die Hauptstadt: Straße +6, Eisenbahn +18
+  (mit Bahnhof), Seeweg +5 (Hafen in beiden Siedlungen)
+- Schnelle Bewegung auf Straßen (½) und Schienen (¼ Bewegungspunkt), Darstellung als Feldweg und Gleis
+
+### Arbeitskraft
+- Manuelle Verteilung der Arbeitskraft je Arbeitsplatz (fest oder automatisch) im neuen Reiter
+  „Arbeitskraft“ des Bau-Dialogs
+
+### Handel
+- Händler richten Handelsrouten ein (eigene Siedlungen, Stadtstaaten, Völker mit Abkommen)
+- Handelsabkommen zwischen Völkern (+2 Gold je Runde für beide); Krieg beendet Routen und Abkommen
+
+### Stadtstaaten & Einfluss
+- Fünf Stadtstaat-Typen mit Boni für Freunde und Suzerän, Lieferaufträge, Gunstverfall
+- Einfluss-Senke: freie Felder am Gebietsrand beanspruchen
+
+### Grafik
+- Asset-Pipeline für KI-generierte Sprites mit Manifest, Farbmasken, Asset-Vorschau und Prüfskript
+  (`npm run assets:check`); ohne Assets bleibt die prozedurale Darstellung erhalten
+
+### Computergegner
+- Nutzen Arbeiter, Händler, Handelsabkommen, Stadtstaat-Aufträge und Gebietskauf
+
+### Technik
+- Spielstand-Version 2 mit automatischer Migration älterer Spielstände
+- 76 automatische Tests
+
 ## v0.1.0 – Spielbarer Prototyp (2026-10-18)
 
 Erste spielbare Version (Vertical Slice) für Browser und Android.
