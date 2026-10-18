@@ -172,7 +172,8 @@ export class MapRenderer {
       }
     }
 
-    // 3) Hervorhebungen
+    // 3) Handelsrouten des Betrachters und Hervorhebungen
+    this.drawTradeRoutes(state, grid);
     this.drawHighlights(state, grid, hl);
 
     // 4) Einheiten (von hinten nach vorne)
@@ -197,6 +198,31 @@ export class MapRenderer {
       if (!this.revealAll && explored?.[s.tile] !== 1) continue;
       this.drawSettlementBanner(state, grid, s);
     }
+  }
+
+  private drawTradeRoutes(state: GameState, grid: HexGrid): void {
+    const ctx = this.ctx;
+    const routes = (state.tradeRoutes ?? []).filter((r) => r.owner === this.viewer);
+    if (!routes.length) return;
+    ctx.save();
+    ctx.strokeStyle = 'rgba(242,193,78,0.85)';
+    ctx.lineWidth = 2.5;
+    ctx.setLineDash([3, 7]);
+    ctx.lineCap = 'round';
+    for (const r of routes) {
+      const a = state.settlements[r.from];
+      const b = state.settlements[r.to];
+      if (!a || !b) continue;
+      const pa = tileTop(grid.col(a.tile), grid.row(a.tile), state.map.tiles[a.tile].elevation);
+      const pb = tileTop(grid.col(b.tile), grid.row(b.tile), state.map.tiles[b.tile].elevation);
+      const mx = (pa.x + pb.x) / 2;
+      const my = Math.min(pa.y, pb.y) - 40 - Math.hypot(pa.x - pb.x, pa.y - pb.y) * 0.12;
+      ctx.beginPath();
+      ctx.moveTo(pa.x, pa.y - 10);
+      ctx.quadraticCurveTo(mx, my, pb.x, pb.y - 10);
+      ctx.stroke();
+    }
+    ctx.restore();
   }
 
   private drawHighlights(state: GameState, grid: HexGrid, hl: Highlights): void {

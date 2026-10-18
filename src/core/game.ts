@@ -53,6 +53,7 @@ import {
   upgradeSettlement,
 } from './systems/settlements';
 import { computeVisibility, updateExplored } from './systems/vision';
+import { agreementEvaluator, canEstablishRoute, canProposeAgreement, cancelAgreement, establishRoute, hasAgreement, signAgreement, validateTrade } from './systems/trade';
 import { canBuildRoad, logRoadDone, nextAutoRoadTile, progressRoadWork, startRoadWork } from './systems/transport';
 
 export class SetupError extends Error {}
@@ -277,6 +278,9 @@ export type Command =
   | { type: 'declareWar'; target: number }
   | { type: 'makePeace'; target: number }
   | { type: 'sendEnvoy'; target: number }
+  | { type: 'establishTrade'; unitId: number; settlementId: number }
+  | { type: 'proposeAgreement'; target: number }
+  | { type: 'cancelAgreement'; target: number }
   | { type: 'endTurn' };
 
 export interface CommandResult {
@@ -387,6 +391,7 @@ export function applyCommand(state: GameState, playerId: number, cmd: Command): 
       if (!target || target.id === playerId) return fail('Ungültig');
       state.players[playerId].relations[cmd.target] = 'war';
       target.relations[playerId] = 'war';
+      validateTrade(state);
       addLog(state, { player: playerId, kind: 'diplomacy', text: `${state.players[playerId].name} erklärt ${target.name} den Krieg!` });
       return ok;
     }
@@ -408,6 +413,35 @@ export function applyCommand(state: GameState, playerId: number, cmd: Command): 
       addLog(state, { player: playerId, kind: 'diplomacy', text: `Gesandter nach ${target.name} entsandt (Gunst ${target.favor[playerId]}).` });
       return ok;
     }
+    case 'establishTrade': {
+      const unit = state.units[cmd.unitId];
+      const target = state.settlements[cmd.settlementId];
+      if (!unit || unit.owner !== playerId || !target) return fail('Ungültig');
+      const err = canEstablishRoute(state, unit, target);
+      if (err) return fail(err);
+      establishRoute(state, unit, target);
+      afterChange(state, playerId);
+      return ok;
+    }
+    case 'proposeAgreement': {
+      const err = canProposeAgreement(state, playerId, cmd.target);
+      if (err) return fail(err);
+      const target = state.players[cmd.target];
+      // Menschliche Partner (Hotseat) stimmen automatisch zu; Computergegner entscheiden selbst
+      const accepted = target.kind === 'human' || agreementEvaluator(state, cmd.target, playerId);
+      if (!accepted) {
+        addLog(state, { player: playerId, kind: 'diplomacy', text: `${target.name} lehnt ein Handelsabkommen ab.` });
+        return fail(`${target.name} lehnt ab`);
+      }
+      signAgreement(state, playerId, cmd.target);
+      refreshReports(state, playerId);
+      return ok;
+    }
+    case 'cancelAgreement':
+      if (!hasAgreement(state, playerId, cmd.target)) return fail('Kein Abkommen');
+      cancelAgreement(state, playerId, cmd.target);
+      refreshReports(state, playerId);
+      return ok;
     case 'endTurn':
       endTurn(state);
       return ok;
@@ -782,6 +816,7 @@ function finishPlayerTurn(state: GameState, pid: number): void {
     machineProduction(state, pid);
     return;
   }
+  validateTrade(state);
   const result = processEconomy(state, pid);
   if (player.kind !== 'cityState') {
     processResearch(state, pid, result.research);
