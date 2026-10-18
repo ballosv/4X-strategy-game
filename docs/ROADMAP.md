@@ -10,11 +10,11 @@
 - [x] Android-Build (Capacitor) in der CI
 
 ## v0.2.0 – Wirtschaft & Infrastruktur
-- [ ] Straßen und Eisenbahn als Kartenobjekte (Transportnetz statt Pauschalkapazität)
-- [ ] Manuelle Verteilung der Arbeitskraft je Arbeitsplatz
-- [ ] Handelsabkommen zwischen Zivilisationen, Händler-Einheiten mit Handelsrouten
-- [ ] Ausgebaute Stadtstaaten (Aufträge, Boni je Typ)
-- [ ] Asset-Pipeline für KI-generierte Sprites (siehe GRAFIK_SPEZIFIKATION.md)
+- [x] Straßen und Eisenbahn als Kartenobjekte (Transportnetz statt Pauschalkapazität)
+- [x] Manuelle Verteilung der Arbeitskraft je Arbeitsplatz
+- [x] Handelsabkommen zwischen Zivilisationen, Händler-Einheiten mit Handelsrouten
+- [x] Ausgebaute Stadtstaaten (Aufträge, Boni je Typ)
+- [x] Asset-Pipeline für KI-generierte Sprites (siehe GRAFIK_SPEZIFIKATION.md)
 
 ## v0.3.0 – Armeen & Diplomatie
 - [ ] Armeen aus mehreren Einheiten (Humankind), taktische Kampfvorschau
