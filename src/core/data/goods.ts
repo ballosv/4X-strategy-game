@@ -75,7 +75,8 @@ export const GOODS: Record<GoodId, GoodDef> = {
 };
 
 export const GOOD_IDS = Object.keys(GOODS) as GoodId[];
-export const FOOD_GOODS: GoodId[] = ['grain', 'vegetables', 'meat'];
+export type FoodGood = 'grain' | 'vegetables' | 'meat';
+export const FOOD_GOODS: FoodGood[] = ['grain', 'vegetables', 'meat'];
 
 export type Stock = Partial<Record<GoodId, number>>;
 
