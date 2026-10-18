@@ -51,8 +51,7 @@ export const BUILDINGS: Record<string, BuildingDef> = Object.fromEntries(
       { id: 'market', name: 'Marktplatz', description: '+3 Gold, Handel mit dem Weltmarkt', labor: 18, goods: { planks: 2, bricks: 2 }, upkeep: 0, tech: 'currency', requiresSettlement: true, yields: { gold: 3 }, icon: '⚖️' },
       { id: 'shrine', name: 'Heiligtum', description: '+2 Einfluss', labor: 14, goods: { stone: 3 }, upkeep: 1, tech: 'mysticism', yields: { influence: 2 }, icon: '🗿' },
       { id: 'granary', name: 'Kornspeicher', description: '+2 Nahrung, +3 Wohnraum', labor: 16, goods: { bricks: 2, planks: 1 }, upkeep: 1, tech: 'agriculture', requiresSettlement: true, yields: { food: 2 }, housing: 3, icon: '🌾' },
-      { id: 'harbor', name: 'Hafen', description: '+4 Transport, Schiffsbau', labor: 20, goods: { planks: 4 }, upkeep: 1, tech: 'sailing', requiresCoast: true, transport: 4, icon: '⚓' },
-      { id: 'road', name: 'Straßenanbindung', description: '+4 Transportkapazität', labor: 14, goods: { stone: 3 }, upkeep: 0, tech: 'wheel', transport: 4, icon: '🛤️' },
+      { id: 'harbor', name: 'Hafen', description: 'Seeweg zur Hauptstadt (beide mit Hafen), +2 Transport', labor: 20, goods: { planks: 4 }, upkeep: 1, tech: 'sailing', requiresCoast: true, transport: 2, icon: '⚓' },
       // Eisenzeit
       { id: 'smithy', name: 'Schmiede', description: 'Bronze oder Eisenerz → Waffen', labor: 20, goods: { bricks: 2, tools: 2 }, upkeep: 2, tech: 'ironWorking', requiresSettlement: true, jobs: 2, recipe: { inputs: { iron_ore: 1, wood: 1 }, outputs: { weapons: 1 } }, icon: '⚔️' },
       { id: 'tailor', name: 'Schneiderei', description: 'Stoffe → Kleidung', labor: 18, goods: { planks: 2 }, upkeep: 1, tech: 'weaving', requiresSettlement: true, jobs: 2, recipe: { inputs: { cloth: 2 }, outputs: { clothing: 1 } }, icon: '👕' },
@@ -67,7 +66,7 @@ export const BUILDINGS: Record<string, BuildingDef> = Object.fromEntries(
       // Industrie und später
       { id: 'factory', name: 'Fabrik', description: 'Stahl + Bretter → Maschinen', labor: 40, goods: { steel: 4, bricks: 4 }, upkeep: 4, tech: 'industrialization', requiresSettlement: true, jobs: 4, recipe: { inputs: { steel: 1, planks: 1 }, outputs: { machines: 1 } }, icon: '🏭' },
       { id: 'textileMill', name: 'Textilfabrik', description: 'Baumwolle → Stoffe (effizient)', labor: 36, goods: { steel: 2, bricks: 4 }, upkeep: 3, tech: 'industrialization', requiresSettlement: true, jobs: 4, recipe: { inputs: { cotton: 1 }, outputs: { cloth: 2 } }, icon: '🧶' },
-      { id: 'railway', name: 'Bahnhof', description: '+12 Transportkapazität', labor: 40, goods: { steel: 4, planks: 2 }, upkeep: 2, tech: 'railroad', requiresSettlement: true, transport: 12, icon: '🚂' },
+      { id: 'railway', name: 'Bahnhof', description: 'Eisenbahnanbindung an die Hauptstadt (+18 Transport)', labor: 40, goods: { steel: 4, planks: 2 }, upkeep: 2, tech: 'railroad', requiresSettlement: true, icon: '🚂' },
       { id: 'refinery', name: 'Raffinerie', description: 'Öl → Treibstoff', labor: 44, goods: { steel: 4, machines: 1 }, upkeep: 4, tech: 'oilDrilling', requiresSettlement: true, jobs: 3, recipe: { inputs: { oil: 1 }, outputs: { fuel: 1 } }, icon: '⛽' },
       { id: 'powerPlant', name: 'Kraftwerk', description: '+20 % Arbeitskraft', labor: 50, goods: { steel: 4, machines: 2 }, upkeep: 5, tech: 'electricity', requiresSettlement: true, modifiers: { laborPct: 20 }, icon: '⚡' },
       { id: 'electronicsPlant', name: 'Elektronikwerk', description: 'Seltene Erden + Edelmetall → Elektronik', labor: 56, goods: { steel: 4, machines: 2 }, upkeep: 5, tech: 'electronics', requiresSettlement: true, jobs: 3, recipe: { inputs: { rare_earth: 1, precious: 1 }, outputs: { electronics: 2 } }, icon: '💡' },

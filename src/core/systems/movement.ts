@@ -1,3 +1,4 @@
+import { roadStepCost } from './transport';
 import { FEATURES, IMPASSABLE_ELEVATION, TERRAIN } from '../data/terrain';
 import { unitType, type UnitTypeDef } from '../data/units';
 import { gridOf, hasTech, playerModifiers } from '../context';
@@ -87,6 +88,9 @@ export function terrainStepCost(
   if (b.elevation >= IMPASSABLE_ELEVATION) return BLOCKED;
   if (isWater(a)) return 99; // Ausschiffen verbraucht alle Bewegungspunkte
   if (isCliff(a, b)) return BLOCKED;
+  // Straßen und Eisenbahnen: schnelle Bewegung ohne Gelände-, Höhen- und Flussaufschläge
+  const road = roadStepCost(state, from, to, idx.settlements);
+  if (road !== null) return road;
   let cost = TERRAIN[b.terrain].moveCost;
   if (b.feature) cost = Math.max(cost, FEATURES[b.feature].moveCost);
   if (b.elevation >= 4) cost = Math.max(cost, 3);

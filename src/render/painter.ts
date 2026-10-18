@@ -3,6 +3,7 @@ import type { HexGrid } from '../core/hex';
 import type { Tile } from '../core/map/types';
 import type { GameState, Settlement } from '../core/state';
 import { CLIFF, EARTH, FOREST, RIVER, ROCK, TERRAIN_COLORS, shade, withAlpha } from './palette';
+import { paintRoads } from './roads';
 import { EDGE_CORNERS, ELEV_STEP, HEX_CORNERS, HEX_R, HEX_W, SQUASH, lift, tileTop, type Point } from './projection';
 
 /** Deterministischer Pseudo-Zufall je Feld (für Baumpositionen etc.). */
@@ -177,6 +178,9 @@ export function paintTile(ctx: CanvasRenderingContext2D, pc: PaintContext, i: nu
     const conifer = t.terrain === 'tundra' || t.terrain === 'snow' || t.elevation >= 3;
     paintForest(ctx, i, top, t.feature === 'denseForest' ? 10 : 6, conifer, imp?.type === 'lumber' || imp?.type === 'hunting' ? 0.55 : 1);
   }
+
+  // Straßen und Schienen
+  if (!water && (settlement || state.roads?.[i])) paintRoads(ctx, pc, i, top);
 
   // 5) Ausbau
   if (imp && !settlement) paintImprovement(ctx, imp.type, imp.level, i, top);

@@ -1,3 +1,4 @@
+import { computeConnections, transportCapacityWith, type Connection } from './transport';
 import { BUILDINGS, type BuildingDef } from '../data/buildings';
 import { addStock, FOOD_GOODS, GOODS, stockOf, type GoodId, type Stock } from '../data/goods';
 import { IMPROVEMENTS, type ImprovementDef } from '../data/improvements';
@@ -36,9 +37,8 @@ export function scholarSlots(s: Settlement): number {
   return (s.kind === 'city' ? 1 : 0) + s.buildings.reduce((sum, b) => sum + (BUILDINGS[b]?.scholarSlots ?? 0), 0);
 }
 
-export function transportCapacity(state: GameState, s: Settlement): number {
-  const mods = playerModifiers(state, s.owner);
-  return BASE_TRANSPORT[s.kind] + (mods.transportBonus ?? 0) + s.buildings.reduce((sum, b) => sum + (BUILDINGS[b]?.transport ?? 0), 0);
+export function transportCapacity(state: GameState, s: Settlement, connection: Connection = computeConnections(state, s.owner).get(s.id) ?? 'none'): number {
+  return transportCapacityWith(state, s, connection, BASE_TRANSPORT[s.kind]);
 }
 
 /** Arbeitskraft einer Siedlung: 1 je Arbeiter, +2 Gemeinschaftsarbeit, Modifikatoren. */
@@ -243,7 +243,7 @@ export function foodNeeds(pop: number): Record<'grain' | 'vegetables' | 'meat', 
  * Verteilt die Arbeitskraft und berechnet Erträge einer Siedlung für eine Runde.
  * apply = true verändert den Spielzustand (Lager, Nahrung, Bauaufträge).
  */
-export function simulateSettlement(state: GameState, s: Settlement, apply: boolean): void {
+export function simulateSettlement(state: GameState, s: Settlement, apply: boolean, connection?: Connection): void {
   const player = state.players[s.owner];
   const mods = settlementModifiers(state, s.id);
   const report = emptyReport();
@@ -339,7 +339,8 @@ export function simulateSettlement(state: GameState, s: Settlement, apply: boole
   report.gold = pct(1 + s.pop.citizens * 1.5 + (mods.goldPerSettlement ?? 0) + yields.reduce((a, y) => a + (y.gold ?? 0), 0), mods.goldPct);
   report.research = pct(1 + s.pop.scholars * 2 + (mods.researchPerSettlement ?? 0) + yields.reduce((a, y) => a + (y.research ?? 0), 0), mods.researchPct);
   report.influence = pct((s.isCapital ? 2 : 0.5) + s.pop.citizens * 0.3 + (mods.influencePerSettlement ?? 0) + yields.reduce((a, y) => a + (y.influence ?? 0), 0), mods.influencePct);
-  report.transport = s.isCapital ? Infinity : transportCapacity(state, s);
+  report.connection = connection ?? computeConnections(state, s.owner).get(s.id) ?? 'none';
+  report.transport = s.isCapital ? Infinity : transportCapacity(state, s, report.connection);
   report.produced = { ...produced };
   report.consumed = { ...consumed };
 
@@ -466,8 +467,9 @@ export function processEconomy(state: GameState, playerId: number): { gold: numb
   let research = 0;
   let influence = 0;
   let buildingUpkeep = 0;
+  const connections = computeConnections(state, playerId);
   for (const s of playerSettlements(state, playerId)) {
-    simulateSettlement(state, s, true);
+    simulateSettlement(state, s, true, connections.get(s.id));
     goldIncome += s.report.gold;
     research += s.report.research;
     influence += s.report.influence;
@@ -499,8 +501,9 @@ export function refreshReports(state: GameState, playerId: number): void {
   let research = 0;
   let influence = 0;
   let buildingUpkeep = 0;
+  const connections = computeConnections(state, playerId);
   for (const s of playerSettlements(state, playerId)) {
-    simulateSettlement(state, s, false);
+    simulateSettlement(state, s, false, connections.get(s.id));
     goldIncome += s.report.gold;
     research += s.report.research;
     influence += s.report.influence;
