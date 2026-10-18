@@ -338,7 +338,7 @@ export function simulateSettlement(state: GameState, s: Settlement, apply: boole
   const yields = s.buildings.map((b) => BUILDINGS[b]?.yields ?? {});
   report.gold = pct(1 + s.pop.citizens * 1.5 + (mods.goldPerSettlement ?? 0) + yields.reduce((a, y) => a + (y.gold ?? 0), 0), mods.goldPct);
   report.research = pct(1 + s.pop.scholars * 2 + (mods.researchPerSettlement ?? 0) + yields.reduce((a, y) => a + (y.research ?? 0), 0), mods.researchPct);
-  report.influence = pct(1 + s.pop.citizens * 0.5 + (mods.influencePerSettlement ?? 0) + yields.reduce((a, y) => a + (y.influence ?? 0), 0), mods.influencePct);
+  report.influence = pct((s.isCapital ? 2 : 0.5) + s.pop.citizens * 0.3 + (mods.influencePerSettlement ?? 0) + yields.reduce((a, y) => a + (y.influence ?? 0), 0), mods.influencePct);
   report.transport = s.isCapital ? Infinity : transportCapacity(state, s);
   report.produced = { ...produced };
   report.consumed = { ...consumed };

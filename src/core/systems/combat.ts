@@ -68,8 +68,8 @@ export function settlementStrength(state: GameState, s: Settlement): number {
   for (const u of Object.values(state.units)) {
     if (u.tile === s.tile && u.owner === s.owner) garrison = Math.max(garrison, unitType(u.type).strength);
   }
-  const elevationBonus = Math.min(6, (state.map.tiles[s.tile].elevation - 1) * 2);
-  return 8 + player.era * 9 + walls + Math.round(garrison * 0.5) + Math.min(8, totalPop(s.pop)) + elevationBonus;
+  const elevationBonus = Math.min(4, (state.map.tiles[s.tile].elevation - 1) * 2);
+  return 6 + player.era * 6 + walls + Math.round(garrison * 0.4) + Math.min(6, Math.floor(totalPop(s.pop) / 2)) + elevationBonus;
 }
 
 function damage(diff: number, rng: Rng): number {
@@ -259,7 +259,11 @@ export function healUnits(state: GameState, playerId: number): void {
     heal += mods.healBonus ?? 0;
     u.hp = Math.min(MAX_HP, u.hp + heal);
   }
+  const grid = gridOf(state);
   for (const s of Object.values(state.settlements)) {
-    if (s.owner === playerId && s.hp < SETTLEMENT_MAX_HP) s.hp = Math.min(SETTLEMENT_MAX_HP, s.hp + 15);
+    if (s.owner !== playerId || s.hp >= SETTLEMENT_MAX_HP) continue;
+    // Belagerte Siedlungen (feindliche Einheit angrenzend) heilen nicht
+    const besieged = grid.neighbors(s.tile).some((n) => Object.values(state.units).some((u) => u.tile === n && isAtWar(state, u.owner, playerId)));
+    if (!besieged) s.hp = Math.min(SETTLEMENT_MAX_HP, s.hp + 10);
   }
 }

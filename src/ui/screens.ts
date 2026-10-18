@@ -7,7 +7,7 @@ import { POLICIES } from '../core/data/policies';
 import { TECHS, techCost, techsOfEra } from '../core/data/techs';
 import { UNIT_TYPES } from '../core/data/units';
 import { gridOf } from '../core/context';
-import { ENVOY_COST, canTrade, currentScores, marketPrices, type Command } from '../core/game';
+import { ENVOY_COST, canTrade, currentScores, marketPrices, policyCost, type Command } from '../core/game';
 import { ELEVATION_NAMES, TERRAIN } from '../core/data/terrain';
 import { isAtWar, playerSettlements, playerUnits, totalPop, type GameState, type Settlement } from '../core/state';
 import { canBuildBuilding, canTrainUnit, canUpgradeImprovement, improvementOptions, itemCost, ownedTiles } from '../core/systems/economy';
@@ -197,8 +197,9 @@ export function civScreen(host: ScreenHost, tab: string, setTab: (t: string) => 
           .filter((d) => d.era <= p.era + 1)
           .map((d) => {
             const active = p.policies.includes(d.id);
+            const cost = policyCost(d.cost, p.era);
             const locked = (d.tech && !p.techs.includes(d.tech)) || d.era > p.era;
-            const why = active ? null : locked ? `Benötigt ${d.tech ? TECHS[d.tech].name : ERAS[d.era].name}` : p.influence < d.cost ? `Benötigt ${d.cost} Einfluss` : p.policies.length >= slots ? 'Kein freier Platz (Politik ersetzen)' : null;
+            const why = active ? null : locked ? `Benötigt ${d.tech ? TECHS[d.tech].name : ERAS[d.era].name}` : p.influence < cost ? `Benötigt ${cost} Einfluss` : p.policies.length >= slots ? 'Kein freier Platz (Politik ersetzen)' : null;
             return h(
               'div',
               { class: `option ${why && !active ? 'disabled' : ''}`, style: active ? 'border-color:var(--accent)' : '' },
@@ -207,8 +208,8 @@ export function civScreen(host: ScreenHost, tab: string, setTab: (t: string) => 
                 'div',
                 { style: 'flex:1' },
                 h('div', { class: 'o-name' }, d.name),
-                h('div', { class: 'o-cost' }, `${d.description} · ${d.cost} Einfluss`),
-                why && !active && why.startsWith('Kein freier') && p.influence >= d.cost
+                h('div', { class: 'o-cost' }, `${d.description} · ${cost} Einfluss`),
+                why && !active && why.startsWith('Kein freier') && p.influence >= cost
                   ? h('div', null, p.policies.map((old) => h('button', { class: 'btn small', style: 'margin:3px 3px 0 0', onclick: () => { host.command({ type: 'adoptPolicy', policy: d.id, replace: old }); host.rerender(); } }, `statt ${POLICIES[old].name}`)))
                   : why && !active ? h('div', { class: 'o-why' }, why) : null,
                 !why && !active ? h('button', { class: 'btn small primary', style: 'margin-top:4px', onclick: () => { host.command({ type: 'adoptPolicy', policy: d.id }); host.rerender(); } }, 'Einführen') : null,

@@ -11,7 +11,7 @@ import { isMilitary } from './util';
 /** Mindestrundenzahl, bevor eine KI einen Angriffskrieg beginnt. */
 export const EARLIEST_WAR_TURN = 35;
 /** Maximale Entfernung (Felder) eines Kriegsziels zum eigenen Reich. */
-const MAX_TARGET_DISTANCE = 12;
+const MAX_TARGET_DISTANCE = 18;
 
 function isMajor(ctx: AiContext, id: number): boolean {
   const k = ctx.state.players[id]?.kind;
