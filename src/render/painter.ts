@@ -5,6 +5,7 @@ import type { GameState, Settlement } from '../core/state';
 import { forestKeyCandidates, improvementKeyCandidates, settlementKeyCandidates } from './assetKeys';
 import { assets, type LoadedSprite } from './assets';
 import { CLIFF, EARTH, FOREST, RIVER, ROCK, TERRAIN_COLORS, shade, withAlpha } from './palette';
+import { paintRoads } from './roads';
 import { EDGE_CORNERS, ELEV_STEP, HEX_CORNERS, HEX_R, HEX_W, SQUASH, lift, tileTop, type Point } from './projection';
 
 /** Deterministischer Pseudo-Zufall je Feld (für Baumpositionen etc.). */
@@ -178,6 +179,9 @@ export function paintTile(ctx: CanvasRenderingContext2D, pc: PaintContext, i: nu
     if (sprite) drawTileSprite(ctx, sprite, top);
     else paintForest(ctx, i, top, t.feature === 'denseForest' ? 10 : 6, conifer, imp?.type === 'lumber' || imp?.type === 'hunting' ? 0.55 : 1);
   }
+
+  // Straßen und Schienen
+  if (!water && (settlement || state.roads?.[i])) paintRoads(ctx, pc, i, top);
 
   // 5) Ausbau
   if (imp && !settlement) {

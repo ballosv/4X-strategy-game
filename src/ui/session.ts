@@ -1,5 +1,6 @@
 import { ERAS, formatYear } from '../core/data/eras';
-import { STATE_VERSION, type GameState } from '../core/state';
+import { migrateState } from '../core/migrate';
+import type { GameState } from '../core/state';
 
 const PREFIX = 'ai4x.save.';
 
@@ -30,9 +31,7 @@ export function loadGame(slot: string): GameState | null {
   try {
     const raw = localStorage.getItem(PREFIX + slot);
     if (!raw) return null;
-    const state = JSON.parse(raw) as GameState;
-    if (state.version !== STATE_VERSION) return null;
-    return state;
+    return migrateState(JSON.parse(raw));
   } catch {
     return null;
   }

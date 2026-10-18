@@ -1,3 +1,4 @@
+import { nextAutoRoadTile } from '../core/systems/transport';
 import { unitType, type UnitTypeDef } from '../core/data/units';
 import type { UnitActionId } from '../core/game';
 import { isPassableLand } from '../core/map/passability';
@@ -532,10 +533,20 @@ function handleBankruptcy(ctx: AiContext): void {
 }
 
 /** Steuert alle eigenen Einheiten eines KI-Spielers. */
+/** Arbeiter verbinden Siedlungen selbstständig mit dem Straßennetz der Hauptstadt. */
+function handleWorkers(ctx: AiContext): void {
+  for (const u of ctx.view.ownUnits().filter((x) => x.type === 'worker').sort((a, b) => a.id - b.id)) {
+    if (!ctx.active || !alive(ctx, u) || u.work || u.status === 'autoRoad') continue;
+    if (nextAutoRoadTile(ctx.state, u) >= 0) act(ctx, u, 'autoRoad');
+    else if (u.status !== 'sentry') act(ctx, u, 'sentry');
+  }
+}
+
 export function manageUnits(ctx: AiContext): void {
   handleFounders(ctx);
   ctx.view.refresh();
   handleBankruptcy(ctx);
+  handleWorkers(ctx);
   handleMilitary(ctx);
   handleScouts(ctx);
 }
