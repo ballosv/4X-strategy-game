@@ -23,6 +23,7 @@ import { drawUnitFigure } from '../render/units';
 import { h } from './dom';
 import { costText, fmt, signed, stockText } from './format';
 import { CONNECTION_NAMES, ROAD_WORK, canBuildRoad } from '../core/systems/transport';
+import { canClaimTile, claimTileCost, isClaimCandidate } from '../core/systems/cityStates';
 import { homeSettlement, routeYield, tradeTargetsFor } from '../core/systems/trade';
 
 export interface PanelHost {
@@ -303,6 +304,12 @@ export function tilePanel(host: PanelHost, tileIdx: number): [HTMLElement, HTMLE
         ),
       );
     }
+  } else if (!ownerSettlement && state.currentPlayer === host.viewer && isClaimCandidate(state, host.viewer, tileIdx)) {
+    const why = canClaimTile(state, host.viewer, tileIdx);
+    side.append(
+      h('div', { class: 'hint', style: 'margin-bottom:6px' }, 'Freies Feld am Rand deines Gebiets.'),
+      h('button', { class: 'btn primary', disabled: !!why, title: why ?? '', onclick: () => host.command({ type: 'claimTile', tile: tileIdx }) }, `✴️ Feld beanspruchen (${claimTileCost(state, host.viewer, tileIdx)} Einfluss)`),
+    );
   } else if (nearbySettlement) {
     side.append(h('button', { class: 'btn', onclick: () => host.select({ kind: 'settlement', id: nearbySettlement.id }) }, 'Siedlung anzeigen'));
   } else {

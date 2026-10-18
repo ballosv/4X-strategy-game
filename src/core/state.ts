@@ -1,6 +1,14 @@
 import type { Stock } from './data/goods';
 import type { MapSize, MapType, GameMap } from './map/types';
 
+export type CityStateType = 'trade' | 'science' | 'culture' | 'industry' | 'military';
+
+export interface CityStateQuest {
+  good: import('./data/goods').GoodId;
+  amount: number;
+  until: number;
+}
+
 export type PlayerKind = 'human' | 'ai' | 'cityState' | 'machine';
 export type Difficulty = 'easy' | 'normal' | 'hard';
 export type Phase = 'human' | 'ai';
@@ -68,6 +76,9 @@ export interface Player {
   relations: Record<number, DiplomaticStatus>;
   /** Partner mit Handelsabkommen. */
   agreements?: number[];
+  /** Für Stadtstaaten: Typ und aktueller Auftrag. */
+  cityStateType?: CityStateType;
+  quest?: CityStateQuest | null;
   /** Für Stadtstaaten: Gunst je Spieler. */
   favor: Record<number, number>;
   /** Letzte Einnahmen/Ausgaben für die Anzeige. */
