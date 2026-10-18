@@ -29,9 +29,9 @@ export interface PlanParams {
 }
 
 export const PLANS: Record<Difficulty, PlanParams> = {
-  easy: { evalInterval: 3, candidateCap: 6, siteSearchSteps: 8, attackRatio: 1.5, warSuperiority: 2.6, queueTarget: 1, minGroup: 2, lookahead: false },
-  normal: { evalInterval: 1, candidateCap: 14, siteSearchSteps: 12, attackRatio: 1.0, warSuperiority: 2.0, queueTarget: 2, minGroup: 3, lookahead: true },
-  hard: { evalInterval: 1, candidateCap: 28, siteSearchSteps: 16, attackRatio: 0.85, warSuperiority: 1.7, queueTarget: 2, minGroup: 3, lookahead: true },
+  easy: { evalInterval: 3, candidateCap: 6, siteSearchSteps: 8, attackRatio: 1.5, warSuperiority: 2.0, queueTarget: 1, minGroup: 2, lookahead: false },
+  normal: { evalInterval: 1, candidateCap: 14, siteSearchSteps: 12, attackRatio: 1.0, warSuperiority: 1.5, queueTarget: 2, minGroup: 3, lookahead: true },
+  hard: { evalInterval: 1, candidateCap: 28, siteSearchSteps: 16, attackRatio: 0.85, warSuperiority: 1.3, queueTarget: 2, minGroup: 3, lookahead: true },
 };
 
 /** Ergebnis eines KI-Zuges (Diagnose, nicht Teil des Spielstands). */

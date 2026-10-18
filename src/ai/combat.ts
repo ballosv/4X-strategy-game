@@ -223,7 +223,8 @@ export function assaultDamage(ctx: AiContext, group: Unit[], s: Settlement): num
 /** Grobe Schätzung der Verteidigungsstärke einer fremden Siedlung (nur öffentliches Wissen: Zeitalter). */
 export function guessSettlementStrength(ctx: AiContext, owner: number): number {
   const era = ctx.state.players[owner]?.era ?? 0;
-  return 8 + era * 9 + 6 + 7 + 5 + 4 * era;
+  // grobe Schätzung analog settlementStrength: Basis, Zeitalter, typische Befestigung, Garnison, Größe
+  return 6 + era * 6 + 6 + 4 * era + 4 + 3;
 }
 
 /** Erwarteter Schaden der stärksten eigenen Einheiten gegen eine Siedlung dieser Stärke (je Runde). */

@@ -1,3 +1,4 @@
+import { policyCost } from '../core/game';
 import { ERAS } from '../core/data/eras';
 import { POLICIES } from '../core/data/policies';
 import { RESOURCES, type ResourceId } from '../core/data/terrain';
@@ -185,7 +186,7 @@ export function managePolicies(ctx: AiContext): void {
   let bestScore = -Infinity;
   for (const def of Object.values(POLICIES)) {
     if (p.policies.includes(def.id) || def.era > p.era || !hasTech(ctx.state, ctx.pid, def.tech)) continue;
-    if (p.influence - def.cost < reserve) continue;
+    if (p.influence - policyCost(def.cost, p.era) < reserve) continue;
     const tags = POLICY_TAGS[def.id] ?? { economy: 0.5 };
     let score = def.era * 0.3;
     for (const [goal, w] of Object.entries(tags) as [GoalId, number][]) score += (ctx.goals[goal] ?? 0) * w;

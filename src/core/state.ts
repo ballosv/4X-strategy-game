@@ -127,6 +127,8 @@ export interface Settlement {
   localStock: Stock;
   hp: number;
   founded: number;
+  /** Spieler, der die Siedlung gegründet hat. */
+  foundedBy?: number;
   focus: SettlementFocus;
   /** Zuletzt berechnete Wirtschaftsdaten für die Anzeige. */
   report: SettlementReport;

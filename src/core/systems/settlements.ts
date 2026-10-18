@@ -18,7 +18,7 @@ export const MIN_SETTLEMENT_DISTANCE = 3;
 
 export function campCost(state: GameState, playerId: number): number {
   const n = playerSettlements(state, playerId).length;
-  return n === 0 ? 0 : 5 + n * 5;
+  return n === 0 ? 0 : 10 + n * 10;
 }
 
 export const UPGRADE_COST: Record<'settlement' | 'city', { influence: number; minPop: number; tech?: string }> = {
@@ -71,6 +71,7 @@ export function foundSettlement(state: GameState, playerId: number, tile: number
     localStock: {},
     hp: 100,
     founded: state.turn,
+    foundedBy: playerId,
     focus: 'balanced',
     report: emptyReport(),
   };

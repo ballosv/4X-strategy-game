@@ -396,7 +396,7 @@ export function applyCommand(state: GameState, playerId: number, cmd: Command): 
   }
 }
 
-export const ENVOY_COST = 10;
+export const ENVOY_COST = 15;
 
 function ownSettlement(state: GameState, playerId: number, id: number): Settlement | null {
   const s = state.settlements[id];
@@ -458,18 +458,24 @@ function adoptPolicy(state: GameState, playerId: number, policyId: string, repla
   if (!def) return fail('Unbekannte Politik');
   if (p.policies.includes(policyId)) return fail('Bereits eingeführt');
   if (!hasTech(state, playerId, def.tech) || def.era > p.era) return fail('Noch nicht verfügbar');
-  if (p.influence < def.cost) return fail(`Benötigt ${def.cost} Einfluss`);
+  const cost = policyCost(def.cost, p.era);
+  if (p.influence < cost) return fail(`Benötigt ${cost} Einfluss`);
   const slots = ERAS[p.era].policySlots;
   if (replace) {
     const i = p.policies.indexOf(replace);
     if (i < 0) return fail('Zu ersetzende Politik nicht aktiv');
     p.policies.splice(i, 1);
   } else if (p.policies.length >= slots) return fail('Keine freien Politik-Plätze');
-  p.influence -= def.cost;
+  p.influence -= cost;
   p.policies.push(policyId);
   addLog(state, { player: playerId, kind: 'info', text: `Politik eingeführt: ${def.name}` });
   refreshReports(state, playerId);
   return ok;
+}
+
+/** Politiken werden mit jedem Zeitalter teurer (Einfluss als dauerhafte Ressource). */
+export function policyCost(base: number, era: number): number {
+  return Math.round(base * (1 + era * 0.5));
 }
 
 export const MARKET_SPREAD = 0.2;
@@ -860,11 +866,12 @@ setAiTechHandler((state, researcher) => {
 });
 
 function machineProduction(state: GameState, pid: number): void {
-  const cores = playerSettlements(state, pid);
+  // Nur selbst errichtete Kernanlagen produzieren; eroberte Siedlungen sind keine Fabriken
+  const cores = playerSettlements(state, pid).filter((s) => s.foundedBy === pid);
   const units = playerUnits(state, pid).length;
   for (const core of cores) {
-    // Jede Kernanlage baut alle 3 Runden eine Maschine, maximal 6 je Kern
-    if (state.turn % 3 !== 0 || units >= cores.length * 6) continue;
+    // Jede Kernanlage baut alle 3 Runden eine Maschine, insgesamt höchstens 10 + 4 je Kern
+    if (state.turn % 3 !== 0 || units >= 10 + cores.length * 4) continue;
     const type = state.turn % 2 === 0 ? 'warMachine' : 'drone';
     const tile = findSpawnTile(state, pid, core.tile, type);
     if (tile >= 0) createUnit(state, pid, type, tile).movesLeft = 0;
