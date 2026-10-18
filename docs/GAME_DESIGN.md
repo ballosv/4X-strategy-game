@@ -165,6 +165,14 @@ Utility-basierte KI mit Zielsystem:
 
 Schwierigkeitsgrade verändern ausschließlich Planungstiefe und Neubewertungsfrequenz.
 
+**Umsetzungsstand** (`src/ai/`): `runAiTurn(state, spieler)` spielt einen kompletten Zug nur über
+`applyCommand`. `AiView` erzwingt den Nebel des Krieges (Gelände nur erkundet, fremde Einheiten nur
+sichtbar, fremde Siedlungen nur gesehen – mit Gedächtnis). Das KI-Gedächtnis liegt JSON-serialisierbar in
+`state.aiMemory`. Ziele: expandieren, verteidigen, aufrüsten, Wirtschaft, Forschung, Angriff.
+Leicht bewertet die Strategie nur alle 3 Runden neu und prüft weniger Kandidaten; Normal/Schwer jede Runde
+mit Vorausschau auf Gegenangriffe. Stadtstaaten verteidigen sich nur, die Maschine greift die nächste
+bekannte Siedlung an.
+
 ## 9. Technik
 
 Siehe [ARCHITEKTUR.md](ARCHITEKTUR.md).
