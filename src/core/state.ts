@@ -80,7 +80,7 @@ export interface Income {
   influence: number;
 }
 
-export type UnitStatus = 'ready' | 'fortified' | 'sentry' | 'skip' | 'exploring';
+export type UnitStatus = 'ready' | 'fortified' | 'sentry' | 'skip' | 'exploring' | 'autoRoad';
 
 export interface Unit {
   id: number;
@@ -95,6 +95,8 @@ export interface Unit {
   /** Mehrrundiges Bewegungsziel. */
   destination: number | null;
   hasAttacked: boolean;
+  /** Laufende Bauarbeit (Straße/Eisenbahn) eines Arbeiters. */
+  work?: { kind: 'road' | 'rail'; tile: number; turnsLeft: number } | null;
 }
 
 export type SettlementKind = 'camp' | 'settlement' | 'city';
@@ -149,6 +151,8 @@ export interface SettlementReport {
   research: number;
   influence: number;
   transport: number;
+  /** Anbindung an die Hauptstadt (siehe systems/transport.ts). */
+  connection?: 'capital' | 'rail' | 'road' | 'sea' | 'none';
   jobs: Record<string, number>;
   stalled?: string;
 }
@@ -196,6 +200,8 @@ export interface GameState {
   market: Record<string, number>;
   /** Kuriositäten auf der Karte (Feldindizes), die beim Betreten eine Belohnung geben. */
   curiosities: number[];
+  /** Straßen (1) und Eisenbahnen (2) je Feldindex. */
+  roads?: Record<number, number>;
   /** Spieler-ID der KI-Fraktion, sobald sie erwacht ist. */
   machinePlayer: number | null;
   gameOver: GameOver | null;
@@ -206,7 +212,7 @@ export interface GameState {
   aiMemory?: Record<number, unknown>;
 }
 
-export const STATE_VERSION = 1;
+export const STATE_VERSION = 2;
 
 export function emptyReport(): SettlementReport {
   return {

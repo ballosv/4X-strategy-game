@@ -364,6 +364,7 @@ export class MapRenderer {
         n++;
         const imp = state.improvements[i];
         const t = state.map.tiles[i];
+        h = (Math.imul(h, 31) + (state.roads?.[i] ?? 0) * 977) | 0;
         h = (Math.imul(h, 31) + i * 7 + (imp ? imp.level * 13 + imp.type.length : 0) + (t.feature ? t.feature.length : 0) + (state.tileOwner[i] + 2) * 101) | 0;
         const s = pc.settlementsByTile.get(i);
         if (s) h = (Math.imul(h, 31) + s.kind.length * 17 + s.buildings.length * 3 + s.owner * 1009 + (state.players[s.owner]?.era ?? 0)) | 0;

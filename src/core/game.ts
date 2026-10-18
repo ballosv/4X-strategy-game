@@ -53,6 +53,7 @@ import {
   upgradeSettlement,
 } from './systems/settlements';
 import { computeVisibility, updateExplored } from './systems/vision';
+import { canBuildRoad, logRoadDone, nextAutoRoadTile, progressRoadWork, startRoadWork } from './systems/transport';
 
 export class SetupError extends Error {}
 
@@ -165,6 +166,7 @@ export function createGame(settings: GameSettings): GameState {
       log: [],
       market: Object.fromEntries(Object.values(GOODS).map((g) => [g.id, g.basePrice])),
       curiosities: [],
+      roads: {},
       machinePlayer: null,
       gameOver: null,
     };
@@ -253,7 +255,10 @@ export type UnitActionId =
   | 'heal'
   | 'disband'
   | 'foundCamp'
-  | 'foundSettlement';
+  | 'foundSettlement'
+  | 'buildRoad'
+  | 'buildRail'
+  | 'autoRoad';
 
 export type Command =
   | { type: 'move'; unitId: number; target: number }
@@ -521,6 +526,7 @@ function moveUnit(state: GameState, playerId: number, unitId: number, target: nu
   if (!path) return fail('Kein Weg dorthin');
   unit.destination = target;
   unit.status = 'ready';
+  unit.work = null;
   unit.fortifyTurns = 0;
   followPath(state, unit, path);
   if (unit.tile === target) unit.destination = null;
@@ -643,6 +649,26 @@ function unitAction(state: GameState, playerId: number, unitId: number, action: 
       return ok;
     case 'disband':
       delete state.units[unit.id];
+      afterChange(state, playerId);
+      return ok;
+    case 'buildRoad':
+    case 'buildRail': {
+      if (!def.abilities.includes('buildRoad')) return fail('Nur Arbeiter können bauen');
+      const kind = action === 'buildRoad' ? 'road' : 'rail';
+      if (unit.movesLeft <= 0) return fail('Keine Bewegung übrig');
+      const err = canBuildRoad(state, unit, kind);
+      if (err) return fail(err);
+      startRoadWork(state, unit, kind);
+      unit.status = 'ready';
+      unit.destination = null;
+      return ok;
+    }
+    case 'autoRoad':
+      if (!def.abilities.includes('buildRoad')) return fail('Nur Arbeiter können bauen');
+      if (!hasTech(state, playerId, 'wheel')) return fail('Benötigt die Technologie Rad');
+      unit.status = 'autoRoad';
+      unit.destination = null;
+      autoRoad(state, unit);
       afterChange(state, playerId);
       return ok;
     case 'foundCamp':
@@ -783,10 +809,17 @@ function startPlayerTurn(state: GameState, pid: number): void {
     if (u.status === 'skip') u.status = 'ready';
     if (u.status === 'fortified' && u.hp >= MAX_HP && unitType(u.type).strength === 0) u.status = 'ready';
   }
-  // Mehrrundige Bewegungen und Erkundung fortsetzen
+  // Bauarbeiten der Arbeiter
+  for (const u of playerUnits(state, pid)) {
+    const kind = u.work?.kind;
+    if (kind && progressRoadWork(state, u)) logRoadDone(state, u, kind);
+  }
+  // Mehrrundige Bewegungen, Erkundung und automatischer Straßenbau
   for (const u of playerUnits(state, pid)) {
     if (!state.units[u.id]) continue;
+    if (u.work) continue;
     if (u.status === 'exploring') autoExplore(state, u);
+    else if (u.status === 'autoRoad') autoRoad(state, u);
     else if (u.destination !== null) {
       const path = findPath(state, u, u.destination, { explored: state.players[pid].explored, visible: computeVisibility(state, pid) });
       if (path) followPath(state, u, path);
@@ -800,7 +833,29 @@ function startPlayerTurn(state: GameState, pid: number): void {
 
 /** Einheiten, die in diesem Zug noch Befehle brauchen. */
 export function unitsNeedingOrders(state: GameState, pid: number): Unit[] {
-  return playerUnits(state, pid).filter((u) => u.status === 'ready' && u.movesLeft > 0 && u.destination === null);
+  return playerUnits(state, pid).filter((u) => u.status === 'ready' && u.movesLeft > 0 && u.destination === null && !u.work);
+}
+
+/** Arbeiter verbindet selbstständig Siedlungen mit dem Straßennetz der Hauptstadt. */
+export function autoRoad(state: GameState, unit: Unit): void {
+  const target = nextAutoRoadTile(state, unit);
+  if (target < 0) {
+    unit.status = 'ready';
+    addLog(state, { player: unit.owner, kind: 'info', text: 'Arbeiter: Alle Siedlungen sind angebunden.', tile: unit.tile });
+    return;
+  }
+  if (unit.tile !== target) {
+    const path = findPath(state, unit, target, { explored: state.players[unit.owner].explored, visible: computeVisibility(state, unit.owner) });
+    if (!path) {
+      unit.status = 'ready';
+      return;
+    }
+    followPath(state, unit, path);
+  }
+  if (unit.tile === target && unit.movesLeft > 0) {
+    if (canBuildRoad(state, unit, 'road') === null) startRoadWork(state, unit, 'road');
+    else unit.status = 'ready';
+  }
 }
 
 function cityStateTurn(state: GameState, pid: number): void {

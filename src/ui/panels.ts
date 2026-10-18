@@ -21,7 +21,8 @@ import { maxMoves } from '../core/systems/movement';
 import { KIND_NAMES, UPGRADE_COST, campCost, canFoundAt, canPromote, canUpgradeSettlement } from '../core/systems/settlements';
 import { drawUnitFigure } from '../render/units';
 import { h } from './dom';
-import { costText, fmt, signed } from './format';
+import { costText, fmt, signed, stockText } from './format';
+import { CONNECTION_NAMES, ROAD_WORK, canBuildRoad } from '../core/systems/transport';
 
 export interface PanelHost {
   state: GameState;
@@ -39,6 +40,7 @@ const STATUS_NAMES: Record<Unit['status'], string> = {
   sentry: 'Wache',
   skip: 'Wartet',
   exploring: 'Erkundet',
+  autoRoad: 'Baut Straßen',
 };
 
 function portrait(type: string, color: string): HTMLElement {
@@ -64,7 +66,7 @@ export function unitPanel(host: PanelHost, unit: Unit): [HTMLElement, HTMLElemen
   const strength = def.strength > 0 ? unitStrength(state, unit, 'defend') : null;
   const tile = state.map.tiles[unit.tile];
   const level = experienceLevel(unit.xp);
-  const status = unit.destination !== null ? 'Unterwegs' : unit.movesLeft <= 0 && own ? 'Erschöpft' : STATUS_NAMES[unit.status];
+  const status = unit.work ? `Baut ${ROAD_WORK[unit.work.kind].name} (${unit.work.turnsLeft} R.)` : unit.destination !== null ? 'Unterwegs' : unit.movesLeft <= 0 && own ? 'Erschöpft' : STATUS_NAMES[unit.status];
   const bonuses: string[] = [];
   if (def.hillBonus) bonuses.push(`+${def.hillBonus} auf Hügeln`);
   if (def.versus) bonuses.push(`+${def.versus.bonus} gegen ${def.versus.unitClass === 'cavalry' ? 'Kavallerie' : 'Maschinen'}`);
@@ -105,6 +107,13 @@ export function unitPanel(host: PanelHost, unit: Unit): [HTMLElement, HTMLElemen
       const cost = campCost(state, unit.owner);
       const settle = def.abilities.includes('foundSettlement');
       actions.push(action(settle ? '🏘️' : '⛺', settle ? 'Siedlung gründen' : 'Lager errichten', act(settle ? 'foundSettlement' : 'foundCamp'), { disabled: !!err, title: err ?? (cost ? `Kostet ${cost} Einfluss` : 'Kostenlos') }));
+    }
+    if (def.abilities.includes('buildRoad')) {
+      const roadErr = canBuildRoad(state, unit, 'road');
+      const railErr = canBuildRoad(state, unit, 'rail');
+      actions.push(action('🛤️', 'Straße bauen', act('buildRoad'), { disabled: !!roadErr || unit.movesLeft <= 0, title: roadErr ?? `${ROAD_WORK.road.turns} Runden · ${stockText(ROAD_WORK.road.goods)}` }));
+      if (state.players[unit.owner].techs.includes('railroad')) actions.push(action('🚂', 'Eisenbahn bauen', act('buildRail'), { disabled: !!railErr || unit.movesLeft <= 0, title: railErr ?? `${ROAD_WORK.rail.turns} Runden · ${stockText(ROAD_WORK.rail.goods)}` }));
+      actions.push(action('🔗', 'Siedlungen verbinden', act('autoRoad'), { active: unit.status === 'autoRoad', title: 'Baut automatisch Straßen zwischen Siedlungen und Hauptstadt' }));
     }
     if (def.strength > 0) actions.push(action('🛡️', 'Befestigen', act('fortify'), { active: unit.status === 'fortified' }));
     actions.push(action('👁️', 'Wachen', act('sentry'), { active: unit.status === 'sentry' }));
@@ -148,6 +157,7 @@ export function settlementPanel(host: PanelHost, s: Settlement): [HTMLElement, H
         own ? [h('span', { class: 'k' }, '🔨 Arbeitskraft'), h('span', { class: 'v' }, `${r.laborFree} frei / ${r.laborTotal}`)] : null,
         own ? [h('span', { class: 'k' }, '🌱 Wachstum'), h('span', { class: 'v' }, `${fmt(s.food)} / ${growthThreshold(pop)} (${signed(r.foodSurplus, 1)})`)] : null,
         own ? [h('span', { class: 'k' }, '🚚 Transport'), h('span', { class: 'v' }, s.isCapital ? 'Hauptstadt' : `${r.transport} / Runde`)] : null,
+        own && !s.isCapital ? [h('span', { class: 'k' }, '🛤️ Anbindung'), h('span', { class: 'v', style: r.connection === 'none' ? 'color:var(--danger)' : '' }, CONNECTION_NAMES[r.connection ?? 'none'])] : null,
       ),
     ),
     own
@@ -236,6 +246,7 @@ export function tilePanel(host: PanelHost, tileIdx: number): [HTMLElement, HTMLE
       h('div', null,
         res ? h('span', { class: 'pill ok' }, `Ressource: ${res.name}`) : null,
         riverText ? h('span', { class: 'pill' }, '💧 Fluss') : null,
+        state.roads?.[tileIdx] ? h('span', { class: 'pill' }, state.roads[tileIdx] >= 2 ? '🚂 Eisenbahn' : '🛤️ Straße') : null,
         ownerSettlement ? h('span', { class: 'pill' }, `Gebiet: ${ownerSettlement.name}`) : h('span', { class: 'pill' }, 'Niemandsland'),
         state.curiosities.includes(tileIdx) ? h('span', { class: 'pill ok' }, '✨ Kuriosität') : null,
       ),
