@@ -1,0 +1,58 @@
+name: Release
+
+# Bei jedem Push auf main: Ist die Version aus package.json noch nicht getaggt,
+# wird der Tag v<version> angelegt und ein GitHub-Release mit Web-Build und APK erstellt.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Version bestimmen
+        id: version
+        run: |
+          VERSION="v$(node -p "require('./package.json').version")"
+          echo "tag=$VERSION" >> "$GITHUB_OUTPUT"
+          if git rev-parse "$VERSION" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-node@v5
+        if: steps.version.outputs.exists == 'false'
+        with:
+          node-version: 22
+          cache: npm
+      - uses: actions/setup-java@v5
+        if: steps.version.outputs.exists == 'false'
+        with:
+          distribution: temurin
+          java-version: 21
+      - name: Bauen und testen
+        if: steps.version.outputs.exists == 'false'
+        run: |
+          npm ci
+          npm run typecheck
+          npm test
+          npm run build
+          npx cap sync android
+          (cd android && ./gradlew assembleDebug --no-daemon)
+          cp android/app/build/outputs/apk/debug/app-debug.apk "ai4x-${{ steps.version.outputs.tag }}-debug.apk"
+          (cd dist && zip -qr "../ai4x-${{ steps.version.outputs.tag }}-web.zip" .)
+      - name: Tag und Release erstellen
+        if: steps.version.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="${{ steps.version.outputs.tag }}"
+          NOTES=$(awk -v tag="$TAG" '$0 ~ "^## "tag {flag=1; next} /^## / {flag=0} flag' CHANGELOG.md)
+          gh release create "$TAG" --target "$GITHUB_SHA" --title "$TAG" --notes "$NOTES" \
+            "ai4x-$TAG-debug.apk" "ai4x-$TAG-web.zip"

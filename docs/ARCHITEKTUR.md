@@ -52,3 +52,10 @@ npx cap open android     # Android Studio → APK / AAB
 ```
 
 Der CI-Workflow baut zusätzlich automatisch eine Debug-APK.
+
+## Releases
+
+Branch-Modell: `feature/*` → PR nach `develop` → Release-PR nach `main`.
+Bei jedem Push auf `main` prüft der Workflow `release.yml`, ob die Version aus `package.json`
+bereits getaggt ist. Falls nicht, legt er den Tag `v<version>` an und erstellt ein GitHub-Release
+mit Debug-APK und Web-Build; die Release-Notizen stammen aus `CHANGELOG.md`.
