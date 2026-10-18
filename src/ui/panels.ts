@@ -193,6 +193,7 @@ export function settlementPanel(host: PanelHost, s: Settlement): [HTMLElement, H
         { class: 'action-grid' },
         action('🏗️', 'Bauen / Rekrutieren', () => host.openBuild(s.id)),
         action('🗺️', 'Felder', () => host.openBuild(s.id, 'improvements')),
+        action('👷', 'Arbeitskraft', () => host.openBuild(s.id, 'labor')),
         s.kind !== 'city' ? action('⬆️', `Zur ${KIND_NAMES[target]}`, () => host.command({ type: 'upgradeSettlement', settlementId: s.id }), { disabled: !!upErr, title: upErr ?? `${UPGRADE_COST[target].influence} Einfluss` }) : null,
         action('🎩', 'Bürger ausbilden', () => host.command({ type: 'promote', settlementId: s.id, to: 'citizens' }), { disabled: !!promoteErr, title: promoteErr ?? '+1,5 Gold, +0,5 Einfluss je Bürger' }),
         action('📜', 'Gelehrte ausbilden', () => host.command({ type: 'promote', settlementId: s.id, to: 'scholars' }), { disabled: !!scholarErr, title: scholarErr ?? '+2 Entwicklung je Gelehrtem' }),
