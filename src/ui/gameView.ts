@@ -340,7 +340,7 @@ export class GameView implements PanelHost, ScreenHost {
   }
 
   private renderMessages(): void {
-    const mine = this.state.log.filter((e, i) => i >= this.seenLog && (e.player === this.viewer || e.player === -1)).slice(-5);
+    const mine = this.state.log.filter((e, i) => i >= this.seenLog && e.turn >= this.state.turn - 1 && (e.player === this.viewer || e.player === -1)).slice(-5);
     replace(
       this.messages,
       mine.map((e) =>
