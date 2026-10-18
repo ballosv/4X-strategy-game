@@ -704,6 +704,7 @@ export function autoExplore(state: GameState, unit: Unit): void {
 function afterChange(state: GameState, playerId: number): void {
   updateExplored(state, playerId);
   checkElimination(state);
+  refreshReports(state, playerId);
 }
 
 // ---------------------------------------------------------------------------
