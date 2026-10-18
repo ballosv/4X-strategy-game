@@ -2,7 +2,7 @@ import type { Stock } from './goods';
 
 export type UnitClass = 'civilian' | 'recon' | 'infantry' | 'ranged' | 'cavalry' | 'siege' | 'naval' | 'air' | 'machine';
 export type Domain = 'land' | 'sea' | 'air';
-export type UnitAbility = 'foundCamp' | 'foundSettlement' | 'gather' | 'trade' | 'capture';
+export type UnitAbility = 'foundCamp' | 'foundSettlement' | 'gather' | 'trade' | 'capture' | 'buildRoad';
 
 export interface UnitTypeDef {
   id: string;
@@ -49,6 +49,7 @@ export const UNIT_TYPES: Record<string, UnitTypeDef> = Object.fromEntries(
     // Steinzeit
     u({ id: 'tribe', name: 'Stamm', typeName: 'Umherziehender Stamm', unitClass: 'civilian', domain: 'land', era: 0, moves: 2, strength: 0, sight: 2, upkeep: 0, labor: 16, popCost: 2, abilities: ['foundCamp', 'gather'], icon: '⛺' }),
     u({ id: 'scout', name: 'Späher', typeName: 'Erkundung', unitClass: 'recon', domain: 'land', era: 0, moves: 3, strength: 6, sight: 3, upkeep: 0, labor: 8, abilities: ['gather'], icon: '🔭' }),
+    u({ id: 'worker', name: 'Arbeiter', typeName: 'Zivil · Bautrupp', unitClass: 'civilian', domain: 'land', era: 0, moves: 2, strength: 0, sight: 2, upkeep: 1, labor: 12, popCost: 1, abilities: ['buildRoad'], icon: '👷' }),
     u({ id: 'clubman', name: 'Keulenträger', typeName: 'Leichte Infanterie', unitClass: 'infantry', domain: 'land', era: 0, moves: 2, strength: 9, sight: 2, upkeep: 1, labor: 10, goods: { wood: 1 }, abilities: ['capture'], icon: '🪓' }),
     u({ id: 'slinger', name: 'Schleuderer', typeName: 'Fernkampf', unitClass: 'ranged', domain: 'land', era: 0, moves: 2, strength: 5, rangedStrength: 9, range: 2, sight: 2, upkeep: 1, labor: 10, goods: { stone: 1 }, icon: '🪨' }),
     // Bronzezeit

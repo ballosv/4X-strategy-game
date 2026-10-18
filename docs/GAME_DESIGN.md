@@ -131,7 +131,12 @@ Alle Boni sind symmetrisch ausbalanciert – kein Volk ist grundsätzlich stärk
 * **Nahrungsversorgung**: Jede Siedlung benötigt Getreide, Fisch/Fleisch und (ab Bronzezeit) Gemüse.
   Vollständige Versorgung → Wachstum; Unterversorgung → Stagnation bzw. Schrumpfen.
 * **Transport**: Überschüsse fließen ins Nationallager – begrenzt durch die **Transportkapazität**
-  der Siedlung (Pfad < Straße < Eisenbahn). Nicht abtransportierte Güter verbleiben im lokalen Lager.
+  der Siedlung. Sie hängt von der **Anbindung an die Hauptstadt** ab: keine (Träger), Straße (+6),
+  Eisenbahn (+18, Bahnhof nötig) oder Seeweg (+5, beide mit Hafen). Straßen und Schienen werden von
+  **Arbeitern** gebaut (Straße: Rad, 2 Runden, 1 Stein; Eisenbahn: Eisenbahn, 3 Runden, 1 Stahl + 1 Bretter),
+  auf Wunsch automatisch („Siedlungen verbinden“). Einheiten bewegen sich auf Straßen für ½, auf
+  Schienen für ¼ Bewegungspunkt je Feld; Klippen bleiben unpassierbar. Nicht abtransportierte
+  Güter verbleiben im lokalen Lager.
 * **Handel**: Güter können auf dem Weltmarkt gekauft und verkauft werden; Preise folgen Angebot und
   Nachfrage. Handelsabkommen mit anderen Zivilisationen und Stadtstaaten.
 * **Produktionserweiterungen**: Ausbaustufen erhöhen Ertrag je Arbeitskraft.

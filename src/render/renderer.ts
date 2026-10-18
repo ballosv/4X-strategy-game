@@ -7,7 +7,8 @@ import { RESOURCES } from '../core/data/terrain';
 import { paintTile, tracedHex, type PaintContext } from './painter';
 import { UI, withAlpha } from './palette';
 import { EDGE_CORNERS, ELEV_STEP, HEX_CORNERS, HEX_R, HEX_W, ROW_STEP, SQUASH, pointInHex, tileTop, worldSize, type Point } from './projection';
-import { SPRITE_SIZE, unitSprite } from './units';
+import { assets } from './assets';
+import { SPRITE_SIZE, clearUnitSpriteCache, drawUnitAsset, unitSprite } from './units';
 
 const CHUNK = 8;
 const PAD_TOP = 5 * ELEV_STEP + 70;
@@ -54,8 +55,23 @@ export class MapRenderer {
   private cssW = 0;
   private cssH = 0;
 
+  /** Wird aufgerufen, wenn sich die Darstellung ohne Spieländerung ändert (z. B. Assets geladen). */
+  onInvalidate: (() => void) | null = null;
+  private readonly offAssets: () => void;
+
   constructor(readonly canvas: HTMLCanvasElement) {
     this.ctx = canvas.getContext('2d')!;
+    // Sobald Sprites geladen sind, Chunk-Cache einmalig verwerfen und neu zeichnen
+    this.offAssets = assets.onLoad(() => {
+      clearUnitSpriteCache();
+      this.invalidate();
+      this.onInvalidate?.();
+    });
+  }
+
+  dispose(): void {
+    this.offAssets();
+    this.chunks.clear();
   }
 
   resize(): void {
@@ -172,7 +188,8 @@ export class MapRenderer {
       }
     }
 
-    // 3) Hervorhebungen
+    // 3) Handelsrouten des Betrachters und Hervorhebungen
+    this.drawTradeRoutes(state, grid);
     this.drawHighlights(state, grid, hl);
 
     // 4) Einheiten (von hinten nach vorne)
@@ -197,6 +214,31 @@ export class MapRenderer {
       if (!this.revealAll && explored?.[s.tile] !== 1) continue;
       this.drawSettlementBanner(state, grid, s);
     }
+  }
+
+  private drawTradeRoutes(state: GameState, grid: HexGrid): void {
+    const ctx = this.ctx;
+    const routes = (state.tradeRoutes ?? []).filter((r) => r.owner === this.viewer);
+    if (!routes.length) return;
+    ctx.save();
+    ctx.strokeStyle = 'rgba(242,193,78,0.85)';
+    ctx.lineWidth = 2.5;
+    ctx.setLineDash([3, 7]);
+    ctx.lineCap = 'round';
+    for (const r of routes) {
+      const a = state.settlements[r.from];
+      const b = state.settlements[r.to];
+      if (!a || !b) continue;
+      const pa = tileTop(grid.col(a.tile), grid.row(a.tile), state.map.tiles[a.tile].elevation);
+      const pb = tileTop(grid.col(b.tile), grid.row(b.tile), state.map.tiles[b.tile].elevation);
+      const mx = (pa.x + pb.x) / 2;
+      const my = Math.min(pa.y, pb.y) - 40 - Math.hypot(pa.x - pb.x, pa.y - pb.y) * 0.12;
+      ctx.beginPath();
+      ctx.moveTo(pa.x, pa.y - 10);
+      ctx.quadraticCurveTo(mx, my, pb.x, pb.y - 10);
+      ctx.stroke();
+    }
+    ctx.restore();
   }
 
   private drawHighlights(state: GameState, grid: HexGrid, hl: Highlights): void {
@@ -288,9 +330,11 @@ export class MapRenderer {
       ctx.ellipse(x, y, 13, 5, 0, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
-      const sprite = unitSprite(u.type, owner.color);
-      const s = 0.82;
-      ctx.drawImage(sprite, x - (SPRITE_SIZE / 2) * s, y - (SPRITE_SIZE - 6) * s, SPRITE_SIZE * s, SPRITE_SIZE * s);
+      if (!drawUnitAsset(ctx, u.type, owner.color, x, y)) {
+        const sprite = unitSprite(u.type, owner.color);
+        const s = 0.82;
+        ctx.drawImage(sprite, x - (SPRITE_SIZE / 2) * s, y - (SPRITE_SIZE - 6) * s, SPRITE_SIZE * s, SPRITE_SIZE * s);
+      }
       // Lebensbalken
       if (u.hp < 100) {
         ctx.fillStyle = 'rgba(0,0,0,0.6)';
@@ -364,6 +408,7 @@ export class MapRenderer {
         n++;
         const imp = state.improvements[i];
         const t = state.map.tiles[i];
+        h = (Math.imul(h, 31) + (state.roads?.[i] ?? 0) * 977) | 0;
         h = (Math.imul(h, 31) + i * 7 + (imp ? imp.level * 13 + imp.type.length : 0) + (t.feature ? t.feature.length : 0) + (state.tileOwner[i] + 2) * 101) | 0;
         const s = pc.settlementsByTile.get(i);
         if (s) h = (Math.imul(h, 31) + s.kind.length * 17 + s.buildings.length * 3 + s.owner * 1009 + (state.players[s.owner]?.era ?? 0)) | 0;

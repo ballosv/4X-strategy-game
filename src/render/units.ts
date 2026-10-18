@@ -1,6 +1,9 @@
 import { unitType } from '../core/data/units';
 import { shade } from './palette';
+import { MASK_SUFFIX } from './assetKeys';
+import { assets, type LoadedSprite } from './assets';
 import { drawBoat } from './painter';
+import { HEX_W } from './projection';
 
 /**
  * Prozedurale Einheiten-Sprites. Einheiten sind bewusst etwas größer als maßstabsgetreu
@@ -24,6 +27,69 @@ export function unitSprite(type: string, color: string): HTMLCanvasElement {
   drawUnitFigure(ctx, type, color, SPRITE_SIZE / 2, SPRITE_SIZE - 6);
   cache.set(key, c);
   return c;
+}
+
+// ---------------------------------------------------------------------------
+// Sprites aus der Asset-Pipeline (unit/<id>, optional unit/<id>_mask)
+
+const assetCache = new Map<string, HTMLCanvasElement>();
+
+/** Leert die Sprite-Zwischenspeicher (nach dem Laden neuer Assets). */
+export function clearUnitSpriteCache(): void {
+  cache.clear();
+  assetCache.clear();
+}
+
+/**
+ * Sprite mit eingefärbter Maske: Die Maske (weiß auf transparent) wird in der Spielerfarbe eingefärbt,
+ * auf die Deckkraft des Sprites beschnitten und per „multiply“ über den Sprite gelegt.
+ * Unter der Maske sollte der Sprite daher hell/neutral (grau-weiß) gemalt sein – die Schattierung bleibt erhalten.
+ */
+function tintedUnitCanvas(sprite: LoadedSprite, mask: LoadedSprite | null, color: string): CanvasImageSource {
+  if (!mask) return sprite.image;
+  const key = `${sprite.key}|${color}`;
+  let out = assetCache.get(key);
+  if (out) return out;
+  const w = sprite.width;
+  const hgt = sprite.height;
+  const tint = document.createElement('canvas');
+  tint.width = w;
+  tint.height = hgt;
+  const tc = tint.getContext('2d')!;
+  tc.drawImage(mask.image, 0, 0, w, hgt);
+  tc.globalCompositeOperation = 'source-in';
+  tc.fillStyle = color;
+  tc.fillRect(0, 0, w, hgt);
+  tc.globalCompositeOperation = 'destination-in';
+  tc.drawImage(sprite.image, 0, 0, w, hgt);
+  out = document.createElement('canvas');
+  out.width = w;
+  out.height = hgt;
+  const oc = out.getContext('2d')!;
+  oc.drawImage(sprite.image, 0, 0);
+  oc.globalCompositeOperation = 'multiply';
+  oc.drawImage(tint, 0, 0);
+  assetCache.set(key, out);
+  return out;
+}
+
+/** Gibt es für den Einheitentyp einen geladenen Sprite? */
+export function hasUnitAsset(type: string): boolean {
+  return assets.has(`unit/${type}`);
+}
+
+/**
+ * Zeichnet den Einheiten-Sprite mit Ankerpunkt auf (x, y) (Fußpunkt).
+ * Breite = HEX_W × scale × zoom. Gibt false zurück, wenn kein Sprite geladen ist.
+ */
+export function drawUnitAsset(ctx: CanvasRenderingContext2D, type: string, color: string, x: number, y: number, zoom = 1): boolean {
+  const sprite = assets.get(`unit/${type}`);
+  if (!sprite) return false;
+  const img = tintedUnitCanvas(sprite, assets.get(`unit/${type}${MASK_SUFFIX}`), color);
+  const w = HEX_W * sprite.scale * zoom;
+  const hgt = (w * sprite.height) / sprite.width;
+  ctx.drawImage(img, x - sprite.anchorX * w, y - sprite.anchorY * hgt, w, hgt);
+  return true;
 }
 
 /** Zeichnet eine Einheit mit Fußpunkt (x, y). */

@@ -14,6 +14,7 @@ import { availableTechs } from '../core/systems/research';
 import { computeVisibility } from '../core/systems/vision';
 import { MapRenderer, renderMinimap, type Highlights } from '../render/renderer';
 import { HEX_W, ROW_STEP } from '../render/projection';
+import { assetPreviewScreen } from './assetPreview';
 import { h, replace } from './dom';
 import { fmt, signed } from './format';
 import { settlementPanel, tilePanel, unitPanel, type PanelHost } from './panels';
@@ -21,7 +22,7 @@ import { buildScreen, civScreen, diplomacyScreen, gameOverScreen, helpScreen, mo
 import { saveGame } from './session';
 
 type Selection = { kind: 'unit'; id: number } | { kind: 'settlement'; id: number } | { kind: 'tile'; tile: number } | null;
-type Screen = { kind: 'build'; id: number; tab: string } | { kind: 'tech' } | { kind: 'civ'; tab: string } | { kind: 'diplomacy' } | { kind: 'menu' } | { kind: 'help' } | { kind: 'gameOver' } | null;
+type Screen = { kind: 'build'; id: number; tab: string } | { kind: 'tech' } | { kind: 'civ'; tab: string } | { kind: 'diplomacy' } | { kind: 'menu' } | { kind: 'help' } | { kind: 'assets' } | { kind: 'gameOver' } | null;
 
 const LOG_ICONS: Record<LogEntry['kind'], string> = { info: 'ℹ️', combat: '⚔️', economy: '🏗️', research: '📖', diplomacy: '🕊️', warning: '⚠️' };
 
@@ -66,6 +67,7 @@ export class GameView implements PanelHost, ScreenHost {
     this.seenLog = Math.max(0, state.log.length - 6);
     this.renderer = new MapRenderer(this.canvas);
     this.renderer.viewer = this.viewer;
+    this.renderer.onInvalidate = () => this.refresh();
     const minimapBox = h(
       'div',
       { class: 'minimap-box' },
@@ -98,6 +100,7 @@ export class GameView implements PanelHost, ScreenHost {
 
   destroy(): void {
     this.destroyed = true;
+    this.renderer.dispose();
     window.removeEventListener('resize', this.onResize);
     window.removeEventListener('keydown', this.onKey);
   }
@@ -414,6 +417,9 @@ export class GameView implements PanelHost, ScreenHost {
       case 'help':
         el = modal('Spielhilfe', this, helpScreen());
         break;
+      case 'assets':
+        el = modal('Asset-Vorschau', this, assetPreviewScreen());
+        break;
       case 'gameOver':
         el = modal('Spielende', this, gameOverScreen(this, () => this.cb.exit()));
         break;
@@ -428,6 +434,7 @@ export class GameView implements PanelHost, ScreenHost {
             h('button', { class: 'btn', onclick: () => { this.toast(saveGame(this.state, '1') ? 'Gespeichert (Spielstand 1)' : 'Speichern fehlgeschlagen', 'info'); this.close(); } }, '💾 Spiel speichern (Platz 1)'),
             h('button', { class: 'btn', onclick: () => { this.toast(saveGame(this.state, '2') ? 'Gespeichert (Spielstand 2)' : 'Speichern fehlgeschlagen', 'info'); this.close(); } }, '💾 Spiel speichern (Platz 2)'),
             h('button', { class: 'btn', onclick: () => { this.renderer.revealAll = !this.renderer.revealAll; this.close(); } }, this.renderer.revealAll ? '🌫️ Nebel des Krieges einblenden' : '🗺️ Ganze Karte zeigen (Beobachter)'),
+            h('button', { class: 'btn', onclick: () => this.openScreen({ kind: 'assets' }) }, '🖼️ Asset-Vorschau (Grafik-Abdeckung)'),
             h('button', { class: 'btn danger', onclick: () => { saveGame(this.state, 'auto'); this.cb.exit(); } }, '⏏️ Zum Hauptmenü'),
             h('div', { class: 'hint' }, 'Steuerung: Ziehen = Karte bewegen, Zwei Finger / Mausrad = Zoom, Tippen = Auswahl. Tasten: Eingabe = nächste Runde, Leertaste = Einheit überspringen, F = befestigen, Esc = Auswahl aufheben.'),
           ),

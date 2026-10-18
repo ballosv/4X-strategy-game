@@ -53,6 +53,9 @@ import {
   upgradeSettlement,
 } from './systems/settlements';
 import { computeVisibility, updateExplored } from './systems/vision';
+import { CITY_STATE_TYPE_ORDER, canClaimTile, canFulfillQuest, claimTile, fulfillQuest, processCityState, setLevyHook } from './systems/cityStates';
+import { agreementEvaluator, canEstablishRoute, canProposeAgreement, cancelAgreement, establishRoute, hasAgreement, signAgreement, validateTrade } from './systems/trade';
+import { canBuildRoad, logRoadDone, nextAutoRoadTile, progressRoadWork, startRoadWork } from './systems/transport';
 
 export class SetupError extends Error {}
 
@@ -165,6 +168,7 @@ export function createGame(settings: GameSettings): GameState {
       log: [],
       market: Object.fromEntries(Object.values(GOODS).map((g) => [g.id, g.basePrice])),
       curiosities: [],
+      roads: {},
       machinePlayer: null,
       gameOver: null,
     };
@@ -217,6 +221,7 @@ function placeCityStates(state: GameState, rng: Rng, count: number, starts: numb
     if (minDist < 8) continue;
     const id = state.players.length;
     const p = newPlayer(id, names[made % names.length], 'citystate', 'cityState', colors[made % colors.length], grid.size);
+    p.cityStateType = CITY_STATE_TYPE_ORDER[made % CITY_STATE_TYPE_ORDER.length];
     p.era = 0;
     state.players.push(p);
     const s = foundSettlement(state, id, c, 'settlement', 4);
@@ -253,7 +258,10 @@ export type UnitActionId =
   | 'heal'
   | 'disband'
   | 'foundCamp'
-  | 'foundSettlement';
+  | 'foundSettlement'
+  | 'buildRoad'
+  | 'buildRail'
+  | 'autoRoad';
 
 export type Command =
   | { type: 'move'; unitId: number; target: number }
@@ -262,6 +270,7 @@ export type Command =
   | { type: 'enqueue'; settlementId: number; item: ProductionItem; front?: boolean }
   | { type: 'dequeue'; settlementId: number; index: number }
   | { type: 'setFocus'; settlementId: number; focus: SettlementFocus }
+  | { type: 'setJob'; settlementId: number; key: string; count: number | null }
   | { type: 'upgradeSettlement'; settlementId: number }
   | { type: 'promote'; settlementId: number; to: 'citizens' | 'scholars' }
   | { type: 'demote'; settlementId: number; from: 'citizens' | 'scholars' }
@@ -271,6 +280,11 @@ export type Command =
   | { type: 'declareWar'; target: number }
   | { type: 'makePeace'; target: number }
   | { type: 'sendEnvoy'; target: number }
+  | { type: 'establishTrade'; unitId: number; settlementId: number }
+  | { type: 'proposeAgreement'; target: number }
+  | { type: 'cancelAgreement'; target: number }
+  | { type: 'fulfillQuest'; target: number }
+  | { type: 'claimTile'; tile: number }
   | { type: 'endTurn' };
 
 export interface CommandResult {
@@ -326,6 +340,18 @@ export function applyCommand(state: GameState, playerId: number, cmd: Command): 
       refreshReports(state, playerId);
       return ok;
     }
+    case 'setJob': {
+      const s = ownSettlement(state, playerId, cmd.settlementId);
+      if (!s) return fail('Siedlung nicht gefunden');
+      if (cmd.count === null) {
+        if (s.jobOverrides) delete s.jobOverrides[cmd.key];
+      } else {
+        if (!Number.isInteger(cmd.count) || cmd.count < 0) return fail('Ungültige Anzahl');
+        s.jobOverrides = { ...(s.jobOverrides ?? {}), [cmd.key]: cmd.count };
+      }
+      refreshReports(state, playerId);
+      return ok;
+    }
     case 'upgradeSettlement': {
       const s = ownSettlement(state, playerId, cmd.settlementId);
       if (!s) return fail('Siedlung nicht gefunden');
@@ -369,6 +395,7 @@ export function applyCommand(state: GameState, playerId: number, cmd: Command): 
       if (!target || target.id === playerId) return fail('Ungültig');
       state.players[playerId].relations[cmd.target] = 'war';
       target.relations[playerId] = 'war';
+      validateTrade(state);
       addLog(state, { player: playerId, kind: 'diplomacy', text: `${state.players[playerId].name} erklärt ${target.name} den Krieg!` });
       return ok;
     }
@@ -390,6 +417,48 @@ export function applyCommand(state: GameState, playerId: number, cmd: Command): 
       addLog(state, { player: playerId, kind: 'diplomacy', text: `Gesandter nach ${target.name} entsandt (Gunst ${target.favor[playerId]}).` });
       return ok;
     }
+    case 'establishTrade': {
+      const unit = state.units[cmd.unitId];
+      const target = state.settlements[cmd.settlementId];
+      if (!unit || unit.owner !== playerId || !target) return fail('Ungültig');
+      const err = canEstablishRoute(state, unit, target);
+      if (err) return fail(err);
+      establishRoute(state, unit, target);
+      afterChange(state, playerId);
+      return ok;
+    }
+    case 'proposeAgreement': {
+      const err = canProposeAgreement(state, playerId, cmd.target);
+      if (err) return fail(err);
+      const target = state.players[cmd.target];
+      // Menschliche Partner (Hotseat) stimmen automatisch zu; Computergegner entscheiden selbst
+      const accepted = target.kind === 'human' || agreementEvaluator(state, cmd.target, playerId);
+      if (!accepted) {
+        addLog(state, { player: playerId, kind: 'diplomacy', text: `${target.name} lehnt ein Handelsabkommen ab.` });
+        return fail(`${target.name} lehnt ab`);
+      }
+      signAgreement(state, playerId, cmd.target);
+      refreshReports(state, playerId);
+      return ok;
+    }
+    case 'fulfillQuest': {
+      const err = canFulfillQuest(state, playerId, cmd.target);
+      if (err) return fail(err);
+      fulfillQuest(state, playerId, cmd.target);
+      return ok;
+    }
+    case 'claimTile': {
+      const err = canClaimTile(state, playerId, cmd.tile);
+      if (err) return fail(err);
+      claimTile(state, playerId, cmd.tile);
+      afterChange(state, playerId);
+      return ok;
+    }
+    case 'cancelAgreement':
+      if (!hasAgreement(state, playerId, cmd.target)) return fail('Kein Abkommen');
+      cancelAgreement(state, playerId, cmd.target);
+      refreshReports(state, playerId);
+      return ok;
     case 'endTurn':
       endTurn(state);
       return ok;
@@ -421,6 +490,10 @@ export function validateItem(state: GameState, s: Settlement, item: ProductionIt
     }
   }
 }
+
+setLevyHook((state, owner, type, tile) => {
+  createUnit(state, owner, type, tile).movesLeft = 0;
+});
 
 setCompleteItemHandler((state, s, item) => {
   switch (item.kind) {
@@ -521,6 +594,7 @@ function moveUnit(state: GameState, playerId: number, unitId: number, target: nu
   if (!path) return fail('Kein Weg dorthin');
   unit.destination = target;
   unit.status = 'ready';
+  unit.work = null;
   unit.fortifyTurns = 0;
   followPath(state, unit, path);
   if (unit.tile === target) unit.destination = null;
@@ -645,6 +719,26 @@ function unitAction(state: GameState, playerId: number, unitId: number, action: 
       delete state.units[unit.id];
       afterChange(state, playerId);
       return ok;
+    case 'buildRoad':
+    case 'buildRail': {
+      if (!def.abilities.includes('buildRoad')) return fail('Nur Arbeiter können bauen');
+      const kind = action === 'buildRoad' ? 'road' : 'rail';
+      if (unit.movesLeft <= 0) return fail('Keine Bewegung übrig');
+      const err = canBuildRoad(state, unit, kind);
+      if (err) return fail(err);
+      startRoadWork(state, unit, kind);
+      unit.status = 'ready';
+      unit.destination = null;
+      return ok;
+    }
+    case 'autoRoad':
+      if (!def.abilities.includes('buildRoad')) return fail('Nur Arbeiter können bauen');
+      if (!hasTech(state, playerId, 'wheel')) return fail('Benötigt die Technologie Rad');
+      unit.status = 'autoRoad';
+      unit.destination = null;
+      autoRoad(state, unit);
+      afterChange(state, playerId);
+      return ok;
     case 'foundCamp':
     case 'foundSettlement': {
       const ability = action === 'foundCamp' ? 'foundCamp' : 'foundSettlement';
@@ -743,6 +837,7 @@ function finishPlayerTurn(state: GameState, pid: number): void {
     machineProduction(state, pid);
     return;
   }
+  validateTrade(state);
   const result = processEconomy(state, pid);
   if (player.kind !== 'cityState') {
     processResearch(state, pid, result.research);
@@ -783,10 +878,17 @@ function startPlayerTurn(state: GameState, pid: number): void {
     if (u.status === 'skip') u.status = 'ready';
     if (u.status === 'fortified' && u.hp >= MAX_HP && unitType(u.type).strength === 0) u.status = 'ready';
   }
-  // Mehrrundige Bewegungen und Erkundung fortsetzen
+  // Bauarbeiten der Arbeiter
+  for (const u of playerUnits(state, pid)) {
+    const kind = u.work?.kind;
+    if (kind && progressRoadWork(state, u)) logRoadDone(state, u, kind);
+  }
+  // Mehrrundige Bewegungen, Erkundung und automatischer Straßenbau
   for (const u of playerUnits(state, pid)) {
     if (!state.units[u.id]) continue;
+    if (u.work) continue;
     if (u.status === 'exploring') autoExplore(state, u);
+    else if (u.status === 'autoRoad') autoRoad(state, u);
     else if (u.destination !== null) {
       const path = findPath(state, u, u.destination, { explored: state.players[pid].explored, visible: computeVisibility(state, pid) });
       if (path) followPath(state, u, path);
@@ -800,7 +902,29 @@ function startPlayerTurn(state: GameState, pid: number): void {
 
 /** Einheiten, die in diesem Zug noch Befehle brauchen. */
 export function unitsNeedingOrders(state: GameState, pid: number): Unit[] {
-  return playerUnits(state, pid).filter((u) => u.status === 'ready' && u.movesLeft > 0 && u.destination === null);
+  return playerUnits(state, pid).filter((u) => u.status === 'ready' && u.movesLeft > 0 && u.destination === null && !u.work);
+}
+
+/** Arbeiter verbindet selbstständig Siedlungen mit dem Straßennetz der Hauptstadt. */
+export function autoRoad(state: GameState, unit: Unit): void {
+  const target = nextAutoRoadTile(state, unit);
+  if (target < 0) {
+    unit.status = 'ready';
+    addLog(state, { player: unit.owner, kind: 'info', text: 'Arbeiter: Alle Siedlungen sind angebunden.', tile: unit.tile });
+    return;
+  }
+  if (unit.tile !== target) {
+    const path = findPath(state, unit, target, { explored: state.players[unit.owner].explored, visible: computeVisibility(state, unit.owner) });
+    if (!path) {
+      unit.status = 'ready';
+      return;
+    }
+    followPath(state, unit, path);
+  }
+  if (unit.tile === target && unit.movesLeft > 0) {
+    if (canBuildRoad(state, unit, 'road') === null) startRoadWork(state, unit, 'road');
+    else unit.status = 'ready';
+  }
 }
 
 function cityStateTurn(state: GameState, pid: number): void {
@@ -811,17 +935,7 @@ function cityStateTurn(state: GameState, pid: number): void {
     const defenders = Object.values(state.units).filter((u) => u.owner === pid && u.tile === s.tile).length;
     if (defenders === 0 && !s.queue.length) s.queue.push({ kind: 'unit', id: 'clubman' });
   }
-  // Suzerän: Spieler mit der höchsten Gunst (mind. 3) erhält Güterlieferungen
-  const best = Object.entries(cs.favor).sort((a, b) => b[1] - a[1])[0];
-  if (best && best[1] >= 3) {
-    const suz = state.players[Number(best[0])];
-    if (suz?.alive) {
-      const goods: GoodId[] = ['wood', 'stone', 'tools', 'cloth'];
-      const g = goods[state.turn % goods.length];
-      addStock(suz.stock, g, 1 + Math.floor(best[1] / 3));
-      suz.influence += 1;
-    }
-  }
+  processCityState(state, pid);
 }
 
 // ---------------------------------------------------------------------------

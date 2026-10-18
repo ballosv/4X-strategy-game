@@ -10,9 +10,11 @@ import { gridOf } from '../core/context';
 import { ENVOY_COST, canTrade, currentScores, marketPrices, policyCost, type Command } from '../core/game';
 import { ELEVATION_NAMES, TERRAIN } from '../core/data/terrain';
 import { isAtWar, playerSettlements, playerUnits, totalPop, type GameState, type Settlement } from '../core/state';
-import { canBuildBuilding, canTrainUnit, canUpgradeImprovement, improvementOptions, itemCost, ownedTiles } from '../core/systems/economy';
+import { canBuildBuilding, canTrainUnit, canUpgradeImprovement, collectJobs, improvementOptions, itemCost, ownedTiles } from '../core/systems/economy';
 import { MILESTONES, score } from '../core/systems/legacy';
 import { canResearch, eraProgress } from '../core/systems/research';
+import { CITY_STATE_TYPES, FRIEND_FAVOR, QUEST_FAVOR, SUZERAIN_FAVOR, canFulfillQuest, relationTo, suzerainOf } from '../core/systems/cityStates';
+import { AGREEMENT_GOLD, canProposeAgreement, hasAgreement, maxTradeRoutes, routeYield, routesOf } from '../core/systems/trade';
 import { h } from './dom';
 import { costText, fmt } from './format';
 
@@ -104,6 +106,8 @@ export function buildScreen(host: ScreenHost, s: Settlement, tab: string, setTab
         );
       });
     body = h('table', { class: 'tbl' }, h('tr', null, h('th', null, 'Feld'), h('th', null, 'Ausbau'), h('th', null, 'Möglich')), rows);
+  } else if (tab === 'labor') {
+    body = laborTable(host, s);
   } else {
     body = h('div', null);
   }
@@ -130,7 +134,7 @@ export function buildScreen(host: ScreenHost, s: Settlement, tab: string, setTab
         )
       : h('div', { class: 'hint' }, 'Leer'),
   );
-  return h('div', null, h('div', { style: 'margin-bottom:12px' }, tabs(tab, [['units', 'Rekrutieren'], ['buildings', 'Gebäude'], ['improvements', 'Felder & Ausbauten']], setTab)), queue, body);
+  return h('div', null, h('div', { style: 'margin-bottom:12px' }, tabs(tab, [['units', 'Rekrutieren'], ['buildings', 'Gebäude'], ['improvements', 'Felder & Ausbauten'], ['labor', 'Arbeitskraft']], setTab)), queue, body);
 }
 
 // ---------------------------------------------------------------------------
@@ -223,6 +227,7 @@ export function civScreen(host: ScreenHost, tab: string, setTab: (t: string) => 
     body = h(
       'div',
       null,
+      tradeRoutesCard(host),
       h('div', { class: 'hint', style: 'margin-bottom:10px' }, tradeOk ? `Weltmarkt: kaufen und verkaufen. Gold: ${fmt(p.gold)}` : 'Handel mit dem Weltmarkt erfordert die Technologie „Währung“.'),
       h(
         'table',
@@ -325,15 +330,21 @@ export function diplomacyScreen(host: ScreenHost): HTMLElement {
           ? h(
               'div',
               null,
-              h('div', { class: 'hint' }, p.kind === 'cityState' ? `Stadtstaat · Gunst: ${p.favor[host.viewer] ?? 0}` : p.kind === 'machine' ? 'Die erwachte Maschinenintelligenz' : `${civ ? civ.traits.map((t) => TRAITS[t].name).join(', ') : ''} · ${ERAS[p.era].name}`),
+              h('div', { class: 'hint' }, p.kind === 'cityState' ? `${CITY_STATE_TYPES[p.cityStateType ?? 'trade'].icon} ${CITY_STATE_TYPES[p.cityStateType ?? 'trade'].name} · Gunst: ${p.favor[host.viewer] ?? 0}` : p.kind === 'machine' ? 'Die erwachte Maschinenintelligenz' : `${civ ? civ.traits.map((t) => TRAITS[t].name).join(', ') : ''} · ${ERAS[p.era].name}`),
               h('div', { style: 'margin:8px 0' }, h('span', { class: `pill ${war ? 'warn' : 'ok'}` }, war ? '⚔️ Krieg' : '🕊️ Frieden')),
               p.kind !== 'machine'
                 ? war
                   ? h('button', { class: 'btn small', onclick: () => { host.command({ type: 'makePeace', target: p.id }); host.rerender(); } }, '🕊️ Frieden schließen')
                   : h('button', { class: 'btn small danger', onclick: () => { if (confirm(`${p.name} den Krieg erklären?`)) { host.command({ type: 'declareWar', target: p.id }); host.rerender(); } } }, '⚔️ Krieg erklären')
                 : null,
+              (p.kind === 'ai' || p.kind === 'human')
+                ? hasAgreement(state, host.viewer, p.id)
+                  ? h('button', { class: 'btn small', style: 'margin-left:6px', onclick: () => { host.command({ type: 'cancelAgreement', target: p.id }); host.rerender(); } }, '📜 Abkommen kündigen')
+                  : h('button', { class: 'btn small', style: 'margin-left:6px', disabled: !!canProposeAgreement(state, host.viewer, p.id), title: canProposeAgreement(state, host.viewer, p.id) ?? `+${AGREEMENT_GOLD} Gold je Runde für beide, erlaubt Handelsrouten`, onclick: () => { host.command({ type: 'proposeAgreement', target: p.id }); host.rerender(); } }, '🤝 Handelsabkommen anbieten')
+                : null,
+              hasAgreement(state, host.viewer, p.id) ? h('div', null, h('span', { class: 'pill ok' }, '🤝 Handelsabkommen')) : null,
               p.kind === 'cityState' ? h('button', { class: 'btn small', style: 'margin-left:6px', disabled: me.influence < ENVOY_COST, onclick: () => { host.command({ type: 'sendEnvoy', target: p.id }); host.rerender(); } }, `📯 Gesandter (${ENVOY_COST} Einfluss)`) : null,
-              p.kind === 'cityState' ? h('div', { class: 'hint' }, 'Ab 3 Gunst und höchster Gunst aller Spieler liefert der Stadtstaat Güter und Einfluss.') : null,
+              p.kind === 'cityState' ? cityStateDetails(host, p.id) : null,
             )
           : h('div', { class: 'hint' }, 'Noch nicht begegnet.'),
       );
@@ -372,8 +383,110 @@ export function helpScreen(): HTMLElement {
     sec('Höhen & Bewegung', 'Felder haben Höhenstufen 0–5. Unterscheiden sich Nachbarfelder um 2 oder mehr Stufen, liegt dazwischen eine unpassierbare Klippe – nutze Rampen und Pässe.', 'Bergauf kostet +1 Bewegung, Hochgebirge ist unpassierbar. Erhöhte Positionen geben mehr Sicht und Kampfbonus.'),
     sec('Arbeitskraft & Wirtschaft', 'Jeder Arbeiter liefert 1 Arbeitskraft (AK). Ausbauten bieten Arbeitsplätze und erzeugen je AK Güter. Freie AK fließt in Bauaufträge.', 'Rohstoffe gelangen über die Transportkapazität der Siedlung ins Nationallager. Gebäude wie Werkzeugmacher oder Sägegrube verarbeiten sie zu Waren (Produktionsketten).'),
     sec('Nahrung & Wachstum', 'Jeder Einwohner braucht 1 Nahrung: halb Getreide, je ein Viertel Gemüse und Fisch/Fleisch. Ist alles gedeckt, wächst die Siedlung schneller.', 'Bürger bringen Gold und Einfluss, Gelehrte Entwicklungspunkte – beide brauchen weiterhin Nahrung.'),
-    sec('Einfluss', 'Einfluss brauchst du für neue Lager, das Aufwerten Lager → Siedlung → Stadt, Politiken und Gesandte zu Stadtstaaten.'),
+    sec('Einfluss', 'Einfluss brauchst du für neue Lager, das Aufwerten Lager → Siedlung → Stadt, Politiken, Gesandte zu Stadtstaaten und um freie Felder am Rand deines Gebiets zu beanspruchen.'),
+    sec('Transport', 'Güter gelangen nur über die Transportkapazität ins Nationallager. Verbinde Siedlungen mit Arbeitern per Straße (Rad) oder Eisenbahn (mit Bahnhof) mit der Hauptstadt – oder per Seeweg, wenn beide einen Hafen haben.', 'Auf Straßen bewegen sich Einheiten doppelt, auf Schienen vierfach so schnell.'),
+    sec('Handel', 'Händler (Währung) richten Handelsrouten zu eigenen Siedlungen, Stadtstaaten oder Völkern mit Handelsabkommen ein. Abkommen schließt du im Diplomatie-Dialog.'),
+    sec('Stadtstaaten', 'Gesandte und erfüllte Lieferaufträge bringen Gunst. Ab 3 Gunst bist du Freund, mit der höchsten Gunst (mind. 6) Suzerän – je nach Typ gibt es Gold, Entwicklung, Einfluss, Waren oder Truppen.'),
+    sec('Arbeitskraft verteilen', 'Im Bau-Dialog unter „Arbeitskraft“ legst du fest, wie viele Arbeiter ein Ausbau oder Produktionsgebäude bekommt. „Auto“ überlässt die Verteilung der Verwaltung.'),
     sec('Kampf', 'Rot markierte Felder können angegriffen werden. Stärke, Gelände, Befestigung und Höhenunterschied (±3 je Stufe) entscheiden. Siedlungen werden durch Nahkämpfer erobert.'),
     sec('Steuerung', 'Ziehen: Karte bewegen · Zwei Finger / Mausrad: Zoom · Tippen: Auswahl.', 'Einheit gewählt: Tippen auf blaues Feld = Bewegen, rotes Feld = Angriff, weiter entferntes Feld zweimal tippen = Marschbefehl. Rechtsklick (PC) bewegt direkt.', 'Tasten: Eingabe = Runde beenden, Leertaste = Einheit überspringen, F = befestigen, WASD/Pfeile = Karte, +/− = Zoom.'),
+  );
+}
+
+/** Verteilung der Arbeitskraft auf Arbeitsplätze: automatisch oder fest vorgegeben. */
+function laborTable(host: ScreenHost, s: Settlement): HTMLElement {
+  const { state } = host;
+  const jobs = collectJobs(state, s);
+  const r = s.report;
+  const yieldText = (y: Partial<Record<GoodId, number>>) =>
+    (Object.entries(y) as [GoodId, number][]).filter(([, v]) => v > 0).map(([g, v]) => `${GOODS[g].icon} ${fmt(v, 1)}`).join(' ');
+  const set = (key: string, count: number | null) => {
+    host.command({ type: 'setJob', settlementId: s.id, key, count });
+    host.rerender();
+  };
+  return h(
+    'div',
+    null,
+    h(
+      'div',
+      { class: 'hint', style: 'margin-bottom:10px' },
+      `Arbeitskraft: ${r.laborTotal} gesamt · ${r.laborBound} gebunden · ${r.laborFree} frei für Bauaufträge. `,
+      'Automatische Plätze verteilt die Verwaltung nach Bedarf (zuerst Nahrung). Feste Plätze haben Vorrang.',
+    ),
+    jobs.length
+      ? h(
+          'table',
+          { class: 'tbl' },
+          h('tr', null, h('th', null, 'Arbeitsplatz'), h('th', null, 'Ertrag je AK'), h('th', null, 'Verbrauch je AK'), h('th', null, 'Besetzt'), h('th', null, 'Steuerung')),
+          jobs.map((j) => {
+            const fixed = s.jobOverrides?.[j.key];
+            const cur = r.jobs[j.key] ?? 0;
+            return h(
+              'tr',
+              null,
+              h('td', null, `${j.icon} ${j.label}`, j.tile !== undefined ? h('div', { class: 'hint' }, h('a', { href: '#', onclick: (e: Event) => { e.preventDefault(); host.focusTile(j.tile!); } }, 'auf der Karte zeigen')) : null),
+              h('td', null, yieldText(j.outputs)),
+              h('td', null, yieldText(j.inputs) || '–'),
+              h('td', null, `${cur} / ${j.slots}`),
+              h(
+                'td',
+                { style: 'white-space:nowrap' },
+                h('button', { class: 'btn small', disabled: (fixed ?? cur) <= 0, onclick: () => set(j.key, Math.max(0, (fixed ?? cur) - 1)) }, '−'),
+                ' ',
+                h('button', { class: 'btn small', disabled: (fixed ?? cur) >= j.slots, onclick: () => set(j.key, Math.min(j.slots, (fixed ?? cur) + 1)) }, '+'),
+                ' ',
+                h('button', { class: `btn small ${fixed === undefined ? 'active' : ''}`, onclick: () => set(j.key, fixed === undefined ? cur : null) }, fixed === undefined ? 'Auto' : 'Fest'),
+              ),
+            );
+          }),
+        )
+      : h('div', { class: 'hint' }, 'Noch keine Arbeitsplätze – baue Geländeausbauten oder Produktionsgebäude.'),
+  );
+}
+
+function tradeRoutesCard(host: ScreenHost): HTMLElement {
+  const { state } = host;
+  const routes = routesOf(state, host.viewer);
+  return h(
+    'div',
+    { class: 'card', style: 'margin-bottom:12px' },
+    h('h2', null, `Handelsrouten ${routes.length} / ${maxTradeRoutes(state, host.viewer)}`),
+    routes.length
+      ? h(
+          'table',
+          { class: 'tbl' },
+          routes.map((r) => {
+            const y = routeYield(state, r);
+            const from = state.settlements[r.from];
+            const to = state.settlements[r.to];
+            return h('tr', null, h('td', null, `${from?.name ?? '?'} → ${to?.name ?? '?'}`), h('td', null, to ? state.players[to.owner].name : ''), h('td', null, `+${y.gold} 🪙${y.influence ? ` · +${y.influence} ✴️` : ''}`));
+          }),
+        )
+      : h('div', { class: 'hint' }, 'Bilde Händler aus (Währung) und schicke sie zu einer eigenen Siedlung, einem Stadtstaat oder einem Volk mit Handelsabkommen.'),
+  );
+}
+
+function cityStateDetails(host: ScreenHost, csId: number): HTMLElement {
+  const { state } = host;
+  const cs = state.players[csId];
+  const type = CITY_STATE_TYPES[cs.cityStateType ?? 'trade'];
+  const rel = relationTo(cs, host.viewer);
+  const suz = suzerainOf(cs);
+  const quest = cs.quest;
+  const why = canFulfillQuest(state, host.viewer, csId);
+  return h(
+    'div',
+    { style: 'margin-top:8px;font-size:13px' },
+    h('div', null, h('span', { class: `pill ${rel !== 'neutral' ? 'ok' : ''}` }, rel === 'suzerain' ? '👑 Suzerän' : rel === 'friend' ? '🤝 Freund' : 'Neutral'), suz !== null && suz !== host.viewer ? h('span', { class: 'pill' }, `Suzerän: ${knows(state, host.viewer, suz) ? state.players[suz].name : 'unbekannt'}`) : null),
+    h('div', { class: 'hint' }, `Freund (ab ${FRIEND_FAVOR} Gunst): ${type.friend}`),
+    h('div', { class: 'hint' }, `Suzerän (höchste Gunst, ab ${SUZERAIN_FAVOR}): ${type.suzerain}`),
+    quest
+      ? h(
+          'div',
+          { style: 'margin-top:6px' },
+          h('div', null, `📦 Auftrag: ${quest.amount} ${GOODS[quest.good].icon} ${GOODS[quest.good].name} liefern (bis Runde ${quest.until}, +${QUEST_FAVOR} Gunst)`),
+          h('button', { class: 'btn small primary', style: 'margin-top:4px', disabled: !!why, title: why ?? '', onclick: () => { host.command({ type: 'fulfillQuest', target: csId }); host.rerender(); } }, 'Liefern'),
+        )
+      : null,
   );
 }

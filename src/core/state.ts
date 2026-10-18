@@ -1,6 +1,14 @@
 import type { Stock } from './data/goods';
 import type { MapSize, MapType, GameMap } from './map/types';
 
+export type CityStateType = 'trade' | 'science' | 'culture' | 'industry' | 'military';
+
+export interface CityStateQuest {
+  good: import('./data/goods').GoodId;
+  amount: number;
+  until: number;
+}
+
 export type PlayerKind = 'human' | 'ai' | 'cityState' | 'machine';
 export type Difficulty = 'easy' | 'normal' | 'hard';
 export type Phase = 'human' | 'ai';
@@ -66,6 +74,11 @@ export interface Player {
   stats: PlayerStats;
   /** Diplomatischer Status gegenüber anderen Spielern (fehlend = Frieden). */
   relations: Record<number, DiplomaticStatus>;
+  /** Partner mit Handelsabkommen. */
+  agreements?: number[];
+  /** Für Stadtstaaten: Typ und aktueller Auftrag. */
+  cityStateType?: CityStateType;
+  quest?: CityStateQuest | null;
   /** Für Stadtstaaten: Gunst je Spieler. */
   favor: Record<number, number>;
   /** Letzte Einnahmen/Ausgaben für die Anzeige. */
@@ -80,7 +93,7 @@ export interface Income {
   influence: number;
 }
 
-export type UnitStatus = 'ready' | 'fortified' | 'sentry' | 'skip' | 'exploring';
+export type UnitStatus = 'ready' | 'fortified' | 'sentry' | 'skip' | 'exploring' | 'autoRoad';
 
 export interface Unit {
   id: number;
@@ -95,6 +108,8 @@ export interface Unit {
   /** Mehrrundiges Bewegungsziel. */
   destination: number | null;
   hasAttacked: boolean;
+  /** Laufende Bauarbeit (Straße/Eisenbahn) eines Arbeiters. */
+  work?: { kind: 'road' | 'rail'; tile: number; turnsLeft: number } | null;
 }
 
 export type SettlementKind = 'camp' | 'settlement' | 'city';
@@ -130,6 +145,8 @@ export interface Settlement {
   /** Spieler, der die Siedlung gegründet hat. */
   foundedBy?: number;
   focus: SettlementFocus;
+  /** Vom Spieler festgelegte Besetzung je Arbeitsplatz (Schlüssel wie in report.jobs). */
+  jobOverrides?: Record<string, number>;
   /** Zuletzt berechnete Wirtschaftsdaten für die Anzeige. */
   report: SettlementReport;
 }
@@ -149,8 +166,20 @@ export interface SettlementReport {
   research: number;
   influence: number;
   transport: number;
+  /** Anbindung an die Hauptstadt (siehe systems/transport.ts). */
+  connection?: 'capital' | 'rail' | 'road' | 'sea' | 'none';
   jobs: Record<string, number>;
   stalled?: string;
+}
+
+export interface TradeRoute {
+  id: number;
+  owner: number;
+  /** Eigene Heimatsiedlung. */
+  from: number;
+  /** Zielsiedlung (eigene, fremde oder Stadtstaat). */
+  to: number;
+  since: number;
 }
 
 export interface Improvement {
@@ -196,8 +225,12 @@ export interface GameState {
   market: Record<string, number>;
   /** Kuriositäten auf der Karte (Feldindizes), die beim Betreten eine Belohnung geben. */
   curiosities: number[];
+  /** Straßen (1) und Eisenbahnen (2) je Feldindex. */
+  roads?: Record<number, number>;
   /** Spieler-ID der KI-Fraktion, sobald sie erwacht ist. */
   machinePlayer: number | null;
+  /** Handelsrouten aller Spieler. */
+  tradeRoutes?: TradeRoute[];
   gameOver: GameOver | null;
   /**
    * Gedächtnis der Computergegner je Spieler-ID (JSON-serialisierbar, Teil des Spielstands).
@@ -206,7 +239,7 @@ export interface GameState {
   aiMemory?: Record<number, unknown>;
 }
 
-export const STATE_VERSION = 1;
+export const STATE_VERSION = 2;
 
 export function emptyReport(): SettlementReport {
   return {
