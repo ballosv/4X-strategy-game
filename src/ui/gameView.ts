@@ -17,11 +17,11 @@ import { HEX_W, ROW_STEP } from '../render/projection';
 import { h, replace } from './dom';
 import { fmt, signed } from './format';
 import { settlementPanel, tilePanel, unitPanel, type PanelHost } from './panels';
-import { buildScreen, civScreen, diplomacyScreen, gameOverScreen, modal, techScreen, type ScreenHost } from './screens';
+import { buildScreen, civScreen, diplomacyScreen, gameOverScreen, helpScreen, modal, techScreen, type ScreenHost } from './screens';
 import { saveGame } from './session';
 
 type Selection = { kind: 'unit'; id: number } | { kind: 'settlement'; id: number } | { kind: 'tile'; tile: number } | null;
-type Screen = { kind: 'build'; id: number; tab: string } | { kind: 'tech' } | { kind: 'civ'; tab: string } | { kind: 'diplomacy' } | { kind: 'menu' } | { kind: 'gameOver' } | null;
+type Screen = { kind: 'build'; id: number; tab: string } | { kind: 'tech' } | { kind: 'civ'; tab: string } | { kind: 'diplomacy' } | { kind: 'menu' } | { kind: 'help' } | { kind: 'gameOver' } | null;
 
 const LOG_ICONS: Record<LogEntry['kind'], string> = { info: 'ℹ️', combat: '⚔️', economy: '🏗️', research: '📖', diplomacy: '🕊️', warning: '⚠️' };
 
@@ -411,6 +411,9 @@ export class GameView implements PanelHost, ScreenHost {
       case 'diplomacy':
         el = modal('Diplomatie', this, diplomacyScreen(this));
         break;
+      case 'help':
+        el = modal('Spielhilfe', this, helpScreen());
+        break;
       case 'gameOver':
         el = modal('Spielende', this, gameOverScreen(this, () => this.cb.exit()));
         break;
@@ -421,6 +424,7 @@ export class GameView implements PanelHost, ScreenHost {
           h(
             'div',
             { style: 'display:flex;flex-direction:column;gap:8px;max-width:360px' },
+            h('button', { class: 'btn', onclick: () => this.openScreen({ kind: 'help' }) }, '❓ Spielhilfe'),
             h('button', { class: 'btn', onclick: () => { this.toast(saveGame(this.state, '1') ? 'Gespeichert (Spielstand 1)' : 'Speichern fehlgeschlagen', 'info'); this.close(); } }, '💾 Spiel speichern (Platz 1)'),
             h('button', { class: 'btn', onclick: () => { this.toast(saveGame(this.state, '2') ? 'Gespeichert (Spielstand 2)' : 'Speichern fehlgeschlagen', 'info'); this.close(); } }, '💾 Spiel speichern (Platz 2)'),
             h('button', { class: 'btn', onclick: () => { this.renderer.revealAll = !this.renderer.revealAll; this.close(); } }, this.renderer.revealAll ? '🌫️ Nebel des Krieges einblenden' : '🗺️ Ganze Karte zeigen (Beobachter)'),

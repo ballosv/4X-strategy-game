@@ -357,3 +357,22 @@ export function gameOverScreen(host: ScreenHost, onExit: () => void): HTMLElemen
     h('div', { style: 'margin-top:16px;display:flex;gap:8px' }, h('button', { class: 'btn primary', onclick: onExit }, 'Zum Hauptmenü'), h('button', { class: 'btn', onclick: () => host.close() }, 'Karte ansehen')),
   );
 }
+
+// ---------------------------------------------------------------------------
+// Spielhilfe
+
+export function helpScreen(): HTMLElement {
+  const sec = (title: string, ...lines: string[]) => h('div', { class: 'card' }, h('h2', null, title), lines.map((l) => h('p', { style: 'margin:4px 0;font-size:14px;line-height:1.45' }, l)));
+  return h(
+    'div',
+    { class: 'list', style: 'grid-template-columns:repeat(auto-fill,minmax(300px,1fr))' },
+    sec('Ziel', 'Führe dein Volk von der Steinzeit bis in die nahe Zukunft. Meilensteine bringen Vermächtnispunkte – wer am Ende die meisten Punkte hat, gewinnt.', 'Wird die Künstliche Intelligenz erforscht, erwacht „Die KI“ als gemeinsamer Gegner. Wird sie besiegt oder bleibt nur ein Volk übrig, endet das Spiel.'),
+    sec('Erste Schritte', 'Dein Stamm errichtet mit „Lager errichten“ das erste Lager. Der Späher erkundet die Umgebung (Kuriositäten ✨ geben Belohnungen).', 'Wähle unter „Entwicklung“ eine Technologie. Baue im Lager Ausbauten auf den umliegenden Feldern: ohne Sammlerplatz oder Jagdlager wächst das Lager kaum.'),
+    sec('Höhen & Bewegung', 'Felder haben Höhenstufen 0–5. Unterscheiden sich Nachbarfelder um 2 oder mehr Stufen, liegt dazwischen eine unpassierbare Klippe – nutze Rampen und Pässe.', 'Bergauf kostet +1 Bewegung, Hochgebirge ist unpassierbar. Erhöhte Positionen geben mehr Sicht und Kampfbonus.'),
+    sec('Arbeitskraft & Wirtschaft', 'Jeder Arbeiter liefert 1 Arbeitskraft (AK). Ausbauten bieten Arbeitsplätze und erzeugen je AK Güter. Freie AK fließt in Bauaufträge.', 'Rohstoffe gelangen über die Transportkapazität der Siedlung ins Nationallager. Gebäude wie Werkzeugmacher oder Sägegrube verarbeiten sie zu Waren (Produktionsketten).'),
+    sec('Nahrung & Wachstum', 'Jeder Einwohner braucht 1 Nahrung: halb Getreide, je ein Viertel Gemüse und Fisch/Fleisch. Ist alles gedeckt, wächst die Siedlung schneller.', 'Bürger bringen Gold und Einfluss, Gelehrte Entwicklungspunkte – beide brauchen weiterhin Nahrung.'),
+    sec('Einfluss', 'Einfluss brauchst du für neue Lager, das Aufwerten Lager → Siedlung → Stadt, Politiken und Gesandte zu Stadtstaaten.'),
+    sec('Kampf', 'Rot markierte Felder können angegriffen werden. Stärke, Gelände, Befestigung und Höhenunterschied (±3 je Stufe) entscheiden. Siedlungen werden durch Nahkämpfer erobert.'),
+    sec('Steuerung', 'Ziehen: Karte bewegen · Zwei Finger / Mausrad: Zoom · Tippen: Auswahl.', 'Einheit gewählt: Tippen auf blaues Feld = Bewegen, rotes Feld = Angriff, weiter entferntes Feld zweimal tippen = Marschbefehl. Rechtsklick (PC) bewegt direkt.', 'Tasten: Eingabe = Runde beenden, Leertaste = Einheit überspringen, F = befestigen, WASD/Pfeile = Karte, +/− = Zoom.'),
+  );
+}
