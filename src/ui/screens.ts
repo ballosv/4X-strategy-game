@@ -10,7 +10,7 @@ import { gridOf } from '../core/context';
 import { ENVOY_COST, canTrade, currentScores, marketPrices, policyCost, type Command } from '../core/game';
 import { ELEVATION_NAMES, TERRAIN } from '../core/data/terrain';
 import { isAtWar, playerSettlements, playerUnits, totalPop, type GameState, type Settlement } from '../core/state';
-import { canBuildBuilding, canTrainUnit, canUpgradeImprovement, improvementOptions, itemCost, ownedTiles } from '../core/systems/economy';
+import { canBuildBuilding, canTrainUnit, canUpgradeImprovement, collectJobs, improvementOptions, itemCost, ownedTiles } from '../core/systems/economy';
 import { MILESTONES, score } from '../core/systems/legacy';
 import { canResearch, eraProgress } from '../core/systems/research';
 import { h } from './dom';
@@ -104,6 +104,8 @@ export function buildScreen(host: ScreenHost, s: Settlement, tab: string, setTab
         );
       });
     body = h('table', { class: 'tbl' }, h('tr', null, h('th', null, 'Feld'), h('th', null, 'Ausbau'), h('th', null, 'Möglich')), rows);
+  } else if (tab === 'labor') {
+    body = laborTable(host, s);
   } else {
     body = h('div', null);
   }
@@ -130,7 +132,7 @@ export function buildScreen(host: ScreenHost, s: Settlement, tab: string, setTab
         )
       : h('div', { class: 'hint' }, 'Leer'),
   );
-  return h('div', null, h('div', { style: 'margin-bottom:12px' }, tabs(tab, [['units', 'Rekrutieren'], ['buildings', 'Gebäude'], ['improvements', 'Felder & Ausbauten']], setTab)), queue, body);
+  return h('div', null, h('div', { style: 'margin-bottom:12px' }, tabs(tab, [['units', 'Rekrutieren'], ['buildings', 'Gebäude'], ['improvements', 'Felder & Ausbauten'], ['labor', 'Arbeitskraft']], setTab)), queue, body);
 }
 
 // ---------------------------------------------------------------------------
@@ -375,5 +377,56 @@ export function helpScreen(): HTMLElement {
     sec('Einfluss', 'Einfluss brauchst du für neue Lager, das Aufwerten Lager → Siedlung → Stadt, Politiken und Gesandte zu Stadtstaaten.'),
     sec('Kampf', 'Rot markierte Felder können angegriffen werden. Stärke, Gelände, Befestigung und Höhenunterschied (±3 je Stufe) entscheiden. Siedlungen werden durch Nahkämpfer erobert.'),
     sec('Steuerung', 'Ziehen: Karte bewegen · Zwei Finger / Mausrad: Zoom · Tippen: Auswahl.', 'Einheit gewählt: Tippen auf blaues Feld = Bewegen, rotes Feld = Angriff, weiter entferntes Feld zweimal tippen = Marschbefehl. Rechtsklick (PC) bewegt direkt.', 'Tasten: Eingabe = Runde beenden, Leertaste = Einheit überspringen, F = befestigen, WASD/Pfeile = Karte, +/− = Zoom.'),
+  );
+}
+
+/** Verteilung der Arbeitskraft auf Arbeitsplätze: automatisch oder fest vorgegeben. */
+function laborTable(host: ScreenHost, s: Settlement): HTMLElement {
+  const { state } = host;
+  const jobs = collectJobs(state, s);
+  const r = s.report;
+  const yieldText = (y: Partial<Record<GoodId, number>>) =>
+    (Object.entries(y) as [GoodId, number][]).filter(([, v]) => v > 0).map(([g, v]) => `${GOODS[g].icon} ${fmt(v, 1)}`).join(' ');
+  const set = (key: string, count: number | null) => {
+    host.command({ type: 'setJob', settlementId: s.id, key, count });
+    host.rerender();
+  };
+  return h(
+    'div',
+    null,
+    h(
+      'div',
+      { class: 'hint', style: 'margin-bottom:10px' },
+      `Arbeitskraft: ${r.laborTotal} gesamt · ${r.laborBound} gebunden · ${r.laborFree} frei für Bauaufträge. `,
+      'Automatische Plätze verteilt die Verwaltung nach Bedarf (zuerst Nahrung). Feste Plätze haben Vorrang.',
+    ),
+    jobs.length
+      ? h(
+          'table',
+          { class: 'tbl' },
+          h('tr', null, h('th', null, 'Arbeitsplatz'), h('th', null, 'Ertrag je AK'), h('th', null, 'Verbrauch je AK'), h('th', null, 'Besetzt'), h('th', null, 'Steuerung')),
+          jobs.map((j) => {
+            const fixed = s.jobOverrides?.[j.key];
+            const cur = r.jobs[j.key] ?? 0;
+            return h(
+              'tr',
+              null,
+              h('td', null, `${j.icon} ${j.label}`, j.tile !== undefined ? h('div', { class: 'hint' }, h('a', { href: '#', onclick: (e: Event) => { e.preventDefault(); host.focusTile(j.tile!); } }, 'auf der Karte zeigen')) : null),
+              h('td', null, yieldText(j.outputs)),
+              h('td', null, yieldText(j.inputs) || '–'),
+              h('td', null, `${cur} / ${j.slots}`),
+              h(
+                'td',
+                { style: 'white-space:nowrap' },
+                h('button', { class: 'btn small', disabled: (fixed ?? cur) <= 0, onclick: () => set(j.key, Math.max(0, (fixed ?? cur) - 1)) }, '−'),
+                ' ',
+                h('button', { class: 'btn small', disabled: (fixed ?? cur) >= j.slots, onclick: () => set(j.key, Math.min(j.slots, (fixed ?? cur) + 1)) }, '+'),
+                ' ',
+                h('button', { class: `btn small ${fixed === undefined ? 'active' : ''}`, onclick: () => set(j.key, fixed === undefined ? cur : null) }, fixed === undefined ? 'Auto' : 'Fest'),
+              ),
+            );
+          }),
+        )
+      : h('div', { class: 'hint' }, 'Noch keine Arbeitsplätze – baue Geländeausbauten oder Produktionsgebäude.'),
   );
 }

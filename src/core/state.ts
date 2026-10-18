@@ -132,6 +132,8 @@ export interface Settlement {
   /** Spieler, der die Siedlung gegründet hat. */
   foundedBy?: number;
   focus: SettlementFocus;
+  /** Vom Spieler festgelegte Besetzung je Arbeitsplatz (Schlüssel wie in report.jobs). */
+  jobOverrides?: Record<string, number>;
   /** Zuletzt berechnete Wirtschaftsdaten für die Anzeige. */
   report: SettlementReport;
 }

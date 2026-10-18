@@ -267,6 +267,7 @@ export type Command =
   | { type: 'enqueue'; settlementId: number; item: ProductionItem; front?: boolean }
   | { type: 'dequeue'; settlementId: number; index: number }
   | { type: 'setFocus'; settlementId: number; focus: SettlementFocus }
+  | { type: 'setJob'; settlementId: number; key: string; count: number | null }
   | { type: 'upgradeSettlement'; settlementId: number }
   | { type: 'promote'; settlementId: number; to: 'citizens' | 'scholars' }
   | { type: 'demote'; settlementId: number; from: 'citizens' | 'scholars' }
@@ -328,6 +329,18 @@ export function applyCommand(state: GameState, playerId: number, cmd: Command): 
       const s = ownSettlement(state, playerId, cmd.settlementId);
       if (!s) return fail('Siedlung nicht gefunden');
       s.focus = cmd.focus;
+      refreshReports(state, playerId);
+      return ok;
+    }
+    case 'setJob': {
+      const s = ownSettlement(state, playerId, cmd.settlementId);
+      if (!s) return fail('Siedlung nicht gefunden');
+      if (cmd.count === null) {
+        if (s.jobOverrides) delete s.jobOverrides[cmd.key];
+      } else {
+        if (!Number.isInteger(cmd.count) || cmd.count < 0) return fail('Ungültige Anzahl');
+        s.jobOverrides = { ...(s.jobOverrides ?? {}), [cmd.key]: cmd.count };
+      }
       refreshReports(state, playerId);
       return ok;
     }

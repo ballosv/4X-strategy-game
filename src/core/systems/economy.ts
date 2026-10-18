@@ -176,15 +176,20 @@ export function canTrainUnit(state: GameState, s: Settlement, id: string): strin
 // ---------------------------------------------------------------------------
 // Arbeitsplätze
 
-interface Job {
+export interface Job {
   key: string;
+  /** Anzeigename (Ausbau oder Gebäude). */
+  label: string;
+  icon: string;
+  tile?: number;
   slots: number;
   outputs: Partial<Record<GoodId, number>>;
   inputs: Partial<Record<GoodId, number>>;
   food: boolean;
 }
 
-function collectJobs(state: GameState, s: Settlement): Job[] {
+/** Alle Arbeitsplätze einer Siedlung (Geländeausbauten und Produktionsgebäude). */
+export function collectJobs(state: GameState, s: Settlement): Job[] {
   const jobs: Job[] = [];
   for (const tile of ownedTiles(state, s.id)) {
     const imp = state.improvements[tile];
@@ -193,6 +198,9 @@ function collectJobs(state: GameState, s: Settlement): Job[] {
     const outputs = improvementYield(state, tile, imp.type, imp.level, s.owner);
     jobs.push({
       key: `t${tile}`,
+      label: def.name,
+      icon: def.icon,
+      tile,
       slots: improvementJobs(def, imp.level),
       outputs,
       inputs: {},
@@ -202,7 +210,7 @@ function collectJobs(state: GameState, s: Settlement): Job[] {
   for (const b of s.buildings) {
     const def = BUILDINGS[b];
     if (!def?.jobs || !def.recipe) continue;
-    jobs.push({ key: `b${b}`, slots: def.jobs, outputs: def.recipe.outputs, inputs: def.recipe.inputs, food: false });
+    jobs.push({ key: `b${b}`, label: def.name, icon: def.icon, slots: def.jobs, outputs: def.recipe.outputs, inputs: def.recipe.inputs, food: false });
   }
   return jobs;
 }
@@ -269,10 +277,23 @@ export function simulateSettlement(state: GameState, s: Settlement, apply: boole
     for (const [g, v] of Object.entries(job.inputs) as [GoodId, number][]) addStock(consumed, g, v * n);
   };
   const free = (job: Job) => job.slots - (assigned.get(job.key) ?? 0);
+  const availableGood = (g: GoodId) => stockOf(player.stock, g) + stockOf(s.localStock, g) + stockOf(produced, g) - stockOf(consumed, g);
+
+  // 0) Manuell festgelegte Arbeitsplätze zuerst (vom Spieler gesetzt, Imperialismus-Prinzip)
+  const overrides = s.jobOverrides ?? {};
+  for (const j of jobs) {
+    const want = overrides[j.key];
+    if (want === undefined) continue;
+    let n = Math.max(0, Math.min(want, j.slots, laborLeft));
+    // Industrie nur so weit, wie Eingangsgüter vorhanden sind
+    for (const [g, v] of Object.entries(j.inputs) as [GoodId, number][]) n = Math.min(n, Math.floor(availableGood(g) / v));
+    if (n > 0) assign(j, n);
+  }
+  const autoJob = (j: Job) => overrides[j.key] === undefined;
 
   // 1) Nahrung sichern (fehlende Kategorien bevorzugt)
   const foodTarget = s.focus === 'food' ? needTotal + 4 : needTotal + 1;
-  const foodJobs = jobs.filter((j) => j.food);
+  const foodJobs = jobs.filter((j) => j.food && autoJob(j));
   while (laborLeft > 0 && foodOf(produced) * (1 + (mods.foodPct ?? 0) / 100) < foodTarget) {
     let best: Job | null = null;
     let bestScore = 0;
@@ -300,12 +321,12 @@ export function simulateSettlement(state: GameState, s: Settlement, apply: boole
     const cost = itemCost(state, s, current);
     for (const g of Object.keys(cost.goods) as GoodId[]) if (stockOf(player.stock, g) < (cost.goods[g] ?? 0)) wanted.add(g);
   }
-  const available = (g: GoodId) => stockOf(player.stock, g) + stockOf(s.localStock, g) + stockOf(produced, g) - stockOf(consumed, g);
+  const available = availableGood;
   while (jobLabor > 0) {
     let best: Job | null = null;
     let bestScore = 0;
     for (const j of jobs) {
-      if (free(j) <= 0) continue;
+      if (free(j) <= 0 || !autoJob(j)) continue;
       const inputsOk = (Object.entries(j.inputs) as [GoodId, number][]).every(([g, v]) => available(g) >= v);
       if (!inputsOk) continue;
       const score = value(j.outputs, wanted) - value(j.inputs, new Set()) * 0.8 + (j.food && s.focus === 'food' ? 4 : 0);
