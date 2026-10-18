@@ -7,7 +7,8 @@ import { RESOURCES } from '../core/data/terrain';
 import { paintTile, tracedHex, type PaintContext } from './painter';
 import { UI, withAlpha } from './palette';
 import { EDGE_CORNERS, ELEV_STEP, HEX_CORNERS, HEX_R, HEX_W, ROW_STEP, SQUASH, pointInHex, tileTop, worldSize, type Point } from './projection';
-import { SPRITE_SIZE, unitSprite } from './units';
+import { assets } from './assets';
+import { SPRITE_SIZE, clearUnitSpriteCache, drawUnitAsset, unitSprite } from './units';
 
 const CHUNK = 8;
 const PAD_TOP = 5 * ELEV_STEP + 70;
@@ -54,8 +55,23 @@ export class MapRenderer {
   private cssW = 0;
   private cssH = 0;
 
+  /** Wird aufgerufen, wenn sich die Darstellung ohne Spieländerung ändert (z. B. Assets geladen). */
+  onInvalidate: (() => void) | null = null;
+  private readonly offAssets: () => void;
+
   constructor(readonly canvas: HTMLCanvasElement) {
     this.ctx = canvas.getContext('2d')!;
+    // Sobald Sprites geladen sind, Chunk-Cache einmalig verwerfen und neu zeichnen
+    this.offAssets = assets.onLoad(() => {
+      clearUnitSpriteCache();
+      this.invalidate();
+      this.onInvalidate?.();
+    });
+  }
+
+  dispose(): void {
+    this.offAssets();
+    this.chunks.clear();
   }
 
   resize(): void {
@@ -314,9 +330,11 @@ export class MapRenderer {
       ctx.ellipse(x, y, 13, 5, 0, 0, Math.PI * 2);
       ctx.fill();
       ctx.stroke();
-      const sprite = unitSprite(u.type, owner.color);
-      const s = 0.82;
-      ctx.drawImage(sprite, x - (SPRITE_SIZE / 2) * s, y - (SPRITE_SIZE - 6) * s, SPRITE_SIZE * s, SPRITE_SIZE * s);
+      if (!drawUnitAsset(ctx, u.type, owner.color, x, y)) {
+        const sprite = unitSprite(u.type, owner.color);
+        const s = 0.82;
+        ctx.drawImage(sprite, x - (SPRITE_SIZE / 2) * s, y - (SPRITE_SIZE - 6) * s, SPRITE_SIZE * s, SPRITE_SIZE * s);
+      }
       // Lebensbalken
       if (u.hp < 100) {
         ctx.fillStyle = 'rgba(0,0,0,0.6)';
