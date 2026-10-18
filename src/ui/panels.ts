@@ -19,7 +19,7 @@ import {
 } from '../core/systems/economy';
 import { maxMoves } from '../core/systems/movement';
 import { KIND_NAMES, UPGRADE_COST, campCost, canFoundAt, canPromote, canUpgradeSettlement } from '../core/systems/settlements';
-import { drawUnitFigure } from '../render/units';
+import { drawUnitAsset, drawUnitFigure } from '../render/units';
 import { h } from './dom';
 import { costText, fmt, signed } from './format';
 
@@ -45,7 +45,8 @@ function portrait(type: string, color: string): HTMLElement {
   const c = h('canvas', { width: 232, height: 232 });
   const ctx = c.getContext('2d')!;
   ctx.scale(3.4, 3.4);
-  drawUnitFigure(ctx, type, color, 34, 64);
+  // Sprite aus der Asset-Pipeline, sonst prozedurale Figur
+  if (!drawUnitAsset(ctx, type, color, 34, 64)) drawUnitFigure(ctx, type, color, 34, 64);
   return h('div', { class: 'portrait' }, c);
 }
 

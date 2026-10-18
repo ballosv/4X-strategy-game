@@ -1,11 +1,14 @@
 import './ui/styles.css';
 import { SetupError, createGame } from './core/game';
 import { refreshReports } from './core/systems/economy';
+import { assets } from './render/assets';
 import { GameView } from './ui/gameView';
 import { loadGame } from './ui/session';
 import { SetupScreen } from './ui/setup';
 
 const app = document.getElementById('app')!;
+// Sprites im Hintergrund laden; bis dahin (oder ohne Assets) wird prozedural gezeichnet
+void assets.load();
 let view: GameView | null = null;
 
 function showSetup(): void {
