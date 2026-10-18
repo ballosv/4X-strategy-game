@@ -555,9 +555,10 @@ function followPath(state: GameState, unit: Unit, path: number[]): void {
     updateExplored(state, unit.owner);
     if (state.players[unit.owner].stats.tilesExplored !== before && i < path.length - 1) {
       const rest = path.slice(i + 1);
+      const restIdx = buildOccupancy(state);
       const blockedAhead = rest.some((t, k) => {
         const from = k === 0 ? unit.tile : rest[k - 1];
-        return terrainStepCost(state, unit.owner, def, from, t) === BLOCKED;
+        return terrainStepCost(state, unit.owner, def, from, t, restIdx) === BLOCKED;
       });
       if (blockedAhead) {
         const vis = computeVisibility(state, unit.owner);
@@ -668,10 +669,12 @@ export function autoExplore(state: GameState, unit: Unit): void {
   // BFS über bekannte, begehbare Felder; Ziel: Feld mit den meisten unerkundeten Nachbarn in Reichweite
   const dist = new Map<number, number>([[unit.tile, 0]]);
   const queue = [unit.tile];
+  // Belegungsindex einmal aufbauen (terrainStepCost würde ihn sonst je Schritt neu erstellen)
+  const idx = buildOccupancy(state);
   let best = -1;
   let bestScore = -Infinity;
-  while (queue.length) {
-    const cur = queue.shift()!;
+  for (let qi = 0; qi < queue.length; qi++) {
+    const cur = queue[qi];
     const d = dist.get(cur)!;
     if (d > 25) break;
     if (cur !== unit.tile) {
@@ -687,7 +690,7 @@ export function autoExplore(state: GameState, unit: Unit): void {
     }
     for (const nb of grid.neighbors(cur)) {
       if (dist.has(nb) || !explored[nb]) continue;
-      if (terrainStepCost(state, unit.owner, def, cur, nb) === BLOCKED) continue;
+      if (terrainStepCost(state, unit.owner, def, cur, nb, idx) === BLOCKED) continue;
       dist.set(nb, d + 1);
       queue.push(nb);
     }
