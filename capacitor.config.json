@@ -1,0 +1,6 @@
+{
+  "appId": "de.ai4x.game",
+  "appName": "AI 4X",
+  "webDir": "dist",
+  "android": { "backgroundColor": "#0f1720" }
+}
