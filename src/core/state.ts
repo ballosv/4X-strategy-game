@@ -197,6 +197,11 @@ export interface GameState {
   /** Spieler-ID der KI-Fraktion, sobald sie erwacht ist. */
   machinePlayer: number | null;
   gameOver: GameOver | null;
+  /**
+   * Gedächtnis der Computergegner je Spieler-ID (JSON-serialisierbar, Teil des Spielstands).
+   * Wird ausschließlich von src/ai gelesen und geschrieben.
+   */
+  aiMemory?: Record<number, unknown>;
 }
 
 export const STATE_VERSION = 1;
