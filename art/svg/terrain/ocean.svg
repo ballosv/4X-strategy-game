@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="190" viewBox="0 0 250 190">
+  <defs>
+    <!-- @defs -->
+    <path id="w" d="M-12 0 q6 -5 12 0 q6 5 12 0" fill="none" stroke-linecap="round"/>
+    <path id="s" d="M-5 0 q5 -3 10 0" fill="none" stroke-linecap="round"/>
+  </defs>
+  <!-- Meer: tiefes Blau, ruhige stilisierte Wellen -->
+  <rect width="250" height="190" fill="#2b6ca3"/>
+  <ellipse cx="70" cy="45" rx="70" ry="32" fill="#3a7fb8" opacity="0.45"/>
+  <ellipse cx="190" cy="140" rx="70" ry="34" fill="#1f5383" opacity="0.45"/>
+  <ellipse cx="175" cy="50" rx="45" ry="20" fill="#3477af" opacity="0.4"/>
+  <ellipse cx="60" cy="145" rx="50" ry="24" fill="#24609a" opacity="0.4"/>
+  <!-- Wellen: dunkle Täler, helle Kämme -->
+  <g stroke="#1f5383" stroke-width="3" opacity="0.7">
+    <use href="#w" x="52" y="68"/><use href="#w" x="150" y="98"/><use href="#w" x="210" y="162"/>
+    <use href="#w" x="95" y="152"/><use href="#w" x="200" y="40"/><use href="#w" x="28" y="114"/>
+    <use href="#w" x="122" y="35"/><use href="#w" x="106" y="107"/><use href="#w" x="172" y="131"/>
+  </g>
+  <g stroke="#5f9ccc" stroke-width="2.4">
+    <use href="#w" x="50" y="65"/><use href="#w" x="148" y="95"/><use href="#w" x="208" y="159"/>
+    <use href="#w" x="93" y="149"/><use href="#w" x="198" y="37"/><use href="#w" x="26" y="111"/>
+    <use href="#w" x="120" y="32"/><use href="#w" x="104" y="104"/><use href="#w" x="170" y="128"/>
+  </g>
+  <!-- Glitzer -->
+  <g stroke="#a9cde6" stroke-width="1.6" opacity="0.75">
+    <use href="#s" x="70" y="86"/><use href="#s" x="182" y="70"/><use href="#s" x="140" y="168"/>
+    <use href="#s" x="40" y="30"/><use href="#s" x="226" y="112"/>
+  </g>
+  <rect width="250" height="190" fill="url(#lightTL)"/>
+</svg>

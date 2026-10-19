@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="190" viewBox="0 0 250 190">
+  <defs><!-- @defs --></defs>
+  <!-- Wüste: Sand mit weichen Dünenkämmen (Licht links oben, Schatten rechts unten) -->
+  <rect width="250" height="190" fill="#e0c486"/>
+  <ellipse cx="60" cy="46" rx="58" ry="28" fill="#e8d098" opacity="0.7"/>
+  <ellipse cx="190" cy="140" rx="60" ry="30" fill="#d4b676" opacity="0.6"/>
+  <!-- Dünen: helle Luvseite, dunkle Leeseite -->
+  <path d="M10 82 Q50 52 92 70 Q60 66 30 86 Z" fill="#f0dba6"/>
+  <path d="M92 70 Q70 82 34 92 Q66 92 98 76 Z" fill="#bfa064" opacity="0.75"/>
+  <path d="M120 52 Q164 26 210 44 Q176 42 140 58 Z" fill="#f0dba6"/>
+  <path d="M210 44 Q186 56 146 64 Q182 64 216 50 Z" fill="#bfa064" opacity="0.75"/>
+  <path d="M98 132 Q146 102 196 122 Q160 118 120 138 Z" fill="#f0dba6"/>
+  <path d="M196 122 Q168 136 126 144 Q166 146 202 128 Z" fill="#bfa064" opacity="0.75"/>
+  <path d="M-10 160 Q30 136 72 150 Q40 148 8 166 Z" fill="#f0dba6"/>
+  <path d="M72 150 Q50 162 14 170 Q48 172 78 156 Z" fill="#bfa064" opacity="0.7"/>
+  <path d="M190 182 Q226 164 262 174 Q232 174 206 188 Z" fill="#f0dba6"/>
+  <!-- Rippelmarken -->
+  <g fill="none" stroke="#cfb073" stroke-width="1.5" stroke-linecap="round" opacity="0.8">
+    <path d="M136 92 q10 -4 20 0"/><path d="M146 98 q10 -4 20 0"/><path d="M40 118 q10 -4 20 0"/>
+    <path d="M50 124 q10 -4 20 0"/><path d="M200 92 q8 -3 16 0"/><path d="M84 30 q8 -3 16 0"/>
+  </g>
+  <!-- Kiesel -->
+  <g fill="#bfa064"><ellipse cx="112" cy="104" rx="3" ry="2"/><ellipse cx="226" cy="140" rx="2.6" ry="1.7"/><ellipse cx="60" cy="24" rx="2.4" ry="1.6"/></g>
+  <rect width="250" height="190" fill="url(#lightTL)"/>
+</svg>
