@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs -->
+    <!-- Einzeldrohne (Quadrocopter), Mitte bei 0/0 -->
+    <g id="dr">
+      <path d="M0 0 L-14 -7 M0 0 L14 -7 M0 0 L-17 4 M0 0 L17 4" stroke="#0f151c" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="-14" cy="-8" rx="9" ry="3" fill="#9aa6b2" opacity="0.4"/>
+      <ellipse cx="14" cy="-8" rx="9" ry="3" fill="#9aa6b2" opacity="0.4"/>
+      <ellipse cx="-17" cy="3" rx="10" ry="3.5" fill="#9aa6b2" opacity="0.45"/>
+      <ellipse cx="17" cy="3" rx="10" ry="3.5" fill="#9aa6b2" opacity="0.45"/>
+      <path d="M-17 3 v-3 M17 3 v-3 M-14 -8 v-2 M14 -8 v-2" stroke="#2c3846" stroke-width="2.5"/>
+      <path d="M-10 0 Q-10 -8 0 -9 Q10 -8 10 0 L7 7 Q0 10 -7 7 Z" fill="#1b2430"/>
+      <path d="M-10 0 Q-10 -8 0 -9 Q-4 -5 -4 1 Z" fill="#3a4757"/>
+      <path d="M4 -8 Q10 -6 10 0 L7 7 Q5 8 3 8 Z" fill="#111820"/>
+      <circle cx="-3" cy="2" r="6" fill="#14d2c8" opacity="0.25"/>
+      <circle cx="-3" cy="2" r="2.8" fill="#14d2c8"/>
+      <circle cx="-3.6" cy="1.4" r="1" fill="#c8fffa"/>
+      <path d="M-6 8 L6 8" stroke="#14d2c8" stroke-width="1.2" opacity="0.8"/>
+    </g>
+  </defs>
+  <!-- Bodenschatten der Drohnen -->
+  <g fill="#1a2410" opacity="0.22">
+    <ellipse cx="104" cy="172" rx="13.0" ry="4.0"/>
+    <ellipse cx="146" cy="178" rx="14.9" ry="4.6"/>
+    <ellipse cx="60" cy="176" rx="15.6" ry="4.8"/>
+    <ellipse cx="58" cy="188" rx="16.9" ry="5.2"/>
+    <ellipse cx="152" cy="188" rx="16.9" ry="5.2"/>
+    <ellipse cx="104" cy="184" rx="18.8" ry="5.8"/>
+  </g>
+  <!-- Datenverbindungen im Schwarm -->
+  <path d="M100 50 L56 84 L100 114 L142 80 Z M56 84 L54 142 L100 114 L148 138 L142 80" stroke="#14d2c8" stroke-width="1.2" fill="none" opacity="0.3"/>
+  <!-- Drohnen (hinten nach vorne) -->
+  <use href="#dr" transform="translate(100 50) scale(1.0)"/>
+  <use href="#dr" transform="translate(142 80) scale(1.15)"/>
+  <use href="#dr" transform="translate(56 84) scale(1.2)"/>
+  <use href="#dr" transform="translate(54 142) scale(1.3)"/>
+  <use href="#dr" transform="translate(148 138) scale(1.3)"/>
+  <use href="#dr" transform="translate(100 114) scale(1.45)"/>
+</svg>

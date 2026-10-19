@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs>
+    <!-- @defs -->
+    <linearGradient id="tank" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e3e7ea"/><stop offset="0.45" stop-color="#aab3ba"/><stop offset="1" stop-color="#5d666d"/>
+    </linearGradient>
+  </defs>
+  <!-- Betonplatz, Ölflecken -->
+  <path d="M128 296 L30 258 L128 168 L226 206 Z" fill="#9c958b" opacity="0.35"/>
+  <ellipse cx="96" cy="238" rx="26" ry="9" fill="#1b1b1b" opacity="0.35"/>
+  <ellipse cx="160" cy="276" rx="18" ry="6" fill="#1b1b1b" opacity="0.3"/>
+  <!-- Tank -->
+  <g transform="translate(198 214)">
+    <ellipse cx="8" cy="2" rx="30" ry="9" fill="url(#shadow)"/>
+    <path d="M-22 -40 L-22 0 A22 7 0 0 0 22 0 L22 -40 Z" fill="url(#tank)"/>
+    <ellipse cx="0" cy="-40" rx="22" ry="7" fill="#cfd5da"/>
+    <ellipse cx="0" cy="-40" rx="16" ry="4.6" fill="#b5bec5"/>
+    <path d="M-22 -14 A22 7 0 0 0 22 -14 M-22 -28 A22 7 0 0 0 22 -28" stroke="#6d767d" stroke-width="1" fill="none" opacity="0.6"/>
+    <path d="M-10 5 L-10 -36 M-6 6 L-6 -36 M-10 -4 L-6 -4 M-10 -12 L-6 -12 M-10 -20 L-6 -20 M-10 -28 L-6 -28" stroke="#3a3330" stroke-width="1.2"/>
+    <path d="M-16 -10 A22 7 0 0 0 4 -6 L4 -2 A22 7 0 0 1 -16 -6 Z" fill="#b8573a"/>
+  </g>
+  <!-- Rohrleitung -->
+  <path d="M100 236 L100 244 L176 220 L176 212" stroke="#5d666d" stroke-width="4" fill="none" stroke-linejoin="round"/>
+  <path d="M100 236 L100 244 L176 220 L176 212" stroke="#aab3ba" stroke-width="1.4" fill="none" transform="translate(-0.8 -0.8)"/>
+  <!-- Bohrturm (Stahlgitter) -->
+  <g transform="translate(96 240)">
+    <ellipse cx="10" cy="2" rx="36" ry="10" fill="url(#shadow)"/>
+    <path d="M-26 -4 L0 6 L26 -4 L0 -14 Z" fill="#6d767d"/>
+    <path d="M-26 -4 L0 6 L0 9 L-26 -1 Z" fill="#aab3ba"/>
+    <path d="M0 6 L26 -4 L26 -1 L0 9 Z" fill="#5d666d"/>
+    <g stroke="#3a3330" stroke-width="4.6" stroke-linecap="round" fill="none">
+      <path d="M-22 -4 L-4 -128 M22 -4 L4 -128 M0 4 L0 -126"/>
+    </g>
+    <g stroke="#5d666d" stroke-width="2.4" fill="none">
+      <path d="M-19 -24 L19 -24 M-16 -48 L16 -48 M-12 -72 L12 -72 M-9 -96 L9 -96 M-6 -116 L6 -116"/>
+      <path d="M-19 -24 L16 -48 M19 -24 L-16 -48 M-16 -48 L12 -72 M16 -48 L-12 -72 M-12 -72 L9 -96 M12 -72 L-9 -96 M-9 -96 L6 -116 M9 -96 L-6 -116 M-22 -4 L19 -24 M22 -4 L-19 -24"/>
+    </g>
+    <path d="M-23 -4 L-5 -128" stroke="#aab3ba" stroke-width="1.6"/>
+    <path d="M-10 -126 L10 -126 L10 -136 L-10 -136 Z" fill="#b8573a"/><path d="M0 -126 L10 -126 L10 -136 L0 -136 Z" fill="#843a25"/>
+    <path d="M0 -128 L0 -60" stroke="#1b1b1b" stroke-width="1"/>
+    <path d="M-30 -130 L-10 -131" stroke="#3a3330" stroke-width="1.6"/>
+  </g>
+  <!-- Pumpenbock (Pferdekopfpumpe) -->
+  <g transform="translate(168 274) scale(1.2)">
+    <ellipse cx="6" cy="2" rx="36" ry="8" fill="url(#shadow)"/>
+    <path d="M-34 0 L26 -10 L32 -6 L-28 4 Z" fill="#5d666d"/>
+    <path d="M-34 0 L-28 4 L-28 6 L-34 2 Z M-28 4 L32 -6 L32 -4 L-28 6 Z" fill="#3a3330"/>
+    <path d="M-6 -2 L0 -34 L6 -4 M-10 -2 L0 -34" stroke="#3a3330" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+    <path d="M-36 -32 L28 -40" stroke="#3a3330" stroke-width="5" stroke-linecap="round"/>
+    <path d="M-36 -33.4 L28 -41.4" stroke="#6d767d" stroke-width="1.4"/>
+    <path d="M-36 -40 Q-46 -36 -44 -22 L-38 -24 Q-40 -32 -34 -34 Z" fill="#e0a82e"/>
+    <path d="M-41 -23 L-41 -2" stroke="#1b1b1b" stroke-width="1.4"/>
+    <path d="M-44 -2 L-38 -2 L-38 -6 L-44 -6 Z" fill="#3a3330"/>
+    <path d="M22 -40 L24 -20" stroke="#3a3330" stroke-width="3"/>
+    <path d="M14 -24 Q24 -32 32 -22 Q24 -12 14 -24 Z" fill="#e0a82e"/>
+    <path d="M24 -27 Q30 -24 32 -22 Q24 -12 18 -18 Z" fill="#a4762a"/>
+    <circle cx="24" cy="-20" r="2.6" fill="#3a3330"/>
+    <path d="M24 -20 L26 -6 M20 -6 L32 -8" stroke="#3a3330" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="0" cy="-34" r="2.6" fill="#e0a82e"/>
+  </g>
+  <!-- Fässer -->
+  <g transform="translate(48 258) scale(1.2)">
+    <path d="M-6 -12 L-6 0 Q0 2.4 6 0 L6 -12 Z" fill="#3c93c6"/>
+    <path d="M1 -12 L6 -12 L6 0 Q3.6 1.8 1 2 Z" fill="#2a6f9c"/>
+    <ellipse cx="0" cy="-12" rx="6" ry="2.2" fill="#5aa9d6"/>
+    <path d="M-6 -6 Q0 -4 6 -6" stroke="#1f5383" stroke-width="1" fill="none"/>
+    <path d="M8 -10 L8 2 Q14 4.4 20 2 L20 -10 Z" fill="#b8573a"/>
+    <path d="M15 -10 L20 -10 L20 2 Q17.6 3.8 15 4 Z" fill="#843a25"/>
+    <ellipse cx="14" cy="-10" rx="6" ry="2.2" fill="#d07a5a"/>
+  </g>
+</svg>

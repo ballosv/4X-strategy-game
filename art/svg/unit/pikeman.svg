@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Pikenier: lange Pike, Eisenhut, Wappenrock -->
+  <ellipse cx="108" cy="186" rx="36" ry="10" fill="url(#shadow)"/>
+  <!-- Pike (Schaft + Spitze) -->
+  <path d="M66 188 L66 18" stroke="#553c22" stroke-width="5" stroke-linecap="round"/>
+  <path d="M65 188 L65 18" stroke="#b08559" stroke-width="2"/>
+  <path d="M66 0 L60 18 L66 24 Z" fill="#e3e7ea"/>
+  <path d="M66 0 L72 18 L66 24 Z" fill="#6d767d"/>
+  <path d="M63 24 h6 v12 h-6 z" fill="#aab3ba"/>
+  <!-- Beine (Beinlinge) und Stiefel -->
+  <path d="M88 152 L86 180 L96 180 L98 152 Z" fill="#5a4636"/>
+  <path d="M104 152 L105 180 L115 180 L113 152 Z" fill="#3e3026"/>
+  <path d="M84 186 Q84 176 88 175 L97 175 L98 186 Z" fill="#3a2c20"/>
+  <path d="M103 186 L104 175 L114 175 Q119 177 119 186 Z" fill="#2a2018"/>
+  <!-- Kettenhemd (Saum unter dem Wappenrock) -->
+  <path d="M78 102 Q100 92 122 102 L126 158 L74 158 Z" fill="#aab3ba"/>
+  <path d="M106 96 Q116 98 122 102 L126 158 L110 158 Z" fill="#6d767d"/>
+  <path d="M76 150 h50 v12 Q100 168 74 162 Z" fill="#8f989f"/>
+  <!-- Wappenrock (Fraktion) -->
+  <path class="faction" d="M84 100 Q100 96 116 100 L120 162 Q100 167 80 162 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M84 100 Q92 97 99 96 L98 165 Q88 165 80 162 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M108 97 Q113 98 116 100 L120 162 Q115 164 110 165 Z" fill="#a8a8a8"/>
+  <!-- Wappenkreuz -->
+  <path d="M96 106 h8 v14 h10 v7 h-10 v26 h-8 v-26 h-10 v-7 h10 z" fill="#f2e7d2"/>
+  <path d="M100 106 h4 v14 h10 v7 h-10 v26 h-4 z" fill="#d9c7a5"/>
+  <!-- Gürtel -->
+  <path d="M80 134 Q100 140 120 134 L120 140 Q100 146 80 140 Z" fill="#553c22"/>
+  <rect x="96" y="136" width="7" height="6" rx="1" fill="#aab3ba"/>
+  <!-- Arme (Kettenärmel) greifen die Pike -->
+  <path d="M82 104 Q70 112 68 124 L76 128 Q78 116 88 110 Z" fill="#aab3ba"/>
+  <path d="M117 102 Q128 116 126 138 L117 138 Q118 120 112 108 Z" fill="#6d767d"/>
+  <path d="M117 102 Q122 110 124 120 L118 122 Q117 114 113 108 Z" fill="#8f989f"/>
+  <!-- Schwertgriff an der Hüfte -->
+  <path d="M84 136 L74 150" stroke="#553c22" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M80 132 L90 140" stroke="#aab3ba" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="68" cy="124" r="5.5" fill="#e0b48a"/>
+  <circle cx="122" cy="141" r="5" fill="#e0b48a"/>
+  <path d="M122 141 m0 -5 a5 5 0 0 1 5 5 h-5 z" fill="#b88a62" opacity="0.6"/>
+  <!-- Kopf -->
+  <circle cx="100" cy="82" r="14" fill="#e0b48a"/>
+  <path d="M100 68 a14 14 0 0 1 14 14 l-6 0 a8 8 0 0 0 -8 -8 z" fill="#b88a62" opacity="0.5"/>
+  <path d="M88 90 Q100 100 112 90 Q110 98 100 99 Q90 98 88 90 Z" fill="#7a5a36"/>
+  <circle cx="94" cy="84" r="1.6" fill="#3a2c20"/>
+  <!-- Eisenhut mit breiter Krempe -->
+  <ellipse cx="100" cy="76" rx="25" ry="6" fill="#6d767d"/>
+  <path d="M75 76 Q100 68 125 76 Q100 72 75 76 Z" fill="#e3e7ea"/>
+  <path d="M86 75 Q86 56 100 54 Q114 56 114 75 Z" fill="#aab3ba"/>
+  <path d="M100 54 Q114 56 114 75 L104 75 Z" fill="#6d767d"/>
+  <path d="M90 70 Q92 60 99 57" stroke="#e3e7ea" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</svg>

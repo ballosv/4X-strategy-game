@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Armbrustschütze mit Setzschild (Pavese) -->
+  <ellipse cx="114" cy="186" rx="44" ry="11" fill="url(#shadow)"/>
+  <!-- Pavese hinter dem Schützen (Fraktion) -->
+  <path d="M124 74 Q146 66 168 74 L166 178 Q146 184 126 178 Z" fill="#553c22"/>
+  <path class="faction" d="M128 78 Q146 71 164 78 L162 174 Q146 179 130 174 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M128 78 Q137 74 146 73 L146 178 Q138 177 130 174 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M152 74 Q158 75 164 78 L162 174 Q157 176 152 177 Z" fill="#a8a8a8"/>
+  <path d="M143 73 h6 v105 h-6 z" fill="#7a5a36"/>
+  <path d="M146 73 h3 v105 h-3 z" fill="#553c22"/>
+  <!-- Beine -->
+  <path d="M84 150 L82 180 L92 180 L94 150 Z" fill="#5a4636"/>
+  <path d="M100 150 L102 180 L112 180 L108 150 Z" fill="#3e3026"/>
+  <path d="M79 186 Q79 176 83 175 L93 175 L94 186 Z" fill="#3a2c20"/>
+  <path d="M100 186 L101 175 L111 175 Q116 177 116 186 Z" fill="#2a2018"/>
+  <!-- Köcher mit Bolzen -->
+  <path d="M114 130 l12 -4 l6 24 l-12 4 z" fill="#7a5a36"/>
+  <path d="M120 128 l6 -2 l6 24 l-6 2 z" fill="#553c22"/>
+  <path d="M115 128 l-2 -10 M119 127 l-1 -10 M123 126 l0 -10" stroke="#aab3ba" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Gambeson (Fraktion) -->
+  <path class="faction" d="M76 100 Q96 92 116 100 L120 156 Q96 162 72 156 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M76 100 Q86 96 96 95 L94 159 Q82 158 72 156 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M106 97 Q112 98 116 100 L120 156 Q114 158 108 159 Z" fill="#a8a8a8"/>
+  <path d="M80 112 Q96 116 114 112 M78 126 Q96 130 116 126 M76 146 Q96 150 118 146" stroke="#a8a8a8" stroke-width="1.5" fill="none" opacity="0.7"/>
+  <!-- Gürtel -->
+  <path d="M74 134 Q96 140 118 134 L118 140 Q96 146 74 140 Z" fill="#553c22"/>
+  <!-- Armbrust (Säule + Bogen + Sehne), schräg nach links unten -->
+  <path d="M120 120 L58 140" stroke="#553c22" stroke-width="7" stroke-linecap="round"/>
+  <path d="M120 118 L58 138" stroke="#b08559" stroke-width="3" stroke-linecap="round"/>
+  <path d="M52 118 Q66 136 64 162" stroke="#6d767d" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M52 118 Q64 134 62 160" stroke="#e3e7ea" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M53 119 L86 129 L64 161" stroke="#e2c27a" stroke-width="1.3" fill="none"/>
+  <path d="M60 136 L50 139" stroke="#aab3ba" stroke-width="3" stroke-linecap="round"/>
+  <!-- Arme -->
+  <path class="faction" d="M78 104 Q66 116 70 132 L78 132 Q76 118 84 110 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M112 104 Q122 114 118 124 L110 126 Q112 116 106 108 Z" fill="#a8a8a8"/>
+  <circle cx="74" cy="134" r="5.5" fill="#e0b48a"/>
+  <circle cx="114" cy="124" r="5.5" fill="#e0b48a"/>
+  <!-- Kopf -->
+  <circle cx="96" cy="80" r="14" fill="#e0b48a"/>
+  <path d="M96 66 a14 14 0 0 1 14 14 l-6 0 a8 8 0 0 0 -8 -8 z" fill="#b88a62" opacity="0.5"/>
+  <circle cx="90" cy="82" r="1.6" fill="#3a2c20"/>
+  <!-- Beckenhaube mit Kettenkragen -->
+  <path d="M80 86 Q80 96 96 100 Q112 96 112 86 L112 96 Q96 106 80 96 Z" fill="#8f989f"/>
+  <path d="M81 80 Q80 58 96 52 Q112 58 112 80 L106 78 Q104 70 96 70 Q88 70 86 78 Z" fill="#aab3ba"/>
+  <path d="M96 52 Q112 58 112 80 L106 78 Q104 70 98 70 Z" fill="#6d767d"/>
+  <path d="M87 70 Q88 60 95 55" stroke="#e3e7ea" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</svg>

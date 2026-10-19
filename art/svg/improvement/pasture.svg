@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs>
+    <!-- @defs -->
+    <!-- Schaf (Ursprung = Füße, Blick nach links) -->
+    <g id="sheep">
+      <ellipse cx="4" cy="1" rx="17" ry="5" fill="url(#shadow)"/>
+      <path d="M-8 0 L-8 -7 M-3 1 L-3 -7 M5 0 L5 -7 M10 -1 L10 -7" stroke="#3a3330" stroke-width="2.4" stroke-linecap="round"/>
+      <ellipse cx="2" cy="-12" rx="14" ry="8.5" fill="#cfc8b6"/>
+      <circle cx="-4" cy="-15" r="6" fill="#ece8dc"/><circle cx="4" cy="-17" r="6" fill="#f6f3ea"/><circle cx="10" cy="-13" r="5.5" fill="#d9d3c3"/>
+      <circle cx="-6" cy="-10" r="5" fill="#e4dfd2"/><circle cx="8" cy="-8" r="5" fill="#b9b2a0"/>
+      <ellipse cx="-14" cy="-14" rx="4.6" ry="5.6" fill="#3a3330"/>
+      <path d="M-17 -18 L-22 -16 L-17 -15 Z" fill="#2a2420"/>
+      <circle cx="-15.5" cy="-15" r="0.9" fill="#f4f4f4"/>
+      <circle cx="-11" cy="-19" r="3.2" fill="#f6f3ea"/>
+    </g>
+  </defs>
+  <!-- abgegraste Stellen -->
+  <ellipse cx="92" cy="236" rx="34" ry="14" fill="#9aa060" opacity="0.45"/>
+  <ellipse cx="172" cy="252" rx="30" ry="12" fill="#9aa060" opacity="0.4"/>
+  <ellipse cx="146" cy="196" rx="26" ry="10" fill="#9aa060" opacity="0.35"/>
+  <path d="M56 262 Q70 278 76 292" stroke="#b89c6e" stroke-width="6" fill="none" opacity="0.6" stroke-linecap="round"/>
+  <path d="M28.0 256.6 L28.0 180.6 M28.0 252.4 L28.0 176.4 M28.0 180.6 L128.0 142.6 M28.0 176.4 L128.0 138.4 M128.0 142.6 L228.0 180.6 M128.0 138.4 L228.0 176.4 M228.0 180.6 L228.0 256.6 M228.0 176.4 L228.0 252.4" stroke="#9a7348" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M28.0 263.0 l0 -14 M28.0 244.0 l0 -14 M28.0 225.0 l0 -14 M28.0 206.0 l0 -14 M28.0 187.0 l0 -14 M28.0 187.0 l0 -14 M44.7 180.7 l0 -14 M61.3 174.3 l0 -14 M78.0 168.0 l0 -14 M94.7 161.7 l0 -14 M111.3 155.3 l0 -14 M128.0 149.0 l0 -14 M128.0 149.0 l0 -14 M144.7 155.3 l0 -14 M161.3 161.7 l0 -14 M178.0 168.0 l0 -14 M194.7 174.3 l0 -14 M211.3 180.7 l0 -14 M228.0 187.0 l0 -14 M228.0 187.0 l0 -14 M228.0 206.0 l0 -14 M228.0 225.0 l0 -14 M228.0 244.0 l0 -14 M228.0 263.0 l0 -14" stroke="#553c22" stroke-width="3.0" stroke-linecap="round"/>
+  <!-- Unterstand -->
+  <g transform="translate(64 196)">
+    <ellipse cx="6" cy="2" rx="26" ry="7" fill="url(#shadow)"/>
+    <path d="M-18 0 L-18 -18 M14 -4 L14 -22 M-6 6 L-6 -10 M24 2 L24 -14" stroke="#553c22" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M-22 -16 L12 -28 L28 -14 L-6 -2 Z" fill="#b48a4a" stroke="#86622e" stroke-width="1.2" stroke-linejoin="round"/>
+    <path d="M-6 -2 L28 -14 L28 -11 L-6 1 Z" fill="#86622e"/>
+  </g>
+  <!-- Tränke -->
+  <g transform="translate(186 200)">
+    <path d="M-14 0 L10 -9 L16 -6 L-8 3 Z" fill="#553c22"/>
+    <path d="M-14 0 L-14 -5 L10 -14 L10 -9 Z" fill="#b08559"/>
+    <path d="M10 -9 L10 -14 L16 -11 L16 -6 Z" fill="#7a5a36"/>
+    <path d="M-12 -5 L10 -13 L14 -11 L-8 -3 Z" fill="#5aa9d6"/>
+  </g>
+  <use href="#sheep" transform="translate(150 192) scale(0.95 0.95)"/>
+  <use href="#sheep" transform="translate(84 200) scale(1 1)"/>
+  <use href="#sheep" transform="translate(186 226) scale(-1 1)"/>
+  <use href="#sheep" transform="translate(110 244) scale(1.05 1.05)"/>
+  <use href="#sheep" transform="translate(62 252) scale(-0.95 0.95)"/>
+  <use href="#sheep" transform="translate(200 252) scale(0.9 0.9)"/>
+  <use href="#sheep" transform="translate(160 266) scale(1.05 1.05)"/>
+  <path d="M228.0 256.6 L128.0 294.6 M228.0 252.4 L128.0 290.4 M128.0 294.6 L83.0 277.5 M128.0 290.4 L83.0 273.3" stroke="#9a7348" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M228.0 263.0 l0 -14 M211.3 269.3 l0 -14 M194.7 275.7 l0 -14 M178.0 282.0 l0 -14 M161.3 288.3 l0 -14 M144.7 294.7 l0 -14 M128.0 301.0 l0 -14 M128.0 301.0 l0 -14 M113.0 295.3 l0 -14 M98.0 289.6 l0 -14 M83.0 283.9 l0 -14" stroke="#553c22" stroke-width="3.0" stroke-linecap="round"/>
+  <path d="M63.0 269.9 L28.0 256.6 M63.0 265.7 L28.0 252.4" stroke="#9a7348" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M63.0 276.3 l0 -14 M45.5 269.6 l0 -14 M28.0 263.0 l0 -14" stroke="#553c22" stroke-width="3.0" stroke-linecap="round"/>
+</svg>

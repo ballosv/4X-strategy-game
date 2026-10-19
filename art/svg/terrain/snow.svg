@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="190" viewBox="0 0 250 190">
+  <defs><!-- @defs --></defs>
+  <!-- Schnee: Verwehungen mit hellen Kämmen und kühlblauen Schatten -->
+  <rect width="250" height="190" fill="#e9eff3"/>
+  <ellipse cx="62" cy="46" rx="58" ry="28" fill="#ffffff" opacity="0.7"/>
+  <ellipse cx="190" cy="140" rx="60" ry="30" fill="#dbe4eb" opacity="0.7"/>
+  <!-- Verwehungen -->
+  <path d="M14 84 Q52 60 96 74 Q60 74 30 90 Z" fill="#ffffff"/>
+  <path d="M96 74 Q70 86 36 94 Q70 94 100 80 Z" fill="#c3cfd8" opacity="0.8"/>
+  <path d="M124 50 Q166 30 212 44 Q178 44 144 58 Z" fill="#ffffff"/>
+  <path d="M212 44 Q186 56 150 62 Q186 62 216 50 Z" fill="#c3cfd8" opacity="0.8"/>
+  <path d="M104 132 Q150 108 198 122 Q162 120 126 138 Z" fill="#ffffff"/>
+  <path d="M198 122 Q170 136 132 142 Q170 144 202 128 Z" fill="#c3cfd8" opacity="0.8"/>
+  <path d="M72 150 Q50 162 14 168 Q48 170 78 156 Z" fill="#c3cfd8" opacity="0.6"/>
+  <!-- Windrillen -->
+  <g fill="none" stroke="#d2dde5" stroke-width="1.5" stroke-linecap="round">
+    <path d="M140 92 q12 -3 24 0"/><path d="M40 120 q12 -3 24 0"/><path d="M196 92 q8 -2 16 0"/><path d="M82 30 q8 -2 16 0"/>
+  </g>
+  <!-- herausragende Steine/Grashalme -->
+  <g>
+    <ellipse cx="112" cy="104" rx="4" ry="2.4" fill="#9c958b"/><ellipse cx="111" cy="103" rx="3" ry="1.5" fill="#cfc8be"/>
+    <ellipse cx="226" cy="150" rx="3.4" ry="2" fill="#9c958b"/>
+  </g>
+  <g stroke="#9aa486" stroke-width="1.4" stroke-linecap="round"><path d="M58 128 l-1 -6 M61 128 l1 -6"/><path d="M176 80 l-1 -5 M179 80 l1 -5"/></g>
+  <!-- Glitzer -->
+  <g fill="#ffffff"><circle cx="44" cy="40" r="1.6"/><circle cx="160" cy="80" r="1.6"/><circle cx="210" cy="170" r="1.6"/><circle cx="90" cy="168" r="1.6"/></g>
+  <rect width="250" height="190" fill="url(#lightTL)"/>
+</svg>

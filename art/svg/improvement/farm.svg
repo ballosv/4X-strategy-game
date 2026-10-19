@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs>
+    <!-- @defs -->
+    <clipPath id="fl"><path d="M121.8 226.4 L121.8 311.9 L9.2 269.1 L9.2 183.6 Z"/></clipPath>
+    <clipPath id="fr"><path d="M134.2 226.4 L246.8 183.6 L246.8 269.1 L134.2 311.9 Z"/></clipPath>
+  </defs>
+  <!-- Feldkanten (leicht erhöht) -->
+  <path d="M121.8 229.4 L121.8 314.9 L9.2 272.1 L9.2 186.6 Z" fill="#6b5a2a" opacity="0.7"/>
+  <path d="M134.2 229.4 L246.8 186.6 L246.8 272.1 L134.2 314.9 Z" fill="#6b5a2a" opacity="0.7"/>
+  <!-- linkes Weizenfeld -->
+  <path d="M121.8 226.4 L121.8 311.9 L9.2 269.1 L9.2 183.6 Z" fill="#a87a2a"/>
+  <g clip-path="url(#fl)" stroke-linecap="round">
+    <path d="M121.8 307.1 L9.2 264.4 M121.8 297.6 L9.2 254.9 M121.8 288.1 L9.2 245.4 M121.8 278.6 L9.2 235.9 M121.8 269.1 L9.2 226.4 M121.8 259.6 L9.2 216.9 M121.8 250.1 L9.2 207.4 M121.8 240.6 L9.2 197.9 M121.8 231.1 L9.2 188.4" stroke="#d9ac44" stroke-width="7.5"/>
+    <path d="M121.8 304.6 L9.2 261.9 M121.8 295.1 L9.2 252.4 M121.8 285.6 L9.2 242.9 M121.8 276.1 L9.2 233.4 M121.8 266.6 L9.2 223.9 M121.8 257.1 L9.2 214.4 M121.8 247.6 L9.2 204.9 M121.8 238.1 L9.2 195.4 M121.8 228.6 L9.2 185.9" stroke="#f4d77e" stroke-width="2.6" stroke-dasharray="5 3"/>
+  </g>
+  <!-- rechtes Weizenfeld (etwas reifer) -->
+  <path d="M134.2 226.4 L246.8 183.6 L246.8 269.1 L134.2 311.9 Z" fill="#9c6e22"/>
+  <g clip-path="url(#fr)" stroke-linecap="round">
+    <path d="M134.2 231.1 L246.8 188.4 M134.2 240.6 L246.8 197.9 M134.2 250.1 L246.8 207.4 M134.2 259.6 L246.8 216.9 M134.2 269.1 L246.8 226.4 M134.2 278.6 L246.8 235.9 M134.2 288.1 L246.8 245.4 M134.2 297.6 L246.8 254.9 M134.2 307.1 L246.8 264.4" stroke="#cf9a36" stroke-width="7.5"/>
+    <path d="M134.2 228.6 L246.8 185.9 M134.2 238.1 L246.8 195.4 M134.2 247.6 L246.8 204.9 M134.2 257.1 L246.8 214.4 M134.2 266.6 L246.8 223.9 M134.2 276.1 L246.8 233.4 M134.2 285.6 L246.8 242.9 M134.2 295.1 L246.8 252.4 M134.2 304.6 L246.8 261.9" stroke="#eccb6c" stroke-width="2.6" stroke-dasharray="4 3"/>
+  </g>
+  <!-- Feldweg zwischen den Feldern -->
+  <path d="M128 228 L128 314" stroke="#c9ad80" stroke-width="5" opacity="0.8"/>
+  <!-- Hof -->
+  <path d="M128 218 L56 190 L128 162 L200 190 Z" fill="#b89c6e" opacity="0.55"/>
+  <!-- Heuhaufen -->
+  <ellipse cx="190" cy="204" rx="16" ry="5" fill="url(#shadow)"/>
+  <path d="M170 202 Q172 182 184 180 Q198 182 200 202 Q185 207 170 202 Z" fill="#d9ac44"/>
+  <path d="M185 180 Q198 182 200 202 Q192 205 186 205 Z" fill="#a87a2a"/>
+  <path d="M174 192 Q184 188 196 192" stroke="#f4d77e" stroke-width="1.5" fill="none"/>
+  <!-- Scheune (Ursprung vordere Ecke) -->
+  <g transform="translate(138 206)">
+    <ellipse cx="-8" cy="-8" rx="46" ry="16" fill="url(#shadow)" transform="translate(8 3)"/>
+    <path d="M0 0 L-50 -19 L-50 -39 L0 -20 Z" fill="#b08559"/>
+    <path d="M-12 -4.6 L-12 -24.6 M-25 -9.5 L-25 -29.5 M-38 -14.4 L-38 -34.4" stroke="#7a5a36" stroke-width="1.2"/>
+    <path d="M-22 -16 L-22 -22 L-30 -25 L-30 -19 Z" fill="#3e2a18"/>
+    <path d="M0 0 L28 -10.6 L28 -30.6 L14 -43.3 L0 -20 Z" fill="#7a5a36"/>
+    <path d="M6 -2.3 L22 -8.4 L22 -26 L14 -29 L6 -26 Z" fill="#3e2a18"/>
+    <path d="M6 -2.3 L22 -8.4 L22 -26 L6 -20 Z M6 -20 L22 -8.4 M6 -2.3 L22 -26" stroke="#b08559" stroke-width="1.6" fill="none"/>
+    <path d="M2 -17.5 L-53.5 -38.6 L-36.5 -64 L15.5 -44.5 Z" fill="#b8573a" stroke="#843a25" stroke-width="1.2" stroke-linejoin="round"/>
+    <path d="M-10 -24 L4 -46 M-24 -29 L-10 -51 M-38 -34.5 L-24 -56.5" stroke="#d07a5a" stroke-width="1.4" opacity="0.7"/>
+    <path d="M15.5 -44.5 L31.5 -28.6 L28.5 -27.4 L14.5 -41.5 Z" fill="#843a25"/>
+    <path d="M2 -17.5 L-53.5 -38.6 L-53.5 -36 L2 -15 Z" fill="#843a25"/>
+  </g>
+  <!-- Zaun zum Hof -->
+  <path d="M60 196 L60 186 M76 202 L76 192 M92 208 L92 198 M108 214 L108 204" stroke="#553c22" stroke-width="2" stroke-linecap="round"/>
+  <path d="M58 189 L110 207 M58 194 L110 212" stroke="#9a7348" stroke-width="2" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Kogge: hochbordiges Rundschiff mit Kastellen und einem großen Rahsegel (Fraktion) -->
+  <ellipse cx="106" cy="182" rx="80" ry="12" fill="url(#shadow)"/>
+  <!-- Bugwelle / Kielwasser -->
+  <path d="M22 178 Q60 172 100 180 Q140 172 182 178 Q140 186 100 184 Q60 186 22 178 Z" fill="#e9eff3" opacity="0.55"/>
+  <!-- Takelage hinten -->
+  <path d="M100 18 L172 92 M100 18 L30 98" stroke="#553c22" stroke-width="1.4"/>
+  <!-- Mast -->
+  <path d="M98 14 h5 v100 h-5 z" fill="#7a5a36"/>
+  <path d="M101 14 h2 v100 h-2 z" fill="#553c22"/>
+  <!-- Rah -->
+  <path d="M56 30 L146 30" stroke="#553c22" stroke-width="4" stroke-linecap="round"/>
+  <!-- Großsegel (Fraktion), gebläht, mit Bahnen -->
+  <path class="faction" d="M60 32 L142 32 Q152 66 144 102 L58 102 Q50 66 60 32 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M60 32 L92 32 Q88 66 90 102 L58 102 Q50 66 60 32 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M118 32 L142 32 Q152 66 144 102 L120 102 Q124 66 118 32 Z" fill="#a8a8a8"/>
+  <path class="faction" d="M60 32 L142 32 L142 38 Q100 42 60 38 Z" fill="#a8a8a8"/>
+  <path d="M76 33 Q72 66 74 101 M108 33 Q108 66 106 101 M128 33 Q134 66 132 101" stroke="#a8a8a8" stroke-width="1.2" fill="none" opacity="0.8"/>
+  <!-- Wappen auf dem Segel -->
+  <path d="M92 52 h18 v14 Q110 76 101 82 Q92 76 92 66 Z" fill="#f2e7d2"/>
+  <path d="M101 52 h9 v14 Q110 76 101 82 Z" fill="#d9c7a5"/>
+  <!-- Mastkorb und Wimpel (Fraktion) -->
+  <path d="M93 12 h15 l-2 7 h-11 z" fill="#553c22"/>
+  <path class="faction" d="M103 2 L128 7 L103 12 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M103 2 L128 7 L103 7 Z" fill="#f4f4f4"/>
+  <path d="M101 0 h3 v14 h-3 z" fill="#553c22"/>
+  <!-- Rumpf (Klinkerplanken) -->
+  <path d="M22 106 L178 106 L172 146 Q162 172 140 178 L62 178 Q38 172 28 146 Z" fill="#7a5a36"/>
+  <path d="M22 106 L100 106 L100 178 L62 178 Q38 172 28 146 Z" fill="#b08559"/>
+  <path d="M140 106 L178 106 L172 146 Q162 172 140 178 Z" fill="#553c22"/>
+  <path d="M24 120 Q100 126 176 120 M26 134 Q100 140 175 134 M30 148 Q100 154 170 148 M40 162 Q100 168 160 162" stroke="#553c22" stroke-width="1.6" fill="none"/>
+  <path d="M22 106 L178 106 L177 112 L23 112 Z" fill="#553c22"/>
+  <!-- Achterkastell -->
+  <path d="M140 84 h38 v24 h-38 z" fill="#7a5a36"/>
+  <path d="M162 84 h16 v24 h-16 z" fill="#553c22"/>
+  <path d="M140 78 h6 v6 h-6 z M151 78 h6 v6 h-6 z M162 78 h6 v6 h-6 z M172 78 h6 v6 h-6 z" fill="#7a5a36"/>
+  <path d="M140 84 h38 v3 h-38 z" fill="#b08559"/>
+  <!-- Vorderkastell -->
+  <path d="M20 92 h30 v16 h-30 z" fill="#b08559"/>
+  <path d="M20 86 h5 v6 h-5 z M30 86 h5 v6 h-5 z M40 86 h5 v6 h-5 z" fill="#b08559"/>
+  <path d="M38 92 h12 v16 h-12 z" fill="#7a5a36"/>
+  <!-- Steven und Ruder -->
+  <path d="M22 106 L14 100 L18 98 L26 106 Z" fill="#553c22"/>
+  <path d="M174 140 L182 140 L178 174 L170 172 Z" fill="#553c22"/>
+</svg>

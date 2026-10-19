@@ -59,7 +59,12 @@ function render(svg) {
 
 /** Maske: Fraktionsflächen weiß, alles andere schwarz; danach Helligkeit -> Deckkraft. */
 function renderMask(svg) {
-  const style = '<style>*{fill:#000;stroke:#000}.faction,.faction *{fill:#fff;stroke:#fff}</style>';
+  // Nur vorhandene Füllungen/Konturen umfärben: fill="none" bleibt leer, Formen ohne Kontur
+  // erhalten keine (sonst würden sie die Fraktionsflächen verdecken).
+  const style =
+    '<style>*{fill:#000}[fill="none"]{fill:none}[stroke]{stroke:#000}[stroke="none"]{stroke:none}' +
+    '.faction,.faction *{fill:#fff}.faction[fill="none"],.faction [fill="none"]{fill:none}' +
+    '.faction[stroke],.faction [stroke]{stroke:#fff}.faction[stroke="none"],.faction [stroke="none"]{stroke:none}</style>';
   const masked = svg.replace(/(<svg[^>]*>)/, `$1${style}`);
   const img = render(masked);
   const px = Buffer.from(img.pixels);

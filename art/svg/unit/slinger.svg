@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="108" cy="186" rx="34" ry="10" fill="url(#shadow)"/>
+  <!-- Schwungbahn der Schleuder -->
+  <path d="M36 52 Q38 22 72 18 Q50 28 44 54 Z" fill="#ffffff" opacity="0.35"/>
+  <!-- Beine (Schrittstellung) -->
+  <path d="M88 148 L80 182 L90 182 L98 150 Z" fill="#e0b48a"/>
+  <path d="M104 148 L110 182 L120 182 L113 148 Z" fill="#b88a62"/>
+  <path d="M78 184 h14 v-5 h-14 z M108 184 h14 v-5 h-14 z" fill="#7a5a36"/>
+  <path d="M80 176 l10 -2 M110 176 l10 -2" stroke="#553c22" stroke-width="1.5"/>
+  <!-- Tunika (Fraktion) -->
+  <path class="faction" d="M80 100 Q100 92 120 100 L123 152 Q100 158 77 152 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M80 100 Q90 96 100 95 L99 155 Q88 155 77 152 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M111 98 Q116 99 120 100 L123 152 Q118 154 113 155 Z" fill="#a8a8a8"/>
+  <!-- Ledergurt quer über die Brust -->
+  <path d="M116 100 L84 136 L90 140 L120 106 Z" fill="#7a5a36"/>
+  <!-- Gürtel -->
+  <path d="M78 128 Q100 134 122 128 L122 134 Q100 140 78 134 Z" fill="#5a3d22"/>
+  <!-- Steinbeutel an der Hüfte -->
+  <path d="M114 134 Q130 132 132 148 Q130 162 118 160 Q108 156 110 144 Z" fill="#9a7048"/>
+  <path d="M114 134 Q122 133 126 138 Q116 140 112 148 Q110 140 114 134 Z" fill="#b08559"/>
+  <path d="M132 148 Q130 162 118 160 Q126 154 128 144 Z" fill="#6b4a2c"/>
+  <circle cx="116" cy="134" r="3.4" fill="#9c958b"/>
+  <circle cx="123" cy="133" r="3" fill="#cfc8be"/>
+  <!-- linker Arm hängt -->
+  <path d="M116 104 Q126 112 124 128 L117 128 Q118 116 112 110 Z" fill="#b88a62"/>
+  <circle cx="120" cy="130" r="5" fill="#b88a62"/>
+  <!-- rechter Arm schwingt die Schleuder über dem Kopf -->
+  <path d="M84 104 Q72 92 74 64 L82 64 Q82 88 90 100 Z" fill="#e0b48a"/>
+  <path d="M84 104 Q76 96 76 80 L80 80 Q80 92 88 100 Z" fill="#f0c9a0"/>
+  <circle cx="78" cy="62" r="5.5" fill="#e0b48a"/>
+  <path d="M78 58 L54 36" stroke="#7a5a36" stroke-width="1.6"/>
+  <ellipse cx="52" cy="34" rx="6" ry="5" fill="#7a5a36"/>
+  <circle cx="51" cy="33" r="3.2" fill="#9c958b"/>
+  <!-- Kopf mit Stirnband (Fraktion) und Zopf -->
+  <circle cx="100" cy="80" r="15" fill="#e0b48a"/>
+  <path d="M100 80 m0 -15 a15 15 0 0 1 15 15 l-6 0 a9 9 0 0 0 -9 -9 z" fill="#b88a62" opacity="0.5"/>
+  <path d="M85 76 Q86 62 100 62 Q114 62 116 78 Q112 70 100 70 Q90 70 85 76 Z" fill="#5a3d22"/>
+  <path d="M113 76 Q124 82 122 98 Q118 92 112 86 Z" fill="#5a3d22"/>
+  <path class="faction" d="M85 72 Q100 64 116 72 L116 77 Q100 69 85 77 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M115 72 L124 70 L122 78 L115 77 Z" fill="#a8a8a8"/>
+  <circle cx="94" cy="83" r="1.6" fill="#3a2c20"/>
+</svg>

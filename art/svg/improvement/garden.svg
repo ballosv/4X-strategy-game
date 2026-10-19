@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs>
+    <!-- @defs -->
+    <!-- Pflanzen: Kohl, Salat, Möhre, Kürbis -->
+    <g id="cab"><circle cx="0" cy="-2" r="5" fill="#4f7f2c"/><circle cx="-1.2" cy="-3.2" r="3.2" fill="#b5d98a"/></g>
+    <g id="let"><circle cx="0" cy="-2" r="4.4" fill="#6aa84f"/><circle cx="-1" cy="-3" r="2.2" fill="#c8e69a"/></g>
+    <g id="car"><path d="M0 1 l-3.5 -8 M0 1 l0 -9 M0 1 l3.5 -8" stroke="#6aa84f" stroke-width="1.8" stroke-linecap="round"/><circle cx="0" cy="1.5" r="2" fill="#f08a2e"/></g>
+    <g id="pum"><path d="M-6 1 q6 -6 12 0" fill="#3f7a35"/><ellipse cx="0" cy="-1" rx="5.2" ry="4" fill="#e0782e"/><path d="M-2.5 -3.5 q2 -1.2 3.5 0" stroke="#f4b070" stroke-width="1.3" fill="none"/></g>
+  </defs>
+  <!-- Gartenfläche -->
+  <path d="M16 182 L128 224 L240 182 L240 266 L128 309 L16 266 Z" fill="#8a6a44" opacity="0.5"/>
+  <!-- Geräteschuppen -->
+  <g transform="translate(160 184) scale(1.25)">
+    <ellipse cx="4" cy="-2" rx="22" ry="7" fill="url(#shadow)" transform="translate(5 2)"/>
+    <path d="M0 0 L-20 -7.6 L-20 -27 L0 -19.4 Z" fill="#b08559"/>
+    <path d="M0 0 L14 -5.3 L14 -24.7 L0 -19.4 Z" fill="#7a5a36"/>
+    <path d="M3 -1.4 L10 -4 L10 -16 L3 -13.4 Z" fill="#3e2a18"/>
+    <path d="M2 -17 L-23 -26.5 L-17 -38 L16 -25.5 Z" fill="#b48a4a" stroke="#86622e" stroke-width="1.2" stroke-linejoin="round"/>
+    <path d="M16 -25.5 L17 -21 L2 -14.5 L2 -17 Z" fill="#86622e"/>
+  </g>
+  <!-- Zaun hinten -->
+  <path d="M16.0 182.0 l0 -11 M32.0 187.1 l0 -11 M48.0 192.3 l0 -11 M64.0 197.4 l0 -11 M80.0 202.6 l0 -11 M96.0 207.7 l0 -11 M112.0 212.9 l0 -11 M128.0 218.0 l0 -11" stroke="#553c22" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M16.0 174.0 L128.0 210.0 M16.0 178.0 L128.0 214.0" stroke="#9a7348" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M128.0 218.0 l0 -11 M144.0 212.9 l0 -11 M160.0 207.7 l0 -11 M176.0 202.6 l0 -11 M192.0 197.4 l0 -11 M208.0 192.3 l0 -11 M224.0 187.1 l0 -11 M240.0 182.0 l0 -11" stroke="#553c22" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M128.0 210.0 L240.0 174.0 M128.0 214.0 L240.0 178.0" stroke="#9a7348" stroke-width="2.4" stroke-linecap="round"/>
+  <!-- Beete -->
+  <path d="M119.9 245.3 L11.1 203.9 L11.1 188.2 L119.9 229.6 Z" fill="#4a3220" transform="translate(0 3)"/>
+<path d="M119.9 245.3 L11.1 203.9 L11.1 188.2 L119.9 229.6 Z" fill="#6b4a2e"/>
+<use href="#let" x="115" y="237"/>
+<use href="#let" x="106" y="233"/>
+<use href="#let" x="97" y="230"/>
+<use href="#let" x="87" y="226"/>
+<use href="#let" x="78" y="222"/>
+<use href="#let" x="68" y="219"/>
+<use href="#let" x="59" y="215"/>
+<use href="#let" x="50" y="212"/>
+<use href="#let" x="40" y="208"/>
+<use href="#let" x="31" y="205"/>
+<use href="#let" x="22" y="201"/>
+<path d="M136.1 229.6 L244.9 188.2 L244.9 203.9 L136.1 245.3 Z" fill="#4a3220" transform="translate(0 3)"/>
+<path d="M136.1 229.6 L244.9 188.2 L244.9 203.9 L136.1 245.3 Z" fill="#6b4a2e"/>
+<use href="#let" x="141" y="237"/>
+<use href="#let" x="150" y="233"/>
+<use href="#let" x="159" y="230"/>
+<use href="#let" x="169" y="226"/>
+<use href="#let" x="178" y="222"/>
+<use href="#let" x="188" y="219"/>
+<use href="#let" x="197" y="215"/>
+<use href="#let" x="206" y="212"/>
+<use href="#let" x="216" y="208"/>
+<use href="#let" x="225" y="205"/>
+<use href="#let" x="234" y="201"/>
+<path d="M136.1 250.2 L244.9 208.9 L244.9 224.6 L136.1 265.9 Z" fill="#4a3220" transform="translate(0 3)"/>
+<path d="M136.1 250.2 L244.9 208.9 L244.9 224.6 L136.1 265.9 Z" fill="#6b4a2e"/>
+<use href="#car" x="141" y="257"/>
+<use href="#car" x="150" y="254"/>
+<use href="#car" x="159" y="250"/>
+<use href="#car" x="169" y="247"/>
+<use href="#car" x="178" y="243"/>
+<use href="#car" x="188" y="240"/>
+<use href="#car" x="197" y="236"/>
+<use href="#car" x="206" y="232"/>
+<use href="#car" x="216" y="229"/>
+<use href="#car" x="225" y="225"/>
+<use href="#car" x="234" y="222"/>
+<path d="M119.9 265.9 L11.1 224.6 L11.1 208.9 L119.9 250.2 Z" fill="#4a3220" transform="translate(0 3)"/>
+<path d="M119.9 265.9 L11.1 224.6 L11.1 208.9 L119.9 250.2 Z" fill="#6b4a2e"/>
+<use href="#pum" x="115" y="257"/>
+<use href="#pum" x="101" y="252"/>
+<use href="#pum" x="87" y="247"/>
+<use href="#pum" x="73" y="241"/>
+<use href="#pum" x="59" y="236"/>
+<use href="#pum" x="45" y="231"/>
+<use href="#pum" x="31" y="225"/>
+<use href="#pum" x="17" y="220"/>
+<path d="M119.9 286.6 L11.1 245.3 L11.1 229.6 L119.9 270.9 Z" fill="#4a3220" transform="translate(0 3)"/>
+<path d="M119.9 286.6 L11.1 245.3 L11.1 229.6 L119.9 270.9 Z" fill="#6b4a2e"/>
+<use href="#cab" x="115" y="278"/>
+<use href="#cab" x="106" y="274"/>
+<use href="#cab" x="97" y="271"/>
+<use href="#cab" x="87" y="267"/>
+<use href="#cab" x="78" y="264"/>
+<use href="#cab" x="68" y="260"/>
+<use href="#cab" x="59" y="257"/>
+<use href="#cab" x="50" y="253"/>
+<use href="#cab" x="40" y="250"/>
+<use href="#cab" x="31" y="246"/>
+<use href="#cab" x="22" y="242"/>
+<path d="M136.1 270.9 L244.9 229.6 L244.9 245.3 L136.1 286.6 Z" fill="#4a3220" transform="translate(0 3)"/>
+<path d="M136.1 270.9 L244.9 229.6 L244.9 245.3 L136.1 286.6 Z" fill="#6b4a2e"/>
+<use href="#cab" x="141" y="278"/>
+<use href="#cab" x="150" y="274"/>
+<use href="#cab" x="159" y="271"/>
+<use href="#cab" x="169" y="267"/>
+<use href="#cab" x="178" y="264"/>
+<use href="#cab" x="188" y="260"/>
+<use href="#cab" x="197" y="257"/>
+<use href="#cab" x="206" y="253"/>
+<use href="#cab" x="216" y="250"/>
+<use href="#cab" x="225" y="246"/>
+<use href="#cab" x="234" y="242"/>
+<path d="M119.9 307.3 L11.1 265.9 L11.1 250.2 L119.9 291.6 Z" fill="#4a3220" transform="translate(0 3)"/>
+<path d="M119.9 307.3 L11.1 265.9 L11.1 250.2 L119.9 291.6 Z" fill="#6b4a2e"/>
+<use href="#car" x="115" y="299"/>
+<use href="#car" x="106" y="295"/>
+<use href="#car" x="97" y="292"/>
+<use href="#car" x="87" y="288"/>
+<use href="#car" x="78" y="284"/>
+<use href="#car" x="68" y="281"/>
+<use href="#car" x="59" y="277"/>
+<use href="#car" x="50" y="274"/>
+<use href="#car" x="40" y="270"/>
+<use href="#car" x="31" y="267"/>
+<use href="#car" x="22" y="263"/>
+<path d="M136.1 291.6 L244.9 250.2 L244.9 265.9 L136.1 307.3 Z" fill="#4a3220" transform="translate(0 3)"/>
+<path d="M136.1 291.6 L244.9 250.2 L244.9 265.9 L136.1 307.3 Z" fill="#6b4a2e"/>
+<use href="#car" x="141" y="299"/>
+<use href="#car" x="150" y="295"/>
+<use href="#car" x="159" y="292"/>
+<use href="#car" x="169" y="288"/>
+<use href="#car" x="178" y="284"/>
+<use href="#car" x="188" y="281"/>
+<use href="#car" x="197" y="277"/>
+<use href="#car" x="206" y="274"/>
+<use href="#car" x="216" y="270"/>
+<use href="#car" x="225" y="267"/>
+<use href="#car" x="234" y="263"/>
+
+  <!-- Wasserfass und Gießkanne -->
+  <ellipse cx="88" cy="188" rx="12" ry="4" fill="url(#shadow)"/>
+  <path d="M74 170 L74 186 Q82 190 90 186 L90 170 Z" fill="#7a5a36"/>
+  <path d="M82 171 L82 188 Q87 188 90 186 L90 170 Z" fill="#553c22"/>
+  <ellipse cx="82" cy="170" rx="8" ry="3" fill="#3c93c6"/>
+  <path d="M74 175 Q82 178 90 175 M74 182 Q82 185 90 182" stroke="#3a2c20" stroke-width="1.4" fill="none"/>
+  <!-- Vogelscheuche -->
+  <g transform="translate(128 272) scale(1.2)">
+    <path d="M0 2 L0 -34 M-12 -24 L12 -24" stroke="#7a5a36" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M-7 -26 L7 -26 L9 -10 L-9 -10 Z" fill="#a4472f"/>
+    <path d="M1 -26 L7 -26 L9 -10 L1 -10 Z" fill="#7a2f22"/>
+    <circle cx="0" cy="-31" r="4.5" fill="#e2c27a"/>
+    <path d="M-8 -33 L8 -33 L4 -37 L-4 -37 Z" fill="#86622e"/>
+  </g>
+</svg>

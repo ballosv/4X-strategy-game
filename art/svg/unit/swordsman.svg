@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="110" cy="186" rx="38" ry="10" fill="url(#shadow)"/>
+  <!-- Beine mit Beinschienen -->
+  <path d="M88 150 L86 184 L96 184 L98 150 Z" fill="#e0b48a"/>
+  <path d="M104 150 L104 184 L114 184 L112 150 Z" fill="#b88a62"/>
+  <path d="M85 160 Q91 157 97 160 L96 180 L86 180 Z" fill="#aab3ba"/>
+  <path d="M85 160 Q88 158 91 158 L90 180 L86 180 Z" fill="#c4ccd2"/>
+  <path d="M84 184 h14 v-5 h-14 z M102 184 h14 v-5 h-14 z" fill="#3a2c20"/>
+  <!-- Tunika-Rock (Fraktion) -->
+  <path class="faction" d="M79 128 L121 128 L125 158 Q100 164 75 158 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M79 128 L99 128 L98 161 Q86 160 75 158 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M112 128 L121 128 L125 158 Q119 160 113 161 Z" fill="#a8a8a8"/>
+  <!-- Lederstreifen (Pteryges) -->
+  <path d="M82 132 h5 v20 h-5 z M91 133 h5 v21 h-5 z M100 133 h5 v21 h-5 z M109 132 h5 v20 h-5 z" fill="#7a5a36"/>
+  <!-- Schienenpanzer -->
+  <path d="M80 100 Q100 90 120 100 L122 134 Q100 140 78 134 Z" fill="#8f99a1"/>
+  <path d="M80 100 Q90 95 100 94 L99 138 Q88 137 78 134 Z" fill="#c4ccd2"/>
+  <path d="M110 96 Q116 98 120 100 L122 134 Q117 136 112 137 Z" fill="#5f686f"/>
+  <path d="M79 112 Q100 118 121 112 M79 122 Q100 128 122 122" fill="none" stroke="#5f686f" stroke-width="1.5"/>
+  <path d="M82 98 Q90 92 98 100 L96 108 Q90 102 82 106 Z" fill="#c4ccd2"/>
+  <!-- Gürtel -->
+  <path d="M78 130 Q100 136 122 130 L122 137 Q100 143 78 137 Z" fill="#553c22"/>
+  <circle cx="92" cy="136" r="2.4" fill="#e2c27a"/>
+  <!-- Kurzschwert (Gladius) -->
+  <path d="M66 66 L72 64 L78 110 L72 111 Z" fill="#e3e7ea"/>
+  <path d="M69 65 L72 64 L78 110 L75 110.5 Z" fill="#aab3ba"/>
+  <path d="M68 60 L69 66 L72 64 Z" fill="#e3e7ea"/>
+  <path d="M68 110 L84 107 L85 112 L69 115 Z" fill="#9c7a3a"/>
+  <path d="M74 112 L77 124 L82 123 L79 111 Z" fill="#553c22"/>
+  <!-- rechter Arm mit Schwert -->
+  <path d="M84 104 Q72 108 74 122 L82 124 Q82 114 88 110 Z" fill="#e0b48a"/>
+  <path d="M74 112 h10 v6 h-10 z" fill="#7a5a36"/>
+  <circle cx="79" cy="122" r="5.5" fill="#e0b48a"/>
+  <!-- Kopf mit Helm (Wangenklappen, Kamm) -->
+  <circle cx="100" cy="80" r="15" fill="#e0b48a"/>
+  <path d="M100 80 m0 -15 a15 15 0 0 1 15 15 l-6 0 a9 9 0 0 0 -9 -9 z" fill="#b88a62" opacity="0.5"/>
+  <path d="M83 80 Q82 60 100 58 Q118 60 117 80 L112 80 Q110 70 100 70 Q90 70 88 80 Z" fill="#aab3ba"/>
+  <path d="M100 58 Q118 60 117 80 L112 80 Q110 66 100 64 Z" fill="#6d767d"/>
+  <path d="M86 66 Q90 60 98 59 Q90 64 88 72 Z" fill="#e3e7ea"/>
+  <path d="M84 78 L92 78 L91 92 L86 90 Z" fill="#aab3ba"/>
+  <path d="M108 78 L116 78 L114 90 L109 92 Z" fill="#6d767d"/>
+  <path d="M112 76 L124 80 L122 84 L112 80 Z" fill="#6d767d"/>
+  <path class="faction" d="M88 58 Q100 42 114 58 L110 60 Q100 50 92 60 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M88 58 Q94 50 100 48 L98 54 Q94 56 92 60 Z" fill="#f4f4f4"/>
+  <circle cx="96" cy="84" r="1.6" fill="#3a2c20"/>
+  <g transform="translate(128 132) scale(1.18 1.06) translate(-128 -132)">
+  <!-- großer Rechteckschild (Fraktion, gewölbt) -->
+  <path d="M112 100 Q128 96 144 102 L144 168 Q128 162 112 166 Z" fill="#7a5a36"/>
+  <path class="faction" d="M115 103 Q128 100 141 105 L141 163 Q128 158 115 162 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M115 103 Q120 102 124 101 L124 159 Q120 160 115 162 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M134 102 Q138 103 141 105 L141 163 Q138 162 134 160 Z" fill="#a8a8a8"/>
+  <path d="M127 101 L129 101 L129 160 L127 160 Z" fill="#9c7a3a"/>
+  <ellipse cx="128" cy="131" rx="7" ry="9" fill="#aab3ba"/>
+  <path d="M128 122 a7 9 0 0 0 -7 9 h7 z" fill="#e3e7ea"/>
+  <path d="M128 131 h7 a7 9 0 0 1 -7 9 z" fill="#6d767d"/>
+  </g>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Bodenschatten (Flugzeug in der Luft) -->
+  <ellipse cx="104" cy="182" rx="50" ry="10" fill="url(#shadow)"/>
+  <path d="M70 182 L130 176 L146 184 L84 188 Z" fill="#1a2410" opacity="0.18"/>
+  <!-- ferne Tragfläche -->
+  <path d="M90 92 L112 58 L130 58 L122 92 Z" fill="#5b6650"/>
+  <path d="M112 58 L130 58 L128 64 L109 63 Z" fill="#454f3c"/>
+  <!-- Höhenleitwerk fern -->
+  <path d="M150 92 L160 78 L170 78 L166 92 Z" fill="#5b6650"/>
+  <!-- Rumpf -->
+  <path d="M40 98 Q44 86 62 85 L150 88 L176 86 L178 96 L150 104 L62 110 Q44 108 40 98 Z" fill="#7d8a6a"/>
+  <path d="M40 98 Q44 86 62 85 L150 88 L176 86 L176 90 L150 93 L62 94 Q46 94 40 98 Z" fill="#9daa86"/>
+  <path d="M60 104 L150 100 L178 96 L150 104 L62 110 Z" fill="#5b6650"/>
+  <!-- Fraktionsband Rumpf -->
+  <path class="faction" d="M126 89 L138 89 L138 102 L126 103 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M126 89 L138 89 L138 93 L126 94 Z" fill="#f4f4f4"/>
+  <!-- Seitenleitwerk (Fraktion) -->
+  <path class="faction" d="M150 88 L160 60 L174 58 L176 86 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M150 88 L160 60 L166 60 L160 88 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M170 58 L174 58 L176 86 L170 87 Z" fill="#a8a8a8"/>
+  <!-- Abgasstutzen -->
+  <path d="M56 96 h4 v3 h-4 z M64 96 h4 v3 h-4 z M72 96 h4 v3 h-4 z" fill="#3b3a33"/>
+  <!-- Kanzel -->
+  <path d="M78 87 Q86 72 102 74 L108 87 Z" fill="#9cc3d8"/>
+  <path d="M78 87 Q86 72 96 74 L94 87 Z" fill="#d4ebf5"/>
+  <path d="M94 74 L94 87 M86 79 L86 87" stroke="#454f3c" stroke-width="1.5"/>
+  <!-- Höhenleitwerk nah -->
+  <path d="M150 100 L140 118 L156 118 L170 98 Z" fill="#8f9c78"/>
+  <!-- nahe Tragfläche -->
+  <path d="M84 104 L60 150 L94 154 L126 103 Z" fill="#8f9c78"/>
+  <path d="M84 104 L60 150 L70 151 L96 104 Z" fill="#a8b590"/>
+  <path d="M114 103 L126 103 L94 154 L86 153 Z" fill="#6c785a"/>
+  <!-- Flügelspitze (Fraktion) -->
+  <path class="faction" d="M66 138 L60 150 L94 154 L101 142 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M66 138 L60 150 L72 151 L77 139 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M92 141 L101 142 L94 154 L86 153 Z" fill="#a8a8a8"/>
+  <!-- MG-Mündungen -->
+  <path d="M74 120 L64 120 M70 128 L60 128" stroke="#3b3a33" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Propellerkreis und Nabe -->
+  <ellipse cx="34" cy="97" rx="5" ry="30" fill="#e3e7ea" opacity="0.35"/>
+  <path d="M35 97 L31 70 L37 70 Z M35 97 L31 124 L37 124 Z" fill="#3b3a33" opacity="0.7"/>
+  <path class="faction" d="M42 90 Q32 92 30 97 Q32 102 42 105 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M42 90 Q32 92 30 97 L42 97 Z" fill="#f4f4f4"/>
+</svg>

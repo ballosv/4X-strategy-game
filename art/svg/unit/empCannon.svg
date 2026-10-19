@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="106" cy="182" rx="80" ry="13" fill="url(#shadow)"/>
+  <!-- Ketten -->
+  <path d="M36 160 Q30 172 42 182 L160 182 Q172 172 166 160 Z" fill="#23282e"/>
+  <g fill="#4a525c">
+    <circle cx="52" cy="171" r="7"/><circle cx="74" cy="172" r="7"/><circle cx="96" cy="172" r="7"/>
+    <circle cx="118" cy="172" r="7"/><circle cx="140" cy="172" r="7"/><circle cx="156" cy="171" r="6"/>
+  </g>
+  <!-- Wanne -->
+  <path d="M34 160 L46 136 L160 136 L172 160 Z" fill="#545e69"/>
+  <path d="M34 160 L46 136 L60 136 L52 160 Z" fill="#7d8894"/>
+  <path d="M150 136 L160 136 L172 160 L160 160 Z" fill="#353c45"/>
+  <path d="M46 136 L54 128 L152 128 L160 136 Z" fill="#8b96a1"/>
+  <!-- Fraktionsfläche Seitenwand -->
+  <path class="faction" d="M48 142 L160 142 L164 154 L44 154 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M48 142 L62 142 L58 154 L44 154 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M148 142 L160 142 L164 154 L152 154 Z" fill="#a8a8a8"/>
+  <!-- Kondensatoren hinten -->
+  <path d="M136 128 L136 98 Q143 94 150 98 L150 128 Z" fill="#545e69"/>
+  <path d="M136 128 L136 98 Q139 96 142 96 L142 128 Z" fill="#7d8894"/>
+  <path d="M152 128 L152 104 Q158 101 164 104 L164 128 Z" fill="#353c45"/>
+  <path d="M140 104 h6 v18 h-6 z" fill="#7fe3ff"/>
+  <path d="M156 110 h4 v14 h-4 z" fill="#4fb8d8"/>
+  <!-- Turmsockel -->
+  <path d="M80 128 L86 112 L132 112 L138 128 Z" fill="#545e69"/>
+  <path d="M80 128 L86 112 L96 112 L92 128 Z" fill="#7d8894"/>
+  <path class="faction" d="M96 116 L128 116 L130 124 L95 124 Z" fill="#a8a8a8"/>
+  <!-- Spulenrohr, erhoben -->
+  <g transform="rotate(-18 110 108)">
+    <path d="M28 100 L112 100 L112 116 L28 116 Z" fill="#353c45"/>
+    <path d="M28 100 L112 100 L112 104 L28 104 Z" fill="#545e69"/>
+    <rect x="96" y="96" width="22" height="24" rx="3" fill="#545e69"/>
+    <rect x="96" y="96" width="22" height="6" rx="2" fill="#7d8894"/>
+    <g fill="#7fe3ff">
+      <rect x="38" y="96" width="5" height="24" rx="2"/>
+      <rect x="50" y="96" width="5" height="24" rx="2"/>
+      <rect x="62" y="96" width="5" height="24" rx="2"/>
+      <rect x="74" y="96" width="5" height="24" rx="2"/>
+      <rect x="86" y="96" width="5" height="24" rx="2"/>
+    </g>
+    <g fill="#e8fbff">
+      <rect x="39" y="97" width="2" height="8"/><rect x="51" y="97" width="2" height="8"/>
+      <rect x="63" y="97" width="2" height="8"/><rect x="75" y="97" width="2" height="8"/><rect x="87" y="97" width="2" height="8"/>
+    </g>
+    <!-- Emitter -->
+    <ellipse cx="26" cy="108" rx="6" ry="14" fill="#545e69"/>
+    <ellipse cx="22" cy="108" rx="18" ry="18" fill="#7fe3ff" opacity="0.22"/>
+    <ellipse cx="22" cy="108" rx="10" ry="10" fill="#7fe3ff" opacity="0.4"/>
+    <ellipse cx="23" cy="108" rx="4" ry="9" fill="#e8fbff"/>
+  </g>
+  <!-- Entladungsfunken -->
+  <path d="M14 104 L6 98 L10 96 L2 88 M22 92 L18 80 L22 80 L18 70" stroke="#7fe3ff" stroke-width="1.6" fill="none" stroke-linejoin="round"/>
+</svg>
