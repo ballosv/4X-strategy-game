@@ -38,5 +38,25 @@
   "ebf264133c797209": {
     "file": "art/scenario/raw/prop/rock_1/2.png",
     "assetId": "asset_HSmwmK9uWk3oGnBWqQa7oAGR"
+  },
+  "8ab720d78a0c2be0": {
+    "file": "art/scenario/ref/terrain_water.png",
+    "assetId": "asset_9CZLhQC96aZzzQQDivH59AVu"
+  },
+  "ff142dcc323e14ca": {
+    "file": "art/scenario/ref/props_mountain.png",
+    "assetId": "asset_8DjkxobWjq41nBqUvpdmAEFd"
+  },
+  "f7d715672d6f7f6f": {
+    "file": "art/scenario/ref/props_deer.png",
+    "assetId": "asset_jmYCijnHUUbty9aJE2vL3Evm"
+  },
+  "9fb3bc1e25489cd7": {
+    "file": "art/scenario/ref/village.png",
+    "assetId": "asset_tN54gFUNgBm4RP8XTbH3uEg8"
+  },
+  "909fcfcd024ef9d1": {
+    "file": "art/scenario/ref/building_tower.png",
+    "assetId": "asset_tAqu3PMVeKtqhU37naDtif6d"
   }
 }

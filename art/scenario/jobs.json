@@ -4,7 +4,27 @@
   "presets": {
     "gemini": {
       "model": "model_google-gemini-3-1-flash",
-      "params": { "aspectRatio": "1:1", "resolution": "1K", "numOutputs": 3 }
+      "params": {
+        "aspectRatio": "1:1",
+        "resolution": "1K",
+        "numOutputs": 3
+      }
+    },
+    "gemini512": {
+      "model": "model_google-gemini-3-1-flash",
+      "params": {
+        "aspectRatio": "1:1",
+        "resolution": "512",
+        "numOutputs": 3
+      }
+    },
+    "gemini512wide": {
+      "model": "model_google-gemini-3-1-flash",
+      "params": {
+        "aspectRatio": "16:9",
+        "resolution": "512",
+        "numOutputs": 3
+      }
     }
   },
   "backgroundRemoval": {
@@ -14,7 +34,8 @@
   "basePrompt": {
     "object": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border",
     "texture": "seamless tileable top-down painted texture in exactly the hand-painted stylized look of the reference images, viewed straight from above, even lighting, no objects, no hexagon lines, no borders, no text, edges must tile seamlessly",
-    "portrait": "painted character portrait for a strategy game unit panel in exactly the hand-painted stylized look of the reference images, three-quarter body, painted landscape background, no frame, no text"
+    "portrait": "painted character portrait for a strategy game unit panel in exactly the hand-painted stylized look of the reference images, three-quarter body, painted landscape background, no frame, no text",
+    "wall": "seamless tileable painted texture of a vertical surface seen straight from the front in exactly the hand-painted stylized look of the reference images, light from upper left, no sky, no ground, no objects, no borders, no text, edges must tile seamlessly in both directions"
   },
   "jobs": [
     {
@@ -22,28 +43,221 @@
       "kind": "texture",
       "preset": "gemini",
       "prompt": "lush green meadow grass with small lighter and darker patches and a few tiny flowers, matching the grass colour and brushwork of the reference",
-      "refs": ["art/scenario/ref/terrain_grass.png", "docs/referenz/einheitenpanel.png"]
+      "refs": [
+        "art/scenario/ref/terrain_grass.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
     },
     {
       "key": "prop/tree_conifer_1",
       "kind": "object",
       "preset": "gemini",
       "prompt": "one single dark green conifer pine tree with a short brown trunk, like the pine trees in the reference",
-      "refs": ["art/scenario/ref/props_conifer.png", "docs/referenz/einheitenpanel.png"]
+      "refs": [
+        "art/scenario/ref/props_conifer.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
     },
     {
       "key": "prop/rock_1",
       "kind": "object",
       "preset": "gemini",
       "prompt": "one single grey granite boulder with soft moss patches on top, same rock colour and shading as the cliffs in the reference",
-      "refs": ["art/scenario/ref/props_cliff.png", "docs/referenz/einheitenpanel.png"]
+      "refs": [
+        "art/scenario/ref/props_cliff.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
     },
     {
       "key": "portrait/spearman",
       "kind": "portrait",
       "preset": "gemini",
       "prompt": "bearded medieval spearman with steel kettle helmet, blue tunic, round blue shield with a white plant emblem, holding a tall spear, standing in a green valley with mountains, same character as the reference portrait",
-      "refs": ["art/scenario/ref/portrait_spearman.png", "art/scenario/ref/unit_spearman.png"]
+      "refs": [
+        "art/scenario/ref/portrait_spearman.png",
+        "art/scenario/ref/unit_spearman.png"
+      ]
+    },
+    {
+      "key": "texture/coast_1",
+      "kind": "texture",
+      "preset": "gemini512",
+      "prompt": "shallow turquoise coastal water with soft light caustic ripples and a few subtle wave highlights, matching the light blue water near the shore in the reference",
+      "refs": [
+        "art/scenario/ref/terrain_water.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "texture/ocean_1",
+      "kind": "texture",
+      "preset": "gemini512",
+      "prompt": "deep saturated blue sea water with soft painted wave streaks and small white highlights, matching the open sea in the reference",
+      "refs": [
+        "art/scenario/ref/terrain_water.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "wall/cliff_temperate",
+      "kind": "wall",
+      "preset": "gemini512wide",
+      "prompt": "grey granite cliff face made of large vertical rock columns and blocky facets with small moss tufts in the cracks, same rock colour and shading as the cliffs in the reference",
+      "refs": [
+        "art/scenario/ref/props_cliff.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "wall/slope",
+      "kind": "wall",
+      "preset": "gemini512wide",
+      "prompt": "steep earth slope of brown soil with small stones, roots and a few grass tufts, painted",
+      "refs": [
+        "art/scenario/ref/props_cliff.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "wall/beach",
+      "kind": "wall",
+      "preset": "gemini512wide",
+      "prompt": "sloped sandy beach bank of warm light sand with small pebbles and a few shells, painted",
+      "refs": [
+        "art/scenario/ref/terrain_water.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "prop/tree_broadleaf_1",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "one single round deciduous oak tree with a lush rounded green crown and a short brown trunk",
+      "refs": [
+        "art/scenario/ref/props_conifer.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "prop/tree_broadleaf_2",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "one single tall deciduous beech tree with an oval light green crown and a slim trunk",
+      "refs": [
+        "art/scenario/ref/props_conifer.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "prop/tree_broadleaf_3",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "one single small young deciduous birch tree with a white trunk and a light yellow-green airy crown",
+      "refs": [
+        "art/scenario/ref/props_conifer.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "prop/tree_conifer_3",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "one single tall slim spruce fir tree, dark blue-green, narrow silhouette, short brown trunk",
+      "refs": [
+        "art/scenario/ref/props_conifer.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "prop/mountain_1",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "one single rocky grey mountain massif with two or three peaks, steep cliffs, only small patches of snow on the very top, a few pine trees at its foot, wider than tall",
+      "refs": [
+        "art/scenario/ref/props_mountain.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "prop/resource_game",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "a small group of two red deer, a stag with antlers and a doe, standing on a tiny patch of grass",
+      "refs": [
+        "art/scenario/ref/props_deer.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "building/stone_house_small",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "one single small stone age hut, round, made of wooden poles covered with animal hides and thatch, with a smoke hole",
+      "refs": [
+        "art/scenario/ref/village.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "building/stone_center",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "one single large stone age tribal long house with a thatched roof, wooden poles, a fire pit and a small totem pole in front",
+      "refs": [
+        "art/scenario/ref/village.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "building/medieval_house_small",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "one single small medieval peasant cottage with a straw thatched roof and timber-framed walls",
+      "refs": [
+        "art/scenario/ref/village.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "building/medieval_house_large",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "one single large medieval half-timbered house with an orange-red tiled roof and white plaster walls",
+      "refs": [
+        "art/scenario/ref/village.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "building/medieval_center",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "one single medieval town hall with a stone ground floor, timber-framed upper floor, red tiled roof and a small clock turret, with a neutral light grey banner",
+      "refs": [
+        "art/scenario/ref/village.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "building/medieval_tower",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "one single tall square medieval stone church tower with a pointed dark roof and small windows",
+      "refs": [
+        "art/scenario/ref/building_tower.png",
+        "art/scenario/ref/village.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
+    },
+    {
+      "key": "building/medieval_wall",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "one single short straight segment of a medieval grey stone town wall with crenellations, seen diagonally",
+      "refs": [
+        "art/scenario/ref/village.png",
+        "docs/referenz/einheitenpanel.png"
+      ]
     }
   ]
 }

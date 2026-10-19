@@ -8,6 +8,7 @@ Ankerpunkt, nahtlose Texturen, WebP-Export nach public/assets und Eintrag ins Ma
 
 Typen:
 - texture:  mittiges Quadrat, 512 × 512, durch Überblenden mit der halb versetzten Kopie nahtlos
+- wall:     mittiger Ausschnitt 2 : 1, 512 × 256, ebenso nahtlos
 - object:   freigestelltes Bild auf die Deckkraft-Box zuschneiden, Fußpunkt unten mittig (anchorY 0,95),
             quadratisch, Kantenlänge "size" (256 oder 512)
 - portrait: 512 × 512, deckend
@@ -39,15 +40,28 @@ def seamless(im: Image.Image) -> Image.Image:
     in der Mitte aus dem Original (verdeckt die Naht der Kopie)."""
     w, h = im.size
     shifted = ImageChops.offset(im, w // 2, h // 2)
-    ramp_x = Image.linear_gradient('L').rotate(90).resize((w, h))  # 0 links … 255 rechts
-    tent_x = ImageChops.subtract(Image.new('L', (w, h), 255), ImageChops.difference(ramp_x, Image.new('L', (w, h), 128)).point(lambda v: min(255, v * 2)))
-    tent_y = tent_x.rotate(90)
-    mask = ImageChops.multiply(tent_x, tent_y).point(lambda v: min(255, int(v * 1.6)))
+
+    def tent(n: int) -> list[float]:
+        # 0 am Rand, 1 in der Mitte
+        return [1 - abs(2 * i / (n - 1) - 1) for i in range(n)]
+
+    tx, ty = tent(w), tent(h)
+    mask = Image.new('L', (w, h))
+    mask.putdata([min(255, int(255 * 1.6 * tx[x] * ty[y])) for y in range(h) for x in range(w)])
     return Image.composite(im, shifted, mask)
 
 
 def process_texture(im: Image.Image) -> Image.Image:
     return seamless(center_square(im.convert('RGB')).resize((512, 512), Image.LANCZOS))
+
+
+def process_wall(im: Image.Image) -> Image.Image:
+    """Wandtextur 512 × 256: mittiger Ausschnitt im Seitenverhältnis 2 : 1, in beiden Richtungen nahtlos."""
+    im = im.convert('RGB')
+    w = min(im.width, im.height * 2)
+    h = w // 2
+    x, y = (im.width - w) // 2, (im.height - h) // 2
+    return seamless(im.crop((x, y, x + w, y + h)).resize((512, 256), Image.LANCZOS))
 
 
 def process_object(im: Image.Image, size: int) -> Image.Image:
@@ -79,6 +93,8 @@ def main() -> None:
         kind = entry['type']
         if kind == 'texture':
             out, quality = process_texture(src), 82
+        elif kind == 'wall':
+            out, quality = process_wall(src), 82
         elif kind == 'object':
             out, quality = process_object(src, entry.get('size', 256)), 85
         elif kind == 'portrait':
