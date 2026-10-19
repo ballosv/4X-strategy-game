@@ -1,12 +1,297 @@
 {
   "version": 1,
   "sprites": {
+    "overlay/denseForest": {
+      "file": "overlay/denseForest.png",
+      "anchorY": 0.7
+    },
+    "overlay/denseForest_conifer": {
+      "file": "overlay/denseForest_conifer.png",
+      "anchorY": 0.7
+    },
     "overlay/forest": {
       "file": "overlay/forest.png",
       "anchorY": 0.7
     },
+    "overlay/forest_conifer": {
+      "file": "overlay/forest_conifer.png",
+      "anchorY": 0.7
+    },
+    "overlay/highMountain": {
+      "file": "overlay/highMountain.png",
+      "anchorY": 0.7
+    },
+    "overlay/mountain": {
+      "file": "overlay/mountain.png",
+      "anchorY": 0.7
+    },
+    "overlay/rocks": {
+      "file": "overlay/rocks.png",
+      "anchorY": 0.7
+    },
+    "terrain/coast": {
+      "file": "terrain/coast.png"
+    },
+    "terrain/desert": {
+      "file": "terrain/desert.png"
+    },
     "terrain/grassland": {
       "file": "terrain/grassland.png"
+    },
+    "terrain/lake": {
+      "file": "terrain/lake.png"
+    },
+    "terrain/marsh": {
+      "file": "terrain/marsh.png"
+    },
+    "terrain/ocean": {
+      "file": "terrain/ocean.png"
+    },
+    "terrain/plains": {
+      "file": "terrain/plains.png"
+    },
+    "terrain/snow": {
+      "file": "terrain/snow.png"
+    },
+    "terrain/tundra": {
+      "file": "terrain/tundra.png"
+    },
+    "unit/archer": {
+      "file": "unit/archer.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/archer_mask": {
+      "file": "unit/archer_mask.png"
+    },
+    "unit/artillery": {
+      "file": "unit/artillery.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/artillery_mask": {
+      "file": "unit/artillery_mask.png"
+    },
+    "unit/cannon": {
+      "file": "unit/cannon.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/cannon_mask": {
+      "file": "unit/cannon_mask.png"
+    },
+    "unit/catapult": {
+      "file": "unit/catapult.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/catapult_mask": {
+      "file": "unit/catapult_mask.png"
+    },
+    "unit/cavalry": {
+      "file": "unit/cavalry.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/cavalry_mask": {
+      "file": "unit/cavalry_mask.png"
+    },
+    "unit/chariot": {
+      "file": "unit/chariot.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/chariot_mask": {
+      "file": "unit/chariot_mask.png"
+    },
+    "unit/clubman": {
+      "file": "unit/clubman.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/clubman_mask": {
+      "file": "unit/clubman_mask.png"
+    },
+    "unit/cog": {
+      "file": "unit/cog.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/cog_mask": {
+      "file": "unit/cog_mask.png"
+    },
+    "unit/crossbow": {
+      "file": "unit/crossbow.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/crossbow_mask": {
+      "file": "unit/crossbow_mask.png"
+    },
+    "unit/destroyer": {
+      "file": "unit/destroyer.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/destroyer_mask": {
+      "file": "unit/destroyer_mask.png"
+    },
+    "unit/drone": {
+      "file": "unit/drone.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/empCannon": {
+      "file": "unit/empCannon.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/empCannon_mask": {
+      "file": "unit/empCannon_mask.png"
+    },
+    "unit/exoSoldier": {
+      "file": "unit/exoSoldier.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/exoSoldier_mask": {
+      "file": "unit/exoSoldier_mask.png"
+    },
+    "unit/fighter": {
+      "file": "unit/fighter.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/fighter_mask": {
+      "file": "unit/fighter_mask.png"
+    },
+    "unit/frigate": {
+      "file": "unit/frigate.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/frigate_mask": {
+      "file": "unit/frigate_mask.png"
+    },
+    "unit/galley": {
+      "file": "unit/galley.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/galley_mask": {
+      "file": "unit/galley_mask.png"
+    },
+    "unit/horseman": {
+      "file": "unit/horseman.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/horseman_mask": {
+      "file": "unit/horseman_mask.png"
+    },
+    "unit/infantry": {
+      "file": "unit/infantry.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/infantry_mask": {
+      "file": "unit/infantry_mask.png"
+    },
+    "unit/ironclad": {
+      "file": "unit/ironclad.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/ironclad_mask": {
+      "file": "unit/ironclad_mask.png"
+    },
+    "unit/jet": {
+      "file": "unit/jet.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/jet_mask": {
+      "file": "unit/jet_mask.png"
+    },
+    "unit/knight": {
+      "file": "unit/knight.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/knight_mask": {
+      "file": "unit/knight_mask.png"
+    },
+    "unit/mechInfantry": {
+      "file": "unit/mechInfantry.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/mechInfantry_mask": {
+      "file": "unit/mechInfantry_mask.png"
+    },
+    "unit/merchant": {
+      "file": "unit/merchant.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/merchant_mask": {
+      "file": "unit/merchant_mask.png"
+    },
+    "unit/modernArmor": {
+      "file": "unit/modernArmor.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/modernArmor_mask": {
+      "file": "unit/modernArmor_mask.png"
+    },
+    "unit/musketeer": {
+      "file": "unit/musketeer.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/musketeer_mask": {
+      "file": "unit/musketeer_mask.png"
+    },
+    "unit/pikeman": {
+      "file": "unit/pikeman.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/pikeman_mask": {
+      "file": "unit/pikeman_mask.png"
+    },
+    "unit/rifleman": {
+      "file": "unit/rifleman.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/rifleman_mask": {
+      "file": "unit/rifleman_mask.png"
+    },
+    "unit/scout": {
+      "file": "unit/scout.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/scout_mask": {
+      "file": "unit/scout_mask.png"
+    },
+    "unit/settler": {
+      "file": "unit/settler.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/settler_mask": {
+      "file": "unit/settler_mask.png"
+    },
+    "unit/slinger": {
+      "file": "unit/slinger.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/slinger_mask": {
+      "file": "unit/slinger_mask.png"
     },
     "unit/spearman": {
       "file": "unit/spearman.png",
@@ -15,6 +300,51 @@
     },
     "unit/spearman_mask": {
       "file": "unit/spearman_mask.png"
+    },
+    "unit/swordsman": {
+      "file": "unit/swordsman.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/swordsman_mask": {
+      "file": "unit/swordsman_mask.png"
+    },
+    "unit/tank": {
+      "file": "unit/tank.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/tank_mask": {
+      "file": "unit/tank_mask.png"
+    },
+    "unit/tribe": {
+      "file": "unit/tribe.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/tribe_mask": {
+      "file": "unit/tribe_mask.png"
+    },
+    "unit/trireme": {
+      "file": "unit/trireme.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/trireme_mask": {
+      "file": "unit/trireme_mask.png"
+    },
+    "unit/warMachine": {
+      "file": "unit/warMachine.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/worker": {
+      "file": "unit/worker.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/worker_mask": {
+      "file": "unit/worker_mask.png"
     }
   }
 }
