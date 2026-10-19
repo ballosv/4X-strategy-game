@@ -155,6 +155,29 @@
           "art/scenario/raw/texture/coast_1/3.png"
         ]
       }
+    ],
+    "texture/ocean_1": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "seamless tileable top-down painted texture in exactly the hand-painted stylized look of the reference images, viewed straight from above, even lighting, no objects, no hexagon lines, no borders, no text, edges must tile seamlessly, deep saturated blue sea water with soft painted wave streaks and small white highlights, matching the open sea in the reference",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "512",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/terrain_water.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_YJVdMSgVosYGLCiRzgBdWtEr",
+        "cu": 30,
+        "files": [
+          "art/scenario/raw/texture/ocean_1/1.png",
+          "art/scenario/raw/texture/ocean_1/2.png",
+          "art/scenario/raw/texture/ocean_1/3.png"
+        ]
+      }
     ]
   }
 }
