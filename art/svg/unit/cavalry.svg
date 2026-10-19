@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Kavallerie (19. Jh.): Tschako, Uniformjacke, erhobener Säbel, Pferd mit Satteldecke (Fraktion) -->
+  <ellipse cx="108" cy="184" rx="64" ry="12" fill="url(#shadow)"/>
+  <!-- Schweif -->
+  <path d="M152 112 Q176 112 178 146 Q166 136 152 126 Z" fill="#3a2414"/>
+  <!-- Ferne Beine -->
+  <path d="M84 140 L80 158 L70 168 L74 174 L88 160 L94 142 Z" fill="#5e3a1e"/>
+  <path d="M124 140 L126 178 L134 178 L134 140 Z" fill="#5e3a1e"/>
+  <path d="M68 166 l8 6 l-4 5 l-8 -6 z M125 178 h10 v6 h-10 z" fill="#2a2018"/>
+  <!-- Nahe Beine (Vorderbein angehoben) -->
+  <path d="M68 136 L62 152 L66 166 L74 164 L72 152 L80 138 Z" fill="#a0643a"/>
+  <path d="M62 164 l12 -2 l1 7 l-11 2 z" fill="#2a2018"/>
+  <path d="M140 138 L146 178 L155 178 L152 138 Z" fill="#7a4a28"/>
+  <path d="M145 178 h12 v7 h-12 z" fill="#2a2018"/>
+  <!-- Rumpf -->
+  <ellipse cx="110" cy="124" rx="46" ry="21" fill="#a0643a"/>
+  <path d="M66 120 Q72 102 100 102 Q130 100 150 108 Q120 108 100 112 Q80 116 66 128 Z" fill="#c4824e"/>
+  <path d="M156 124 Q156 140 130 145 Q110 147 92 144 Q130 138 150 118 Z" fill="#7a4a28"/>
+  <!-- Hals und Kopf -->
+  <path d="M66 126 Q58 104 56 86 L66 66 Q82 76 88 106 Z" fill="#a0643a"/>
+  <path d="M66 126 Q58 104 56 86 L62 76 Q64 100 74 120 Z" fill="#c4824e"/>
+  <path d="M60 60 Q70 60 76 74 L58 100 Q48 104 38 100 Q33 94 38 88 Z" fill="#a0643a"/>
+  <path d="M60 60 L46 86 Q48 92 44 96 Q36 96 38 88 Z" fill="#c4824e"/>
+  <path d="M58 58 l2 -8 l5 9 z M64 60 l3 -7 l3 9 z" fill="#7a4a28"/>
+  <path d="M64 58 Q74 64 84 88 Q86 100 88 106 L82 104 Q76 82 64 64 Z" fill="#3a2414"/>
+  <circle cx="56" cy="76" r="2" fill="#2a2018"/>
+  <path d="M40 96 Q52 88 64 72" stroke="#2a2018" stroke-width="1.6" fill="none"/>
+  <path d="M60 80 L100 96" stroke="#2a2018" stroke-width="1.6"/>
+  <!-- Satteldecke (Fraktion) mit Borte -->
+  <path class="faction" d="M92 100 L140 100 Q150 104 152 128 L132 142 Q110 142 94 136 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M92 100 L118 100 Q108 116 106 140 Q100 138 94 136 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M140 100 Q150 104 152 128 L132 142 L132 116 Z" fill="#a8a8a8"/>
+  <path d="M94 132 Q112 140 132 138 L150 126 L152 130 L132 144 Q110 144 94 138 Z" fill="#e2c27a"/>
+  <!-- Sattel -->
+  <path d="M98 100 Q112 92 134 98 L132 106 Q114 102 100 106 Z" fill="#553c22"/>
+  <!-- Bein des Reiters: Hose mit Streifen, Stiefel -->
+  <path d="M104 98 L114 98 L118 122 L108 124 Z" fill="#3c4250"/>
+  <path d="M112 98 L114 98 L118 122 L115 123 Z" fill="#c9a24a"/>
+  <path d="M107 120 L119 120 L120 140 L104 142 L104 136 L109 134 Z" fill="#1e1712"/>
+  <!-- Uniformjacke (Fraktion) mit Verschnürung -->
+  <path class="faction" d="M100 68 Q112 62 124 68 L126 100 Q112 104 98 100 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M100 68 Q106 65 112 64 L111 102 Q104 102 98 100 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M119 66 Q122 67 124 68 L126 100 Q122 101 118 102 Z" fill="#a8a8a8"/>
+  <path d="M104 76 h12 M104 82 h12 M104 88 h12" stroke="#e2c27a" stroke-width="2"/>
+  <path d="M98 94 Q112 98 126 94 L126 100 Q112 104 98 100 Z" fill="#2a2018"/>
+  <!-- Säbelarm nach oben -->
+  <path class="faction" d="M104 70 Q94 66 88 54 L96 50 Q100 60 108 64 Z" fill="#f4f4f4"/>
+  <circle cx="91" cy="50" r="5" fill="#e0b48a"/>
+  <path d="M90 48 Q78 28 62 16" stroke="#6d767d" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+  <path d="M89 47 Q77 28 61 16" stroke="#e3e7ea" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M86 54 L96 46" stroke="#c9a24a" stroke-width="3" stroke-linecap="round"/>
+  <!-- Zügelhand -->
+  <path class="faction" d="M122 70 Q128 82 120 94 L112 92 Q118 82 116 74 Z" fill="#a8a8a8"/>
+  <circle cx="111" cy="94" r="4.5" fill="#e0b48a"/>
+  <!-- Kopf mit Tschako -->
+  <circle cx="113" cy="56" r="11" fill="#e0b48a"/>
+  <path d="M113 45 a11 11 0 0 1 11 11 l-5 0 a6 6 0 0 0 -6 -6 z" fill="#b88a62" opacity="0.5"/>
+  <path d="M104 60 Q108 58 112 60 Q116 58 120 60 L116 62 Q112 61 108 62 Z" fill="#553c22"/>
+  <circle cx="108" cy="56" r="1.4" fill="#3a2c20"/>
+  <path d="M102 50 L100 28 Q113 24 126 28 L124 50 Z" fill="#2e3340"/>
+  <path d="M114 25 Q121 26 126 28 L124 50 L114 50 Z" fill="#1e2230"/>
+  <path d="M100 28 Q113 24 126 28 L126 32 Q113 28 100 32 Z" fill="#c9a24a"/>
+  <path d="M100 50 Q108 47 116 50 L114 54 Q106 52 98 54 Z" fill="#1e2028"/>
+  <ellipse cx="108" cy="22" rx="4" ry="6" fill="#f2e7d2"/>
+  <ellipse cx="109" cy="23" rx="2" ry="5" fill="#d9c7a5"/>
+</svg>
