@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="108" cy="186" rx="40" ry="11" fill="url(#shadow)"/>
+  <!-- Energietornister -->
+  <path d="M80 80 L120 80 L124 100 L76 100 Z" fill="#353c45"/>
+  <path d="M84 74 h10 v8 h-10 z M106 74 h10 v8 h-10 z" fill="#545e69"/>
+  <circle cx="89" cy="76" r="2" fill="#ffb547"/>
+  <!-- Beine: Hydraulik -->
+  <path d="M74 134 L76 172 M126 134 L124 172" stroke="#aab3ba" stroke-width="3" stroke-linecap="round"/>
+  <!-- linkes Bein -->
+  <path class="faction" d="M80 130 L78 156 L95 156 L97 130 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M90 130 L97 130 L95 156 L88 156 Z" fill="#d6d6d6"/>
+  <path d="M78 160 L76 176 L97 176 L96 160 Z" fill="#545e69"/>
+  <path d="M78 160 L76 176 L83 176 L84 160 Z" fill="#7d8894"/>
+  <circle cx="87" cy="158" r="7" fill="#353c45"/>
+  <path d="M73 184 L76 173 L97 173 L100 184 Z" fill="#353c45"/>
+  <path d="M73 184 L76 173 L84 173 L82 184 Z" fill="#545e69"/>
+  <!-- rechtes Bein -->
+  <path class="faction" d="M104 130 L106 156 L122 156 L121 130 Z" fill="#a8a8a8"/>
+  <path d="M104 160 L104 176 L124 176 L123 160 Z" fill="#353c45"/>
+  <circle cx="114" cy="158" r="7" fill="#262c33"/>
+  <path d="M103 184 L104 173 L124 173 L128 184 Z" fill="#262c33"/>
+  <!-- Becken / Hüftrahmen -->
+  <path d="M80 122 L120 122 L122 134 L78 134 Z" fill="#545e69"/>
+  <path d="M80 122 L90 122 L88 134 L78 134 Z" fill="#7d8894"/>
+  <path d="M96 124 h8 v8 h-8 z" fill="#353c45"/>
+  <!-- Brustpanzer (Fraktion) -->
+  <path class="faction" d="M74 90 Q100 80 126 90 L122 124 Q100 130 78 124 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M74 90 Q87 85 100 84 L98 128 Q88 127 78 124 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M112 86 Q120 87 126 90 L122 124 Q117 126 112 127 Z" fill="#a8a8a8"/>
+  <path d="M86 108 L100 112 L114 108" stroke="#7d8894" stroke-width="2" fill="none"/>
+  <path d="M94 96 h12 v6 h-12 z" fill="#353c45"/>
+  <path d="M96 98 h8 v2 h-8 z" fill="#ffb547"/>
+  <!-- Schulterpanzer -->
+  <path class="faction" d="M64 94 Q64 80 80 82 L86 100 L68 108 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M136 94 Q136 80 120 82 L114 100 L132 108 Z" fill="#a8a8a8"/>
+  <!-- Arme (Servorahmen) -->
+  <path d="M68 106 L80 104 L88 118 L78 122 Z" fill="#7d8894"/>
+  <path d="M132 106 L120 104 L116 116 L126 120 Z" fill="#353c45"/>
+  <!-- Schienengewehr -->
+  <path d="M42 108 L124 104 L126 118 L46 120 Z" fill="#2b3139"/>
+  <path d="M42 108 L124 104 L124 108 L44 112 Z" fill="#4a535b"/>
+  <path d="M26 110 L44 109 L44 116 L26 116 Z" fill="#353c45"/>
+  <path d="M50 114 L90 112" stroke="#ffb547" stroke-width="2" stroke-linecap="round"/>
+  <path d="M100 118 L106 132 L114 132 L110 118 Z" fill="#2b3139"/>
+  <!-- Hände (Panzerhandschuhe) -->
+  <circle cx="84" cy="116" r="5.5" fill="#545e69"/>
+  <circle cx="120" cy="114" r="5.5" fill="#353c45"/>
+  <!-- Helm mit Visier -->
+  <path d="M85 78 Q84 54 100 52 Q116 54 115 78 Q100 84 85 78 Z" fill="#545e69"/>
+  <path d="M85 78 Q84 54 100 52 Q91 60 92 80 Z" fill="#7d8894"/>
+  <path d="M106 53 Q116 56 115 78 Q111 80 108 80 Q110 62 106 53 Z" fill="#353c45"/>
+  <path d="M86 64 L112 62 L112 71 L88 73 Z" fill="#c07a20"/>
+  <path d="M86 64 L112 62 L112 65 L87 67 Z" fill="#ffb547"/>
+  <path d="M112 56 L118 42" stroke="#7d8894" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M90 80 h20 v6 h-20 z" fill="#353c45"/>
+</svg>

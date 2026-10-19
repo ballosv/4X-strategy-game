@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="114" cy="180" rx="82" ry="14" fill="url(#shadow)"/>
+  <!-- Schützenpanzer (Radfahrzeug) im Hintergrund -->
+  <g fill="#2e2d28">
+    <circle cx="100" cy="164" r="12"/><circle cx="126" cy="164" r="12"/><circle cx="150" cy="164" r="12"/><circle cx="173" cy="163" r="11"/>
+  </g>
+  <g fill="#6a675c">
+    <circle cx="100" cy="164" r="5"/><circle cx="126" cy="164" r="5"/><circle cx="150" cy="164" r="5"/><circle cx="173" cy="163" r="4.5"/>
+  </g>
+  <path d="M80 156 L74 136 L90 110 L184 110 L190 156 Z" fill="#7f835c"/>
+  <path d="M80 156 L74 136 L90 110 L102 110 L90 136 L94 156 Z" fill="#a3a67e"/>
+  <path d="M174 110 L184 110 L190 156 L178 156 Z" fill="#5a5d40"/>
+  <path d="M90 110 L98 102 L180 102 L184 110 Z" fill="#b2b58c"/>
+  <!-- Fraktionsfläche Seitenwand -->
+  <path class="faction" d="M98 120 L182 120 L184 142 L96 142 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M98 120 L112 120 L110 142 L96 142 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M170 120 L182 120 L184 142 L172 142 Z" fill="#a8a8a8"/>
+  <path d="M140 122 L140 142" stroke="#a8a8a8" stroke-width="1.5"/>
+  <path d="M84 146 L188 146" stroke="#5a5d40" stroke-width="2"/>
+  <!-- Turm mit Maschinenkanone -->
+  <path d="M130 102 L134 90 L162 90 L166 102 Z" fill="#7f835c"/>
+  <path d="M130 102 L134 90 L142 90 L140 102 Z" fill="#a3a67e"/>
+  <path d="M134 94 L96 92" stroke="#3b3a33" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M150 90 h8 v-6 h-8 z" fill="#5a5d40"/>
+  <path d="M176 102 L180 70" stroke="#3b3a33" stroke-width="1.5"/>
+  <!-- Soldat davor -->
+  <ellipse cx="72" cy="184" rx="22" ry="5" fill="#1a2410" opacity="0.25"/>
+  <!-- Beine -->
+  <path d="M57 150 L55 178 L65 178 L67 150 Z" fill="#6f7350"/>
+  <path d="M71 150 L73 178 L83 178 L81 150 Z" fill="#4b4e35"/>
+  <path d="M55 160 h10 v6 h-10 z M73 160 h10 v6 h-10 z" fill="#3b3a33"/>
+  <path d="M52 184 h15 v-7 h-15 z M70 184 h15 v-7 h-15 z" fill="#2e2d28"/>
+  <!-- Uniform (Fraktion) -->
+  <path class="faction" d="M51 104 Q67 96 83 104 L86 152 Q67 157 48 152 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M51 104 Q59 100 67 99 L65 156 Q56 155 48 152 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M76 101 Q80 102 83 104 L86 152 Q82 154 77 155 Z" fill="#a8a8a8"/>
+  <!-- Schutzweste mit Taschen -->
+  <path d="M55 106 Q67 102 79 106 L81 138 Q67 142 53 138 Z" fill="#5f6344"/>
+  <path d="M55 106 Q60 104 65 103 L64 141 Q58 140 53 138 Z" fill="#7a7e58"/>
+  <path d="M55 126 h7 v8 h-7 z M64 127 h7 v8 h-7 z M73 126 h7 v8 h-7 z" fill="#4b4e35"/>
+  <!-- rechter Arm -->
+  <path class="faction" d="M80 104 Q90 110 86 124 L76 122 Q78 114 75 108 Z" fill="#a8a8a8"/>
+  <!-- Sturmgewehr (Bereithaltung) -->
+  <path d="M86 112 L40 132" stroke="#2e2d28" stroke-width="5" stroke-linecap="round"/>
+  <path d="M84 110 L74 114 L78 122 L90 118 Z" fill="#2e2d28"/>
+  <path d="M60 124 L64 134 L58 136 L55 126 Z" fill="#3b3a33"/>
+  <path d="M42 131 L32 135" stroke="#3b3a33" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M60 119 h8 v-4 h-8 z" fill="#3b3a33"/>
+  <!-- linker Arm -->
+  <path class="faction" d="M53 104 Q44 112 46 126 L54 126 Q53 116 58 110 Z" fill="#f4f4f4"/>
+  <!-- Hände (Handschuhe) -->
+  <circle cx="80" cy="118" r="4.5" fill="#4b4e35"/>
+  <circle cx="51" cy="126" r="4.5" fill="#4b4e35"/>
+  <!-- Kopf -->
+  <circle cx="67" cy="88" r="12" fill="#e0b48a"/>
+  <path d="M67 88 m0 -12 a12 12 0 0 1 12 12 l-5 0 a7 7 0 0 0 -7 -7 z" fill="#b88a62" opacity="0.5"/>
+  <circle cx="61" cy="91" r="1.5" fill="#3a2c20"/>
+  <path d="M56 98 Q66 102 76 96" stroke="#5f6344" stroke-width="1.5" fill="none"/>
+  <!-- Gefechtshelm mit Bezug -->
+  <path d="M53 86 Q52 67 67 66 Q82 67 81 86 L77 86 L76 81 L58 81 L57 86 Z" fill="#7a7e58"/>
+  <path d="M55 84 Q55 70 67 68 Q60 74 61 82 Z" fill="#9a9e74"/>
+  <path d="M72 67 Q82 70 81 86 L77 86 L76 79 Q76 72 72 67 Z" fill="#5f6344"/>
+  <path d="M63 66 h8 v4 h-8 z" fill="#3b3a33"/>
+</svg>

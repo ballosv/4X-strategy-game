@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="108" cy="184" rx="56" ry="12" fill="url(#shadow)"/>
+  <!-- Antennen hinten -->
+  <path d="M116 60 L128 34 M122 62 L138 44" stroke="#26313e" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="128" cy="34" r="2.5" fill="#14d2c8"/>
+  <!-- fernes Bein -->
+  <path d="M108 116 L122 112 L138 144 L126 150 Z" fill="#141b24"/>
+  <circle cx="132" cy="148" r="7" fill="#26313e"/>
+  <path d="M126 150 L138 148 L130 176 L118 176 Z" fill="#1b2430"/>
+  <path d="M110 184 L114 173 L136 173 L144 184 Z" fill="#141b24"/>
+  <path d="M130 156 L126 170" stroke="#14d2c8" stroke-width="1.6" opacity="0.8"/>
+  <!-- fernerArm mit Klaue -->
+  <path d="M136 82 L148 84 L150 110 L140 110 Z" fill="#141b24"/>
+  <path d="M138 110 L152 110 L156 128 L149 122 L146 132 L141 122 L136 126 Z" fill="#26313e"/>
+  <!-- Becken -->
+  <path d="M82 108 L118 108 L114 124 L86 124 Z" fill="#26313e"/>
+  <!-- nahes Bein -->
+  <path d="M78 114 L94 118 L76 150 L62 144 Z" fill="#3a4757"/>
+  <path d="M78 114 L84 116 L68 148 L62 144 Z" fill="#4c5b6d"/>
+  <circle cx="70" cy="148" r="8" fill="#26313e"/>
+  <circle cx="70" cy="148" r="3" fill="#14d2c8"/>
+  <path d="M62 150 L78 150 L90 176 L76 176 Z" fill="#26313e"/>
+  <path d="M62 150 L68 150 L80 176 L76 176 Z" fill="#3a4757"/>
+  <path d="M64 184 L68 173 L94 173 L100 184 Z" fill="#1b2430"/>
+  <path d="M64 184 L68 173 L76 173 L74 184 Z" fill="#3a4757"/>
+  <!-- Rumpf -->
+  <path d="M66 72 L84 58 L118 58 L136 72 L130 110 L72 110 Z" fill="#26313e"/>
+  <path d="M66 72 L84 58 L96 58 L84 110 L72 110 Z" fill="#3a4757"/>
+  <path d="M118 58 L136 72 L130 110 L116 110 Z" fill="#141b24"/>
+  <path d="M84 58 L118 58 L126 66 L76 66 Z" fill="#4c5b6d"/>
+  <path d="M80 100 L122 100" stroke="#141b24" stroke-width="2"/>
+  <!-- Energiekern -->
+  <circle cx="101" cy="86" r="15" fill="#14d2c8" opacity="0.18"/>
+  <circle cx="101" cy="86" r="10" fill="#0f151c"/>
+  <circle cx="101" cy="86" r="7" fill="#14d2c8"/>
+  <circle cx="99" cy="84" r="2.8" fill="#c8fffa"/>
+  <!-- Kopf mit Sensorauge -->
+  <path d="M86 60 L90 44 L112 44 L116 60 Z" fill="#26313e"/>
+  <path d="M86 60 L90 44 L97 44 L94 60 Z" fill="#3a4757"/>
+  <path d="M90 49 L112 49 L110 55 L92 55 Z" fill="#0f151c"/>
+  <ellipse cx="97" cy="52" rx="12" ry="6" fill="#14d2c8" opacity="0.25"/>
+  <path d="M92 51 L106 51 L105 53.5 L93 53.5 Z" fill="#14d2c8"/>
+  <circle cx="96" cy="52" r="1.6" fill="#c8fffa"/>
+  <!-- Schulterpanzer -->
+  <path d="M56 68 L76 60 L84 78 L60 86 Z" fill="#4c5b6d"/>
+  <path d="M56 68 L76 60 L78 64 L58 72 Z" fill="#62738a"/>
+  <path d="M124 60 L144 68 L144 86 L120 78 Z" fill="#141b24"/>
+  <!-- naher Arm mit Doppelkanone -->
+  <path d="M62 84 L74 84 L72 100 L60 100 Z" fill="#26313e"/>
+  <path d="M30 98 L78 96 L80 114 L32 116 Z" fill="#26313e"/>
+  <path d="M30 98 L78 96 L78 101 L31 103 Z" fill="#4c5b6d"/>
+  <path d="M30 104 L14 104 M30 111 L16 111" stroke="#141b24" stroke-width="4"/>
+  <circle cx="13" cy="104" r="3.5" fill="#14d2c8" opacity="0.35"/>
+  <circle cx="14" cy="111" r="3.5" fill="#14d2c8" opacity="0.35"/>
+  <circle cx="13" cy="104" r="1.6" fill="#14d2c8"/>
+  <circle cx="14" cy="111" r="1.6" fill="#14d2c8"/>
+  <path d="M40 108 L70 107" stroke="#14d2c8" stroke-width="1.6" opacity="0.85"/>
+</svg>
