@@ -40,9 +40,10 @@ Vorlagen: [art/STYLE.md](../art/STYLE.md).
   zu den SVG-Quellen passen.
 - Die GitHub-Actions-Zusammenfassung zeigt bei jedem Lauf die Grafik-Abdeckung und den Backlog je Release.
 
-Werkzeugwahl für neue Grafiken: zuerst eigene Vektorgrafik (SVG). Reicht das für ein Motiv nicht aus,
-können Bildgenerator-Werkzeuge (z. B. über Plugins wie SpriteCook oder CellCog) genutzt werden; deren
-Ergebnis wird als PNG/WebP direkt in `public/assets/` abgelegt und im Manifest eingetragen.
+**Werkzeugwahl (ab Grafik-Spezifikation Version 2):** Die Zielgrafik ist handgemalt-detailliert
+(siehe [GRAFIK_SPEZIFIKATION.md](GRAFIK_SPEZIFIKATION.md)). Sie wird mit KI-Bildgenerierung
+(Scenario, trainierte Stilmodelle) erzeugt und im Repository nachbearbeitet. Die SVG-Grafiken aus
+`art/svg/` sind ein **Zwischenstand** und dienen als Platzhalter, bis die gemalten Assets abgenommen sind.
 
 ## Überblick
 
