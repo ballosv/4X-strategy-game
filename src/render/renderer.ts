@@ -4,17 +4,21 @@ import type { HexGrid } from '../core/hex';
 import { isWater } from '../core/map/passability';
 import type { GameState, Settlement, Unit } from '../core/state';
 import { RESOURCES } from '../core/data/terrain';
-import { paintTile, tracedHex, type PaintContext } from './painter';
+import { paintTileGround, paintTileObjects, tracedHex, type PaintContext } from './painter';
 import { UI, withAlpha } from './palette';
-import { EDGE_CORNERS, ELEV_STEP, HEX_CORNERS, HEX_R, HEX_W, ROW_STEP, SQUASH, pointInHex, tileTop, worldSize, type Point } from './projection';
+import { EDGE_CORNERS, ELEV_STEP, HEX_CORNERS, HEX_R, HEX_W, ROW_STEP, SQUASH, ZOOM_MAX, ZOOM_MIN, pointInHex, tileTop, worldSize, type Point } from './projection';
+import { clearTextureCache } from './textures';
 import { assets } from './assets';
 import { SPRITE_SIZE, clearUnitSpriteCache, drawUnitAsset, unitSprite } from './units';
 
 const CHUNK = 8;
-const PAD_TOP = 5 * ELEV_STEP + 70;
+/** Platz über der Chunk-Oberkante für angehobene Felder und hohe Objekte (Berge, Türme). */
+const PAD_TOP = 5 * ELEV_STEP + 110;
 const PAD_BOTTOM = 5 * ELEV_STEP + 30;
 const LOD_LEVELS = [0.5, 1, 2];
 const MAX_CHUNKS = 48;
+/** Zeitbudget je Bild für neu zu zeichnende Chunks (ms); der Rest folgt in den nächsten Bildern. */
+const CHUNK_BUDGET_MS = 18;
 
 export interface Camera {
   x: number;
@@ -55,6 +59,9 @@ export class MapRenderer {
   private cssW = 0;
   private cssH = 0;
 
+  /** true, wenn Chunks wegen des Zeitbudgets noch fehlen oder veraltet sind – dann ein weiteres Bild zeichnen. */
+  needsFrame = false;
+
   /** Wird aufgerufen, wenn sich die Darstellung ohne Spieländerung ändert (z. B. Assets geladen). */
   onInvalidate: (() => void) | null = null;
   private readonly offAssets: () => void;
@@ -64,6 +71,7 @@ export class MapRenderer {
     // Sobald Sprites geladen sind, Chunk-Cache einmalig verwerfen und neu zeichnen
     this.offAssets = assets.onLoad(() => {
       clearUnitSpriteCache();
+      clearTextureCache();
       this.invalidate();
       this.onInvalidate?.();
     });
@@ -110,7 +118,7 @@ export class MapRenderer {
 
   clampCamera(state: GameState): void {
     const size = worldSize(state.map.width, state.map.height);
-    this.camera.zoom = Math.max(0.35, Math.min(2.6, this.camera.zoom));
+    this.camera.zoom = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, this.camera.zoom));
     this.camera.x = Math.max(0, Math.min(size.w, this.camera.x));
     this.camera.y = Math.max(-60, Math.min(size.h, this.camera.y));
   }
@@ -163,28 +171,57 @@ export class MapRenderer {
       explored: (i) => this.revealAll || explored?.[i] === 1,
       settlementsByTile,
     };
+    // Ohne vorhandene Chunks (Spielstart) alles sofort zeichnen, sonst mit Zeitbudget
+    const t0 = this.chunks.size ? performance.now() : Infinity;
+    this.needsFrame = false;
     for (let cy = Math.floor(rowMin / CHUNK); cy <= Math.floor(rowMax / CHUNK); cy++) {
       for (let cx = Math.floor(colMin / CHUNK); cx <= Math.floor(colMax / CHUNK); cx++) {
-        const entry = this.getChunk(pc, cx, cy, lod);
+        const entry = this.getChunk(pc, cx, cy, lod, !(performance.now() - t0 >= CHUNK_BUDGET_MS));
         if (!entry) continue;
         const ox = cx * CHUNK * HEX_W - HEX_W;
         const oy = cy * CHUNK * ROW_STEP - PAD_TOP;
-        ctx.drawImage(entry.canvas, ox, oy, entry.canvas.width / lod, entry.canvas.height / lod);
+        ctx.drawImage(entry.canvas, ox, oy, entry.canvas.width / entry.lod, entry.canvas.height / entry.lod);
       }
     }
     this.evictChunks();
 
-    // 2) Nebel des Krieges: erkundet, aber nicht sichtbar -> Schleier
+    // 2) Nebel des Krieges: erkundet, aber nicht sichtbar -> entsättigter, abgedunkelter Schleier
     if (!this.revealAll) {
-      ctx.fillStyle = 'rgba(14,20,28,0.42)';
+      ctx.beginPath();
+      let any = false;
       for (let row = rowMin; row <= rowMax; row++) {
         for (let col = colMin; col <= colMax; col++) {
           const i = grid.index(col, row);
           if (explored?.[i] !== 1 || vis[i]) continue;
           const t = state.map.tiles[i];
-          tracedHex(ctx, tileTop(col, row, isWater(t) ? 0 : t.elevation), 1.01);
-          ctx.fill();
+          const c = tileTop(col, row, isWater(t) ? 0 : t.elevation);
+          // Feld samt darunterliegender Wand abdecken
+          const elev = isWater(t) ? 0 : t.elevation;
+          let low = elev;
+          for (const d of [4, 5]) {
+            const nb = grid.neighbor(i, d);
+            if (nb >= 0) low = Math.min(low, isWater(state.map.tiles[nb]) ? 0 : state.map.tiles[nb].elevation);
+          }
+          const drop = (elev - low) * ELEV_STEP;
+          for (let k = 0; k < 6; k++) {
+            const p = HEX_CORNERS[k];
+            const y = c.y + p.y * 1.01 + (k <= 2 ? drop : 0);
+            if (k === 0) ctx.moveTo(c.x + p.x * 1.01, y);
+            else ctx.lineTo(c.x + p.x * 1.01, y);
+          }
+          ctx.closePath();
+          any = true;
         }
+      }
+      if (any) {
+        ctx.save();
+        ctx.globalCompositeOperation = 'saturation';
+        ctx.fillStyle = 'rgba(128,128,128,0.75)';
+        ctx.fill();
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = 'rgba(16,22,32,0.38)';
+        ctx.fill();
+        ctx.restore();
       }
     }
 
@@ -417,7 +454,7 @@ export class MapRenderer {
     return `${n}:${h}`;
   }
 
-  private getChunk(pc: PaintContext, cx: number, cy: number, lod: number): ChunkEntry | null {
+  private getChunk(pc: PaintContext, cx: number, cy: number, lod: number, build: boolean): ChunkEntry | null {
     const key = `${cx},${cy},${lod}`;
     const sig = this.chunkSignature(pc, cx, cy);
     if (sig.startsWith('0:')) return null;
@@ -425,6 +462,13 @@ export class MapRenderer {
     if (entry && entry.signature === sig) {
       entry.lastUsed = this.frame;
       return entry;
+    }
+    if (!build) {
+      // Budget erschöpft: vorerst veralteten Chunk oder eine andere Auflösungsstufe zeigen
+      this.needsFrame = true;
+      const fallback = entry ?? LOD_LEVELS.map((l) => this.chunks.get(`${cx},${cy},${l}`)).find((e) => e && e.signature === sig);
+      if (fallback) fallback.lastUsed = this.frame;
+      return fallback ?? null;
     }
     const w = (CHUNK + 1.5) * HEX_W + HEX_W;
     const h = CHUNK * ROW_STEP + PAD_TOP + PAD_BOTTOM + HEX_R;
@@ -438,11 +482,17 @@ export class MapRenderer {
     const oy = cy * CHUNK * ROW_STEP - PAD_TOP;
     ctx.setTransform(lod, 0, 0, lod, -ox * lod, -oy * lod);
     const { state, grid } = pc;
+    // Zeilenweise von hinten nach vorne: erst Boden (Wände, Textur, Fluss, Gitter), dann Objekte.
+    // Objekte ragen so über die Felder dahinter, werden aber von vorderen, höheren Feldern verdeckt.
+    const colEnd = Math.min((cx + 1) * CHUNK, state.map.width);
     for (let row = cy * CHUNK; row < Math.min((cy + 1) * CHUNK, state.map.height); row++) {
-      for (let col = cx * CHUNK; col < Math.min((cx + 1) * CHUNK, state.map.width); col++) {
+      for (let col = cx * CHUNK; col < colEnd; col++) {
         const i = grid.index(col, row);
-        if (!pc.explored(i)) continue;
-        paintTile(ctx, pc, i);
+        if (pc.explored(i)) paintTileGround(ctx, pc, i);
+      }
+      for (let col = cx * CHUNK; col < colEnd; col++) {
+        const i = grid.index(col, row);
+        if (pc.explored(i)) paintTileObjects(ctx, pc, i);
       }
     }
     this.paintBorders(ctx, pc, cx, cy);
@@ -490,8 +540,9 @@ export class MapRenderer {
     for (const [key] of entries.slice(0, this.chunks.size - MAX_CHUNKS)) this.chunks.delete(key);
   }
 
+  /** Alle Chunks neu zeichnen; bis dahin bleiben die alten Bilder als Ersatz sichtbar. */
   invalidate(): void {
-    this.chunks.clear();
+    for (const entry of this.chunks.values()) entry.signature = '';
   }
 }
 

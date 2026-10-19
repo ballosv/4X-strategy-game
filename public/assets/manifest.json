@@ -1,6 +1,35 @@
 {
   "version": 1,
   "sprites": {
+    "building/medieval_center": {
+      "file": "building/medieval_center.webp",
+      "anchorY": 0.92
+    },
+    "building/medieval_house_large": {
+      "file": "building/medieval_house_large.webp",
+      "anchorY": 0.92
+    },
+    "building/medieval_house_small": {
+      "file": "building/medieval_house_small.webp",
+      "anchorY": 0.92
+    },
+    "building/medieval_tower": {
+      "file": "building/medieval_tower.webp",
+      "anchorY": 0.92,
+      "scale": 0.55
+    },
+    "building/medieval_wall": {
+      "file": "building/medieval_wall.webp",
+      "anchorY": 0.92
+    },
+    "building/stone_center": {
+      "file": "building/stone_center.webp",
+      "anchorY": 0.92
+    },
+    "building/stone_house_small": {
+      "file": "building/stone_house_small.webp",
+      "anchorY": 0.92
+    },
     "improvement/claypit": {
       "file": "improvement/claypit.png",
       "anchorY": 0.7
@@ -81,6 +110,56 @@
       "file": "overlay/rocks.png",
       "anchorY": 0.7
     },
+    "portrait/spearman": {
+      "file": "portrait/spearman.webp"
+    },
+    "prop/mountain_1": {
+      "file": "prop/mountain_1.webp",
+      "scale": 1.35
+    },
+    "prop/mountain_2": {
+      "file": "prop/mountain_2.webp",
+      "scale": 1.35
+    },
+    "prop/resource_game": {
+      "file": "prop/resource_game.webp",
+      "scale": 0.32
+    },
+    "prop/rock_1": {
+      "file": "prop/rock_1.webp",
+      "scale": 0.2
+    },
+    "prop/rock_2": {
+      "file": "prop/rock_2.webp",
+      "scale": 0.2
+    },
+    "prop/tree_broadleaf_1": {
+      "file": "prop/tree_broadleaf_1.webp"
+    },
+    "prop/tree_broadleaf_2": {
+      "file": "prop/tree_broadleaf_2.webp"
+    },
+    "prop/tree_broadleaf_3": {
+      "file": "prop/tree_broadleaf_3.webp"
+    },
+    "prop/tree_broadleaf_4": {
+      "file": "prop/tree_broadleaf_4.webp"
+    },
+    "prop/tree_broadleaf_5": {
+      "file": "prop/tree_broadleaf_5.webp"
+    },
+    "prop/tree_conifer_1": {
+      "file": "prop/tree_conifer_1.webp"
+    },
+    "prop/tree_conifer_2": {
+      "file": "prop/tree_conifer_2.webp"
+    },
+    "prop/tree_conifer_3": {
+      "file": "prop/tree_conifer_3.webp"
+    },
+    "prop/tree_conifer_4": {
+      "file": "prop/tree_conifer_4.webp"
+    },
     "settlement/camp_0": {
       "file": "settlement/camp_0.png",
       "anchorY": 0.7
@@ -135,6 +214,18 @@
     },
     "terrain/tundra": {
       "file": "terrain/tundra.png"
+    },
+    "texture/coast_1": {
+      "file": "texture/coast_1.webp"
+    },
+    "texture/grassland_1": {
+      "file": "texture/grassland_1.webp"
+    },
+    "texture/grassland_2": {
+      "file": "texture/grassland_2.webp"
+    },
+    "texture/ocean_1": {
+      "file": "texture/ocean_1.webp"
     },
     "unit/archer": {
       "file": "unit/archer.png",
@@ -425,6 +516,18 @@
     },
     "unit/worker_mask": {
       "file": "unit/worker_mask.png"
+    },
+    "wall/beach": {
+      "file": "wall/beach.webp",
+      "scale": 4
+    },
+    "wall/cliff_temperate": {
+      "file": "wall/cliff_temperate.webp",
+      "scale": 4
+    },
+    "wall/slope": {
+      "file": "wall/slope.webp",
+      "scale": 4
     }
   }
 }

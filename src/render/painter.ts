@@ -1,12 +1,15 @@
-import { CLIFF_DELTA, TERRAIN } from '../core/data/terrain';
+import { TERRAIN } from '../core/data/terrain';
 import type { HexGrid } from '../core/hex';
 import type { Tile } from '../core/map/types';
 import type { GameState, Settlement } from '../core/state';
-import { forestKeyCandidates, improvementKeyCandidates, settlementKeyCandidates } from './assetKeys';
+import { improvementKeyCandidates, type BuildingStyle, type BuildingType } from './assetKeys';
 import { assets, type LoadedSprite } from './assets';
-import { CLIFF, EARTH, FOREST, RIVER, ROCK, TERRAIN_COLORS, shade, withAlpha } from './palette';
+import { effElevation, hexPath, isWaterTile, paintFace, paintGridLine, paintGroundDetails, paintRiver, paintWalls } from './ground';
+import { drawBuilding, drawProp, drawTree, paintForest, paintLooseVegetation, paintMountain, paintRocks, paintSettlementComposed, type TreeKind } from './objects';
+import { ROCK, shade } from './palette';
 import { paintRoads } from './roads';
-import { EDGE_CORNERS, ELEV_STEP, HEX_CORNERS, HEX_R, HEX_W, SQUASH, lift, tileTop, type Point } from './projection';
+import { HEX_R, HEX_W, SQUASH, tileTop, type Point } from './projection';
+import { groundColor, groundPattern, wallPattern, type WallTexture } from './textures';
 
 /** Deterministischer Pseudo-Zufall je Feld (für Baumpositionen etc.). */
 export function hash01(a: number, b: number): number {
@@ -25,177 +28,64 @@ export interface PaintContext {
   settlementsByTile: Map<number, Settlement>;
 }
 
-function isWaterTile(t: Tile): boolean {
-  return TERRAIN[t.terrain].water;
-}
-
-function effElevation(t: Tile): number {
-  return isWaterTile(t) ? 0 : t.elevation;
-}
-
-function hexPath(ctx: CanvasRenderingContext2D, c: Point, scale = 1): void {
-  ctx.beginPath();
-  for (let k = 0; k < 6; k++) {
-    const p = HEX_CORNERS[k];
-    if (k === 0) ctx.moveTo(c.x + p.x * scale, c.y + p.y * scale);
-    else ctx.lineTo(c.x + p.x * scale, c.y + p.y * scale);
-  }
-  ctx.closePath();
-}
-
 export function tracedHex(ctx: CanvasRenderingContext2D, c: Point, scale = 1): void {
   hexPath(ctx, c, scale);
 }
 
-/** Zeichnet ein komplettes Feld: Wände, Oberseite, Fluss, Overlays, Ausbau, Siedlung. */
-export function paintTile(ctx: CanvasRenderingContext2D, pc: PaintContext, i: number): void {
+/**
+ * Bodenschichten eines Feldes (Grafik-Spezifikation v2, Kap. 4): Wände, Oberseite mit Übergängen,
+ * Fluss, Bodendetails, flache Ausbauten, Wege und Gitterlinie. Der Renderer zeichnet zeilenweise
+ * erst den Boden, dann die Objekte – so ragen Objekte über die Felder dahinter.
+ */
+export function paintTileGround(ctx: CanvasRenderingContext2D, pc: PaintContext, i: number): void {
   const { state, grid } = pc;
   const t = state.map.tiles[i];
-  const col = grid.col(i);
-  const row = grid.row(i);
-  const elev = effElevation(t);
-  const top = tileTop(col, row, elev);
+  const top = tileTop(grid.col(i), grid.row(i), effElevation(t));
   const water = isWaterTile(t);
-
-  // 1) Wände zu tiefer liegenden Nachbarn (nur die dem Betrachter zugewandten Kanten SW und SO)
-  for (const dir of [4, 5]) {
-    const nb = grid.neighbor(i, dir);
-    const nbElev = nb >= 0 ? effElevation(state.map.tiles[nb]) : -1;
-    const drop = lift(elev) - (nb >= 0 ? lift(nbElev) : -10);
-    if (drop <= 0) continue;
-    const [a, b] = EDGE_CORNERS[dir];
-    const p1 = { x: top.x + HEX_CORNERS[a].x, y: top.y + HEX_CORNERS[a].y };
-    const p2 = { x: top.x + HEX_CORNERS[b].x, y: top.y + HEX_CORNERS[b].y };
-    const levels = nb >= 0 ? elev - nbElev : elev + 1;
-    const cliff = !water && (levels >= CLIFF_DELTA || (nb >= 0 && isWaterTile(state.map.tiles[nb]) && elev >= 2));
-    const lit = dir === 4;
-    const pal = cliff ? CLIFF : EARTH;
-    const grad = ctx.createLinearGradient(0, p1.y, 0, p1.y + drop);
-    grad.addColorStop(0, lit ? pal.lit : pal.shade);
-    grad.addColorStop(1, shade(lit ? pal.lit : pal.shade, -0.25));
-    ctx.fillStyle = water ? shade(TERRAIN_COLORS[t.terrain].dark, -0.2) : grad;
-    ctx.beginPath();
-    ctx.moveTo(p1.x, p1.y);
-    ctx.lineTo(p2.x, p2.y);
-    ctx.lineTo(p2.x, p2.y + drop);
-    ctx.lineTo(p1.x, p1.y + drop);
-    ctx.closePath();
-    ctx.fill();
-    if (cliff) {
-      // Gesteinsschichten
-      ctx.strokeStyle = CLIFF.strata;
-      ctx.lineWidth = 1;
-      for (let y = ELEV_STEP * 0.6; y < drop - 2; y += ELEV_STEP * 0.7) {
-        const j = (hash01(i, y | 0) - 0.5) * 3;
-        ctx.beginPath();
-        ctx.moveTo(p1.x + 2, p1.y + y + j);
-        ctx.lineTo(p2.x - 2, p2.y + y - j);
-        ctx.stroke();
-      }
-      // senkrechte Risse
-      for (let k = 0; k < 3; k++) {
-        const f = 0.2 + hash01(i, 40 + k) * 0.6;
-        const x = p1.x + (p2.x - p1.x) * f;
-        const y = p1.y + (p2.y - p1.y) * f;
-        ctx.beginPath();
-        ctx.moveTo(x, y + 3);
-        ctx.lineTo(x + (hash01(i, k) - 0.5) * 4, y + drop * (0.4 + hash01(k, i) * 0.5));
-        ctx.stroke();
-      }
-    }
-    // Grasnarbe an der Oberkante
-    if (!water) {
-      ctx.strokeStyle = shade(TERRAIN_COLORS[t.terrain].dark, -0.1);
-      ctx.lineWidth = 2.2;
-      ctx.beginPath();
-      ctx.moveTo(p1.x, p1.y + 1);
-      ctx.lineTo(p2.x, p2.y + 1);
-      ctx.stroke();
-    }
-    // Wasserfall, wenn ein Fluss über diese Kante fließt
-    if (!water && t.river & (1 << dir)) {
-      const mx = (p1.x + p2.x) / 2;
-      const my = (p1.y + p2.y) / 2;
-      const g2 = ctx.createLinearGradient(0, my, 0, my + drop);
-      g2.addColorStop(0, RIVER.light);
-      g2.addColorStop(1, '#e8f6ff');
-      ctx.fillStyle = g2;
-      ctx.beginPath();
-      ctx.moveTo(mx - 5, my - 1);
-      ctx.lineTo(mx + 5, my - 1);
-      ctx.lineTo(mx + 6, my + drop);
-      ctx.lineTo(mx - 6, my + drop);
-      ctx.closePath();
-      ctx.fill();
-      ctx.fillStyle = 'rgba(255,255,255,0.7)';
-      ctx.beginPath();
-      ctx.ellipse(mx, my + drop, 9, 3, 0, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
-  // 2) Oberseite (Sprite terrain/<id> oder prozedural)
-  const textured = paintTerrainFace(ctx, t, i, top);
-
-  if (water) paintWaterDetails(ctx, pc, i, top, !textured);
-
-  // Feine Hexgrenze, Lichtkante oben links
-  hexPath(ctx, top);
-  ctx.strokeStyle = water ? 'rgba(255,255,255,0.10)' : 'rgba(30,40,20,0.28)';
-  ctx.lineWidth = 1;
-  ctx.stroke();
-  if (!water) {
-    ctx.strokeStyle = 'rgba(255,255,255,0.16)';
-    ctx.beginPath();
-    const c2 = HEX_CORNERS[2];
-    const c3 = HEX_CORNERS[3];
-    const c4 = HEX_CORNERS[4];
-    ctx.moveTo(top.x + c2.x * 0.96, top.y + c2.y * 0.96);
-    ctx.lineTo(top.x + c3.x * 0.96, top.y + c3.y * 0.96);
-    ctx.lineTo(top.x + c4.x * 0.96, top.y + c4.y * 0.96);
-    ctx.stroke();
-  }
-
-  // 3) Fluss
-  if (!water && t.river) paintRiver(ctx, t, top);
-
+  paintWalls(ctx, pc, i, t, top);
+  paintFace(ctx, pc, i, t, top);
   const settlement = pc.settlementsByTile.get(i);
   const imp = state.improvements[i];
-
-  // 4) Gelände-Overlays
-  if (!water && t.elevation >= 4 && !settlement) {
-    const sprite = assets.get(t.elevation >= 5 ? 'overlay/highMountain' : 'overlay/mountain');
-    if (sprite) drawTileSprite(ctx, sprite, top);
-    else paintMountain(ctx, t, i, top);
-  }
-  if (t.feature === 'rocks' && !settlement && !imp) {
-    const sprite = assets.get('overlay/rocks');
-    if (sprite) drawTileSprite(ctx, sprite, top);
-    else paintRocks(ctx, i, top);
-  }
-  if ((t.feature === 'forest' || t.feature === 'denseForest') && !settlement) {
-    const conifer = t.terrain === 'tundra' || t.terrain === 'snow' || t.elevation >= 3;
-    const sprite = assets.first(forestKeyCandidates(t.feature, conifer));
-    if (sprite) drawTileSprite(ctx, sprite, top);
-    else paintForest(ctx, i, top, t.feature === 'denseForest' ? 10 : 6, conifer, imp?.type === 'lumber' || imp?.type === 'hunting' ? 0.55 : 1);
-  }
-
-  // Straßen und Schienen
+  if (!water && !settlement && !(imp && FLAT_IMPROVEMENTS.has(imp.type)) && t.elevation < 4) paintGroundDetails(ctx, t, i, top, t.feature ? 0.5 : 1);
+  if (!water && t.river) paintRiver(ctx, t, top);
   if (!water && (settlement || state.roads?.[i])) paintRoads(ctx, pc, i, top);
+  paintGridLine(ctx, t, top);
+}
 
-  // 5) Ausbau
+/** Ausbauten, die flach auf dem Boden liegen (vor Objekten der Nachbarfelder). */
+const FLAT_IMPROVEMENTS = new Set(['farm', 'garden', 'plantation', 'pasture', 'stable']);
+
+/** Objektschicht eines Feldes: Berge, Felsen, Vegetation, Ausbau, Ressource, Siedlung. */
+export function paintTileObjects(ctx: CanvasRenderingContext2D, pc: PaintContext, i: number): void {
+  const { state, grid } = pc;
+  const t = state.map.tiles[i];
+  const top = tileTop(grid.col(i), grid.row(i), effElevation(t));
+  const water = isWaterTile(t);
+  const settlement = pc.settlementsByTile.get(i);
+  const imp = state.improvements[i];
+  if (!water && t.elevation >= 4 && !settlement) paintMountain(ctx, t, i, top);
+  if (t.feature === 'rocks' && !settlement && !imp) paintRocks(ctx, i, top);
+  if ((t.feature === 'forest' || t.feature === 'denseForest') && !settlement) {
+    paintForest(ctx, t, i, top, t.feature === 'denseForest', imp?.type === 'lumber' || imp?.type === 'hunting' ? 0.55 : imp ? 0.4 : 1);
+  } else if (!water && !t.feature && !settlement && !imp && t.elevation < 4) paintLooseVegetation(ctx, t, i, top);
   if (imp && !settlement) {
     const sprite = assets.first(improvementKeyCandidates(imp.type, imp.level));
     if (sprite) drawTileSprite(ctx, sprite, top);
     else paintImprovement(ctx, imp.type, i, top);
     paintImprovementLevel(ctx, imp.level, top);
   }
-
-  // 6) Ressource
-  if (t.resource && !settlement && !imp) paintResourceMarker(ctx, t, top);
-
-  // 7) Siedlung
+  if (t.resource && !settlement && !imp) {
+    const sprite = assets.get(`prop/resource_${t.resource}`);
+    if (sprite) drawProp(ctx, sprite, top.x + HEX_W * 0.18, top.y + HEX_R * SQUASH * 0.45);
+    else paintResourceMarker(ctx, t, top);
+  }
   if (settlement) paintSettlement(ctx, state, settlement, top, i);
+}
+
+/** Zeichnet ein komplettes Feld (Boden und Objekte) – für Einzeldarstellungen. */
+export function paintTile(ctx: CanvasRenderingContext2D, pc: PaintContext, i: number): void {
+  paintTileGround(ctx, pc, i);
+  paintTileObjects(ctx, pc, i);
 }
 
 /**
@@ -206,302 +96,6 @@ export function drawTileSprite(ctx: CanvasRenderingContext2D, s: LoadedSprite, c
   const w = HEX_W * s.scale * zoom;
   const h = (w * s.height) / s.width;
   ctx.drawImage(s.image, c.x - s.anchorX * w, c.y - s.anchorY * h, w, h);
-}
-
-/** Oberseite eines Feldes. Gibt true zurück, wenn eine Textur (Sprite) verwendet wurde. */
-function paintTerrainFace(ctx: CanvasRenderingContext2D, t: Tile, i: number, top: Point): boolean {
-  const water = isWaterTile(t);
-  const pal = TERRAIN_COLORS[t.terrain];
-  const rockMix = !water && t.elevation >= 4 ? (t.elevation >= 5 ? 0.55 : 0.35) : 0;
-  const sprite = assets.get(`terrain/${t.terrain}`);
-  if (sprite) {
-    ctx.save();
-    hexPath(ctx, top);
-    ctx.clip();
-    ctx.fillStyle = pal.top;
-    ctx.fill();
-    drawTileSprite(ctx, sprite, top);
-    if (rockMix) {
-      // Hochlagen wie prozedural felsig einfärben
-      ctx.fillStyle = withAlpha(ROCK.mid, rockMix);
-      ctx.fill();
-    }
-    ctx.restore();
-    return true;
-  }
-  let faceColor = pal.top;
-  if (rockMix) faceColor = mixHex(pal.top, ROCK.mid, rockMix);
-  const fg = ctx.createLinearGradient(top.x - HEX_W / 2, top.y - HEX_R * SQUASH, top.x + HEX_W / 2, top.y + HEX_R * SQUASH);
-  fg.addColorStop(0, shade(faceColor, 0.1));
-  fg.addColorStop(1, shade(faceColor, -0.08));
-  hexPath(ctx, top);
-  ctx.fillStyle = fg;
-  ctx.fill();
-  // Struktur (leicht handgemalter Eindruck)
-  paintTexture(ctx, t, i, top);
-  return false;
-}
-
-function mixHex(a: string, b: string, f: number): string {
-  const na = parseInt(a.slice(1), 16);
-  const nb = parseInt(b.slice(1), 16);
-  const mix = (sh: number) => Math.round(((na >> sh) & 255) * (1 - f) + ((nb >> sh) & 255) * f);
-  return `#${((mix(16) << 16) | (mix(8) << 8) | mix(0)).toString(16).padStart(6, '0')}`;
-}
-
-function paintTexture(ctx: CanvasRenderingContext2D, t: Tile, i: number, c: Point): void {
-  const pal = TERRAIN_COLORS[t.terrain];
-  const water = isWaterTile(t);
-  ctx.save();
-  hexPath(ctx, c, 0.94);
-  ctx.clip();
-  const n = water ? 0 : 14;
-  for (let k = 0; k < n; k++) {
-    const x = c.x + (hash01(i, k) - 0.5) * HEX_W * 0.9;
-    const y = c.y + (hash01(k, i) - 0.5) * HEX_R * 1.6 * SQUASH;
-    const light = hash01(i * 3, k) > 0.5;
-    ctx.strokeStyle = withAlpha(light ? pal.light : pal.dark, 0.55);
-    ctx.lineWidth = 1.4;
-    ctx.beginPath();
-    if (t.terrain === 'grassland' || t.terrain === 'plains' || t.terrain === 'marsh') {
-      // Grasbüschel
-      ctx.moveTo(x - 2, y + 1.5);
-      ctx.lineTo(x, y - 2);
-      ctx.lineTo(x + 2, y + 1.5);
-    } else if (t.terrain === 'desert') {
-      ctx.ellipse(x, y, 4, 1.2, 0, Math.PI, Math.PI * 2);
-    } else {
-      ctx.moveTo(x - 2.5, y);
-      ctx.lineTo(x + 2.5, y);
-    }
-    ctx.stroke();
-  }
-  if (t.terrain === 'marsh') {
-    for (let k = 0; k < 3; k++) {
-      ctx.fillStyle = 'rgba(70,120,140,0.55)';
-      ctx.beginPath();
-      ctx.ellipse(c.x + (hash01(i, 90 + k) - 0.5) * HEX_W * 0.6, c.y + (hash01(90 + k, i) - 0.5) * HEX_R * 0.8 * SQUASH, 7, 2.5, 0, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-  ctx.restore();
-}
-
-function paintWaterDetails(ctx: CanvasRenderingContext2D, pc: PaintContext, i: number, c: Point, waves: boolean): void {
-  const t = pc.state.map.tiles[i];
-  // Wellenlinien (nur prozedural – Texturen bringen eigene mit)
-  ctx.strokeStyle = 'rgba(255,255,255,0.18)';
-  ctx.lineWidth = 1.2;
-  for (let k = 0; k < (waves ? 2 : 0); k++) {
-    const x = c.x + (hash01(i, k) - 0.5) * HEX_W * 0.6;
-    const y = c.y + (hash01(k + 7, i) - 0.5) * HEX_R * 0.9 * SQUASH;
-    ctx.beginPath();
-    ctx.moveTo(x - 6, y);
-    ctx.quadraticCurveTo(x - 3, y - 2.5, x, y);
-    ctx.quadraticCurveTo(x + 3, y + 2.5, x + 6, y);
-    ctx.stroke();
-  }
-  if (t.terrain === 'ocean') return;
-  // Brandung entlang von Landkanten
-  for (let dir = 0; dir < 6; dir++) {
-    const nb = pc.grid.neighbor(i, dir);
-    if (nb < 0 || isWaterTile(pc.state.map.tiles[nb])) continue;
-    const [a, b] = EDGE_CORNERS[dir];
-    const p1 = HEX_CORNERS[a];
-    const p2 = HEX_CORNERS[b];
-    ctx.strokeStyle = 'rgba(235,248,255,0.65)';
-    ctx.lineWidth = 2.5;
-    ctx.beginPath();
-    ctx.moveTo(c.x + p1.x * 0.9, c.y + p1.y * 0.9);
-    ctx.lineTo(c.x + p2.x * 0.9, c.y + p2.y * 0.9);
-    ctx.stroke();
-    ctx.strokeStyle = 'rgba(200,180,130,0.55)';
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(c.x + p1.x * 0.98, c.y + p1.y * 0.98);
-    ctx.lineTo(c.x + p2.x * 0.98, c.y + p2.y * 0.98);
-    ctx.stroke();
-  }
-}
-
-function edgeMid(c: Point, dir: number): Point {
-  const [a, b] = EDGE_CORNERS[dir];
-  return { x: c.x + (HEX_CORNERS[a].x + HEX_CORNERS[b].x) / 2, y: c.y + (HEX_CORNERS[a].y + HEX_CORNERS[b].y) / 2 };
-}
-
-function paintRiver(ctx: CanvasRenderingContext2D, t: Tile, c: Point): void {
-  const dirs: number[] = [];
-  for (let d = 0; d < 6; d++) if (t.river & (1 << d)) dirs.push(d);
-  ctx.lineCap = 'round';
-  ctx.lineJoin = 'round';
-  for (const [width, color] of [
-    [7, shade(RIVER.deep, -0.15)],
-    [5, RIVER.deep],
-    [2, RIVER.light],
-  ] as [number, string][]) {
-    ctx.strokeStyle = color;
-    ctx.lineWidth = width;
-    for (const d of dirs) {
-      const m = edgeMid(c, d);
-      ctx.beginPath();
-      ctx.moveTo(c.x, c.y);
-      ctx.quadraticCurveTo((c.x + m.x) / 2 + (d % 2 ? 4 : -4), (c.y + m.y) / 2, m.x, m.y);
-      ctx.stroke();
-    }
-  }
-  ctx.lineCap = 'butt';
-}
-
-function paintMountain(ctx: CanvasRenderingContext2D, t: Tile, i: number, c: Point): void {
-  const high = t.elevation >= 5;
-  const cold = high || t.terrain === 'snow' || t.terrain === 'tundra';
-  const peaks = high ? [{ dx: 0, h: 50, w: 30 }, { dx: -15, h: 30, w: 18 }, { dx: 16, h: 34, w: 20 }] : [{ dx: -6, h: 32, w: 22 }, { dx: 12, h: 24, w: 17 }];
-  // Schatten nach rechts unten
-  ctx.fillStyle = 'rgba(30,30,30,0.18)';
-  ctx.beginPath();
-  ctx.ellipse(c.x + 6, c.y + 4, HEX_W * 0.38, HEX_R * 0.35 * SQUASH, 0, 0, Math.PI * 2);
-  ctx.fill();
-  const sorted = [...peaks].sort((a, b) => a.h - b.h);
-  for (const p of sorted) {
-    const bx = c.x + p.dx + (hash01(i, p.dx) - 0.5) * 4;
-    const by = c.y + 6;
-    const tx = bx + (hash01(p.dx, i) - 0.5) * 6;
-    const ty = by - p.h;
-    // Licht von oben links: linke Flanke hell, rechte Flanke dunkel
-    ctx.fillStyle = ROCK.light;
-    ctx.beginPath();
-    ctx.moveTo(bx - p.w, by);
-    ctx.lineTo(tx, ty);
-    ctx.lineTo(tx + 2, by);
-    ctx.closePath();
-    ctx.fill();
-    ctx.fillStyle = ROCK.dark;
-    ctx.beginPath();
-    ctx.moveTo(tx, ty);
-    ctx.lineTo(bx + p.w, by);
-    ctx.lineTo(tx + 2, by);
-    ctx.closePath();
-    ctx.fill();
-    // Grat
-    ctx.strokeStyle = 'rgba(40,35,30,0.35)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(tx, ty);
-    ctx.lineTo(tx + 3, ty + p.h * 0.5);
-    ctx.lineTo(tx - 1, by);
-    ctx.stroke();
-    if (cold || p.h > 40) {
-      const sh = p.h * (high ? 0.42 : 0.3);
-      ctx.fillStyle = ROCK.snow;
-      ctx.beginPath();
-      ctx.moveTo(tx, ty);
-      ctx.lineTo(tx - p.w * (sh / p.h), ty + sh);
-      ctx.lineTo(tx - p.w * (sh / p.h) * 0.3, ty + sh * 0.8);
-      ctx.lineTo(tx + 1, ty + sh);
-      ctx.lineTo(tx + p.w * (sh / p.h) * 0.6, ty + sh * 0.85);
-      ctx.closePath();
-      ctx.fill();
-    }
-  }
-}
-
-function paintRocks(ctx: CanvasRenderingContext2D, i: number, c: Point): void {
-  const count = 2 + Math.floor(hash01(i, 5) * 2);
-  for (let k = 0; k < count; k++) {
-    const x = c.x + (hash01(i, 10 + k) - 0.5) * HEX_W * 0.55;
-    const y = c.y + (hash01(10 + k, i) - 0.5) * HEX_R * 0.7 * SQUASH;
-    const s = 4 + hash01(i, 20 + k) * 4;
-    ctx.fillStyle = 'rgba(0,0,0,0.18)';
-    ctx.beginPath();
-    ctx.ellipse(x + 2, y + 1.5, s * 1.1, s * 0.45, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = ROCK.mid;
-    ctx.beginPath();
-    ctx.moveTo(x - s, y);
-    ctx.lineTo(x - s * 0.5, y - s * 0.9);
-    ctx.lineTo(x + s * 0.4, y - s);
-    ctx.lineTo(x + s, y - s * 0.2);
-    ctx.lineTo(x + s * 0.8, y + s * 0.2);
-    ctx.lineTo(x - s * 0.7, y + s * 0.25);
-    ctx.closePath();
-    ctx.fill();
-    ctx.fillStyle = ROCK.light;
-    ctx.beginPath();
-    ctx.moveTo(x - s, y);
-    ctx.lineTo(x - s * 0.5, y - s * 0.9);
-    ctx.lineTo(x + s * 0.4, y - s);
-    ctx.lineTo(x, y - s * 0.3);
-    ctx.closePath();
-    ctx.fill();
-  }
-}
-
-export function drawTree(ctx: CanvasRenderingContext2D, x: number, y: number, s: number, conifer: boolean, tint: number): void {
-  // Schatten nach rechts unten
-  ctx.fillStyle = 'rgba(20,30,10,0.22)';
-  ctx.beginPath();
-  ctx.ellipse(x + s * 0.5, y + 1, s * 0.75, s * 0.28, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.fillStyle = FOREST.trunk;
-  ctx.fillRect(x - 1, y - s * 0.5, 2, s * 0.55);
-  if (conifer) {
-    for (let tier = 0; tier < 2; tier++) {
-      const ty = y - s * 0.35 - tier * s * 0.55;
-      const w = s * (0.62 - tier * 0.16);
-      const h = s * 0.85;
-      ctx.fillStyle = shade(FOREST.conifer, tint);
-      ctx.beginPath();
-      ctx.moveTo(x - w, ty);
-      ctx.lineTo(x, ty - h);
-      ctx.lineTo(x + w, ty);
-      ctx.closePath();
-      ctx.fill();
-      ctx.fillStyle = shade(FOREST.coniferLight, tint);
-      ctx.beginPath();
-      ctx.moveTo(x - w, ty);
-      ctx.lineTo(x, ty - h);
-      ctx.lineTo(x - w * 0.1, ty);
-      ctx.closePath();
-      ctx.fill();
-    }
-  } else {
-    const r = s * 0.55;
-    const cy = y - s * 0.8;
-    ctx.fillStyle = shade(FOREST.leafDark, tint);
-    ctx.beginPath();
-    ctx.arc(x, cy, r, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = shade(FOREST.leaf, tint);
-    ctx.beginPath();
-    ctx.arc(x - r * 0.15, cy - r * 0.12, r * 0.82, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.fillStyle = shade(FOREST.leafLight, tint);
-    ctx.beginPath();
-    ctx.arc(x - r * 0.35, cy - r * 0.35, r * 0.42, 0, Math.PI * 2);
-    ctx.fill();
-  }
-}
-
-function paintForest(ctx: CanvasRenderingContext2D, i: number, c: Point, count: number, conifer: boolean, density: number): void {
-  const trees: { x: number; y: number; s: number; tint: number }[] = [];
-  const n = Math.max(2, Math.round(count * density));
-  for (let k = 0; k < n * 3 && trees.length < n; k++) {
-    const x = c.x + (hash01(i, 100 + k) - 0.5) * HEX_W * 0.78;
-    const y = c.y + (hash01(100 + k, i) - 0.5) * HEX_R * 1.4 * SQUASH;
-    if (!pointInHexLocal(x - c.x, y - c.y, 0.8)) continue;
-    if (trees.some((o) => Math.abs(o.x - x) < 7 && Math.abs(o.y - y) < 4)) continue;
-    trees.push({ x, y, s: 10 + hash01(i, 200 + k) * 5, tint: (hash01(i, 300 + k) - 0.5) * 0.18 });
-  }
-  trees.sort((a, b) => a.y - b.y);
-  for (const tr of trees) drawTree(ctx, tr.x, tr.y, tr.s, conifer, tr.tint);
-}
-
-function pointInHexLocal(dx: number, dy: number, scale: number): boolean {
-  const ax = Math.abs(dx);
-  const ay = Math.abs(dy / SQUASH);
-  const hw = (HEX_W / 2) * scale;
-  const r = HEX_R * scale;
-  return ax <= hw && ay <= r && r * hw - (r / 2) * ax - hw * ay >= 0;
 }
 
 // ---------------------------------------------------------------------------
@@ -813,84 +407,20 @@ export const RESOURCE_GLYPHS: Record<string, string> = {
 // ---------------------------------------------------------------------------
 // Siedlungen
 
-const ROOFS = ['#b48a4a', '#b8573a', '#a4472f', '#5d6470', '#6a4b3a', '#7a2f2a', '#4f5966', '#3f6f8a', '#2a8a8a'];
-const WALLS = ['#cdb48a', '#d9c7a5', '#e2d5bd', '#d8cfc0', '#e0d6c8', '#b9614a', '#c9c3b8', '#dfe4e8', '#e8eef2'];
-
 function paintSettlement(ctx: CanvasRenderingContext2D, state: GameState, s: Settlement, c: Point, i: number): void {
   const owner = state.players[s.owner];
-  paintSettlementBody(ctx, s.kind, owner?.era ?? 0, owner?.kind === 'machine', s.buildings, c, i);
+  const pop = s.pop.workers + s.pop.citizens + s.pop.scholars;
+  paintSettlementBody(ctx, s.kind, owner?.era ?? 0, owner?.kind === 'machine', s.buildings, pop, owner?.color ?? '#888888', c, i);
 }
 
-function paintSettlementBody(ctx: CanvasRenderingContext2D, kind: Settlement['kind'], era: number, machine: boolean, buildings: string[], c: Point, i: number): void {
-  const sprite = machine ? assets.get('settlement/machine') : assets.first(settlementKeyCandidates(kind, era));
-  if (sprite) {
-    drawTileSprite(ctx, sprite, c);
-    paintFortification(ctx, buildings, c);
+function paintSettlementBody(ctx: CanvasRenderingContext2D, kind: Settlement['kind'], era: number, machine: boolean, buildings: string[], pop: number, color: string, c: Point, i: number): void {
+  if (machine) {
+    const sprite = assets.get('settlement/machine');
+    if (sprite) drawTileSprite(ctx, sprite, c);
+    else paintMachineCore(ctx, c);
     return;
   }
-  const roof = ROOFS[Math.min(era, ROOFS.length - 1)];
-  const wall = WALLS[Math.min(era, WALLS.length - 1)];
-  // Platz / Erdboden
-  ctx.fillStyle = 'rgba(170,140,95,0.55)';
-  hexPath(ctx, c, 0.72);
-  ctx.fill();
-  if (kind === 'camp' || machine) {
-    if (machine) {
-      paintMachineCore(ctx, c);
-      return;
-    }
-    drawTent(ctx, c.x - 12, c.y - 2, 8, '#a8865a');
-    drawTent(ctx, c.x + 10, c.y - 4, 7, '#9a7a52');
-    drawTent(ctx, c.x - 2, c.y + 8, 8, '#b49468');
-    // Lagerfeuer
-    ctx.fillStyle = '#5a3a22';
-    ctx.fillRect(c.x + 2, c.y + 1, 6, 2);
-    ctx.fillStyle = '#ff9a3a';
-    ctx.beginPath();
-    ctx.moveTo(c.x + 2, c.y + 1);
-    ctx.lineTo(c.x + 5, c.y - 6);
-    ctx.lineTo(c.x + 8, c.y + 1);
-    ctx.fill();
-    ctx.fillStyle = '#ffe07a';
-    ctx.beginPath();
-    ctx.moveTo(c.x + 3.5, c.y + 1);
-    ctx.lineTo(c.x + 5, c.y - 3);
-    ctx.lineTo(c.x + 6.5, c.y + 1);
-    ctx.fill();
-  } else {
-    const houses = kind === 'city' ? 9 : 5;
-    const spots: { x: number; y: number }[] = [];
-    for (let k = 0; k < houses * 4 && spots.length < houses; k++) {
-      const x = c.x + (hash01(i, 500 + k) - 0.5) * HEX_W * 0.72;
-      const y = c.y + (hash01(500 + k, i) - 0.5) * HEX_R * 1.25 * SQUASH;
-      if (!pointInHexLocal(x - c.x, y - c.y, 0.74)) continue;
-      if (spots.some((o) => Math.abs(o.x - x) < 11 && Math.abs(o.y - y) < 6)) continue;
-      spots.push({ x, y });
-    }
-    spots.sort((a, b) => a.y - b.y);
-    const centerIdx = Math.floor(spots.length / 2);
-    spots.forEach((p, k) => {
-      if (k === centerIdx && kind === 'city') {
-        drawHouse(ctx, p.x, p.y, 12, shade(roof, -0.15), wall, 2);
-      } else {
-        drawHouse(ctx, p.x, p.y, 8 + hash01(i, k) * 2, roof, wall);
-      }
-      if (era >= 5 && k % 3 === 0) {
-        ctx.fillStyle = '#5a4a44';
-        ctx.fillRect(p.x + 2, p.y - 14, 2.5, 7);
-      }
-    });
-  }
-  paintFortification(ctx, buildings, c);
-}
-
-function paintFortification(ctx: CanvasRenderingContext2D, buildings: string[], c: Point): void {
-  if (buildings.includes('walls') || buildings.includes('palisade')) {
-    ctx.strokeStyle = buildings.includes('walls') ? '#9c968c' : '#7a5a36';
-    ctx.lineWidth = buildings.includes('walls') ? 3 : 2;
-    hexPath(ctx, c, 0.82);
-    ctx.stroke();
-  }
+  paintSettlementComposed(ctx, { kind, buildings }, pop, era, color, c, i);
 }
 
 function paintMachineCore(ctx: CanvasRenderingContext2D, c: Point): void {
@@ -919,15 +449,56 @@ function paintMachineCore(ctx: CanvasRenderingContext2D, c: Point): void {
  * so, wie das Spiel ihn zeichnen würde (Sprite, falls geladen, sonst prozedural; bei Siedlungen inkl.
  * Epochen-Fallback). Gibt false zurück, wenn der Schlüssel kein Feld-Asset ist (z. B. Einheiten).
  */
+const WALL_TEXTURES = ['cliff_temperate', 'cliff_desert', 'cliff_snow', 'slope', 'beach'];
+
 export function paintPreviewTile(ctx: CanvasRenderingContext2D, key: string, c: Point): boolean {
   const [cat, rest = ''] = key.split('/');
   const i = 7;
   const tile = (terrain: Tile['terrain'], elevation = 1): Tile => ({ terrain, elevation, feature: null, resource: null, river: 0, landmass: 0 });
+  const face = (t: Tile) => {
+    hexPath(ctx, c);
+    ctx.fillStyle = groundPattern(ctx, t.terrain) ?? groundColor(t.terrain);
+    ctx.fill();
+  };
   switch (cat) {
+    case 'texture':
     case 'terrain': {
-      const terrain = rest as Tile['terrain'];
+      const terrain = rest.replace(/_\d$/, '') as Tile['terrain'];
       if (!(terrain in TERRAIN)) return false;
-      paintTerrainFace(ctx, tile(terrain, TERRAIN[terrain].water ? 0 : 1), i, c);
+      const sprite = cat === 'terrain' ? assets.get(key) : null;
+      if (sprite) drawTileSprite(ctx, sprite, c);
+      else if (cat === 'texture' && rest.endsWith('_2')) {
+        hexPath(ctx, c);
+        ctx.fillStyle = groundPattern(ctx, terrain, 1) ?? groundColor(terrain);
+        ctx.fill();
+      } else face(tile(terrain, TERRAIN[terrain].water ? 0 : 1));
+      return true;
+    }
+    case 'wall': {
+      const w = HEX_W * 0.9;
+      ctx.beginPath();
+      ctx.rect(c.x - w / 2, c.y - 40, w, 44);
+      if (WALL_TEXTURES.includes(rest)) ctx.fillStyle = wallPattern(ctx, rest as WallTexture) ?? '#8d857b';
+      else ctx.fillStyle = rest === 'foam' ? '#3fb5c8' : '#76ad3c';
+      ctx.fill();
+      return true;
+    }
+    case 'prop': {
+      face(tile(rest.startsWith('tree_palm') ? 'desert' : 'grassland'));
+      const sprite = assets.get(key);
+      const kind = rest.replace(/_\d$/, '');
+      if (sprite) drawProp(ctx, sprite, c.x, c.y + 6);
+      else if (kind === 'rock') paintRocks(ctx, i, c, 3);
+      else if (kind === 'mountain' || kind === 'peak') paintMountain(ctx, tile('grassland', kind === 'peak' ? 5 : 4), i, c);
+      else if (kind.startsWith('resource_')) paintResourceMarker(ctx, { ...tile('grassland'), resource: kind.slice(9) as Tile['resource'] }, { x: c.x - HEX_W * 0.22, y: c.y - 6 });
+      else drawTree(ctx, kind as TreeKind, c.x, c.y + 6, kind === 'bush' ? 14 : 30, false, 0, false);
+      return true;
+    }
+    case 'building': {
+      face(tile('grassland'));
+      // Schlüssel building/<stil>_<typ>; der Stil enthält keinen Unterstrich
+      const sep = rest.indexOf('_');
+      drawBuilding(ctx, rest.slice(0, sep) as BuildingStyle, rest.slice(sep + 1) as BuildingType, c.x, c.y + 6, 16, false);
       return true;
     }
     case 'overlay': {
@@ -935,12 +506,12 @@ export function paintPreviewTile(ctx: CanvasRenderingContext2D, key: string, c: 
       const id = rest.replace('_conifer', '');
       const elevation = id === 'highMountain' ? 5 : id === 'mountain' ? 4 : conifer ? 3 : 1;
       const t = tile(conifer ? 'tundra' : 'grassland', elevation);
-      paintTerrainFace(ctx, t, i, c);
+      face(t);
       const sprite = assets.get(key);
       if (sprite) drawTileSprite(ctx, sprite, c);
       else if (id === 'mountain' || id === 'highMountain') paintMountain(ctx, t, i, c);
       else if (id === 'rocks') paintRocks(ctx, i, c);
-      else paintForest(ctx, i, c, id === 'denseForest' ? 10 : 6, conifer, 1);
+      else paintForest(ctx, t, i, c, id === 'denseForest');
       return true;
     }
     case 'improvement': {
@@ -948,7 +519,7 @@ export function paintPreviewTile(ctx: CanvasRenderingContext2D, key: string, c: 
       const id = m?.[1] ?? rest;
       const level = Number(m?.[2] ?? 1);
       const water = id === 'fishery';
-      paintTerrainFace(ctx, tile(water ? 'coast' : 'grassland', water ? 0 : 1), i, c);
+      face(tile(water ? 'coast' : 'grassland', water ? 0 : 1));
       const sprite = assets.first(improvementKeyCandidates(id, level));
       if (sprite) drawTileSprite(ctx, sprite, c);
       else paintImprovement(ctx, id, i, c);
@@ -956,10 +527,15 @@ export function paintPreviewTile(ctx: CanvasRenderingContext2D, key: string, c: 
       return true;
     }
     case 'settlement': {
-      paintTerrainFace(ctx, tile('grassland'), i, c);
+      face(tile('grassland'));
       const [kind, era] = rest.split('_');
+      const sprite = assets.get(key);
+      if (sprite) {
+        drawTileSprite(ctx, sprite, c);
+        return true;
+      }
       const k = (['camp', 'settlement', 'city'].includes(kind) ? kind : 'settlement') as Settlement['kind'];
-      paintSettlementBody(ctx, k, Number(era ?? 0) || 0, kind === 'machine', [], c, i);
+      paintSettlementBody(ctx, k, Number(era ?? 0) || 0, kind === 'machine', [], k === 'city' ? 8 : 3, '#2f6fb5', c, i);
       return true;
     }
   }

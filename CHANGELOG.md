@@ -1,5 +1,36 @@
 # Changelog
 
+## Unveröffentlicht
+
+### Grafik (Spezifikation Version 2, Phase A – Renderer)
+- Flachere Kamera (Stauchung 0,58), hohe Klippen (0,85 × Hex-Radius je Höhenstufe), Zoom 0,4–2,0,
+  Standardzoom ≈ 10 Felder Bildbreite auf dem Smartphone
+- Durchgehende Landschaft: Bodentexturen in Weltkoordinaten mit unregelmäßigen Übergängen,
+  Felswände mit Gesteinstextur, Grasüberhang und Geröll, Erdhänge, Strandkanten, Flachwasser und Schaum
+- Feines helles Hexgitter statt dunkler Kachelkanten
+- Gestreute Einzelobjekte (Laub-/Nadelbäume, Palmen, Büsche, Felsen) mit Varianten, Größe und
+  Spiegelung je Feld; Bergmassive ragen über die Feldfläche
+- Siedlungen aus Gebäudebausteinen in fünf Epochenstilen, wachsen mit Art und Bevölkerung
+- Nebel des Krieges: erkundete, nicht sichtbare Felder entsättigt
+- Chunks werden mit Zeitbudget je Bild gezeichnet (kein Ruckeln beim Schwenken)
+- Asset-Katalog v2 (Texturen, Wände, Wege, Objekte, Gebäude, Porträts, Atmosphäre) in Vorschau und
+  Prüfskript; Grafik-Backlog mit Ziel-Release (Vertical Slice 0.4.0, Bibliothek 0.5.0)
+
+### Grafik (Phase B – Vertical Slice mit Scenario)
+- KI-generierte Grafiken im Stil des Zielbilds (Gemini 3.1 Flash mit Zielbild-Ausschnitten als Referenz):
+  Bodentexturen Gras (2), Küste, Meer; Wandtexturen Felswand, Erdhang, Strand; Laubbäume (5),
+  Nadelbäume (4), Felsbrocken (2), Bergmassive (2), Wild; Steinzeit-Hütte und -Langhaus; mittelalterliches
+  Wohnhaus klein/groß, Rathaus, Kirchturm, Mauerstück; Porträt des Speerträgers
+- Asset-Vorschau zeigt je Gebäudeschlüssel den einzelnen Baustein statt eines ganzen Lagers
+- Gebirge: deckender Felsboden statt Gras, Felskante statt Grasüberhang, Felswände auch an flachen Hängen,
+  größere Bergmassive mit Fußpunkt an der vorderen Feldkante
+- Gemalte Wandtexturen doppelt so grob skaliert (weniger sichtbares Muster an den Feldrändern)
+- Einheitenpanel zeigt gemalte Porträts (`portrait/<einheit>`), sobald vorhanden
+- Gemalte Bäume und Felsen erhalten einen Kontaktschatten vom Renderer
+- Skripte: `scripts/scenario-generate.mjs` (Generierung mit Kostenprüfung per dryRun und Budgetgrenze,
+  Freistellen; vom Sicherheitsfilter blockierte Aufträge werden übersprungen) und `scripts/art-postprocess.py` (Zuschnitt, Anker, nahtlose Boden- und Wandtexturen, WebP, Manifest);
+  Herkunft je Grafik in `art/sources.json`
+
 ## v0.2.0 – Wirtschaft & Infrastruktur (2026-10-18)
 
 ### Transportnetz

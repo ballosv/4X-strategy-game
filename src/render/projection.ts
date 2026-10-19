@@ -6,11 +6,24 @@
 
 export const HEX_R = 36;
 export const HEX_W = Math.sqrt(3) * HEX_R;
-/** Vertikale Stauchung (Neigung der Kamera). */
-export const SQUASH = 0.66;
+/** Vertikale Stauchung (Neigung der Kamera), Grafik-Spezifikation v2 Kap. 3. */
+export const SQUASH = 0.58;
 export const ROW_STEP = 1.5 * HEX_R * SQUASH;
-/** Höhe einer Höhenstufe in Welt-Pixeln. */
-export const ELEV_STEP = 17;
+/** Höhe einer Höhenstufe in Welt-Pixeln (0,85 × Hex-Radius: Klippen deutlich hoch). */
+export const ELEV_STEP = 0.85 * HEX_R;
+
+/** Zoombereich der Karte. */
+export const ZOOM_MIN = 0.4;
+export const ZOOM_MAX = 2;
+
+/**
+ * Standardzoom: ca. 10 Felder Bildbreite auf schmalen Bildschirmen (Smartphone quer),
+ * auf breiten Bildschirmen entsprechend mehr Felder.
+ */
+export function defaultZoom(viewWidth: number): number {
+  const fields = viewWidth < 1000 ? 10 : 10 + (viewWidth - 1000) / 160;
+  return Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, viewWidth / (fields * HEX_W)));
+}
 
 export interface Point {
   x: number;
