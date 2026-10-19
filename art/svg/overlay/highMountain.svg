@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs>
+    <!-- @defs -->
+    <!-- Gipfel: Spitze bei (0,-100), Fuß von -70 bis 70 auf y=0; kühler, steiler Fels -->
+    <g id="peak">
+      <path d="M0 -100 L-12 -70 L-30 -52 L-44 -30 L-70 0 L-6 0 L-10 -30 L2 -56 Z" fill="#c4c4c2"/>
+      <path d="M-44 -30 L-70 0 L-6 0 L-10 -30 L-26 -24 Z" fill="#8f8c88"/>
+      <path d="M0 -100 L2 -56 L-10 -30 L-6 0 L70 0 L50 -26 L34 -40 L18 -70 Z" fill="#5e5b5a"/>
+      <path d="M2 -56 L-10 -30 L-6 0 L14 0 L4 -30 L12 -52 Z" fill="#706c69"/>
+      <path d="M-24 -46 L-16 -36 M-36 -20 L-26 -12 M30 -30 L40 -16" stroke="#77736e" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <!-- große Schneekappe bis zur Flankenmitte -->
+    <g id="cap">
+      <path d="M0 -100 L-12 -70 L-30 -52 L-36 -42 L-26 -44 L-22 -36 L-12 -46 L-6 -38 L2 -56 Z" fill="#ffffff"/>
+      <path d="M0 -100 L2 -56 L8 -44 L14 -52 L22 -42 L30 -48 L34 -40 L18 -70 Z" fill="#c3cfd8"/>
+      <path d="M2 -56 L-6 -38 L-2 -36 L8 -44 Z" fill="#e9eff3"/>
+    </g>
+  </defs>
+  <!-- Schlagschatten des Massivs -->
+  <ellipse cx="136" cy="270" rx="114" ry="42" fill="url(#shadow)"/>
+  <!-- Geröllfuß -->
+  <path d="M24 264 Q28 238 58 232 L202 228 Q230 238 234 264 Q128 304 24 264 Z" fill="#77736e"/>
+  <path d="M24 264 Q28 238 58 232 L118 232 Q88 262 58 280 Q34 274 24 264 Z" fill="#8f8c88"/>
+  <!-- hintere Gipfel -->
+  <use href="#peak" transform="translate(70 256) scale(0.8 1.5)"/>
+  <use href="#cap" transform="translate(70 256) scale(0.8 1.5)"/>
+  <use href="#peak" transform="translate(190 250) scale(0.82 1.75)"/>
+  <use href="#cap" transform="translate(190 250) scale(0.82 1.75)"/>
+  <!-- Hauptgipfel -->
+  <use href="#peak" transform="translate(126 276) scale(1.12 2.55)"/>
+  <use href="#cap" transform="translate(126 276) scale(1.12 2.55)"/>
+  <!-- Vorgipfel -->
+  <use href="#peak" transform="translate(176 290) scale(0.6 0.7)"/>
+  <use href="#cap" transform="translate(176 290) scale(0.6 0.7)"/>
+  <use href="#peak" transform="translate(68 288) scale(0.5 0.55)"/>
+  <!-- Schneefelder am Fuß -->
+  <ellipse cx="104" cy="286" rx="14" ry="4" fill="#e9eff3"/>
+  <ellipse cx="206" cy="270" rx="10" ry="3" fill="#e9eff3"/>
+</svg>

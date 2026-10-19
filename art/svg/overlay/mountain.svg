@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs>
+    <!-- @defs -->
+    <!-- Gipfel: Spitze bei (0,-100), Fuß von -70 bis 70 auf y=0; Licht von links oben -->
+    <g id="peak">
+      <path d="M0 -100 L-12 -70 L-30 -52 L-44 -30 L-70 0 L-6 0 L-10 -30 L2 -56 Z" fill="#cfc8be"/>
+      <path d="M-44 -30 L-70 0 L-6 0 L-10 -30 L-26 -24 Z" fill="#9c958b"/>
+      <path d="M0 -100 L2 -56 L-10 -30 L-6 0 L70 0 L50 -26 L34 -40 L18 -70 Z" fill="#6b645c"/>
+      <path d="M2 -56 L-10 -30 L-6 0 L14 0 L4 -30 L12 -52 Z" fill="#7d766d"/>
+      <path d="M-24 -46 L-16 -36 M-36 -20 L-26 -12 M30 -30 L40 -16" stroke="#857e74" stroke-width="2" stroke-linecap="round"/>
+    </g>
+    <g id="cap">
+      <path d="M0 -100 L-8 -80 L-12 -76 L-7 -77 L-3 -72 L1 -78 Z" fill="#ffffff"/>
+      <path d="M0 -100 L1 -78 L6 -74 L9 -79 L11 -82 Z" fill="#c3cfd8"/>
+    </g>
+    <g id="pine">
+      <ellipse cx="6" cy="2" rx="12" ry="4" fill="url(#shadow)"/>
+      <path d="M0 -30 L-9 -2 Q0 1 9 -2 Z" fill="#2f5f3a"/>
+      <path d="M0 -30 L-9 -2 Q-4 0 0 0 Z" fill="#4f8a55"/>
+      <path d="M0 -30 L9 -2 Q5 0 2 0 Z" fill="#1f4228"/>
+    </g>
+  </defs>
+  <!-- Schlagschatten des Massivs -->
+  <ellipse cx="136" cy="270" rx="112" ry="40" fill="url(#shadow)"/>
+  <!-- Geröllfuß -->
+  <path d="M26 262 Q30 240 60 236 L200 232 Q228 240 232 262 Q128 300 26 262 Z" fill="#857e74"/>
+  <path d="M26 262 Q30 240 60 236 L120 236 Q90 262 60 278 Q36 272 26 262 Z" fill="#9c958b"/>
+  <!-- hintere Gipfel -->
+  <use href="#peak" transform="translate(70 254) scale(0.8 1.05)"/>
+  <use href="#peak" transform="translate(188 250) scale(0.82 1.2)"/>
+  <!-- Hauptgipfel -->
+  <use href="#peak" transform="translate(126 274) scale(1.25 1.85)"/>
+  <use href="#cap" transform="translate(126 274) scale(1.25 1.85)"/>
+  <!-- Vorhügel -->
+  <use href="#peak" transform="translate(178 288) scale(0.55 0.42)"/>
+  <use href="#peak" transform="translate(66 284) scale(0.45 0.36)"/>
+  <!-- vereinzelte Nadelbäume am Fuß -->
+  <use href="#pine" transform="translate(40 270) scale(0.9)"/>
+  <use href="#pine" transform="translate(214 268) scale(0.8)"/>
+  <use href="#pine" transform="translate(120 294) scale(0.75)"/>
+</svg>

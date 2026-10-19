@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="190" viewBox="0 0 250 190">
+  <defs>
+    <!-- @defs -->
+    <path id="w" d="M-10 0 q5 -4 10 0 q5 4 10 0" fill="none" stroke-linecap="round"/>
+    <path id="s" d="M-5 0 q5 -3 10 0" fill="none" stroke-linecap="round"/>
+  </defs>
+  <!-- Küste: helles Flachwasser mit durchscheinendem Sandgrund -->
+  <rect width="250" height="190" fill="#3c93c6"/>
+  <ellipse cx="65" cy="50" rx="62" ry="30" fill="#5aa9d6" opacity="0.6"/>
+  <ellipse cx="185" cy="135" rx="62" ry="30" fill="#5aa9d6" opacity="0.45"/>
+  <ellipse cx="180" cy="48" rx="40" ry="18" fill="#2a6f9c" opacity="0.3"/>
+  <ellipse cx="62" cy="142" rx="44" ry="22" fill="#2a6f9c" opacity="0.28"/>
+  <!-- Sandbänke unter Wasser -->
+  <ellipse cx="128" cy="92" rx="36" ry="14" fill="#8cc6d6" opacity="0.45"/>
+  <ellipse cx="76" cy="98" rx="16" ry="6" fill="#8cc6d6" opacity="0.4"/>
+  <ellipse cx="196" cy="88" rx="18" ry="7" fill="#8cc6d6" opacity="0.35"/>
+  <!-- Wellen -->
+  <g stroke="#2a6f9c" stroke-width="2.6" opacity="0.55">
+    <use href="#w" x="50" y="78"/><use href="#w" x="160" y="112"/><use href="#w" x="205" y="164"/>
+    <use href="#w" x="100" y="158"/><use href="#w" x="198" y="34"/><use href="#w" x="30" y="122"/>
+    <use href="#w" x="118" y="40"/>
+  </g>
+  <g stroke="#8cc6e6" stroke-width="2.2">
+    <use href="#w" x="48" y="75"/><use href="#w" x="158" y="109"/><use href="#w" x="203" y="161"/>
+    <use href="#w" x="98" y="155"/><use href="#w" x="196" y="31"/><use href="#w" x="28" y="119"/>
+    <use href="#w" x="116" y="37"/>
+  </g>
+  <g stroke="#e4f3fb" stroke-width="1.6" opacity="0.7">
+    <use href="#s" x="72" y="104"/><use href="#s" x="150" y="66"/><use href="#s" x="140" y="136"/>
+    <use href="#s" x="44" y="28"/><use href="#s" x="228" y="96"/>
+  </g>
+  <rect width="250" height="190" fill="url(#lightTL)"/>
+</svg>

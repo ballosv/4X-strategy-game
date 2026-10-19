@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs>
+    <!-- @defs -->
+    <!-- Findling: Fußpunkt (0,0); Deckfläche hell, linke Front Grundton, rechte Flanke Schatten -->
+    <g id="b">
+      <ellipse cx="9" cy="3" rx="30" ry="10" fill="url(#shadow)"/>
+      <path d="M-22 0 L-21 -16 L-9 -29 L10 -28 L22 -15 L23 0 Q0 6 -22 0 Z" fill="#9c958b"/>
+      <path d="M-21 -16 L-9 -29 L10 -28 L4 -16 Z" fill="#cfc8be"/>
+      <path d="M-22 0 L-21 -16 L4 -16 L1 3 Q-12 3 -22 0 Z" fill="#aea79c"/>
+      <path d="M4 -16 L10 -28 L22 -15 L23 0 Q12 3 1 3 Z" fill="#6b645c"/>
+      <path d="M-12 -8 L-6 -3 M12 -12 L15 -4" stroke="#857e74" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M-10 -24 L0 -25" stroke="#e2ddd5" stroke-width="2" stroke-linecap="round"/>
+    </g>
+  </defs>
+  <use href="#b" transform="translate(98 222) scale(1.75)"/>
+  <use href="#b" transform="translate(172 238) scale(1.25)"/>
+  <use href="#b" transform="translate(62 258) scale(0.85)"/>
+  <use href="#b" transform="translate(132 272) scale(1.05)"/>
+  <!-- Geröll und Gras -->
+  <g fill="#9c958b"><ellipse cx="190" cy="262" rx="5" ry="3"/><ellipse cx="48" cy="226" rx="4" ry="2.4"/><ellipse cx="104" cy="282" rx="3.4" ry="2"/></g>
+  <g fill="#cfc8be"><ellipse cx="189" cy="261" rx="3" ry="1.6"/><ellipse cx="47" cy="225" rx="2.4" ry="1.3"/></g>
+  <g stroke="#5f8f33" stroke-width="2" stroke-linecap="round" fill="none">
+    <path d="M118 226 l3 -8 l3 8"/><path d="M150 270 l3 -7 l3 7"/><path d="M60 258 l3 -7 l3 7"/>
+  </g>
+</svg>
