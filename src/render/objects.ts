@@ -342,7 +342,7 @@ export function paintMountain(ctx: CanvasRenderingContext2D, t: Tile, i: number,
   const high = t.elevation >= 5;
   const sprites = variants(high ? 'peak' : 'mountain');
   if (sprites.length) {
-    drawProp(ctx, pick(sprites, i, 0), c.x, c.y + HEX_R * SQUASH * 0.55, 0.95 + hash01(i, 8) * 0.2, hash01(i, 9) < 0.5);
+    drawProp(ctx, pick(sprites, i, 0), c.x, c.y + HEX_R * SQUASH * 0.95, 0.95 + hash01(i, 8) * 0.2, hash01(i, 9) < 0.5);
     return;
   }
   const cold = high || t.terrain === 'snow' || t.terrain === 'tundra';

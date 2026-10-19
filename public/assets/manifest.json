@@ -115,11 +115,11 @@
     },
     "prop/mountain_1": {
       "file": "prop/mountain_1.webp",
-      "scale": 1.05
+      "scale": 1.35
     },
     "prop/mountain_2": {
       "file": "prop/mountain_2.webp",
-      "scale": 1.05
+      "scale": 1.35
     },
     "prop/resource_game": {
       "file": "prop/resource_game.webp",
@@ -518,13 +518,16 @@
       "file": "unit/worker_mask.png"
     },
     "wall/beach": {
-      "file": "wall/beach.webp"
+      "file": "wall/beach.webp",
+      "scale": 4
     },
     "wall/cliff_temperate": {
-      "file": "wall/cliff_temperate.webp"
+      "file": "wall/cliff_temperate.webp",
+      "scale": 4
     },
     "wall/slope": {
-      "file": "wall/slope.webp"
+      "file": "wall/slope.webp",
+      "scale": 4
     }
   }
 }

@@ -45,15 +45,18 @@
     },
     "wall/cliff_temperate": {
       "from": "art/scenario/raw/wall/cliff_temperate/1.png",
-      "type": "wall"
+      "type": "wall",
+      "scale": 4
     },
     "wall/slope": {
       "from": "art/scenario/raw/wall/slope/1.png",
-      "type": "wall"
+      "type": "wall",
+      "scale": 4
     },
     "wall/beach": {
       "from": "art/scenario/raw/wall/beach/1.png",
-      "type": "wall"
+      "type": "wall",
+      "scale": 4
     },
     "prop/tree_broadleaf_1": {
       "from": "art/scenario/raw/prop/tree_broadleaf_1/1_nobg.png",
@@ -94,13 +97,13 @@
       "from": "art/scenario/raw/prop/mountain_1/2_nobg.png",
       "type": "object",
       "size": 512,
-      "scale": 1.05
+      "scale": 1.35
     },
     "prop/mountain_2": {
       "from": "art/scenario/raw/prop/mountain_1/3_nobg.png",
       "type": "object",
       "size": 512,
-      "scale": 1.05
+      "scale": 1.35
     },
     "prop/resource_game": {
       "from": "art/scenario/raw/prop/resource_game/1_nobg.png",

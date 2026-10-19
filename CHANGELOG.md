@@ -22,6 +22,9 @@
   Nadelbäume (4), Felsbrocken (2), Bergmassive (2), Wild; Steinzeit-Hütte und -Langhaus; mittelalterliches
   Wohnhaus klein/groß, Rathaus, Kirchturm, Mauerstück; Porträt des Speerträgers
 - Asset-Vorschau zeigt je Gebäudeschlüssel den einzelnen Baustein statt eines ganzen Lagers
+- Gebirge: deckender Felsboden statt Gras, Felskante statt Grasüberhang, Felswände auch an flachen Hängen,
+  größere Bergmassive mit Fußpunkt an der vorderen Feldkante
+- Gemalte Wandtexturen doppelt so grob skaliert (weniger sichtbares Muster an den Feldrändern)
 - Einheitenpanel zeigt gemalte Porträts (`portrait/<einheit>`), sobald vorhanden
 - Gemalte Bäume und Felsen erhalten einen Kontaktschatten vom Renderer
 - Skripte: `scripts/scenario-generate.mjs` (Generierung mit Kostenprüfung per dryRun und Budgetgrenze,

@@ -89,10 +89,11 @@ export function paintFace(ctx: CanvasRenderingContext2D, pc: PaintContext, i: nu
   ctx.clip();
   // Hochlagen felsiger und etwas heller (Licht)
   if (!water && elev >= 4) {
-    ctx.globalAlpha = elev >= 5 ? 0.6 : 0.4;
+    // Gebirge: deckender Felsboden, kein Gras (das Bergmassiv steht darauf)
     ctx.fillStyle = wallPattern(ctx, t.terrain === 'snow' || elev >= 5 ? 'cliff_snow' : 'cliff_temperate') ?? '#8d857b';
     ctx.fill();
-    ctx.globalAlpha = 1;
+    ctx.fillStyle = 'rgba(40,36,30,0.18)';
+    ctx.fill();
   } else if (!water && elev >= 2) {
     ctx.fillStyle = `rgba(255,250,225,${0.025 * (elev - 1)})`;
     ctx.fill();
@@ -135,7 +136,8 @@ function paintShore(ctx: CanvasRenderingContext2D, pc: PaintContext, i: number, 
 function wallKind(t: Tile, nb: Tile | null, levels: number): { tex: WallTexture; cliff: boolean } {
   const nbWater = !!nb && isWaterTile(nb);
   const cliff = levels >= CLIFF_DELTA || (nbWater && t.elevation >= 2) || !nb;
-  if (!cliff) return { tex: nbWater ? 'beach' : 'slope', cliff };
+  // Gebirge (Stufe 4+) hat auch an flachen Hängen Fels statt Erde
+  if (!cliff && t.elevation < 4) return { tex: nbWater ? 'beach' : 'slope', cliff };
   const tex: WallTexture = t.terrain === 'snow' || t.terrain === 'tundra' || t.elevation >= 5 ? 'cliff_snow' : t.terrain === 'desert' ? 'cliff_desert' : 'cliff_temperate';
   return { tex, cliff };
 }
@@ -191,8 +193,10 @@ export function paintWalls(ctx: CanvasRenderingContext2D, pc: PaintContext, i: n
 /** Grasüberhang an der Oberkante (unregelmäßig, hängt ein paar Pixel über die Wand). */
 function paintOverhang(ctx: CanvasRenderingContext2D, t: Tile, p1: Point, p2: Point, cliff: boolean, salt: number): void {
   const n = 9;
-  const dark = groundColor(t.terrain, 0);
-  const mid = groundColor(t.terrain, 1);
+  // Gebirge mit Felskante statt Grasüberhang
+  const rocky = !isWaterTile(t) && effElevation(t) >= 4;
+  const dark = rocky ? '#6f6a62' : groundColor(t.terrain, 0);
+  const mid = rocky ? '#a39d93' : groundColor(t.terrain, 1);
   const pts: Point[] = [];
   for (let k = 0; k <= n; k++) {
     const f = k / n;

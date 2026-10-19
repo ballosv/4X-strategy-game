@@ -264,6 +264,12 @@ Ablauf (Zugangsdaten in `SCENARIO_API_KEY`/`SCENARIO_API_SECRET`, werden nie aus
    schreibt `public/assets/<schlüssel>.webp` und das Manifest.
 5. `npm run assets:check`, `npm run art:prune`, im Spiel prüfen (Kapitel 8 der Spezifikation).
 
+Maßstäbe der Vertical-Slice-Grafiken (in `selection.json` → Manifest): gemalte Wandtexturen `scale` 4
+(eine 512-px-Kachel deckt zwei Feldbreiten ab – grobe Felsblöcke wie im Zielbild, kaum sichtbare
+Wiederholung), Bergmassive `scale` 1,35 mit Fußpunkt an der vorderen Feldkante, Felsbrocken 0,2, Wild 0,32,
+Kirchturm 0,55. Gebirgsfelder (Stufe 4+) haben deckenden Felsboden, Felskanten statt Grasüberhang und
+auch an flachen Hängen Felswände.
+
 Kosten (Stand 10/2026, per dryRun): Gemini 3.1 Flash 12 CU je Bild (mit Referenzen 13), FLUX.2 Dev 16,
 FLUX.2 Klein 9B 11, Freistellen 3; LoRA-Training 92–156 CU je Modell.
 
