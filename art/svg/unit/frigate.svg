@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Fregatte: Dreimaster mit Batteriedeck, Rahsegel (Fraktion) und Heckflagge (Fraktion) -->
+  <ellipse cx="104" cy="182" rx="88" ry="12" fill="url(#shadow)"/>
+  <path d="M12 178 Q56 172 100 180 Q146 172 190 178 Q146 186 100 184 Q56 186 12 178 Z" fill="#e9eff3" opacity="0.55"/>
+  <!-- Takelage -->
+  <path d="M4 112 L56 10 L100 2 L140 18 L184 112" stroke="#553c22" stroke-width="1.2" fill="none"/>
+  <!-- Masten -->
+  <path d="M54 10 h4 v118 h-4 z M98 2 h4 v126 h-4 z M138 18 h4 v110 h-4 z" fill="#7a5a36"/>
+  <!-- Rahen -->
+  <path d="M34 20 h44 M30 54 h52 M76 12 h48 M70 48 h60 M120 28 h40 M116 62 h48" stroke="#553c22" stroke-width="3" stroke-linecap="round"/>
+  <!-- Segel (Fraktion): je Mast Mars- und Untersegel -->
+  <g class="faction">
+    <path d="M36 22 L76 22 Q80 36 76 50 L36 50 Q32 36 36 22 Z" fill="#d6d6d6"/>
+    <path d="M32 56 L80 56 Q86 76 80 96 L32 96 Q26 76 32 56 Z" fill="#d6d6d6"/>
+    <path d="M78 14 L122 14 Q126 30 122 44 L78 44 Q74 30 78 14 Z" fill="#d6d6d6"/>
+    <path d="M72 50 L128 50 Q134 72 128 96 L72 96 Q66 72 72 50 Z" fill="#d6d6d6"/>
+    <path d="M122 30 L158 30 Q162 44 158 58 L122 58 Q118 44 122 30 Z" fill="#d6d6d6"/>
+    <path d="M118 64 L162 64 Q168 82 162 100 L118 100 Q112 82 118 64 Z" fill="#d6d6d6"/>
+  </g>
+  <g class="faction" fill="#f4f4f4">
+    <path d="M36 22 L50 22 Q48 36 50 50 L36 50 Q32 36 36 22 Z"/>
+    <path d="M32 56 L48 56 Q46 76 48 96 L32 96 Q26 76 32 56 Z"/>
+    <path d="M78 14 L94 14 Q92 30 94 44 L78 44 Q74 30 78 14 Z"/>
+    <path d="M72 50 L90 50 Q88 72 90 96 L72 96 Q66 72 72 50 Z"/>
+    <path d="M122 30 L134 30 Q132 44 134 58 L122 58 Q118 44 122 30 Z"/>
+    <path d="M118 64 L134 64 Q132 82 134 100 L118 100 Q112 82 118 64 Z"/>
+  </g>
+  <g class="faction" fill="#a8a8a8">
+    <path d="M66 22 L76 22 Q80 36 76 50 L66 50 Q68 36 66 22 Z"/>
+    <path d="M68 56 L80 56 Q86 76 80 96 L68 96 Q72 76 68 56 Z"/>
+    <path d="M112 14 L122 14 Q126 30 122 44 L112 44 Q114 30 112 14 Z"/>
+    <path d="M114 50 L128 50 Q134 72 128 96 L114 96 Q118 72 114 50 Z"/>
+    <path d="M150 30 L158 30 Q162 44 158 58 L150 58 Q152 44 150 30 Z"/>
+    <path d="M150 64 L162 64 Q168 82 162 100 L150 100 Q154 82 150 64 Z"/>
+  </g>
+  <!-- Heckflagge (Fraktion) -->
+  <path d="M160 100 L190 76" stroke="#553c22" stroke-width="2.5"/>
+  <path class="faction" d="M176 70 L196 70 L196 84 L178 84 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M176 70 L196 70 L196 76 L177 76 Z" fill="#f4f4f4"/>
+  <!-- Bugspriet -->
+  <path d="M40 124 L2 104" stroke="#553c22" stroke-width="4" stroke-linecap="round"/>
+  <!-- Rumpf -->
+  <path d="M14 118 L180 112 L184 132 Q176 168 150 176 L52 176 Q24 168 14 118 Z" fill="#553c22"/>
+  <path d="M14 118 L100 115 L100 176 L52 176 Q24 168 14 118 Z" fill="#7a5a36"/>
+  <path d="M150 113 L180 112 L184 132 Q176 168 150 176 Z" fill="#3e2c1a"/>
+  <!-- Batteriedeck: Ockerband mit Stückpforten -->
+  <path d="M18 134 Q100 140 182 130 L180 144 Q100 154 22 146 Z" fill="#c9a24a"/>
+  <path d="M140 136 Q164 134 182 130 L180 144 Q162 148 140 150 Z" fill="#9a7a32"/>
+  <path d="M32 137 h7 v7 h-7 z M50 138 h7 v7 h-7 z M68 139 h7 v7 h-7 z M86 140 h7 v7 h-7 z M104 140 h7 v7 h-7 z M122 139 h7 v7 h-7 z M140 138 h7 v7 h-7 z M158 136 h7 v7 h-7 z" fill="#1e1712"/>
+  <path d="M30 160 Q100 168 172 156" stroke="#3e2c1a" stroke-width="1.6" fill="none"/>
+  <!-- Reling und Achterdeck -->
+  <path d="M14 118 L180 112 L180 117 L15 123 Z" fill="#3e2c1a"/>
+  <path d="M150 100 L184 98 L184 114 L150 116 Z" fill="#7a5a36"/>
+  <path d="M168 99 L184 98 L184 114 L168 115 Z" fill="#553c22"/>
+  <path d="M154 104 h4 v6 h-4 z M162 104 h4 v6 h-4 z M172 103 h4 v6 h-4 z" fill="#e2c27a"/>
+</svg>
