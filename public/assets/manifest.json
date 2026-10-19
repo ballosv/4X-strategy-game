@@ -1,4 +1,20 @@
 {
   "version": 1,
-  "sprites": {}
+  "sprites": {
+    "overlay/forest": {
+      "file": "overlay/forest.png",
+      "anchorY": 0.7
+    },
+    "terrain/grassland": {
+      "file": "terrain/grassland.png"
+    },
+    "unit/spearman": {
+      "file": "unit/spearman.png",
+      "anchorY": 0.92,
+      "scale": 0.8
+    },
+    "unit/spearman_mask": {
+      "file": "unit/spearman_mask.png"
+    }
+  }
 }

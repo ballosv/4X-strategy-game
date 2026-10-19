@@ -23,6 +23,27 @@ Empfohlene Exportgrößen: 4-fache Auflösung der Weltpixel (Hex-Oberseite ca. *
 transparenter Hintergrund, PNG oder WebP. Die Karte wird bis Zoom 2,6 dargestellt; 4-fach reicht
 auch für hochauflösende Displays.
 
+## Grafik als Teil der Entwicklung
+
+Es gibt kein separates Grafik-Team: Grafiken entstehen im Repository als **SVG-Vektorquellen**
+(`art/svg/`) und werden mit `npm run art:render` deterministisch zu PNG gerendert. Stil und
+Vorlagen: [art/STYLE.md](../art/STYLE.md).
+
+- **Neue Spielobjekte bringen ihre Grafik mit.** Jede Einheit, jeder Ausbau, jede Geländeart usw.
+  erzeugt automatisch einen erwarteten Asset-Schlüssel. Fehlt die Grafik, schlägt `npm run assets:check`
+  (und damit die CI) fehl.
+- **Ausnahme mit Planung:** Ist die Grafik nicht im selben Feature machbar, wird sie mit Ziel-Release
+  in `art/backlog.json` eingetragen. Die CI akzeptiert das, aber **ein Release schlägt fehl**, solange
+  Grafiken für dieses (oder ein früheres) Release offen sind (`npm run assets:release-check`, läuft in
+  PRs nach `main` und im Release-Workflow).
+- **Quellen und Ergebnis bleiben synchron:** `npm run art:check` (CI) prüft, dass PNGs und Manifest
+  zu den SVG-Quellen passen.
+- Die GitHub-Actions-Zusammenfassung zeigt bei jedem Lauf die Grafik-Abdeckung und den Backlog je Release.
+
+Werkzeugwahl für neue Grafiken: zuerst eigene Vektorgrafik (SVG). Reicht das für ein Motiv nicht aus,
+können Bildgenerator-Werkzeuge (z. B. über Plugins wie SpriteCook oder CellCog) genutzt werden; deren
+Ergebnis wird als PNG/WebP direkt in `public/assets/` abgelegt und im Manifest eingetragen.
+
 ## Überblick
 
 | Teil | Datei |

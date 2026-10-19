@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="190" viewBox="0 0 250 190">
+  <defs><!-- @defs --></defs>
+  <rect width="250" height="190" fill="#86b84a"/>
+  <!-- weiche Farbflecken -->
+  <ellipse cx="60" cy="50" rx="55" ry="30" fill="#93c455" opacity="0.7"/>
+  <ellipse cx="185" cy="135" rx="60" ry="32" fill="#78aa40" opacity="0.6"/>
+  <ellipse cx="160" cy="45" rx="40" ry="20" fill="#9ccb5c" opacity="0.5"/>
+  <ellipse cx="70" cy="140" rx="45" ry="24" fill="#7fb045" opacity="0.5"/>
+  <!-- Grasbüschel -->
+  <g stroke-linecap="round" stroke-width="2.4" fill="none">
+    <g stroke="#a8d06a">
+      <path d="M40 70 l4 -9 l4 9"/><path d="M110 40 l4 -9 l4 9"/><path d="M190 80 l4 -9 l4 9"/>
+      <path d="M80 110 l4 -9 l4 9"/><path d="M150 150 l4 -9 l4 9"/><path d="M210 40 l4 -9 l4 9"/>
+      <path d="M30 160 l4 -9 l4 9"/><path d="M125 95 l4 -9 l4 9"/>
+    </g>
+    <g stroke="#5f8f33">
+      <path d="M60 90 l4 -8 l4 8"/><path d="M140 60 l4 -8 l4 8"/><path d="M200 120 l4 -8 l4 8"/>
+      <path d="M100 160 l4 -8 l4 8"/><path d="M20 115 l4 -8 l4 8"/><path d="M170 100 l4 -8 l4 8"/>
+      <path d="M230 160 l4 -8 l4 8"/>
+    </g>
+  </g>
+  <!-- Blüten -->
+  <g fill="#f4e27a"><circle cx="95" cy="70" r="2.2"/><circle cx="175" cy="60" r="2.2"/><circle cx="55" cy="130" r="2.2"/></g>
+  <g fill="#ffffff"><circle cx="205" cy="100" r="2"/><circle cx="130" cy="135" r="2"/></g>
+  <rect width="250" height="190" fill="url(#lightTL)"/>
+</svg>

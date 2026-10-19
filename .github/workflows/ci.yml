@@ -19,6 +19,13 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npm test
+      - name: Grafik prüfen (Manifest, Backlog, SVG-Quellen)
+        run: |
+          npm run assets:check
+          npm run art:check
+      - name: Grafik-Freigabe für das Release
+        if: github.base_ref == 'main' || github.ref == 'refs/heads/main'
+        run: npm run assets:release-check
       - run: npm run build
       - uses: actions/upload-artifact@v5
         with:

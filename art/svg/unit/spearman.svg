@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="108" cy="186" rx="34" ry="10" fill="url(#shadow)"/>
+  <!-- Speer -->
+  <path d="M70 186 L70 36" stroke="#7a5a36" stroke-width="4" stroke-linecap="round"/>
+  <path d="M70 18 L63 40 L77 40 Z" fill="#aab3ba"/>
+  <path d="M70 18 L70 40 L77 40 Z" fill="#6d767d"/>
+  <!-- Beine -->
+  <path d="M88 150 L86 184 L96 184 L98 150 Z" fill="#5a4636"/>
+  <path d="M104 150 L104 184 L114 184 L112 150 Z" fill="#4a3a2c"/>
+  <path d="M84 184 h14 v-5 h-14 z M102 184 h14 v-5 h-14 z" fill="#3a2c20"/>
+  <!-- Tunika (Fraktion) -->
+  <path class="faction" d="M80 100 Q100 92 120 100 L124 156 Q100 162 76 156 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M80 100 Q90 96 100 95 L98 158 Q86 158 76 156 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M110 98 Q116 99 120 100 L124 156 Q118 158 112 159 Z" fill="#a8a8a8"/>
+  <!-- Gürtel -->
+  <path d="M78 130 Q100 136 122 130 L122 137 Q100 143 78 137 Z" fill="#5a3d22"/>
+  <!-- Arme -->
+  <path d="M80 104 Q70 112 72 128 L80 128 Q80 114 86 108 Z" fill="#e0b48a"/>
+  <circle cx="74" cy="128" r="5" fill="#e0b48a"/>
+  <!-- Kopf mit Helm -->
+  <circle cx="100" cy="80" r="15" fill="#e0b48a"/>
+  <path d="M100 80 m0 -15 a15 15 0 0 1 15 15 l-6 0 a9 9 0 0 0 -9 -9 z" fill="#b88a62" opacity="0.5"/>
+  <path d="M84 78 Q84 60 100 58 Q116 60 116 78 Z" fill="#aab3ba"/>
+  <path d="M100 58 Q116 60 116 78 L104 78 Z" fill="#6d767d"/>
+  <path d="M100 52 L102 60 L98 60 Z" fill="#6d767d"/>
+  <circle cx="95" cy="84" r="1.6" fill="#3a2c20"/>
+  <!-- Rundschild (Fraktion mit Metallbuckel) -->
+  <ellipse cx="124" cy="126" rx="22" ry="28" fill="#7a5a36"/>
+  <ellipse class="faction" cx="124" cy="126" rx="18" ry="24" fill="#d6d6d6"/>
+  <path class="faction" d="M124 102 a18 24 0 0 0 -18 24 l18 0 z" fill="#f4f4f4"/>
+  <path class="faction" d="M124 126 l18 0 a18 24 0 0 1 -18 24 z" fill="#a8a8a8"/>
+  <circle cx="124" cy="126" r="5" fill="#aab3ba"/>
+</svg>
