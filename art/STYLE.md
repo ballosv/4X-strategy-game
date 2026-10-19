@@ -1,5 +1,9 @@
 # Grafik-Stilleitfaden für SVG-Quellen
 
+> **Hinweis:** Seit der [Grafik-Spezifikation Version 2](../docs/GRAFIK_SPEZIFIKATION.md) ist die
+> Zielgrafik handgemalt und wird KI-gestützt erzeugt. Die SVG-Grafiken nach diesem Leitfaden sind
+> Platzhalter, bis die gemalten Assets abgenommen sind.
+
 Alle Spielgrafiken entstehen als **SVG-Vektorquellen** in `art/svg/` und werden mit
 `npm run art:render` deterministisch zu PNG gerendert (`public/assets/`, Manifest wird automatisch
 gepflegt). Grundlage ist die [Grafik-Spezifikation](../docs/GRAFIK_SPEZIFIKATION.md):

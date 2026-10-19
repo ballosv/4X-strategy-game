@@ -1,709 +1,248 @@
-# AI 4X Game – Grafik-Spezifikation & Handover
+# AI 4X – Grafik-Spezifikation (Version 2)
 
-**Stand:** 30.09.2026  
-**Zweck:** Verbindliche visuelle Grundlage für die weitere Konzeption, KI-gestützte Asset-Erstellung und spätere technische Umsetzung des rundenbasierten 4X-Zivilisationsspiels.
+**Stand:** 19.10.2026 · ersetzt Version 1 vom 30.09.2026
+**Zweck:** Verbindliche visuelle Grundlage für Grafikproduktion (KI-gestützt) und Renderer.
 
----
-
-## 1. Zielsetzung
-
-Das Spiel soll grafisch hochwertig, klar lesbar und konsistent wirken, ohne auf eine klassische 3D-Art-Pipeline oder einen dedizierten 3D-Artist angewiesen zu sein.
-
-Da die grafischen Assets und UI-Elemente weitgehend mit KI-Unterstützung erzeugt werden sollen, muss der Stil:
-
-- gut durch KI reproduzierbar sein,
-- modular aufgebaut werden können,
-- über viele Epochen hinweg konsistent funktionieren,
-- Gameplay-Informationen klar lesbar darstellen,
-- mit überschaubarem technischen Aufwand implementierbar sein,
-- ohne komplexe 3D-Modelle und aufwendige Animationen auskommen.
-
-Die wichtigste Designregel lautet:
-
-> **Lesbarkeit und Konsistenz haben Vorrang vor maximalem grafischem Detailgrad.**
+**Verbindliches Zielbild:** [`docs/referenz/einheitenpanel.png`](referenz/einheitenpanel.png)
+(im Folgenden „Zielbild“). Ergänzend für Siedlungs-/Wirtschaftsansichten:
+[`docs/referenz/siedlungsansicht.png`](referenz/siedlungsansicht.png).
+Ist-Stand zum Vergleich: [`docs/referenz/ist-stand-v0.2.jpg`](referenz/ist-stand-v0.2.jpg).
 
 ---
 
-# 2. Festgelegter Grafikstil
+## 0. Was sich gegenüber Version 1 ändert
 
-## 2.1 Grundstil
+Version 1 beschrieb einen vektorartigen Stil mit „Medium-Low“-Detail und Feldern als einzelnen
+Kacheln. Das Zielbild zeigt etwas anderes: eine **gemalte, detailreiche Diorama-Landschaft**, über
+der das Hexgitter nur als feine Linie liegt. Version 2 richtet die Spezifikation am Zielbild aus.
 
-Empfohlener und festgelegter Stil:
+| Thema | Version 1 | Version 2 (verbindlich) |
+|---|---|---|
+| Stil | vektorartig, Medium-Low Detail | **handgemalt-stilisiert, mittel-hoher Detailgrad** („painted isometric diorama“) |
+| Gelände | eine Grafik je Feld | **durchgehende Landschaft**: Texturen in Weltkoordinaten, weiche Übergänge, Gitter als Overlay |
+| Höhen | sichtbare Stufen | **hohe, natürliche Felswände** mit Fels-Textur, Grasüberhang, Wasserfällen |
+| Objekte | ein Sprite je Feld | **Einzelobjekte** (Bäume, Felsen, Häuser) werden je Feld variiert verteilt und dürfen über Feldgrenzen ragen |
+| Siedlungen | ein Bild je Siedlung | **aus Gebäude-Sprites zusammengesetzt**, wachsen mit der Größe, Epochenstil |
+| Einheiten | einfache Pose, wenig Details | **detailliert gemalte Figuren**, leicht überproportional, Fraktionsfarbe auf Wappenrock/Schild/Banner |
+| Produktion | SVG von Hand | **KI-Bildgenerierung mit trainierten Stilmodellen** (Scenario), Nachbearbeitung im Repo |
 
-> **Stylized Isometric 2D Strategy Art**
-
-Der Stil kombiniert:
-
-- isometrische Darstellung,
-- klare vektorartige Grundformen,
-- leicht handgemalte Texturen,
-- stilisierte statt realistische Proportionen,
-- moderate Details,
-- klare Silhouetten,
-- weiche, aber gut erkennbare Schatten,
-- einen leicht modellhaften / dioramaartigen Eindruck,
-- eine moderne, reduzierte Strategie-UI.
-
-Der Look soll an eine hochwertige Brettspielwelt bzw. ein stilisiertes digitales Diorama erinnern.
+Unverändert bleiben: 2D-Pipeline, isometrische Ansicht, Hexfelder, Licht von oben links, moderne
+Flat-UI, kontextabhängiges Panel unten, Lesbarkeit vor Realismus.
 
 ---
 
-## 2.2 Nicht angestrebte Richtungen
+## 1. Leitprinzip
 
-Folgende Stile sollen bewusst vermieden werden:
+> **Die Spielwelt soll wie ein handgemaltes Diorama wirken – reich an Details, aber jederzeit
+> lesbar: Felder, Höhen, Einheiten, Besitz und mögliche Aktionen müssen auf einen Blick erkennbar sein.**
 
-- fotorealistisches 3D,
-- komplexes Low-Poly-3D als primäre Produktionspipeline,
-- hochrealistische Renderings,
-- stark detailreiche Concept-Art als eigentliche Spielgrafik,
-- uneinheitliche „KI-Gemälde“ kompletter Spielszenen,
-- sehr kleines oder stark abstrahiertes Retro-Pixelart,
-- übermäßig verspielte Mobile-Game-Optik,
-- UI mit starken Materialsimulationen wie Pergament, Metallrahmen etc.
+Wo Detail und Lesbarkeit kollidieren, gewinnt die Lesbarkeit (z. B. Einheiten größer als
+maßstabsgetreu, Hexlinien immer sichtbar, Fraktionsfarben kräftig).
 
 ---
 
-# 3. Spielwelt
+## 2. Stil
 
-## 3.1 Kartenstruktur
+### 2.1 Grundstil
 
-Die Weltkarte basiert auf **klar erkennbaren Hexfeldern**.
+**Stylized hand-painted isometric strategy art** – vergleichbar mit modernen Aufbau- und
+Strategiespielen in gemalter 2D/2,5D-Optik:
 
-Anforderungen:
+- gemalte Texturen mit sichtbaren, weichen Pinselstrukturen, aber ohne Fotorealismus,
+- kräftige, natürliche Farben mit leicht warmem Licht,
+- klare Silhouetten durch Hell-Dunkel-Kontrast (keine schwarzen Konturen),
+- weiche Umgebungsverschattung (Ambient Occlusion) an Kontaktstellen,
+- Schlagschatten kurz bis mittel, nach rechts unten,
+- Wasser mit Tiefenverlauf (flach türkis → tief blau), Schaumkante an Küsten und Felsen,
+- Atmosphäre: leichte Wolken-/Nebelschleier am Kartenrand und im Nebel des Krieges.
 
-- Jedes Geländefeld ist als Hexkachel eindeutig identifizierbar.
-- Die Hexstruktur muss auch bei dicht bebauten oder bewaldeten Feldern erkennbar bleiben.
-- Grenzen dürfen dezent sein, aber niemals komplett verschwinden.
-- Selektierte Felder können durch einen hellen oder farbigen Rahmen hervorgehoben werden.
-- Besitz-, Einfluss- oder Aktionsbereiche können später über zusätzliche Overlays dargestellt werden.
+### 2.2 Nicht angestrebt
 
-Die Hexfelder sind ein funktionales Gameplay-Element und keine rein dekorative Unterteilung.
+- Fotorealismus, realistische 3D-Renderings, starke Spiegelungen,
+- Pixelart, Low-Poly-Optik, flache Vektorgrafik (Stand v0.2),
+- uneinheitliche Einzelbilder: **Kein Asset darf aus dem Stil fallen** (Kapitel 8),
+- komplette Szenen als ein Bild (nur Einzel-Assets, Texturen und Bausteine),
+- Text in Grafiken.
 
----
+### 2.3 Detailgrad
 
-## 3.2 Höhenunterschiede
-
-Die Karte besitzt klar sichtbare Höhenstufen.
-
-Gelände darf nicht wie eine flache Brettspielkarte wirken.
-
-Höhenunterschiede sollen durch folgende Mittel deutlich werden:
-
-- sichtbare Felskanten,
-- Plateaus,
-- Terrassen,
-- Klippen,
-- erhöhte Waldflächen,
-- Hügelstufen,
-- stark erhöhte Gebirge,
-- Wasserfälle zwischen Höhenebenen,
-- Schatten an Geländekanten.
-
-Beispielhafte Höhenwirkung:
-
-- **Stufe 0:** Wasser / Küste
-- **Stufe 1:** Ebene
-- **Stufe 2:** erhöhtes Grasland / Hügel / Waldplateau
-- **Stufe 3:** hohe Felsplateaus
-- **Stufe 4+:** Gebirge / Hochgebirge
-
-Diese grafische Darstellung unterstützt direkt die bereits konzipierten Spielregeln für Höhenunterschiede, Bewegung und Sicht.
+**Mittel-hoch.** Bei normalem Zoom (Kapitel 3) sind Fenster, Dachziegelreihen, Speere, Schilde,
+Tierfiguren und Felsstrukturen erkennbar. Bei herausgezoomter Ansicht (Zoom ≤ 0,6) müssen
+Silhouette und Farbe allein genügen.
 
 ---
 
-## 3.3 Terrain-Typen
+## 3. Kamera, Maßstab und Höhen
 
-Die Art Direction muss unter anderem folgende Geländearten unterstützen:
+Die Werte sind am Zielbild abgeleitet und werden im Renderer (`src/render/projection.ts`) umgesetzt.
 
-- Grasland
-- Wald
-- dichter Wald
-- Hügel
-- Gebirge
-- Hochgebirge
-- Flüsse
-- Seen
-- Küsten
-- Meer
-- Wüste
-- Tundra
-- Schnee
-- Sumpf
-- landwirtschaftliche Flächen
+| Parameter | Version 1 / v0.2 | Version 2 (Ziel) |
+|---|---|---|
+| Hex-Ausrichtung | Spitze oben | Spitze oben (unverändert) |
+| Vertikale Stauchung (Neigung) | 0,66 | **0,58** (flachere Kamera, mehr Tiefe) |
+| Höhe je Höhenstufe | 0,47 × Hex-Radius | **0,85 × Hex-Radius** (Klippen deutlich hoch) |
+| Standard-Zoom | ca. 20 Felder Bildbreite | **ca. 9–11 Felder Bildbreite** auf dem Smartphone quer |
+| Zoombereich | 0,35 – 2,6 | 0,4 – 2,0 |
+| Hexlinien | dunkle Kanten je Kachel | **feines helles Gitter** (Weiß/Gelbgrün, 15–25 % Deckkraft) über der Landschaft |
 
-Geländefelder sollen grundsätzlich aus einer Basisfläche plus optionalen Overlays bestehen.
+**Höhenstufen** (unverändert in der Spiellogik): 0 Wasser · 1 Ebene · 2 Hügel/erhöhtes Land ·
+3 Hochplateau · 4 Gebirge · 5 Hochgebirge. Stufe 4–5 werden zusätzlich durch Bergmassiv-Objekte
+dargestellt, die deutlich über die Feldfläche hinausragen.
+
+**Klippen und Hänge:**
+- Unterschied ≥ 2 Stufen (unpassierbar): **senkrechte Felswand** mit Gesteinsschichten,
+  Grasüberhang an der Oberkante, Geröll am Fuß.
+- Unterschied 1 Stufe (passierbar): **erdiger Hang** bzw. niedrige Felskante mit Grasflecken.
+- Land an Wasser: Felsküste (ab Stufe 2) oder Strand/Uferböschung (Stufe 1) mit Schaumkante.
+- Flussüberquerung von höheren Feldern: Wasserfall über die Wand.
 
 ---
 
-# 4. Modularer Asset-Aufbau
+## 4. Aufbau der Spielwelt (Rendering-Schichten)
 
-KI soll möglichst **einzelne wiederverwendbare Assets** erzeugen, nicht komplette Spielkarten.
+Damit aus Bausteinen eine durchgehende Landschaft wie im Zielbild entsteht, setzt der Renderer
+die Welt in festen Schichten zusammen. Die Grafikproduktion liefert die Bausteine je Schicht.
 
-Empfohlene Struktur:
+| # | Schicht | Inhalt | Assets |
+|---|---|---|---|
+| 1 | Wasser | Tiefenverlauf, Wellen, Schaum an Küsten | Wassertexturen (flach/tief), Schaum-Pinsel |
+| 2 | Bodenflächen | Geländetextur in **Weltkoordinaten** (nahtlos), Übergänge zu Nachbarn per Rauschmaske | 1 nahtlose Textur je Geländeart (+ Variante) |
+| 3 | Wände | Felswände/Hänge der SW-/SO-Kanten in Fels- bzw. Erdtextur, Grasüberhang | Felswand-Texturen je Biom, Überhang-Kanten |
+| 4 | Flüsse, Wege | Flussbänder, Wasserfälle, Straßen, Schienen, Brücken | Fluss-/Weg-Texturen, Brücken-Sprites |
+| 5 | Bodendetails | Gras, Blumen, Steine, Felder, Zäune | kleine Streu-Sprites, Feld-Kacheln |
+| 6 | Objekte | Bäume, Felsen, Berge, Gebäude, Ausbauten (nach Tiefe sortiert) | Einzel-Sprites mit Varianten |
+| 7 | Hexgitter, Grenzen | feines Gitter, Reichsgrenzen in Spielerfarbe | prozedural |
+| 8 | Einheiten | Figuren mit Fraktionsring, Banner, Lebensbalken | Einheiten-Sprites + Masken |
+| 9 | Nebel | unerkundet: Wolkendecke; erkundet/nicht sichtbar: entsättigter Schleier | Wolken-Textur |
 
-```text
-Terrain
-├── Grasland
-├── Wald
-├── Wüste
-├── Tundra
-├── Schnee
-├── Sumpf
-├── Wasser
-└── Küste
+**Variation:** Jedes Objekt existiert in mehreren Varianten; der Renderer wählt anhand des Feldes
+(deterministisch) Variante, Position, Größe (±15 %) und Spiegelung. Dadurch entsteht keine sichtbare
+Wiederholung.
 
-Overlays
-├── Bäume
-├── Felsen
-├── Ressourcen
-├── Felder
-├── Büsche
-└── Spezialgelände
+---
 
-Infrastruktur
-├── Pfad
-├── Straße
-├── Brücke
-├── Eisenbahn
-├── Stromleitung
-├── Pipeline
-├── Hafen
-└── Flugfeld
+## 5. Asset-Katalog (Version 2)
 
-Gebäude
-├── Wohngebäude
-├── Werkstatt
-├── Bauernhof
-├── Mine
-├── Fabrik
-├── Hafen
-├── Flughafen
-├── Kraftwerk
-└── futuristische / Maschinen-Strukturen
+Alle Assets sind Einzelbilder (transparenter Hintergrund) bzw. nahtlose Texturen. Schlüssel und
+Dateiablage folgen [ASSET_PIPELINE.md](ASSET_PIPELINE.md); der Katalog wird in `src/render/assetKeys.ts`
+gepflegt, damit Vorschau, CI und Grafik-Backlog ihn kennen.
 
-Einheiten
-├── Zivil
-├── Erkundung
-├── Infanterie
-├── Kavallerie / Fahrzeuge
-├── Schiffe
-├── Flugzeuge
-└── Maschinen
+| Gruppe | Inhalt | Anzahl (ca.) |
+|---|---|---|
+| Bodentexturen | Grasland, Ebene, Wüste, Tundra, Schnee, Sumpf, Küste/flaches Wasser, Meer, See; je 2 Varianten, nahtlos 512 × 512 | 18 |
+| Wände & Kanten | Felswand (gemäßigt, Wüste, Schnee), Erdhang, Grasüberhang, Strandkante, Schaumkante | 8 |
+| Flüsse & Wege | Flussband, Wasserfall (2), Feldweg, Straße, Schiene, Brücken (Holz, Stein, Stahl) | 10 |
+| Vegetation | Laubbäume (6), Nadelbäume (6), Palmen (3), Tundra-/kahle Bäume (3), Büsche & Schilf (6) | 24 |
+| Felsen & Berge | Felsbrocken (6), Bergmassive (4), Hochgebirge mit Schnee (3) | 13 |
+| Ressourcen | 15 Rohstoffe als kleine Feld-Objekte (z. B. Hirsche, Schafe, Erzader, Ölfleck) | 15 |
+| Ausbauten | 13 Ausbauten, teils mit Stufen 2/3 (Farm, Mine, Fischerei …) | 30 |
+| Gebäude | Siedlungsbausteine je Epochenstil (5 Stile: Steinzeit, Antike, Mittelalter, Industrie, Moderne/Zukunft) × 7 Gebäude (Wohnhaus klein/groß, Zentrum, Turm/Tempel, Werkstatt, Lager, Mauerstück) | 35 |
+| Einheiten | 38 Einheiten (Karte) | 38 |
+| Porträts | 38 Einheitenporträts (Brustbild/Ganzkörper mit Hintergrund, 512 × 512) | 38 |
+| Atmosphäre | Wolken/Nebel (3), Vögel/Tiere als Deko (4) | 7 |
+| **Summe** | | **≈ 236** |
 
-UI
-├── Ressourcen-Icons
-├── Aktions-Icons
-├── Status-Icons
-├── Gebäude-Icons
-├── Technologie-Icons
-└── Interface-Komponenten
+UI-Icons bleiben vorerst Emoji/Vektor und sind nicht Teil dieses Katalogs.
+
+---
+
+## 6. Technische Vorgaben je Asset-Gruppe
+
+| Gruppe | Format | Größe (Export) | Hintergrund | Bezugspunkt |
+|---|---|---|---|---|
+| Bodentexturen | PNG/WebP | 512 × 512, nahtlos kachelbar | deckend | – (Weltkoordinaten) |
+| Wand-Texturen | PNG/WebP | 512 × 256, horizontal kachelbar | deckend / Oberkante transparent | Oberkante = Feldkante |
+| Objekte (Bäume, Felsen, Ressourcen) | WebP mit Alpha | 256 × 256 (große Bäume/Berge 512 × 512) | transparent | Fußpunkt unten mittig |
+| Gebäude, Ausbauten | WebP mit Alpha | 512 × 512 | transparent | Bodenmitte |
+| Einheiten (Karte) | WebP mit Alpha | 384 × 384 | transparent | Fußpunkt unten mittig |
+| Einheiten-Fraktionsmaske | PNG | wie Einheit | transparent | – |
+| Porträts | WebP | 512 × 512 | gemalter Hintergrund | – |
+
+- Alle Objekte in **derselben Kameraperspektive** (Kapitel 3) und mit **Licht von oben links**.
+- Objekte enthalten **keinen** Boden-Untergrund, nur einen weichen Kontaktschatten.
+- **Fraktionsfarbe:** Flächen, die die Spielerfarbe tragen (Wappenrock, Schildfläche, Banner, Segel),
+  werden in der Generierung **in neutralem Hellgrau** angelegt. Die Maske entsteht in der
+  Nachbearbeitung (Farbbereichsauswahl) und wird im Spiel per Multiplikation eingefärbt.
+- Dateigröße: Einheiten/Objekte ≤ 80 KB, Texturen ≤ 300 KB (WebP), damit die Android-App klein bleibt.
+
+---
+
+## 7. Produktion mit KI (Scenario)
+
+### 7.1 Stilmodelle
+
+Für gleichbleibende Qualität werden in Scenario **eigene Stilmodelle (LoRA)** trainiert, je ein
+Modell pro Asset-Familie, weil Gelände, Gebäude und Figuren unterschiedliche Bildkompositionen haben:
+
+| Modell | Trainingsbilder (15–30) |
+|---|---|
+| `ai4x-terrain` | Ausschnitte aus Zielbild und gleich gestalteten Vorlagen: Gras, Fels, Wasser, Wege |
+| `ai4x-props` | freigestellte Bäume, Felsen, Berge, Ressourcen-Objekte |
+| `ai4x-buildings` | freigestellte Gebäude/Ausbauten (Mine, Turm, Häuser, Farm, Steg) |
+| `ai4x-units` | freigestellte Figuren in der Zielperspektive (Speerträger u. a.) |
+
+Trainingsbilder werden im ersten Schritt aus dem Zielbild ausgeschnitten und mit einem
+Basismodell plus Referenzbild ergänzt, bis je Familie genug stilgleiche Vorlagen vorliegen.
+
+### 7.2 Prompt-Grundgerüst
+
+```
+[Stilmodell] isometric strategy game asset, hand-painted stylized, soft painterly texture,
+light from upper left, soft short shadow to lower right, view from above at 30 degrees,
+consistent with reference, isolated on transparent background, no text, no ground plane,
+<Motiv mit Epoche, Material, Farben>, <Fraktionsflächen in neutral light grey>
 ```
 
----
+Für Texturen: `seamless tileable top-down painted texture, <Material>, no objects, even lighting`.
 
-# 5. Perspektive und Kamera
+### 7.3 Ablauf je Asset
 
-## 5.1 Kamera
+1. Generieren (3–6 Varianten), beste auswählen.
+2. Freistellen (Hintergrundentfernung), ggf. hochskalieren.
+3. Nachbearbeitung im Repo per Skript: Zuschnitt, Größe, Ankerpunkt, Fraktionsmaske, WebP-Export.
+4. Prüfung im Spiel (Asset-Vorschau, Karte, Zoomstufen, zwei Spielerfarben) – siehe Kapitel 8.
+5. Commit mit Quelldaten (Prompt, Modell, Seed in `art/sources.json`) für Reproduzierbarkeit.
 
-Grundregeln:
-
-- feste isometrische Perspektive,
-- orthografischer Eindruck,
-- keine dramatische Tiefenperspektive,
-- keine wechselnden Kamerawinkel zwischen Assets,
-- gleiche Orientierung aller Assets.
-
-Die Perspektive muss so gewählt werden, dass:
-
-- Hexfelder klar lesbar bleiben,
-- Gebäude gut erkennbar sind,
-- Einheiten nicht in der Umgebung verschwinden,
-- Höhenunterschiede sichtbar bleiben.
+Der bestehende Workflow bleibt: fehlende Grafiken erkennt die CI, offene Grafiken werden im
+Grafik-Backlog mit Ziel-Release geführt und blockieren das Release.
 
 ---
 
-## 5.2 Beleuchtung
+## 8. Abnahmekriterien (Konsistenz)
 
-Verbindliche Lichtlogik:
+Ein Asset ist abgenommen, wenn alle Punkte erfüllt sind:
 
-- Hauptlicht von **oben links**,
-- weiche Schatten,
-- kurze bis mittlere Schattenlänge,
-- keine extremen Kontraste,
-- matte Materialien,
-- keine fotorealistischen Reflexionen.
+- [ ] Perspektive, Lichtrichtung und Schattenlänge stimmen mit dem Zielbild überein.
+- [ ] Farbpalette und Sättigung passen zu den Nachbar-Assets (Vergleichsbogen mit 5 abgenommenen Assets).
+- [ ] Silhouette bei Zoom 0,5 eindeutig erkennbar.
+- [ ] Keine Artefakte (Ränder vom Freistellen, verschwommene Details, Text, Wasserzeichen).
+- [ ] Größe und Ankerpunkt korrekt (steht sauber im Feld, ragt nicht ungewollt in Nachbarfelder).
+- [ ] Einheiten: Fraktionsfläche in zwei Spielerfarben deutlich erkennbar.
+- [ ] Texturen: nahtlos, keine sichtbaren Wiederholungsmuster bei 3 × 3 Kachelung.
 
-Alle KI-generierten Assets sollen dieselbe Lichtlogik verwenden.
-
----
-
-# 6. Farb- und Detailstil
-
-## Farbgebung
-
-- kräftig, aber nicht übersättigt,
-- Gelände klar voneinander unterscheidbar,
-- natürliche Grundfarben,
-- UI dunkler und ruhiger als die Spielwelt,
-- Akzentfarben gezielt für Interaktion, Auswahl und Zustände.
-
-## Detailgrad
-
-**Medium-Low Detail**
-
-Objekte sollen auf Spielfeldgröße gut funktionieren.
-
-Wichtiger als kleine Details sind:
-
-- Silhouette,
-- Form,
-- Farbkontrast,
-- Wiedererkennbarkeit,
-- visuelle Funktion.
+Für jeden Meilenstein wird ein **Vergleichsscreenshot** (gleicher Kartenausschnitt wie das Zielbild)
+erstellt und neben das Zielbild gelegt.
 
 ---
 
-# 7. Einheiten
+## 9. UI-Stil (unverändert aus Version 1)
 
-Einheiten dürfen bewusst etwas größer dargestellt werden als es dem realistischen Maßstab entsprechen würde.
-
-Ziel:
-
-> Eine Einheit muss auf der Karte sofort erkennbar sein.
-
-Eigenschaften:
-
-- klare Silhouette,
-- einfache Pose,
-- charakteristische Ausrüstung,
-- begrenzte Anzahl kleiner Details,
-- deutliche Fraktionsfarbe / Akzentfarbe,
-- optional Banner oder Marker,
-- Selektionsring auf aktivem Hexfeld.
-
-Einheiten werden nicht primär für realistischen Größenvergleich mit Gebäuden skaliert, sondern für Gameplay-Lesbarkeit.
+Moderne Flat-/Vector-Strategie-UI: dunkle, ruhige Panels, klare Typografie, abgerundete Container,
+klare Icon-Sprache, kontextabhängiges Panel am unteren Rand (Einheit, Siedlung, Feld) mit Porträt
+links, Werten in der Mitte und großen Aktionsbuttons rechts; Ressourcenleiste oben, Runde/Jahr und
+„Nächste Runde“ oben rechts, Minimap unten links. Das Zielbild ist auch hier die Referenz
+(Abstände, Schriftgrößen, Porträt mit goldenem Rahmen, gemalte Porträts).
 
 ---
 
-# 8. Gebäude und Siedlungen
-
-Gebäude werden als modulare isometrische Assets gedacht.
-
-Grundregeln:
-
-- klar erkennbare Gebäudefunktion,
-- konsistente Grundfläche,
-- gleiche Perspektive,
-- keine unnötigen Kleinstteile,
-- unterschiedliche Epochen müssen klar unterscheidbar bleiben,
-- Gebäude dürfen über mehrere Hexfelder bzw. Teilbereiche eines Hexfeldes organisiert werden.
-
-Beispiele:
-
-- Bauernhof → Felder, Scheune, einfache Gebäude
-- Mine → Felsbereich, Eingang, Gerüst, Lore
-- Werkstatt → Produktionscharakter
-- spätere Fabrik → industrielle Formen, Schornsteine
-- futuristische Anlagen → klare technologische Weiterentwicklung, aber weiterhin gleicher Grundstil
-
----
-
-# 9. UI-Stil
-
-Die UI soll sich bewusst etwas von der Spielwelt unterscheiden.
-
-## Stil
-
-> **Modern Flat / Vector Strategy UI**
-
-Eigenschaften:
-
-- dunkle, ruhige Panels,
-- klare Typografie,
-- wenige dekorative Elemente,
-- runde oder leicht abgerundete Container,
-- klare Icon-Sprache,
-- gute Informationshierarchie,
-- keine unnötige visuelle Überladung.
-
-Icons und UI-Elemente unterstützen die Verständlichkeit.
-
----
-
-# 10. Grundprinzip der Benutzerführung
-
-Die Benutzerführung soll:
-
-- einfach,
-- leicht verständlich,
-- kontextbezogen,
-- konsistent
-sein.
-
-Statt viele dauerhafte Spezialmenüs zu zeigen, werden Informationen und Aktionen dort eingeblendet, wo sie benötigt werden.
-
----
-
-# 11. Kontextpanel am unteren Bildschirmrand
-
-Ein zentrales UI-Prinzip ist das **kontextabhängige Interaktionspanel im unteren Bereich**.
-
-Je nach ausgewähltem Objekt ändert sich der Inhalt.
-
-Beispiele:
-
-- Einheit ausgewählt → Einheitenpanel
-- Siedlung ausgewählt → Siedlungsinformationen
-- Gebäude ausgewählt → Gebäude-/Produktionsmenü
-- Geländefeld ausgewählt → Geländeinformationen / mögliche Aktionen
-
----
-
-# 12. Interaktionspanel für Einheiten
-
-Bei Auswahl einer Einheit wird unten ein Einheitenpanel angezeigt.
-
-## Beispielstruktur
-
-### Linker Bereich
-
-- Einheitenportrait / Thumbnail
-- Name
-- Einheitentyp
-- Lebenspunkte / Zustand
-
-Beispiel:
-
-```text
-Speerträger
-Leichte Infanterie
-
-♥ 100 / 100
-Zustand: Bereit
-```
-
-### Mittlerer Bereich – Werte
-
-Beispiele:
-
-- Bewegung
-- Stärke
-- Sicht
-- Unterhalt
-- Erfahrung
-- aktive Boni / Mali
-
-Beispiel:
-
-```text
-Bewegung   2 / 2
-Stärke     14
-Sicht       2
-Unterhalt   1
-
-Erfahrung 1
-Bonus: +3 auf Hügeln
-```
-
-### Rechter Bereich – Aktionen
-
-Aktionen werden als große, verständliche Buttons mit Icons dargestellt.
-
-Beispiele:
-
-- Bewegen
-- Wachen
-- Befestigen
-- Erkunden
-- Heilen
-- Runde überspringen
-
-Nur für die Einheit relevante Aktionen sollen angezeigt oder aktiviert werden.
-
----
-
-# 13. Interaktion mit Siedlungen und Gebäuden
-
-Für die spätere UI gilt:
-
-1. Spieler öffnet den Siedlungsbildschirm.
-2. Klick auf ein bebautes Geländefeld.
-3. Die zentrale Ansicht wechselt in die Detailansicht dieses Geländefeldes.
-4. Gebäude und Strukturen dieses Feldes werden dargestellt.
-5. Interaktive Gebäude können angeklickt werden.
-6. Klick auf ein Gebäude öffnet das entsprechende Einstell- oder Produktionsmenü.
-
-Beispiele:
-
-- Produktionskette,
-- Arbeitskräfte,
-- Lager,
-- Gebäudeinformationen,
-- Ausbauoptionen.
-
----
-
-# 14. Beispielhafte Bildschirmstruktur
-
-```text
-┌─────────────────────────────────────────────────────────────┐
-│ Ressourcen                    Runde / Zeit   Nächste Runde │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│                                                             │
-│                      SPIELWELT                              │
-│                                                             │
-│              Hexkarte mit Höhenstufen                       │
-│                                                             │
-│                                                             │
-├──────────────┬──────────────────────────────┬───────────────┤
-│              │                              │               │
-│   Minimap    │       Kontextinformationen   │    Aktionen   │
-│              │                              │               │
-└──────────────┴──────────────────────────────┴───────────────┘
-```
-
----
-
-# 15. Empfohlene Asset-Größen
-
-Die endgültigen Werte müssen während der technischen Umsetzung getestet werden.
-
-Als Ausgangspunkt:
-
-```text
-Terrain-Hex             512 × 512 px
-kleines Gebäude         256 × 256 px
-großes Gebäude          512 × 512 px
-Landeinheit             256 × 256 px
-große Einheit           384 × 384 px
-Ressourcen-Icon          64 × 64 px
-UI-Icon                  48 × 48 px
-Technologie-Icon        128 × 128 px
-```
-
-Assets möglichst mit ausreichend Reserve generieren und anschließend für die Engine skalieren.
-
-Für freistehende Assets sollte nach Möglichkeit ein transparenter Hintergrund verwendet werden.
-
----
-
-# 16. KI-Art-Bible / Prompt-Grundlage
-
-Folgende Angaben sollten künftig in KI-Prompts für Welt-Assets möglichst konstant bleiben:
-
-```text
-Stylized isometric 2D strategy game asset.
-Clean vector-like shapes with subtle hand-painted textures.
-Medium-low detail.
-Clear readable silhouette.
-Fixed orthographic isometric perspective.
-Consistent orientation.
-Soft lighting from upper left.
-Soft short shadows.
-Matte materials.
-Moderate saturation.
-No photorealism.
-No dramatic perspective.
-No text.
-No UI elements.
-Transparent background when generating isolated assets.
-Designed for a hex-based turn-based 4X strategy game.
-```
-
-Für Kartenansichten zusätzlich:
-
-```text
-Clearly readable hexagonal tiles.
-Visible hex boundaries.
-Strongly readable terrain elevation.
-Raised plateaus, cliffs and terraces.
-Clear height differences between neighboring hex tiles.
-Gameplay readability has priority over realism.
-```
-
----
-
-# 17. Regeln für KI-generierte Assets
-
-## DO
-
-- einzelne wiederverwendbare Assets generieren,
-- gleiche Perspektive verwenden,
-- gleiche Lichtquelle verwenden,
-- klare Silhouetten verlangen,
-- transparente Hintergründe bei Einzelassets nutzen,
-- mehrere Varianten erzeugen und kuratieren,
-- Assets anschließend vereinheitlichen,
-- feste Referenzbilder verwenden,
-- klare Epochenmerkmale definieren.
-
-## DON'T
-
-- komplette Weltkarten als einzelne Grafik erzeugen,
-- Perspektiven zwischen Assets ändern,
-- unterschiedliche Lichtquellen verwenden,
-- extrem detailreiche Einzelbilder erzeugen,
-- Texte durch Bildgeneratoren fest in Spielassets rendern,
-- UI und Weltgrafik untrennbar miteinander generieren,
-- Gameplay-Informationen nur über kleine grafische Details kommunizieren.
-
----
-
-# 18. Konsistenz als wichtigstes Produktionsproblem
-
-Das größte Risiko bei einer KI-basierten Grafikpipeline ist nicht die Qualität eines einzelnen Assets.
-
-Das größte Risiko ist:
-
-> **Die Konsistenz von hunderten oder tausenden Assets.**
-
-Daher muss für jedes Asset mindestens festgelegt werden:
-
-- Asset-Kategorie
-- Epoche
-- Perspektive
-- Blickrichtung
-- Größe
-- Licht
-- Schatten
-- Farbpalette
-- Detailgrad
-- Fraktionszugehörigkeit
-- Hintergrund
-- technische Verwendung
-
----
-
-# 19. Empfohlener Workflow
-
-## Phase 1 – Vertical Slice
-
-Zuerst einen kleinen repräsentativen Kartenausschnitt erstellen:
-
-- ca. 15–30 Hexfelder,
-- mehrere Höhenstufen,
-- Fluss / Wasser,
-- Wald,
-- Gebirge,
-- Siedlung,
-- Mine,
-- Bauernhof,
-- Straße,
-- mehrere Einheiten,
-- vollständiges HUD,
-- Einheitenpanel,
-- Siedlungs-/Gebäudepanel.
-
-Ziel:
-
-> Prüfen, ob der Grafikstil im tatsächlichen Spielkontext funktioniert.
-
-## Phase 2 – Art Bible finalisieren
-
-Nach dem Vertical Slice festlegen:
-
-- exakte Hex-Proportionen,
-- Kamera,
-- Höhe pro Terrainstufe,
-- maximale Objektgröße,
-- Farbpalette,
-- UI-Abstände,
-- Icon-Stil,
-- Schatten,
-- Asset-Auflösung,
-- Epochenvarianten.
-
-## Phase 3 – Asset-Bibliothek
-
-Danach systematisch einzelne Asset-Sets erstellen.
-
----
-
-# 20. Bisher erzeugte Referenzmotive
-
-Im bisherigen Konzeptprozess wurden drei zentrale visuelle Richtungen getestet:
-
-1. **Allgemeine Spielansicht**
-   - isometrische Welt
-   - Siedlung
-   - Ressourcen
-   - UI
-
-2. **Hexkarte mit deutlich sichtbaren Höhenstufen**
-   - klare Hexfeld-Kacheln
-   - Klippen
-   - Plateaus
-   - Wasserfälle
-   - unterschiedliche Geländehöhen
-
-3. **Aktive Einheit mit Interaktionspanel**
-   - selektierte Einheit auf der Karte
-   - Einheitenportrait
-   - Einheitenwerte
-   - Aktionsbuttons
-   - Kontextpanel statt Siedlungsmenü
-
-Diese drei Punkte bilden die aktuelle visuelle Zielrichtung.
-
----
-
-# 21. Verbindliche Kernentscheidungen
-
-Für die weitere Entwicklung gelten aktuell folgende Entscheidungen:
-
-- **2D statt klassischer 3D-Pipeline**
-- **isometrische Darstellung**
-- **Hexfelder**
-- **Hexgrenzen müssen klar erkennbar sein**
-- **Geländehöhen werden deutlich dargestellt**
-- **stilisiert statt realistisch**
-- **modulare KI-generierte Assets**
-- **klare, moderne Flat-/Vector-UI**
-- **kontextabhängiges Panel am unteren Bildschirmrand**
-- **Einheiten werden zur besseren Lesbarkeit leicht überproportional dargestellt**
-- **UI-Icons unterstützen die Verständlichkeit**
-- **Gameplay-Lesbarkeit hat Vorrang vor grafischem Realismus**
-- **komplexe Animationen und aufwendige 3D-Produktion werden vermieden**
-
----
-
-# 22. Offene Punkte für die spätere Umsetzung
-
-Noch nicht final festgelegt:
-
-- exakter isometrischer Kamerawinkel,
-- genaue Hexgröße in der Engine,
-- Pixel-per-Hex-Verhältnis,
-- genaue Höhe einer einzelnen Höhenstufe,
-- Übergangsregeln zwischen Terrainarten,
-- Animationstiefe der Einheiten,
-- maximale Gebäudegröße,
-- Fraktionsfarb-System,
-- Fog-of-War-Darstellung,
-- genaue UI-Farbpalette,
-- Schriftfamilie,
-- Icon-Bibliothek,
-- Asset-Dateiformate,
-- technische Layer-Struktur in der Engine.
-
-Diese Punkte sollten nicht rein theoretisch festgelegt werden, sondern während eines ersten spielbaren Prototyps getestet werden.
-
----
-
-# 23. Leitprinzip für die weitere Gestaltung
-
-> **Die Grafik muss nicht möglichst komplex aussehen. Sie muss dafür sorgen, dass der Spieler die Spielwelt, Höhen, Einheiten, Zustände und mögliche Aktionen sofort versteht.**
-
-Die visuelle Identität entsteht durch:
-
-- konsistente Perspektive,
-- klare Hexwelt,
-- erkennbare Höhenstufen,
-- starke Silhouetten,
-- kohärente Farbgestaltung,
-- modulare Assets,
-- moderne UI,
-- wiederkehrende Icon-Sprache.
-
-Damit bleibt der Stil sowohl für KI-gestützte Produktion als auch für ein umfangreiches 4X-Spiel realistisch umsetzbar.
+## 10. Umsetzungsplan
+
+| Phase | Inhalt | Ergebnis |
+|---|---|---|
+| A – Renderer | Kamera/Höhen nach Kapitel 3, Schichtmodell nach Kapitel 4 (Weltkoordinaten-Texturen, Übergänge, Fels-Wände, Gitter-Overlay, Objekt-Streuung, zusammengesetzte Siedlungen) – mit Platzhaltern | Landschaft wirkt durchgehend |
+| B – Vertical Slice | Stilmodelle trainieren; ~30 Assets: Gras, Wald, Fels/Klippe, Wasser/Küste, Fluss/Wasserfall, Speerträger (+ Porträt), Steinzeit-/Mittelalterdorf, Mine, Farm, Steg | Vergleich mit dem Zielbild, Freigabe des Stils |
+| C – Bibliothek | restliche ≈ 200 Assets in Familien, laufende Abnahme | vollständiger Katalog |
+| D – Feinschliff | Atmosphäre, Animationen (Wasser, Rauch, Fahnen – optional), Porträts | Release |
+
+**Offene Punkte, die im Vertical Slice festgelegt werden:** exakte Neigung und Höhe je Stufe,
+Pixel pro Hex auf Referenzgeräten, Übergangsbreite zwischen Geländearten, Darstellung des Nebels.
