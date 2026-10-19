@@ -1,6 +1,58 @@
 {
   "version": 1,
   "sprites": {
+    "improvement/claypit": {
+      "file": "improvement/claypit.png",
+      "anchorY": 0.7
+    },
+    "improvement/farm": {
+      "file": "improvement/farm.png",
+      "anchorY": 0.7
+    },
+    "improvement/fishery": {
+      "file": "improvement/fishery.png",
+      "anchorY": 0.7
+    },
+    "improvement/garden": {
+      "file": "improvement/garden.png",
+      "anchorY": 0.7
+    },
+    "improvement/gatherers": {
+      "file": "improvement/gatherers.png",
+      "anchorY": 0.7
+    },
+    "improvement/hunting": {
+      "file": "improvement/hunting.png",
+      "anchorY": 0.7
+    },
+    "improvement/lumber": {
+      "file": "improvement/lumber.png",
+      "anchorY": 0.7
+    },
+    "improvement/mine": {
+      "file": "improvement/mine.png",
+      "anchorY": 0.7
+    },
+    "improvement/oilwell": {
+      "file": "improvement/oilwell.png",
+      "anchorY": 0.7
+    },
+    "improvement/pasture": {
+      "file": "improvement/pasture.png",
+      "anchorY": 0.7
+    },
+    "improvement/plantation": {
+      "file": "improvement/plantation.png",
+      "anchorY": 0.7
+    },
+    "improvement/quarry": {
+      "file": "improvement/quarry.png",
+      "anchorY": 0.7
+    },
+    "improvement/stable": {
+      "file": "improvement/stable.png",
+      "anchorY": 0.7
+    },
     "overlay/denseForest": {
       "file": "overlay/denseForest.png",
       "anchorY": 0.7
@@ -27,6 +79,34 @@
     },
     "overlay/rocks": {
       "file": "overlay/rocks.png",
+      "anchorY": 0.7
+    },
+    "settlement/camp_0": {
+      "file": "settlement/camp_0.png",
+      "anchorY": 0.7
+    },
+    "settlement/city_0": {
+      "file": "settlement/city_0.png",
+      "anchorY": 0.7
+    },
+    "settlement/city_3": {
+      "file": "settlement/city_3.png",
+      "anchorY": 0.7
+    },
+    "settlement/city_5": {
+      "file": "settlement/city_5.png",
+      "anchorY": 0.7
+    },
+    "settlement/machine": {
+      "file": "settlement/machine.png",
+      "anchorY": 0.7
+    },
+    "settlement/settlement_0": {
+      "file": "settlement/settlement_0.png",
+      "anchorY": 0.7
+    },
+    "settlement/settlement_3": {
+      "file": "settlement/settlement_3.png",
       "anchorY": 0.7
     },
     "terrain/coast": {

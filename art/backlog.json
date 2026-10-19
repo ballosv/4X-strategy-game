@@ -1,54 +1,5 @@
 {
   "version": 1,
   "description": "Grafik-Backlog: Pflicht-Grafiken, die noch nicht geliefert sind, mit Ziel-Release. Ein Release schlägt fehl, solange eingeplante Grafiken fehlen.",
-  "pending": {
-    "improvement/hunting": {
-      "release": "0.3.0"
-    },
-    "improvement/gatherers": {
-      "release": "0.3.0"
-    },
-    "improvement/farm": {
-      "release": "0.3.0"
-    },
-    "improvement/garden": {
-      "release": "0.3.0"
-    },
-    "improvement/fishery": {
-      "release": "0.3.0"
-    },
-    "improvement/pasture": {
-      "release": "0.3.0"
-    },
-    "improvement/stable": {
-      "release": "0.3.0"
-    },
-    "improvement/plantation": {
-      "release": "0.3.0"
-    },
-    "improvement/lumber": {
-      "release": "0.3.0"
-    },
-    "improvement/quarry": {
-      "release": "0.3.0"
-    },
-    "improvement/claypit": {
-      "release": "0.3.0"
-    },
-    "improvement/mine": {
-      "release": "0.3.0"
-    },
-    "improvement/oilwell": {
-      "release": "0.3.0"
-    },
-    "settlement/camp_0": {
-      "release": "0.3.0"
-    },
-    "settlement/settlement_0": {
-      "release": "0.3.0"
-    },
-    "settlement/city_0": {
-      "release": "0.3.0"
-    }
-  }
+  "pending": {}
 }
