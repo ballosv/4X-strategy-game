@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="106" cy="182" rx="84" ry="14" fill="url(#shadow)"/>
+  <!-- Ketten -->
+  <path d="M30 156 Q26 156 28 166 L40 182 L160 182 L174 166 Q176 156 170 156 Z" fill="#3b3a33"/>
+  <path d="M34 160 L166 160 L162 164 L38 164 Z" fill="#55534a"/>
+  <g fill="#6a675c">
+    <circle cx="48" cy="170" r="9"/><circle cx="70" cy="172" r="9"/><circle cx="92" cy="172" r="9"/>
+    <circle cx="114" cy="172" r="9"/><circle cx="136" cy="172" r="9"/><circle cx="156" cy="170" r="9"/>
+  </g>
+  <g fill="#3b3a33">
+    <circle cx="48" cy="170" r="3.5"/><circle cx="70" cy="172" r="3.5"/><circle cx="92" cy="172" r="3.5"/>
+    <circle cx="114" cy="172" r="3.5"/><circle cx="136" cy="172" r="3.5"/><circle cx="156" cy="170" r="3.5"/>
+  </g>
+  <path d="M40 182 L160 182" stroke="#24231e" stroke-width="3"/>
+  <!-- Kettenschürze / Kotflügel -->
+  <path d="M24 156 L176 156 L172 148 L30 148 Z" fill="#8a9a5b"/>
+  <path d="M24 156 L176 156 L176 159 L24 159 Z" fill="#4b5630"/>
+  <!-- Wanne -->
+  <path d="M36 148 L50 116 L160 116 L170 148 Z" fill="#6b7a44"/>
+  <path d="M36 148 L50 116 L64 116 L54 148 Z" fill="#8a9a5b"/>
+  <path d="M150 116 L160 116 L170 148 L158 148 Z" fill="#4b5630"/>
+  <path d="M50 116 L58 108 L152 108 L160 116 Z" fill="#9aab68"/>
+  <!-- Fraktionsstreifen Wanne -->
+  <path class="faction" d="M46 126 L162 126 L165 138 L41 138 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M46 126 L60 126 L56 138 L41 138 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M150 126 L162 126 L165 138 L154 138 Z" fill="#a8a8a8"/>
+  <!-- Auspuff, Werkzeug -->
+  <path d="M158 112 h10 v6 h-10 z" fill="#4b5630"/>
+  <path d="M72 112 L118 112" stroke="#553c22" stroke-width="3" stroke-linecap="round"/>
+  <!-- Kanonenrohr -->
+  <path d="M18 88 L84 86 L84 95 L18 95 Z" fill="#5d6a3a"/>
+  <path d="M18 88 L84 86 L84 89 L18 90 Z" fill="#8a9a5b"/>
+  <path d="M12 85 h10 v13 h-10 z" fill="#4b5630"/>
+  <path d="M12 85 h10 v4 h-10 z" fill="#6b7a44"/>
+  <!-- Turm -->
+  <path d="M74 108 Q72 84 102 78 Q134 78 140 108 Z" fill="#6b7a44"/>
+  <path d="M74 108 Q72 84 102 78 Q88 88 90 108 Z" fill="#8a9a5b"/>
+  <path d="M120 80 Q136 86 140 108 L126 108 Q126 92 120 80 Z" fill="#4b5630"/>
+  <!-- Fraktionsband Turm -->
+  <path class="faction" d="M74 98 Q106 92 139 98 L140 106 Q106 101 74 106 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M74 98 Q84 96 92 95 L91 104 Q82 105 74 106 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M124 95 Q132 96 139 98 L140 106 Q132 104 124 103 Z" fill="#a8a8a8"/>
+  <path d="M80 90 h8 v5 h-8 z" fill="#4b5630"/>
+  <!-- Kommandantenkuppel -->
+  <path d="M104 79 L106 70 L124 70 L126 80 Z" fill="#5d6a3a"/>
+  <ellipse cx="115" cy="70" rx="10" ry="3" fill="#9aab68"/>
+  <!-- Antenne mit Wimpel -->
+  <path d="M132 82 L138 36" stroke="#3b3a33" stroke-width="1.5"/>
+  <path class="faction" d="M138 36 L156 42 L137 48 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M138 36 L156 42 L138 42 Z" fill="#f4f4f4"/>
+</svg>

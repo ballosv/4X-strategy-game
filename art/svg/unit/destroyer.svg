@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Wasser / Schatten -->
+  <ellipse cx="104" cy="182" rx="94" ry="13" fill="#1f5383" opacity="0.35"/>
+  <path d="M14 178 Q30 172 44 180 Q34 186 16 184 Z" fill="#ffffff" opacity="0.7"/>
+  <path d="M40 186 Q100 190 176 182" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.5"/>
+  <!-- Rumpf -->
+  <path d="M10 146 L188 150 L180 180 L36 182 Z" fill="#8e979e"/>
+  <path d="M10 146 L60 147 L64 182 L36 182 Z" fill="#c3cad0"/>
+  <path d="M150 149 L188 150 L180 180 L152 181 Z" fill="#5f676d"/>
+  <path d="M36 182 L180 180 L179 176 L34 178 Z" fill="#843a25"/>
+  <!-- Fraktionsstreifen am Rumpf -->
+  <path class="faction" d="M20 152 L186 156 L184 164 L26 162 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M20 152 L60 153 L61 162 L26 162 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M150 155 L186 156 L184 164 L151 163 Z" fill="#a8a8a8"/>
+  <!-- Deck -->
+  <path d="M10 146 L188 150 L186 146 L20 142 Z" fill="#b8b0a2"/>
+  <!-- Geschütz vorn -->
+  <path d="M38 130 L42 140 L60 140 L60 130 Q50 126 38 130 Z" fill="#aab3ba"/>
+  <path d="M52 130 L60 130 L60 140 L54 140 Z" fill="#6d767d"/>
+  <path d="M38 133 L18 131" stroke="#6d767d" stroke-width="3" stroke-linecap="round"/>
+  <path d="M42 140 L60 140 L62 144 L40 144 Z" fill="#6d767d"/>
+  <!-- Aufbauten / Brücke -->
+  <path d="M68 144 L68 120 L106 120 L110 144 Z" fill="#aab3ba"/>
+  <path d="M68 144 L68 120 L78 120 L78 144 Z" fill="#cfd5da"/>
+  <path d="M74 120 L76 100 L98 100 L100 120 Z" fill="#aab3ba"/>
+  <path d="M74 120 L76 100 L84 100 L82 120 Z" fill="#cfd5da"/>
+  <path d="M77 106 h20 v4 h-20 z" fill="#2f3a44"/>
+  <path d="M72 98 h30 v3 h-30 z" fill="#6d767d"/>
+  <!-- Mast mit Radar -->
+  <path d="M88 98 L90 56" stroke="#6d767d" stroke-width="2.5"/>
+  <path d="M80 70 L100 70 M83 82 L97 82" stroke="#6d767d" stroke-width="1.8"/>
+  <path d="M84 60 h12 v4 h-12 z" fill="#aab3ba"/>
+  <!-- Schornsteine -->
+  <path d="M112 144 L114 104 L128 104 L132 144 Z" fill="#8e979e"/>
+  <path d="M112 144 L114 104 L119 104 L118 144 Z" fill="#c3cad0"/>
+  <path class="faction" d="M113.5 112 L128.5 112 L129 120 L113.2 120 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M113.5 112 L119 112 L118.8 120 L113.2 120 Z" fill="#f4f4f4"/>
+  <path d="M114 104 h14 v3 h-14 z" fill="#2f3a44"/>
+  <path d="M134 144 L136 112 L148 112 L151 144 Z" fill="#8e979e"/>
+  <path d="M134 144 L136 112 L140 112 L139 144 Z" fill="#c3cad0"/>
+  <path class="faction" d="M135.5 118 L148.5 118 L149 125 L135.2 125 Z" fill="#a8a8a8"/>
+  <path d="M136 112 h12 v3 h-12 z" fill="#2f3a44"/>
+  <!-- Rauch -->
+  <circle cx="126" cy="94" r="7" fill="#9c958b" opacity="0.45"/>
+  <circle cx="136" cy="84" r="9" fill="#9c958b" opacity="0.3"/>
+  <!-- Geschütz achtern -->
+  <path d="M154 138 L156 146 L174 146 L174 136 Q164 132 154 138 Z" fill="#aab3ba"/>
+  <path d="M166 136 L174 136 L174 146 L168 146 Z" fill="#6d767d"/>
+  <path d="M174 139 L188 137" stroke="#6d767d" stroke-width="3" stroke-linecap="round"/>
+  <!-- Flaggenmast mit Fahne (Fraktion) -->
+  <path d="M182 148 L182 104" stroke="#553c22" stroke-width="2"/>
+  <path class="faction" d="M182 104 L162 106 L164 116 L182 118 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M182 104 L162 106 L163 110 L182 110 Z" fill="#f4f4f4"/>
+</svg>

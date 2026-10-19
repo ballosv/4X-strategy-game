@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Bodenschatten (Flugzeug in der Luft) -->
+  <ellipse cx="106" cy="182" rx="56" ry="9" fill="url(#shadow)"/>
+  <path d="M60 182 L120 178 L134 188 L146 184 L150 178 L170 180 L166 186 L116 190 Z" fill="#1a2410" opacity="0.16"/>
+  <!-- ferne Tragfläche und Höhenleitwerk -->
+  <path d="M98 90 L134 60 L146 60 L138 90 Z" fill="#6b747c"/>
+  <path d="M152 90 L168 74 L178 74 L176 90 Z" fill="#6b747c"/>
+  <!-- Rumpf -->
+  <path d="M20 100 L58 91 L150 89 L180 91 L182 102 L150 107 L58 107 Z" fill="#9aa3ab"/>
+  <path d="M20 100 L58 91 L150 89 L180 91 L180 95 L150 95 L58 97 Z" fill="#cdd3d8"/>
+  <path d="M58 104 L150 103 L182 102 L150 107 L58 107 Z" fill="#6b747c"/>
+  <path d="M20 100 L34 97 L34 103 Z" fill="#4a535b"/>
+  <!-- Lufteinlass -->
+  <path d="M82 104 L112 104 L112 112 L86 111 Z" fill="#4a535b"/>
+  <path d="M82 104 L88 104 L90 111 L86 111 Z" fill="#23282e"/>
+  <!-- Kanzel -->
+  <path d="M50 92 Q60 79 80 82 L90 91 Z" fill="#3d5a78"/>
+  <path d="M54 91 Q61 82 72 82 L70 91 Z" fill="#7fa3c0"/>
+  <!-- Seitenleitwerk (Fraktion) -->
+  <path class="faction" d="M144 90 L160 56 L174 56 L172 90 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M144 90 L160 56 L166 56 L154 90 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M170 56 L174 56 L172 90 L168 90 Z" fill="#a8a8a8"/>
+  <!-- Triebwerksdüse mit Nachbrenner -->
+  <path d="M180 92 L188 94 L188 101 L180 102 Z" fill="#4a535b"/>
+  <ellipse cx="192" cy="97.5" rx="5" ry="3.5" fill="#ffb547" opacity="0.8"/>
+  <ellipse cx="190" cy="97.5" rx="2.5" ry="2" fill="#fff1c8"/>
+  <!-- nahes Höhenleitwerk -->
+  <path d="M150 104 L164 124 L178 124 L178 102 Z" fill="#aab3ba"/>
+  <path d="M164 124 L178 124 L178 120 L161 120 Z" fill="#6b747c"/>
+  <!-- nahe Deltatragfläche -->
+  <path d="M86 104 L126 150 L146 150 L142 104 Z" fill="#aab3ba"/>
+  <path d="M86 104 L126 150 L132 150 L100 104 Z" fill="#cdd3d8"/>
+  <path d="M136 104 L142 104 L146 150 L140 150 Z" fill="#6b747c"/>
+  <!-- Flügelspitze (Fraktion) -->
+  <path class="faction" d="M116 138 L126 150 L146 150 L145 138 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M116 138 L126 150 L132 150 L123 138 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M140 138 L145 138 L146 150 L141 150 Z" fill="#a8a8a8"/>
+  <!-- Lenkflugkörper unter dem Flügel -->
+  <path d="M104 128 L128 128" stroke="#e3e7ea" stroke-width="3" stroke-linecap="round"/>
+  <path d="M100 128 L104 128" stroke="#d07a5a" stroke-width="3" stroke-linecap="round"/>
+  <path d="M124 125 L128 128 L124 131" stroke="#6d767d" stroke-width="1.2" fill="none"/>
+</svg>
