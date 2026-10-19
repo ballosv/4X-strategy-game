@@ -153,11 +153,17 @@
     "terrain/tundra": {
       "file": "terrain/tundra.png"
     },
+    "texture/coast_1": {
+      "file": "texture/coast_1.webp"
+    },
     "texture/grassland_1": {
       "file": "texture/grassland_1.webp"
     },
     "texture/grassland_2": {
       "file": "texture/grassland_2.webp"
+    },
+    "texture/ocean_1": {
+      "file": "texture/ocean_1.webp"
     },
     "unit/archer": {
       "file": "unit/archer.png",
@@ -448,6 +454,9 @@
     },
     "unit/worker_mask": {
       "file": "unit/worker_mask.png"
+    },
+    "wall/cliff_temperate": {
+      "file": "wall/cliff_temperate.webp"
     }
   }
 }

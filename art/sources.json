@@ -178,6 +178,29 @@
           "art/scenario/raw/texture/ocean_1/3.png"
         ]
       }
+    ],
+    "wall/cliff_temperate": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "seamless tileable painted texture of a vertical surface seen straight from the front in exactly the hand-painted stylized look of the reference images, light from upper left, no sky, no ground, no objects, no borders, no text, edges must tile seamlessly in both directions, grey granite cliff face made of large vertical rock columns and blocky facets with small moss tufts in the cracks, same rock colour and shading as the cliffs in the reference",
+        "params": {
+          "aspectRatio": "16:9",
+          "resolution": "512",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/props_cliff.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_kW2RpXozF4Guqt7kEqoXUrPQ",
+        "cu": 30,
+        "files": [
+          "art/scenario/raw/wall/cliff_temperate/1.png",
+          "art/scenario/raw/wall/cliff_temperate/2.png",
+          "art/scenario/raw/wall/cliff_temperate/3.png"
+        ]
+      }
     ]
   }
 }

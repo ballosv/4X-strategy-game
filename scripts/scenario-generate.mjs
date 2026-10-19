@@ -172,9 +172,18 @@ if (total > maxCu) {
 }
 
 const sources = readJson(SOURCES, { description: 'Herkunft der KI-generierten Grafiken (Grafik-Spezifikation v2, Kap. 7.3)', assets: {} });
+const failed = [];
 for (const { job, model, body } of prepared) {
   const { job: started } = await call('POST', `/generate/custom/${model}`, body);
-  const done = await waitForJob(started.jobId);
+  let done;
+  try {
+    done = await waitForJob(started.jobId);
+  } catch (e) {
+    // z. B. Sicherheitsfilter: Auftrag überspringen, die übrigen laufen weiter
+    console.error(`${job.key}: ${e.message}`);
+    failed.push(job.key);
+    continue;
+  }
   const dir = join(RAW, job.key);
   mkdirSync(dir, { recursive: true });
   const files = [];
@@ -191,4 +200,8 @@ for (const { job, model, body } of prepared) {
   });
   writeJson(SOURCES, sources);
   console.log(`${job.key}: ${files.length} Bild(er) → art/scenario/raw/${job.key}/`);
+}
+if (failed.length) {
+  console.error(`Fehlgeschlagen: ${failed.join(', ')}`);
+  process.exit(1);
 }

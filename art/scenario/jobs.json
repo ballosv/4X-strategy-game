@@ -112,7 +112,7 @@
       "key": "wall/slope",
       "kind": "wall",
       "preset": "gemini512wide",
-      "prompt": "steep earth slope of brown soil with small stones, roots and a few grass tufts, painted",
+      "prompt": "hillside bank of brown earth with small pebbles and a few green grass tufts, painted terrain texture",
       "refs": [
         "art/scenario/ref/props_cliff.png",
         "docs/referenz/einheitenpanel.png"
