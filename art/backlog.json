@@ -2,14 +2,6 @@
   "version": 1,
   "description": "Grafik-Backlog: Pflicht-Grafiken, die noch nicht geliefert sind, mit Ziel-Release. Ein Release schlägt fehl, solange eingeplante Grafiken fehlen.",
   "pending": {
-    "texture/grassland_1": {
-      "release": "0.4.0",
-      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
-    },
-    "texture/grassland_2": {
-      "release": "0.4.0",
-      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
-    },
     "texture/plains_1": {
       "release": "0.5.0",
       "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
@@ -166,14 +158,6 @@
       "release": "0.5.0",
       "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
     },
-    "prop/tree_conifer_1": {
-      "release": "0.4.0",
-      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
-    },
-    "prop/tree_conifer_2": {
-      "release": "0.4.0",
-      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
-    },
     "prop/tree_conifer_3": {
       "release": "0.4.0",
       "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
@@ -237,14 +221,6 @@
     "prop/bush_6": {
       "release": "0.5.0",
       "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
-    },
-    "prop/rock_1": {
-      "release": "0.4.0",
-      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
-    },
-    "prop/rock_2": {
-      "release": "0.4.0",
-      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
     },
     "prop/rock_3": {
       "release": "0.5.0",
@@ -513,10 +489,6 @@
     "portrait/settler": {
       "release": "0.5.0",
       "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
-    },
-    "portrait/spearman": {
-      "release": "0.4.0",
-      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
     },
     "portrait/archer": {
       "release": "0.5.0",

@@ -1,0 +1,137 @@
+{
+  "description": "Herkunft der KI-generierten Grafiken (Grafik-Spezifikation v2, Kap. 7.3)",
+  "assets": {
+    "texture/grassland_1": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "seamless tileable top-down painted texture in exactly the hand-painted stylized look of the reference images, viewed straight from above, even lighting, no objects, no hexagon lines, no borders, no text, edges must tile seamlessly, lush green meadow grass with small lighter and darker patches and a few tiny flowers, matching the grass colour and brushwork of the reference",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/terrain_grass.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_gRStfM1Wg9NnG1NE3r6pcQmH",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/texture/grassland_1/1.png",
+          "art/scenario/raw/texture/grassland_1/2.png",
+          "art/scenario/raw/texture/grassland_1/3.png"
+        ]
+      }
+    ],
+    "prop/tree_conifer_1": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, one single dark green conifer pine tree with a short brown trunk, like the pine trees in the reference",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/props_conifer.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_deSpiew5cECCt6NoSXgoarpa",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/prop/tree_conifer_1/1.png",
+          "art/scenario/raw/prop/tree_conifer_1/2.png",
+          "art/scenario/raw/prop/tree_conifer_1/3.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/prop/tree_conifer_1/1.png",
+        "jobId": "job_LbbEA97qqDAUYRVxr43pwMpr",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/prop/tree_conifer_1/1_nobg.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/prop/tree_conifer_1/3.png",
+        "jobId": "job_Do2j511FPErMzxY7EoPFvhWz",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/prop/tree_conifer_1/3_nobg.png"
+        ]
+      }
+    ],
+    "prop/rock_1": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, one single grey granite boulder with soft moss patches on top, same rock colour and shading as the cliffs in the reference",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/props_cliff.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_cQcjY2PzQbNbZyKR8ibLLMPZ",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/prop/rock_1/1.png",
+          "art/scenario/raw/prop/rock_1/2.png",
+          "art/scenario/raw/prop/rock_1/3.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/prop/rock_1/1.png",
+        "jobId": "job_2hXjgsNPjforVithwXJWaKsn",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/prop/rock_1/1_nobg.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/prop/rock_1/2.png",
+        "jobId": "job_NMgqab6EdZhithApgwhxFxWr",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/prop/rock_1/2_nobg.png"
+        ]
+      }
+    ],
+    "portrait/spearman": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "painted character portrait for a strategy game unit panel in exactly the hand-painted stylized look of the reference images, three-quarter body, painted landscape background, no frame, no text, bearded medieval spearman with steel kettle helmet, blue tunic, round blue shield with a white plant emblem, holding a tall spear, standing in a green valley with mountains, same character as the reference portrait",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/portrait_spearman.png",
+          "art/scenario/ref/unit_spearman.png"
+        ],
+        "jobId": "job_3rdkWefpS7qnJwdPFfihUkjJ",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/portrait/spearman/1.png",
+          "art/scenario/raw/portrait/spearman/2.png",
+          "art/scenario/raw/portrait/spearman/3.png"
+        ]
+      }
+    ]
+  }
+}

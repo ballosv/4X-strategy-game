@@ -1,33 +1,31 @@
 # Übergabe für die nächste Entwicklungssitzung
 
-Stand: 19.10.2026 (2. Sitzung) · letztes Release: **v0.2.0** · `develop` enthält zusätzlich Grafik-Workflow,
-67 SVG-Platzhaltergrafiken und die Grafik-Spezifikation Version 2. Branch `ccr-10a868d5-nj0pk0` enthält
-zusätzlich den **Renderer-Umbau (Phase A)**.
+Stand: 19.10.2026 (3. Sitzung) · letztes Release: **v0.2.0** · `develop` enthält zusätzlich Grafik-Workflow,
+67 SVG-Platzhaltergrafiken und die Grafik-Spezifikation Version 2. Branch `ccr-87e8aee1-4etlkm` enthält
+zusätzlich den **Renderer-Umbau (Phase A)** und den **Probelauf von Phase B** (noch kein PR nach `develop`).
 
 ## Nächste Aufgaben (Reihenfolge)
 
-1. **Scenario-Zugang prüfen** – *in Sitzung 2 weiterhin blockiert*
-   - Umgebungsvariablen `SCENARIO_API_KEY` und `SCENARIO_API_SECRET` sind gesetzt (nie ausgeben/loggen).
-   - `api.cloud.scenario.com` wird vom Proxy der Cloud-Umgebung abgewiesen (`CONNECT tunnel failed, response 403`).
-     Freigabe macht der Nutzer: Umgebung bearbeiten → Network access → Domain unter *Allowed domains* eintragen
-     (https://code.claude.com/docs/en/cloud-environments#network-access). Wirkt erst in einer neuen Sitzung.
-   - Danach Verbindung mit einer kostenlosen Abfrage bzw. `dryRun=true` testen (zeigt Kosten ohne Verbrauch).
-2. **Renderer-Umbau (Phase A)** – ✅ erledigt (Branch `ccr-10a868d5-nj0pk0`, noch kein PR nach `develop`)
-   - Kamera 0,58 / 0,85 × Hex-Radius / Zoom 0,4–2,0 / Standardzoom ≈ 10 Felder (`projection.ts`).
-   - Schichten: `ground.ts` (Wände, Boden mit Übergängen, Flüsse, Details, Gitter), `textures.ts` (nahtlose
-     Platzhaltertexturen, gemalte Texturen ersetzen sie automatisch), `objects.ts` (Streuobjekte, Berge,
-     Siedlungen aus Bausteinen), Zeitbudget für Chunks in `renderer.ts`.
-   - Katalog v2 in `src/render/catalogV2.json` + `assetKeys.ts`/`check-assets.mjs`; v1-Feldgrafiken optional.
-   - Backlog: 166 Grafiken, davon 32 Vertical Slice (Ziel 0.4.0), Rest Bibliothek (0.5.0) – Ziel-Releases ggf. anpassen.
-   - Vergleichsbild: [`docs/referenz/ist-stand-phase-a.jpg`](referenz/ist-stand-phase-a.jpg).
-   - Offen/Ideen: Wolkendecke für unerkundete Felder (Kap. 4, Schicht 9), Brücken-/Steg-Darstellung,
-     Einheiten etwas größer, Chunk-Zeichenzeit auf echten Android-Geräten messen.
-3. **Vertical Slice mit Scenario (Phase B)** – Schlüsselliste: Einträge mit Ziel `0.4.0` in `art/backlog.json`
-   - Stilmodelle `ai4x-terrain`, `ai4x-units` (zuerst) trainieren; Trainingsbilder aus dem Zielbild `docs/referenz/einheitenpanel.png`.
-   - ~30 Assets erzeugen, Skript für Nachbearbeitung (Freistellen, Zuschnitt, Anker, Fraktionsmaske, WebP) und
-     `art/sources.json` (Prompt, Modell, Seed) anlegen.
-   - Vergleichsscreenshot neben das Zielbild legen und dem Nutzer zur Freigabe zeigen.
-   - Budget: Pro-Abo (5.000 CU/Monat); Vertical Slice geschätzt 2.000–2.500 CU – Kosten vorher per `dryRun` prüfen.
+1. **Probelauf Phase B vom Nutzer freigeben lassen** – Vergleichsbogen
+   [`docs/referenz/probelauf-phase-b.jpg`](referenz/probelauf-phase-b.jpg)
+   - Scenario-Zugang funktioniert (Sitzung 3). Projekt `proj_tgX9ZV1YKNGpBZnkZwRNYxJj`.
+   - Probelauf: 4 Aufträge × 3 Varianten mit **Gemini 3.1 Flash + Zielbild-Ausschnitten als Referenz, ohne
+     LoRA-Training** (156 CU) + 4 × Freistellen (12 CU) = **168 CU verbraucht**.
+   - Eingebunden: `texture/grassland_1/2`, `prop/tree_conifer_1/2`, `prop/rock_1/2` (scale 0,2),
+     `portrait/spearman`. Einheitenpanel nutzt gemalte Porträts; Renderer zeichnet Kontaktschatten für Bäume/Felsen.
+   - Ergebnis: Stil, Perspektive und Licht treffen das Zielbild gut; Porträt fast identisch zur Vorlage.
+     Textur-Variante 1 von Gemini zeigte sichtbare Wiederholung → `art-postprocess.py` macht Texturen nahtlos.
+2. **Entscheidung des Nutzers zum Rest des Vertical Slice** (25 offene 0.4.0-Schlüssel in `art/backlog.json`)
+   - Option A: weiter ohne LoRA mit Gemini + Referenzen (≈ 40 CU je Schlüssel bei 3 Varianten, gesamt ≈ 1.000 CU);
+     freigegebene Bilder später als Trainingsdaten für die LoRA-Modelle in Phase C.
+   - Option B: wie Spezifikation Kap. 7.1 zuerst LoRA-Stilmodelle trainieren (92–156 CU je Modell).
+   - Vorgehen: Aufträge in `art/scenario/jobs.json` ergänzen → `--dry-run` → generieren → freistellen →
+     `selection.json` → `art-postprocess.py` (siehe [ASSET_PIPELINE.md](ASSET_PIPELINE.md), Abschnitt Scenario).
+   - Offen: Fraktionsmaske für Einheiten-Sprites (Fraktionsflächen hellgrau generieren, Maske per Farbbereich),
+     Wände/Kanten als horizontal kachelbare Texturen, Gebäudebausteine (Anker Bodenmitte).
+3. **PR nach `develop`** für Phase A + Probelauf, sobald der Nutzer zustimmt.
+4. Offen aus Phase A: Wolkendecke für unerkundete Felder (Kap. 4, Schicht 9), Brücken-/Steg-Darstellung,
+   Einheiten etwas größer, Chunk-Zeichenzeit auf echten Android-Geräten messen.
 
 ## Arbeitsweise (vom Nutzer vorgegeben)
 

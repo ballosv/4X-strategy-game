@@ -1,0 +1,42 @@
+{
+  "bc765f82ba816989": {
+    "file": "art/scenario/ref/terrain_grass.png",
+    "assetId": "asset_PmgmBgqdCPWyqjcsr5MNNd6s"
+  },
+  "95f740494ba412d2": {
+    "file": "docs/referenz/einheitenpanel.png",
+    "assetId": "asset_HCpdV2u5DzuzUyQoyi91FrZE"
+  },
+  "de8793c57042aa97": {
+    "file": "art/scenario/ref/props_conifer.png",
+    "assetId": "asset_Bi5b6tpiCaASFyHHkQNf6Yyk"
+  },
+  "d040654e7375b33d": {
+    "file": "art/scenario/ref/props_cliff.png",
+    "assetId": "asset_ECNzTyEgioDuh4KuKCAiC12e"
+  },
+  "7915edef464a7ad1": {
+    "file": "art/scenario/ref/portrait_spearman.png",
+    "assetId": "asset_hUbNQyXibRxd2uEasbnTa8w7"
+  },
+  "a157f65cafe790ed": {
+    "file": "art/scenario/ref/unit_spearman.png",
+    "assetId": "asset_Drb1TkkCdKsymFgfhuQRjknP"
+  },
+  "ddf032113abcbaaa": {
+    "file": "art/scenario/raw/prop/tree_conifer_1/1.png",
+    "assetId": "asset_gz9ir6WsRk2QoeQd45JTgs5J"
+  },
+  "81775a8ac03485b7": {
+    "file": "art/scenario/raw/prop/tree_conifer_1/3.png",
+    "assetId": "asset_wx4RpySCFnUg9QqDvnJexpRG"
+  },
+  "72d838643c1756c6": {
+    "file": "art/scenario/raw/prop/rock_1/1.png",
+    "assetId": "asset_6wYo5g3WuRqKVdvSoLjCvgQx"
+  },
+  "ebf264133c797209": {
+    "file": "art/scenario/raw/prop/rock_1/2.png",
+    "assetId": "asset_HSmwmK9uWk3oGnBWqQa7oAGR"
+  }
+}

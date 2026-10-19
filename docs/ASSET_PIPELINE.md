@@ -241,6 +241,32 @@ public/assets/
 Die Ordnerstruktur ist eine Empfehlung – maßgeblich ist der Pfad in `file`. Wandtexturen
 (`walls/<cliff|earth>`) sind noch nicht angebunden; Wände bleiben prozedural.
 
+## KI-Produktion mit Scenario (Grafik-Spezifikation v2, Kap. 7)
+
+| Datei | Inhalt |
+|---|---|
+| `art/scenario/jobs.json` | Aufträge: Schlüssel, Art (`texture`, `object`, `portrait`), Prompt-Zusatz, Referenzbilder, Modell-Preset |
+| `art/scenario/ref/` | Referenzausschnitte aus dem Zielbild |
+| `art/scenario/uploads.json` | Scenario-Asset-IDs der hochgeladenen Referenzen (Zwischenspeicher) |
+| `art/scenario/raw/` | Rohbilder (nicht im Repository, über die Job-IDs in `art/sources.json` abrufbar) |
+| `art/scenario/selection.json` | gewählte Variante je Schlüssel, Typ, Zielgröße, optional `anchorX`/`anchorY`/`scale` |
+| `art/sources.json` | Herkunft: Modell, Prompt, Parameter, Referenzen, Job-ID, verbrauchte CU, Dateien |
+
+Ablauf (Zugangsdaten in `SCENARIO_API_KEY`/`SCENARIO_API_SECRET`, werden nie ausgegeben):
+
+1. `node scripts/scenario-generate.mjs --dry-run [--only <schlüssel>]` – Kosten schätzen (verbraucht nichts).
+2. `node scripts/scenario-generate.mjs --only <schlüssel> --max-cu <n>` – generieren; bricht ab, wenn die
+   Schätzung das Budget übersteigt (Standard 200 CU).
+3. Objekte freistellen: `node scripts/scenario-generate.mjs --remove-bg art/scenario/raw/<schlüssel>/<n>.png`
+   (Photoroom, 3 CU je Bild; der Schatten wird entfernt, den Kontaktschatten zeichnet der Renderer).
+4. Variante in `art/scenario/selection.json` eintragen, dann `python3 scripts/art-postprocess.py [<schlüssel>]`
+   (Pillow mit WebP): Texturen 512 × 512 nahtlos, Objekte mit Fußpunkt bei 95 % der Höhe, Porträts 512 × 512;
+   schreibt `public/assets/<schlüssel>.webp` und das Manifest.
+5. `npm run assets:check`, `npm run art:prune`, im Spiel prüfen (Kapitel 8 der Spezifikation).
+
+Kosten (Stand 10/2026, per dryRun): Gemini 3.1 Flash 12 CU je Bild (mit Referenzen 13), FLUX.2 Dev 16,
+FLUX.2 Klein 9B 11, Freistellen 3; LoRA-Training 92–156 CU je Modell.
+
 ## Prompt-Vorlage
 
 Basis (immer gleich):

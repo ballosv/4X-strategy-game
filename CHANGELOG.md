@@ -16,6 +16,15 @@
 - Asset-Katalog v2 (Texturen, Wände, Wege, Objekte, Gebäude, Porträts, Atmosphäre) in Vorschau und
   Prüfskript; Grafik-Backlog mit Ziel-Release (Vertical Slice 0.4.0, Bibliothek 0.5.0)
 
+### Grafik (Phase B – Probelauf mit Scenario)
+- Erste KI-generierte Grafiken: Grastextur (2 Varianten, nahtlos), Nadelbäume (2), Felsbrocken (2)
+  und gemaltes Porträt des Speerträgers
+- Einheitenpanel zeigt gemalte Porträts (`portrait/<einheit>`), sobald vorhanden
+- Gemalte Bäume und Felsen erhalten einen Kontaktschatten vom Renderer
+- Skripte: `scripts/scenario-generate.mjs` (Generierung mit Kostenprüfung per dryRun und Budgetgrenze,
+  Freistellen) und `scripts/art-postprocess.py` (Zuschnitt, Anker, nahtlose Texturen, WebP, Manifest);
+  Herkunft je Grafik in `art/sources.json`
+
 ## v0.2.0 – Wirtschaft & Infrastruktur (2026-10-18)
 
 ### Transportnetz

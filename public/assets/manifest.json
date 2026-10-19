@@ -81,6 +81,23 @@
       "file": "overlay/rocks.png",
       "anchorY": 0.7
     },
+    "portrait/spearman": {
+      "file": "portrait/spearman.webp"
+    },
+    "prop/rock_1": {
+      "file": "prop/rock_1.webp",
+      "scale": 0.2
+    },
+    "prop/rock_2": {
+      "file": "prop/rock_2.webp",
+      "scale": 0.2
+    },
+    "prop/tree_conifer_1": {
+      "file": "prop/tree_conifer_1.webp"
+    },
+    "prop/tree_conifer_2": {
+      "file": "prop/tree_conifer_2.webp"
+    },
     "settlement/camp_0": {
       "file": "settlement/camp_0.png",
       "anchorY": 0.7
@@ -135,6 +152,12 @@
     },
     "terrain/tundra": {
       "file": "terrain/tundra.png"
+    },
+    "texture/grassland_1": {
+      "file": "texture/grassland_1.webp"
+    },
+    "texture/grassland_2": {
+      "file": "texture/grassland_2.webp"
     },
     "unit/archer": {
       "file": "unit/archer.png",

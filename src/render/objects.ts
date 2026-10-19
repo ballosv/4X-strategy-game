@@ -50,6 +50,12 @@ export function drawProp(ctx: CanvasRenderingContext2D, s: LoadedSprite, x: numb
   ctx.restore();
 }
 
+/** Gestreuter Sprite mit Kontaktschatten; der Schatten wird nicht gespiegelt (Licht bleibt oben links). */
+function spriteWithShadow(ctx: CanvasRenderingContext2D, s: LoadedSprite, p: Spot): void {
+  contactShadow(ctx, p.x, p.y, HEX_W * s.scale * p.size * 0.22);
+  drawProp(ctx, s, p.x, p.y, p.size, p.flip);
+}
+
 /** Geladene Varianten einer Objektart (leer, wenn keine gemalten Sprites vorliegen). */
 function variants(kind: PropKind): LoadedSprite[] {
   return propKeys(kind)
@@ -200,7 +206,7 @@ export function paintForest(ctx: CanvasRenderingContext2D, t: Tile, i: number, c
 function drawVegetation(ctx: CanvasRenderingContext2D, kind: TreeKind, p: Spot, i: number, snowy: boolean): void {
   const sprites = variants(kind);
   if (sprites.length) {
-    drawProp(ctx, pick(sprites, i, p.k), p.x, p.y, p.size, p.flip);
+    spriteWithShadow(ctx, pick(sprites, i, p.k), p);
     return;
   }
   const base = kind === 'bush' ? 8 : kind === 'tree_conifer' ? 23 : 20;
@@ -258,7 +264,7 @@ function drawRock(ctx: CanvasRenderingContext2D, x: number, y: number, s: number
 export function paintRocks(ctx: CanvasRenderingContext2D, i: number, c: Point, count = 4): void {
   const sprites = variants('rock');
   for (const p of scatter(i, c, count, 59, 0.7, 9)) {
-    if (sprites.length) drawProp(ctx, pick(sprites, i, p.k), p.x, p.y, p.size, p.flip);
+    if (sprites.length) spriteWithShadow(ctx, pick(sprites, i, p.k), p);
     else drawRock(ctx, p.x, p.y, (3.5 + hash01(i, p.k + 20) * 3) * p.size, p.flip);
   }
 }

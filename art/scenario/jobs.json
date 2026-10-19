@@ -1,0 +1,49 @@
+{
+  "description": "Aufträge für scripts/scenario-generate.mjs (Grafik-Spezifikation v2, Kap. 7). Referenzen sind Ausschnitte aus dem Zielbild docs/referenz/einheitenpanel.png.",
+  "projectId": "proj_tgX9ZV1YKNGpBZnkZwRNYxJj",
+  "presets": {
+    "gemini": {
+      "model": "model_google-gemini-3-1-flash",
+      "params": { "aspectRatio": "1:1", "resolution": "1K", "numOutputs": 3 }
+    }
+  },
+  "backgroundRemoval": {
+    "model": "model_photoroom-background-removal",
+    "params": {}
+  },
+  "basePrompt": {
+    "object": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border",
+    "texture": "seamless tileable top-down painted texture in exactly the hand-painted stylized look of the reference images, viewed straight from above, even lighting, no objects, no hexagon lines, no borders, no text, edges must tile seamlessly",
+    "portrait": "painted character portrait for a strategy game unit panel in exactly the hand-painted stylized look of the reference images, three-quarter body, painted landscape background, no frame, no text"
+  },
+  "jobs": [
+    {
+      "key": "texture/grassland_1",
+      "kind": "texture",
+      "preset": "gemini",
+      "prompt": "lush green meadow grass with small lighter and darker patches and a few tiny flowers, matching the grass colour and brushwork of the reference",
+      "refs": ["art/scenario/ref/terrain_grass.png", "docs/referenz/einheitenpanel.png"]
+    },
+    {
+      "key": "prop/tree_conifer_1",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "one single dark green conifer pine tree with a short brown trunk, like the pine trees in the reference",
+      "refs": ["art/scenario/ref/props_conifer.png", "docs/referenz/einheitenpanel.png"]
+    },
+    {
+      "key": "prop/rock_1",
+      "kind": "object",
+      "preset": "gemini",
+      "prompt": "one single grey granite boulder with soft moss patches on top, same rock colour and shading as the cliffs in the reference",
+      "refs": ["art/scenario/ref/props_cliff.png", "docs/referenz/einheitenpanel.png"]
+    },
+    {
+      "key": "portrait/spearman",
+      "kind": "portrait",
+      "preset": "gemini",
+      "prompt": "bearded medieval spearman with steel kettle helmet, blue tunic, round blue shield with a white plant emblem, holding a tall spear, standing in a green valley with mountains, same character as the reference portrait",
+      "refs": ["art/scenario/ref/portrait_spearman.png", "art/scenario/ref/unit_spearman.png"]
+    }
+  ]
+}
