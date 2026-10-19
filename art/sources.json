@@ -224,6 +224,52 @@
           "art/scenario/raw/wall/slope/3.png"
         ]
       }
+    ],
+    "wall/beach": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "seamless tileable painted texture of a vertical surface seen straight from the front in exactly the hand-painted stylized look of the reference images, light from upper left, no sky, no ground, no objects, no borders, no text, edges must tile seamlessly in both directions, sloped sandy beach bank of warm light sand with small pebbles and a few shells, painted",
+        "params": {
+          "aspectRatio": "16:9",
+          "resolution": "512",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/terrain_water.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_eWZJQYy9w8cQxu5a7BC5Tuj1",
+        "cu": 30,
+        "files": [
+          "art/scenario/raw/wall/beach/1.png",
+          "art/scenario/raw/wall/beach/2.png",
+          "art/scenario/raw/wall/beach/3.png"
+        ]
+      }
+    ],
+    "prop/tree_broadleaf_1": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, one single round deciduous oak tree with a lush rounded green crown and a short brown trunk",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/props_conifer.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_YaFh3g3yaqyBmFhEky917QN3",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/prop/tree_broadleaf_1/1.png",
+          "art/scenario/raw/prop/tree_broadleaf_1/2.png",
+          "art/scenario/raw/prop/tree_broadleaf_1/3.png"
+        ]
+      }
     ]
   }
 }
