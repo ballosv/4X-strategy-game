@@ -6,6 +6,14 @@
  *   node scripts/check-assets.mjs --dir <ordner>   anderes Asset-Verzeichnis prüfen
  *   node scripts/check-assets.mjs --json          Ergebnis als JSON
  *   node scripts/check-assets.mjs --list-keys     alle erwarteten Schlüssel ausgeben
+ *   node scripts/check-assets.mjs --strict        zusätzlich: jede fehlende Pflicht-Grafik muss im
+ *                                                 Grafik-Backlog (art/backlog.json) eingeplant sein
+ *   node scripts/check-assets.mjs --release       zusätzlich: keine Backlog-Grafik darf für die aktuelle
+ *                                                 Version (package.json) oder früher eingeplant sein
+ *
+ * Grafik ist Teil der Entwicklung: Neue Einheiten, Ausbauten usw. bringen ihre Grafik mit. Ist das
+ * (noch) nicht möglich, wird die Grafik bewusst mit Ziel-Release in art/backlog.json eingetragen.
+ * Ist GITHUB_STEP_SUMMARY gesetzt, wird ein Bericht für die GitHub-Actions-Zusammenfassung geschrieben.
  *
  * Fehler: ungültiges Manifest, fehlende Dateien, unbekannte Schlüssel, ungültige Einträge.
  * Hinweise: nicht referenzierte Bilddateien, fehlende Pflicht-Sprites (Abdeckung).
@@ -14,7 +22,7 @@
  * Die erwarteten Schlüssel werden – wie in src/render/assetKeys.ts – aus den Datentabellen in
  * src/core/data abgeleitet (hier per Textanalyse, da das Skript kein TypeScript laden soll).
  */
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -95,13 +103,13 @@ export function checkAssets(dir) {
   let manifest;
   if (!existsSync(manifestPath)) {
     errors.push(`manifest.json fehlt in ${dir}`);
-    return { errors, warnings, sprites: 0, coverage: { have: 0, required: expected.filter((e) => !e.optional).length } };
+    return { errors, warnings, sprites: 0, coverage: { have: 0, required: expected.filter((e) => !e.optional).length }, delivered: [], missing: expected.filter((e) => !e.optional).map((e) => e.key) };
   }
   try {
     manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
   } catch (e) {
     errors.push(`manifest.json ist kein gültiges JSON: ${e.message}`);
-    return { errors, warnings, sprites: 0, coverage: { have: 0, required: expected.filter((e) => !e.optional).length } };
+    return { errors, warnings, sprites: 0, coverage: { have: 0, required: expected.filter((e) => !e.optional).length }, delivered: [], missing: expected.filter((e) => !e.optional).map((e) => e.key) };
   }
   if (!manifest || typeof manifest !== 'object' || Array.isArray(manifest)) errors.push('Manifest muss ein JSON-Objekt sein');
   else if (manifest.version !== 1) errors.push(`Unbekannte Manifest-Version ${JSON.stringify(manifest.version)} (erwartet 1)`);
@@ -141,8 +149,61 @@ export function checkAssets(dir) {
   }
   for (const f of listImages(dir)) if (!referenced.has(f)) warnings.push(`Datei nicht im Manifest eingetragen: ${f}`);
   const required = expected.filter((e) => !e.optional);
-  const have = required.filter((e) => valid.has(e.key)).length;
-  return { errors, warnings, sprites: Object.keys(sprites ?? {}).length, coverage: { have, required: required.length } };
+  const delivered = required.filter((e) => valid.has(e.key)).map((e) => e.key);
+  const missing = required.filter((e) => !valid.has(e.key)).map((e) => e.key);
+  return { errors, warnings, sprites: Object.keys(sprites ?? {}).length, coverage: { have: delivered.length, required: required.length }, delivered, missing };
+}
+
+/** Vergleich von Versionen wie 0.3.0 (fehlende Teile = 0). */
+export function compareVersions(a, b) {
+  const pa = String(a).split('.').map(Number);
+  const pb = String(b).split('.').map(Number);
+  for (let i = 0; i < 3; i++) {
+    const d = (pa[i] || 0) - (pb[i] || 0);
+    if (d) return d;
+  }
+  return 0;
+}
+
+/**
+ * Prüft den Grafik-Backlog gegen die fehlenden Pflicht-Grafiken.
+ * strict: fehlende, nicht eingeplante Grafiken sind Fehler. release: fällige Backlog-Einträge sind Fehler.
+ */
+export function checkBacklog(result, backlog, version, { strict = false, release = false } = {}) {
+  const errors = [];
+  const warnings = [];
+  const pending = backlog?.pending ?? {};
+  const known = new Set(expectedKeys().map((e) => e.key));
+  for (const [key, e] of Object.entries(pending)) {
+    if (!known.has(key)) errors.push(`Backlog: unbekannter Schlüssel ${key}`);
+    if (!e || typeof e.release !== 'string' || !/^\d+\.\d+\.\d+$/.test(e.release)) errors.push(`Backlog: ${key} braucht ein Ziel-Release wie "0.3.0"`);
+    else if (release && compareVersions(e.release, version) <= 0 && !result.delivered.includes(key)) errors.push(`Grafik ${key} ist für Release ${e.release} eingeplant, aber nicht geliefert`);
+    if (result.delivered.includes(key)) warnings.push(`Backlog: ${key} ist bereits geliefert und kann aus art/backlog.json entfernt werden`);
+  }
+  const unplanned = result.missing.filter((k) => !pending[k]);
+  if (strict) for (const k of unplanned) errors.push(`Grafik fehlt: ${k} – liefern (art/svg) oder in art/backlog.json einplanen`);
+  return { errors, warnings, unplanned };
+}
+
+function writeSummary(result, backlog, extra) {
+  const file = process.env.GITHUB_STEP_SUMMARY;
+  if (!file) return;
+  const pending = backlog?.pending ?? {};
+  const byRelease = {};
+  for (const [k, e] of Object.entries(pending)) (byRelease[e.release] ??= []).push(k);
+  const lines = [
+    '## Grafik-Abdeckung',
+    '',
+    `**${result.coverage.have} / ${result.coverage.required}** Pflicht-Grafiken geliefert.`,
+    '',
+    '| Ziel-Release | Offene Grafiken |',
+    '|---|---|',
+    ...Object.entries(byRelease).sort(([a], [b]) => compareVersions(a, b)).map(([r, ks]) => `| ${r} | ${ks.length}: ${ks.slice(0, 12).join(', ')}${ks.length > 12 ? ', …' : ''} |`),
+    '',
+    ...(extra.unplanned.length ? ['**Nicht eingeplant (Fehler):** ' + extra.unplanned.join(', '), ''] : []),
+    ...[...result.errors, ...extra.errors].map((e) => `- ❌ ${e}`),
+  ];
+  writeFileSync(file, `${lines.join('\n')}\n`, { flag: 'a' });
 }
 
 function main() {
@@ -156,11 +217,27 @@ function main() {
     return;
   }
   const result = checkAssets(dir);
+  const backlogPath = join(ROOT, 'art/backlog.json');
+  let backlog = { pending: {} };
+  if (existsSync(backlogPath)) {
+    try {
+      backlog = JSON.parse(readFileSync(backlogPath, 'utf8'));
+    } catch (e) {
+      result.errors.push(`art/backlog.json ist kein gültiges JSON: ${e.message}`);
+    }
+  }
+  const version = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8')).version;
+  const bl = checkBacklog(result, backlog, version, { strict: args.includes('--strict') || args.includes('--release'), release: args.includes('--release') });
+  result.errors.push(...bl.errors);
+  result.warnings.push(...bl.warnings);
+  writeSummary(result, backlog, bl);
   if (args.includes('--json')) {
     console.log(JSON.stringify(result));
   } else {
     console.log(`Asset-Prüfung: ${relative(ROOT, dir) || dir}`);
     console.log(`  ${result.sprites} Einträge im Manifest, Abdeckung ${result.coverage.have}/${result.coverage.required} Pflicht-Sprites`);
+    const open = Object.keys(backlog.pending ?? {}).length;
+    if (open) console.log(`  Grafik-Backlog: ${open} eingeplante Grafiken (art/backlog.json)`);
     for (const w of result.warnings) console.log(`  Hinweis: ${w}`);
     for (const e of result.errors) console.log(`  FEHLER: ${e}`);
     console.log(result.errors.length ? `${result.errors.length} Fehler gefunden.` : 'Keine Fehler.');
