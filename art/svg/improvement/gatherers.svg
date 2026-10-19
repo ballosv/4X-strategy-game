@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs>
+    <!-- @defs -->
+    <!-- Beerenstrauch -->
+    <g id="bush">
+      <ellipse cx="6" cy="2" rx="20" ry="6" fill="url(#shadow)"/>
+      <circle cx="-6" cy="-10" r="10" fill="#2c5a26"/>
+      <circle cx="7" cy="-11" r="10" fill="#2c5a26"/>
+      <circle cx="0" cy="-17" r="10" fill="#3f7a35"/>
+      <circle cx="-5" cy="-19" r="6" fill="#6aa84f"/>
+      <g fill="#c8324a"><circle cx="-8" cy="-12" r="2"/><circle cx="3" cy="-20" r="2"/><circle cx="9" cy="-10" r="2"/><circle cx="-2" cy="-8" r="2"/><circle cx="6" cy="-15" r="1.8"/></g>
+    </g>
+    <!-- Korb (Ursprung Boden) -->
+    <g id="basket">
+      <ellipse cx="4" cy="1" rx="12" ry="4" fill="url(#shadow)"/>
+      <path d="M-9 -12 L-7 0 Q0 3 7 0 L9 -12 Z" fill="#c49a52"/>
+      <path d="M0 -12 L9 -12 L7 0 Q3 2 0 2 Z" fill="#86622e"/>
+      <path d="M-8.5 -8 Q0 -5 8.5 -8 M-8 -4 Q0 -1 8 -4" stroke="#86622e" stroke-width="1.2" fill="none"/>
+      <ellipse cx="0" cy="-12" rx="9" ry="3.4" fill="#6e4f24"/>
+    </g>
+  </defs>
+  <!-- Sammelplatz -->
+  <ellipse cx="124" cy="248" rx="64" ry="30" fill="#a88a5a" opacity="0.4"/>
+  <path d="M120 268 Q90 290 76 302" stroke="#b89c6e" stroke-width="7" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <!-- Sträucher hinten -->
+  <use href="#bush" transform="translate(178 198) scale(1.2)"/>
+  <use href="#bush" transform="translate(210 230)"/>
+  <!-- Reisighütte (Ursprung Mitte) -->
+  <g transform="translate(92 226) scale(1.2)">
+    <ellipse cx="8" cy="3" rx="32" ry="10" fill="url(#shadow)"/>
+    <path d="M-26 0 Q-24 -34 0 -38 Q24 -34 26 0 Q0 7 -26 0 Z" fill="#9a7348"/>
+    <path d="M0 -38 Q24 -34 26 0 Q14 4 2 4 Z" fill="#6a4b2c"/>
+    <path d="M-20 -6 Q-18 -28 -2 -34 M-12 -2 Q-10 -26 4 -36 M8 2 Q12 -24 2 -37 M18 -1 Q20 -22 8 -34 M-24 -14 Q0 -20 24 -14 M-22 -26 Q0 -32 18 -28" stroke="#c49a6c" stroke-width="1.4" fill="none" opacity="0.7"/>
+    <path d="M-4 -40 L-10 -48 M2 -40 L6 -49 M0 -38 L-2 -50" stroke="#553c22" stroke-width="2" stroke-linecap="round"/>
+    <path d="M-10 4 Q-10 -14 -1 -16 Q8 -14 8 5 Q-1 7 -10 4 Z" fill="#3e2a18"/>
+    <path d="M-28 -8 Q-24 -14 -18 -12 L-20 -2 Z" fill="#3f7a35"/>
+  </g>
+  <!-- Trockenmatte mit Wurzeln und Pilzen -->
+  <g transform="translate(166 254)">
+    <path d="M-24 4 L4 -8 L28 2 L0 14 Z" fill="#b48a4a"/>
+    <path d="M-24 4 L0 14 L28 2 L28 4 L0 16 L-24 6 Z" fill="#86622e"/>
+    <path d="M-16 4 L8 -6 M-8 7 L16 -3 M0 10 L22 0" stroke="#86622e" stroke-width="1" opacity="0.6"/>
+    <g fill="#e2c27a"><ellipse cx="-10" cy="3" rx="4" ry="2"/><ellipse cx="2" cy="-2" rx="4" ry="2"/><ellipse cx="12" cy="4" rx="4" ry="2"/></g>
+    <g fill="#a4472f"><circle cx="-2" cy="7" r="2.6"/><circle cx="8" cy="9" r="2.6"/><circle cx="16" cy="0" r="2.6"/></g>
+    <g fill="#f2e7d2"><circle cx="-2.6" cy="6.2" r="0.8"/><circle cx="7.4" cy="8.2" r="0.8"/></g>
+  </g>
+  <!-- Körbe -->
+  <use href="#basket" transform="translate(116 260) scale(1.3)"/>
+  <circle cx="113" cy="244" r="2.4" fill="#c8324a"/><circle cx="118" cy="243" r="2.4" fill="#a8243a"/><circle cx="121" cy="246" r="2.2" fill="#c8324a"/><circle cx="114" cy="247" r="2" fill="#7a1f30"/>
+  <use href="#basket" transform="translate(138 270) scale(1.15)"/>
+  <ellipse cx="138" cy="256" rx="8" ry="2.6" fill="#6e4f24"/>
+  <circle cx="134" cy="255" r="2.2" fill="#553c22"/><circle cx="139" cy="254" r="2.2" fill="#7a5a36"/><circle cx="143" cy="256" r="2" fill="#553c22"/>
+  <use href="#basket" transform="translate(96 278)"/>
+  <path d="M90 266 Q94 260 98 266 M96 264 Q100 258 103 265" stroke="#6aa84f" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Strauch vorn -->
+  <use href="#bush" transform="translate(52 262) scale(1.05)"/>
+  <use href="#bush" transform="translate(186 290) scale(0.9)"/>
+</svg>

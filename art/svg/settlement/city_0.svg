@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs>
+    <!-- @defs -->
+    <linearGradient id="daub" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e6d2a8"/><stop offset="0.55" stop-color="#c9ad80"/><stop offset="1" stop-color="#8f7350"/>
+    </linearGradient>
+    <linearGradient id="thatch" x1="0" y1="0" x2="1" y2="0.3">
+      <stop offset="0" stop-color="#ecd08a"/><stop offset="0.5" stop-color="#c49a52"/><stop offset="1" stop-color="#86622e"/>
+    </linearGradient>
+    <!-- Rundhütte -->
+    <g id="hut">
+      <ellipse cx="9" cy="4" rx="28" ry="9" fill="url(#shadow)"/>
+      <path d="M-16 -14 L-16 0 A16 5 0 0 0 16 0 L16 -14 Z" fill="url(#daub)"/>
+      <path d="M-8 3.5 L-8 -8 Q-4 -13 0 -8 L0 5 Z" fill="#3e2a18"/>
+      <path d="M-22 -12 Q0 -3 22 -12 L0 -44 Z" fill="url(#thatch)" stroke="#6e4f24" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M-22 -12 Q0 -3 22 -12 Q0 -7 -22 -12 Z" fill="#6e4f24"/>
+      <path d="M-12 -10 L-3 -36 M-3 -8 L-1 -39 M7 -8 L2 -37 M14 -10 L4 -34" stroke="#86622e" stroke-width="1.2" opacity="0.55"/>
+    </g>
+    <!-- Langhaus (Ursprung = vordere Ecke) -->
+    <g id="long">
+      <ellipse cx="0" cy="-6" rx="34" ry="13" fill="url(#shadow)" transform="translate(4 2)"/>
+      <path d="M0 0 L-30 -13.5 L-30 -25.5 L0 -12 Z" fill="#d9c09a"/>
+      <path d="M0 0 L18 -8 L18 -20 L9 -31 L0 -12 Z" fill="#9a7a55"/>
+      <path d="M5 -3 L11 -5.5 L11 -15 L5 -12.5 Z" fill="#3e2a18"/>
+      <path d="M-8 -6 L-8 -10 L-13 -12 L-13 -8 Z M-20 -11 L-20 -15 L-25 -17 L-25 -13 Z" fill="#5a4030"/>
+      <path d="M2 -10 L-33 -25.8 L-22 -45 L10 -31.5 Z" fill="url(#thatch)" stroke="#6e4f24" stroke-width="1.2" stroke-linejoin="round"/>
+      <path d="M10 -31.5 L21 -18.5 L18.5 -17.5 L9 -28.5 Z" fill="#6e4f24"/>
+      <path d="M2 -10 L-33 -25.8 L-33 -23.5 L2 -7.5 Z" fill="#6e4f24"/>
+      <path d="M-8 -16 L1 -36 M-18 -21 L-9 -40 M-27 -25 L-17 -43" stroke="#86622e" stroke-width="1.2" opacity="0.5"/>
+    </g>
+  </defs>
+  <!-- Stadtgrund, Wege -->
+  <ellipse cx="128" cy="226" rx="104" ry="68" fill="#7d6a44" opacity="0.45"/>
+  <path d="M128 236 Q92 262 66 300 M134 234 Q182 252 216 272 M124 232 Q86 212 34 210 M130 226 Q150 196 186 172" stroke="#c9ad80" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.75"/>
+  <ellipse cx="126" cy="236" rx="30" ry="14" fill="#c9ad80" opacity="0.8"/>
+  <!-- hinten -->
+  <use href="#hut" transform="translate(80 188) scale(0.95)"/>
+  <use href="#long" transform="translate(150 170) scale(0.85)"/>
+  <use href="#hut" transform="translate(192 188) scale(0.95)"/>
+  <!-- Wachturm -->
+  <g transform="translate(216 214)">
+    <ellipse cx="10" cy="3" rx="16" ry="5" fill="url(#shadow)"/>
+    <path d="M-10 0 L-6 -50 M10 0 L6 -50 M-2 2 L-1 -50 M-9 -12 L8 -26 M9 -12 L-8 -26 M-8 -30 L7 -42" stroke="#7a5a36" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M-12 -50 L12 -50 L12 -58 L-12 -58 Z" fill="#9a7348"/>
+    <path d="M2 -50 L12 -50 L12 -58 L2 -58 Z" fill="#6a4b2c"/>
+    <path d="M-15 -57 L15 -57 L0 -74 Z" fill="url(#thatch)" stroke="#6e4f24" stroke-width="1.2" stroke-linejoin="round"/>
+    <path d="M0 -74 L0 -86" stroke="#553c22" stroke-width="2"/>
+    <path d="M0 -86 L13 -82 L0 -78 Z" fill="#a4472f"/>
+  </g>
+  <!-- Große Halle in der Mitte -->
+  <g transform="translate(150 230)">
+    <ellipse cx="-8" cy="-6" rx="56" ry="20" fill="url(#shadow)" transform="translate(8 3)"/>
+    <path d="M0 0 L-50 -22 L-50 -42 L0 -20 Z" fill="#d9c09a"/>
+    <path d="M-50 -22 L-50 -42 L-44 -39.4 L-44 -19.4 Z M-26 -11.5 L-26 -31.5 L-20 -29 L-20 -9 Z" fill="#9a7348"/>
+    <path d="M0 0 L26 -11.5 L26 -31.5 L13 -52 L0 -20 Z" fill="#9a7a55"/>
+    <path d="M7 -3 L17 -7.5 L17 -24 L12 -26 L7 -20 Z" fill="#3e2a18"/>
+    <path d="M3 -17 L-53 -42 L-37 -77 L14 -53 Z" fill="url(#thatch)" stroke="#6e4f24" stroke-width="1.2" stroke-linejoin="round"/>
+    <path d="M14 -53 L29.5 -29 L26 -28 L13 -49 Z" fill="#6e4f24"/>
+    <path d="M3 -17 L-53 -42 L-53 -39 L3 -14 Z" fill="#6e4f24"/>
+    <path d="M-10 -26 L2 -55 M-25 -33 L-13 -61 M-40 -39 L-27 -68" stroke="#86622e" stroke-width="1.4" opacity="0.5"/>
+    <path d="M14 -53 L6 -66 M14 -53 L22 -66" stroke="#e9dfc6" stroke-width="3" stroke-linecap="round"/>
+    <path d="M-37 -77 L-45 -90 M-37 -77 L-29 -90" stroke="#d9c7a5" stroke-width="2.6" stroke-linecap="round"/>
+  </g>
+  <!-- Mitte vorn -->
+  <use href="#hut" transform="translate(40 242) scale(0.95)"/>
+  <use href="#long" transform="translate(100 266) scale(0.9)"/>
+  <use href="#hut" transform="translate(196 266) scale(0.95)"/>
+  <use href="#hut" transform="translate(146 292) scale(0.92)"/>
+  <use href="#hut" transform="translate(86 298) scale(0.85)"/>
+  <!-- Feuer vor der Halle -->
+  <ellipse cx="166" cy="248" rx="7" ry="3.5" fill="#6b645c"/>
+  <path d="M162 248 Q162 240 166 236 Q170 242 171 248 Z" fill="#f08a2e"/>
+  <circle cx="170" cy="226" r="5" fill="#e3e7ea" opacity="0.3"/>
+</svg>
