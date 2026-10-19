@@ -1,0 +1,63 @@
+{
+  "description": "Asset-Katalog Version 2 (Grafik-Spezifikation Kap. 5). Wird von src/render/assetKeys.ts und scripts/check-assets.mjs gelesen. Ressourcen, Porträts, Ausbauten und Einheiten werden aus den Datentabellen abgeleitet.",
+  "textures": {
+    "terrains": ["grassland", "plains", "desert", "tundra", "snow", "marsh", "coast", "ocean", "lake"],
+    "variants": 2
+  },
+  "walls": {
+    "cliff_temperate": "Felswand (gemäßigt)",
+    "cliff_desert": "Felswand (Wüste)",
+    "cliff_snow": "Felswand (Schnee)",
+    "slope": "Erdhang",
+    "overhang": "Grasüberhang",
+    "beach": "Strandkante",
+    "foam": "Schaumkante",
+    "scree": "Geröll am Wandfuß"
+  },
+  "paths": {
+    "river": "Flussband",
+    "waterfall_1": "Wasserfall (schmal)",
+    "waterfall_2": "Wasserfall (breit)",
+    "trail": "Feldweg",
+    "road": "Straße",
+    "rail": "Schiene",
+    "bridge_wood": "Brücke (Holz)",
+    "bridge_stone": "Brücke (Stein)",
+    "bridge_steel": "Brücke (Stahl)"
+  },
+  "props": {
+    "tree_broadleaf": ["Laubbaum", 6],
+    "tree_conifer": ["Nadelbaum", 6],
+    "tree_palm": ["Palme", 3],
+    "tree_bare": ["Kahler Baum", 3],
+    "bush": ["Busch/Schilf", 6],
+    "rock": ["Felsbrocken", 6],
+    "mountain": ["Bergmassiv", 4],
+    "peak": ["Hochgebirge mit Schnee", 3]
+  },
+  "buildingStyles": {
+    "stone": "Steinzeit",
+    "antiquity": "Antike",
+    "medieval": "Mittelalter",
+    "industrial": "Industrie",
+    "modern": "Moderne/Zukunft"
+  },
+  "buildingTypes": {
+    "house_small": "Wohnhaus klein",
+    "house_large": "Wohnhaus groß",
+    "center": "Zentrum",
+    "tower": "Turm/Tempel",
+    "workshop": "Werkstatt",
+    "storage": "Lager",
+    "wall": "Mauerstück"
+  },
+  "fx": {
+    "cloud_1": "Wolke 1",
+    "cloud_2": "Wolke 2",
+    "cloud_3": "Nebelschleier",
+    "deco_1": "Möwen",
+    "deco_2": "Vogelschwarm",
+    "deco_3": "Fische im Wasser",
+    "deco_4": "Schmetterlinge"
+  }
+}

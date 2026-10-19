@@ -1,5 +1,21 @@
 # Changelog
 
+## Unveröffentlicht
+
+### Grafik (Spezifikation Version 2, Phase A – Renderer)
+- Flachere Kamera (Stauchung 0,58), hohe Klippen (0,85 × Hex-Radius je Höhenstufe), Zoom 0,4–2,0,
+  Standardzoom ≈ 10 Felder Bildbreite auf dem Smartphone
+- Durchgehende Landschaft: Bodentexturen in Weltkoordinaten mit unregelmäßigen Übergängen,
+  Felswände mit Gesteinstextur, Grasüberhang und Geröll, Erdhänge, Strandkanten, Flachwasser und Schaum
+- Feines helles Hexgitter statt dunkler Kachelkanten
+- Gestreute Einzelobjekte (Laub-/Nadelbäume, Palmen, Büsche, Felsen) mit Varianten, Größe und
+  Spiegelung je Feld; Bergmassive ragen über die Feldfläche
+- Siedlungen aus Gebäudebausteinen in fünf Epochenstilen, wachsen mit Art und Bevölkerung
+- Nebel des Krieges: erkundete, nicht sichtbare Felder entsättigt
+- Chunks werden mit Zeitbudget je Bild gezeichnet (kein Ruckeln beim Schwenken)
+- Asset-Katalog v2 (Texturen, Wände, Wege, Objekte, Gebäude, Porträts, Atmosphäre) in Vorschau und
+  Prüfskript; Grafik-Backlog mit Ziel-Release (Vertical Slice 0.4.0, Bibliothek 0.5.0)
+
 ## v0.2.0 – Wirtschaft & Infrastruktur (2026-10-18)
 
 ### Transportnetz

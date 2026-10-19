@@ -13,7 +13,7 @@ import { findPath, reachableTiles } from '../core/systems/movement';
 import { availableTechs } from '../core/systems/research';
 import { computeVisibility } from '../core/systems/vision';
 import { MapRenderer, renderMinimap, type Highlights } from '../render/renderer';
-import { HEX_W, ROW_STEP } from '../render/projection';
+import { HEX_W, ROW_STEP, ZOOM_MAX, ZOOM_MIN, defaultZoom } from '../render/projection';
 import { assetPreviewScreen } from './assetPreview';
 import { h, replace } from './dom';
 import { fmt, signed } from './format';
@@ -91,7 +91,7 @@ export class GameView implements PanelHost, ScreenHost {
   mount(): void {
     this.renderer.resize();
     const start = this.ownUnits()[0]?.tile ?? playerSettlements(this.state, this.viewer)[0]?.tile ?? 0;
-    this.renderer.camera.zoom = window.innerWidth < 800 ? 0.9 : 1.1;
+    this.renderer.camera.zoom = defaultZoom(this.renderer.viewWidth);
     this.renderer.centerOn(this.state, start);
     this.refresh();
     this.loop();
@@ -207,7 +207,7 @@ export class GameView implements PanelHost, ScreenHost {
 
   private loop = (): void => {
     if (this.destroyed) return;
-    if (this.dirty) {
+    if (this.dirty || this.renderer.needsFrame) {
       this.dirty = false;
       this.draw();
     }
@@ -490,7 +490,7 @@ export class GameView implements PanelHost, ScreenHost {
   private zoomBy(f: number, sx = this.renderer.viewWidth / 2, sy = this.renderer.viewHeight / 2): void {
     const cam = this.renderer.camera;
     const before = this.renderer.screenToWorld(sx, sy);
-    cam.zoom = Math.max(0.35, Math.min(2.6, cam.zoom * f));
+    cam.zoom = Math.max(ZOOM_MIN, Math.min(ZOOM_MAX, cam.zoom * f));
     const after = this.renderer.screenToWorld(sx, sy);
     cam.x += before.x - after.x;
     cam.y += before.y - after.y;

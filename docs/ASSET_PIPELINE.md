@@ -14,14 +14,33 @@ sieht das Spiel pixelgenau so aus wie vorher.
 | Hex-Ausrichtung | Spitze oben („pointy top“) |
 | Hex-Radius | 36 Welt-Pixel (Zoom 1) |
 | Hex-Breite (`HEX_W`) | √3 × 36 ≈ 62,4 Welt-Pixel |
-| Vertikale Stauchung | 0,66 (Kameraneigung) → Oberseite ≈ 62,4 × 47,5 Welt-Pixel |
-| Höhe je Höhenstufe | 17 Welt-Pixel |
+| Vertikale Stauchung | 0,58 (Kameraneigung) → Oberseite ≈ 62,4 × 41,8 Welt-Pixel |
+| Höhe je Höhenstufe | 0,85 × Hex-Radius ≈ 30,6 Welt-Pixel |
+| Zoom | 0,4 – 2,0; Standard ≈ 10 Felder Bildbreite (Smartphone quer), auf breiten Bildschirmen mehr |
 | Lichtquelle | oben links, Schatten nach rechts unten |
-| Sichtbare Wände | nur Südwest- und Südost-Kante eines Feldes (bleiben prozedural) |
+| Sichtbare Wände | nur Südwest- und Südost-Kante eines Feldes, mit Wandtextur (`wall/*`) |
 
-Empfohlene Exportgrößen: 4-fache Auflösung der Weltpixel (Hex-Oberseite ca. **250 × 190 px**),
-transparenter Hintergrund, PNG oder WebP. Die Karte wird bis Zoom 2,6 dargestellt; 4-fach reicht
-auch für hochauflösende Displays.
+Exportgrößen je Asset-Gruppe: siehe [Grafik-Spezifikation](GRAFIK_SPEZIFIKATION.md), Kapitel 6.
+Die Karte wird bis Zoom 2,0 dargestellt.
+
+## Schichtmodell des Renderers (Grafik-Spezifikation v2, Kap. 4)
+
+Die Landschaft wird in vorgerenderten Chunks **zeilenweise von hinten nach vorne** aufgebaut; je Zeile
+erst alle Bodenschichten, dann alle Objekte. Objekte ragen so über die Felder dahinter und werden von
+vorderen, höheren Feldern verdeckt.
+
+| Schicht | Datei | Inhalt | Gemalte Assets (sonst prozeduraler Platzhalter) |
+|---|---|---|---|
+| Wände | `src/render/ground.ts` | Felswand (≥ 2 Stufen, Felsküste), Erdhang (1 Stufe), Strandkante; Grasüberhang, Geröll, Wasserfall | `wall/*`, `path/waterfall_*` |
+| Boden | `src/render/ground.ts`, `textures.ts` | Textur in **Weltkoordinaten** (zwei Lagen gegen Wiederholung), unregelmäßige Übergänge zu Nachbarn gleicher Höhe, Flachwasser und Schaum an Küsten | `texture/<gelände>_1/_2` |
+| Flüsse, Wege | `ground.ts`, `roads.ts` | Flussband mit Uferkante, Feldweg, Schiene | `path/*` |
+| Bodendetails | `ground.ts` | Blumen, Steinchen, Grasbüschel | – |
+| Hexgitter | `ground.ts` | feine helle Linie je Feld | – (prozedural) |
+| Objekte | `src/render/objects.ts`, `painter.ts` | Bäume/Büsche/Felsen gestreut mit Variante, Position, Größe ±15 %, Spiegelung; Bergmassive; Ausbauten; Ressourcen; Siedlungen aus Gebäudebausteinen | `prop/*`, `building/*`, `improvement/*` |
+| Grenzen, Einheiten, Nebel | `src/render/renderer.ts` | Reichsgrenzen, Einheiten, entsättigter Schleier für erkundete, nicht sichtbare Felder | `unit/*` |
+
+Neue Chunks werden mit einem Zeitbudget je Bild gezeichnet (`CHUNK_BUDGET_MS`); fehlende Chunks folgen
+in den nächsten Bildern, bis dahin wird eine andere Auflösungsstufe gezeigt.
 
 ## Grafik als Teil der Entwicklung
 
@@ -107,7 +126,11 @@ Standardwerte, wenn das Manifest nichts angibt:
 
 | Kategorie | anchorX | anchorY | scale | Hinweis |
 |---|---|---|---|---|
-| `terrain` | 0,5 | 0,5 | 1 | Bild = Oberseite, wird auf die Hex-Oberseite zugeschnitten |
+| `texture`, `wall` | – | – | 2 | nahtlose Textur; `scale` = Weltbreite einer Kachel in `HEX_W` (Boden wird in der Ansicht um 0,58 gestaucht) |
+| `prop` | 0,5 | 0,95 | 0,45 | Einzelobjekt mit Fußpunkt unten mittig; Größe je Platzierung ±15 % |
+| `building` | 0,5 | 0,85 | 0,42 | Gebäudebaustein, Bodenmitte |
+| `path`, `portrait`, `fx` | 0,5 | 0,5 | 1 | |
+| `terrain` | 0,5 | 0,5 | 1 | v1, wird auf der Karte nicht mehr verwendet |
 | `overlay` | 0,5 | 0,7 | 1 | Feldmitte liegt bei 70 % der Bildhöhe (Platz für Bäume/Gipfel) |
 | `improvement` | 0,5 | 0,7 | 1 | wie Overlay |
 | `settlement` | 0,5 | 0,7 | 1 | wie Overlay |
@@ -123,24 +146,29 @@ Alle Schlüssel werden aus den Datentabellen abgeleitet (`expectedAssetKeys()` i
 `src/render/assetKeys.ts`). Kommt ein neuer Einheitentyp oder Ausbau hinzu, erscheint sein Schlüssel
 automatisch in Vorschau und Prüfskript.
 
+Der feste Teil des Katalogs v2 (Texturen, Wände, Wege, Objektvarianten, Gebäudestile, Atmosphäre)
+steht in `src/render/catalogV2.json` – Spiel und Prüfskript lesen dieselbe Datei.
+
 | Schlüssel | Quelle | Verwendung |
 |---|---|---|
-| `terrain/<id>` | `TERRAIN` (ocean, coast, lake, grassland, plains, desert, tundra, snow, marsh) | Oberseite, auf das Hex zugeschnitten. Wände, Flüsse, Brandung und Hexgrenzen bleiben prozedural; Gebirgsfelder (Stufe 4/5) werden wie bisher felsig eingefärbt. |
-| `overlay/forest`, `overlay/denseForest`, `overlay/rocks` | `FEATURES` | Geländemerkmal |
-| `overlay/forest_conifer`, `overlay/denseForest_conifer` | optional | Nadelwald (Tundra, Schnee, ab Höhenstufe 3); Fallback auf die Basis ohne `_conifer` |
-| `overlay/mountain`, `overlay/highMountain` | Höhenstufe 4 / 5 | Bergmassiv |
+| `texture/<gelände>_<1\|2>` | Katalog (9 Geländearten × 2) | nahtlose Bodentextur 512 × 512; Variante 2 liegt in anderem Maßstab halbtransparent darüber |
+| `wall/<id>` | Katalog: `cliff_temperate`, `cliff_desert`, `cliff_snow`, `slope`, `beach`, `overhang`, `foam`, `scree` | Wandtexturen (horizontal kachelbar) und Kanten |
+| `path/<id>` | Katalog: Flussband, Wasserfälle, Wege, Brücken | Flüsse und Wege |
+| `prop/<art>_<n>` | Katalog: `tree_broadleaf` (6), `tree_conifer` (6), `tree_palm` (3), `tree_bare` (3), `bush` (6), `rock` (6), `mountain` (4), `peak` (3) | gestreute Einzelobjekte, Variante je Platzierung |
+| `prop/resource_<id>` | `RESOURCES` | Rohstoff als Feld-Objekt (sonst Plakette mit Symbol) |
 | `improvement/<id>` | `IMPROVEMENTS` (farm, mine, lumber, quarry, …) | Ausbau; Stufenpunkte werden darüber gezeichnet |
 | `improvement/<id>_<stufe>` | optional | eigene Grafik je Ausbaustufe (2, 3); Fallback auf `improvement/<id>` |
-| `settlement/<camp\|settlement\|city>_<epoche>` | Siedlungsart × `ERAS` (0–8) | Siedlung; Mauern/Palisade werden darüber gezeichnet |
-| `settlement/<art>` | optional | epochenunabhängige Grafik (letzter Fallback) |
-| `settlement/machine` | optional | Kern der Maschinen-KI |
-| `unit/<id>` | `UNIT_TYPES` | Einheit (Karte und Porträt im Einheitenpanel) |
+| `building/<stil>_<typ>` | Katalog: Stile `stone`, `antiquity`, `medieval`, `industrial`, `modern` × Typen `house_small`, `house_large`, `center`, `tower`, `workshop`, `storage`, `wall` | Siedlungsbausteine; die Siedlung wird daraus zusammengesetzt und wächst mit Art und Bevölkerung |
+| `unit/<id>` | `UNIT_TYPES` | Einheit auf der Karte |
 | `unit/<id>_mask` | optional | Farbmaske für die Fraktionsfarbe (siehe unten) |
+| `portrait/<id>` | `UNIT_TYPES` | gemaltes Porträt 512 × 512 für das Einheitenpanel |
+| `fx/<id>` | Katalog: Wolken, Nebel, Deko-Tiere | Atmosphäre |
+| `terrain/*`, `overlay/*`, `settlement/*` | optional (v1) | feldgebundene Platzhalter aus Version 1; die Karte nutzt sie nicht mehr (Ausnahme `settlement/machine`), die Asset-Vorschau zeigt sie weiter |
 | `ui/<name>` | frei | für spätere UI-Grafiken; wird geladen und in der Vorschau gezeigt |
 
-**Epochen-Fallback für Siedlungen:** gesucht wird `settlement/<art>_<epoche des Besitzers>`, dann jede
-niedrigere Epoche bis `_0`, zuletzt `settlement/<art>`. Beispiel Stadt im Mittelalter (Epoche 3):
-`city_3 → city_2 → city_1 → city_0 → city`. Pflicht ist daher nur `_0`; spätere Epochen sind optional.
+**Epochenstil der Gebäude:** Steinzeit → `stone`, Bronze-/Eisenzeit → `antiquity`, Mittelalter/Renaissance
+→ `medieval`, Industrie/Moderne → `industrial`, Information/Zukunft → `modern` (`buildingStyle()` in
+`assetKeys.ts`).
 
 Die Fraktionsringe, Lebensbalken, Statussymbole, Siedlungsbanner, Ressourcen-Plaketten,
 Reichsgrenzen und Hervorhebungen zeichnet weiterhin der Renderer.
@@ -176,7 +204,7 @@ Schlüssel nach Kategorie mit
 - Status **geladen**, **fehlt** (Pflicht-Sprite fehlt), **optional** (Variante/Maske) oder
   **Ladefehler** (im Manifest eingetragen, Bild nicht ladbar),
 - Vorschaubild auf einem Musterfeld – genau so, wie das Spiel zeichnen würde (Sprite oder prozedural,
-  bei Siedlungen inklusive Epochen-Fallback; Einheiten in neutralem Blau `#2f6fb5`),
+  bei Gebäuden als Beispielsiedlung; Einheiten in neutralem Blau `#2f6fb5`),
 - Abdeckung „x von y Pflicht-Sprites“ sowie unbekannte Schlüssel aus dem Manifest.
 
 Optionale Varianten und Masken lassen sich per Häkchen einblenden.

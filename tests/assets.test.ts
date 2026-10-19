@@ -6,10 +6,12 @@ import { join } from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
 import { ERAS } from '../src/core/data/eras';
 import { IMPROVEMENTS } from '../src/core/data/improvements';
-import { FEATURES, TERRAIN } from '../src/core/data/terrain';
+import { FEATURES, RESOURCES, TERRAIN } from '../src/core/data/terrain';
 import { UNIT_TYPES } from '../src/core/data/units';
 import {
   CATEGORY_DEFAULTS,
+  buildingStyle,
+  propKeys,
   categoryOf,
   expectedAssetKeys,
   forestKeyCandidates,
@@ -45,13 +47,32 @@ describe('Asset-Schlüssel', () => {
     }
   });
 
-  it('Pflicht: Basis-Sprites; optional: Masken, Varianten, spätere Epochen', () => {
+  it('Pflicht: Katalog v2 und Einheiten/Ausbauten; optional: Masken und feldgebundene v1-Grafiken', () => {
     const opt = (key: string) => keys.find((k) => k.key === key)!.optional;
     expect(opt('unit/spearman')).toBe(false);
     expect(opt('unit/spearman_mask')).toBe(true);
-    expect(opt('settlement/city_0')).toBe(false);
-    expect(opt('settlement/city_4')).toBe(true);
+    expect(opt('texture/grassland_2')).toBe(false);
+    expect(opt('building/medieval_tower')).toBe(false);
+    expect(opt('prop/resource_game')).toBe(false);
+    expect(opt('settlement/city_0')).toBe(true);
+    expect(opt('terrain/grassland')).toBe(true);
     expect(opt('overlay/forest_conifer')).toBe(true);
+  });
+
+  it('enthalten den Katalog der Grafik-Spezifikation v2 (Kap. 5)', () => {
+    const count = (prefix: string) => keys.filter((k) => k.key.startsWith(prefix)).length;
+    expect(count('texture/')).toBe(18);
+    expect(count('wall/')).toBe(8);
+    expect(count('prop/tree_') + count('prop/bush_')).toBe(24);
+    expect(count('prop/rock_') + count('prop/mountain_') + count('prop/peak_')).toBe(13);
+    expect(count('prop/resource_')).toBe(Object.keys(RESOURCES).length);
+    expect(count('building/')).toBe(35);
+    expect(count('portrait/')).toBe(Object.keys(UNIT_TYPES).length);
+    expect(propKeys('tree_palm')).toEqual(['prop/tree_palm_1', 'prop/tree_palm_2', 'prop/tree_palm_3']);
+  });
+
+  it('ordnet Epochen den fünf Gebäudestilen zu', () => {
+    expect(ERAS.map((e) => buildingStyle(e.index))).toEqual(['stone', 'antiquity', 'antiquity', 'medieval', 'medieval', 'industrial', 'industrial', 'modern', 'modern']);
   });
 
   it('erkennt bekannte und unbekannte Schlüssel', () => {
@@ -63,6 +84,8 @@ describe('Asset-Schlüssel', () => {
     expect(isKnownKey('improvement/castle_2')).toBe(false);
     expect(isKnownKey('settlement/castle_1')).toBe(false);
     expect(isKnownKey('walls/cliff')).toBe(false);
+    expect(isKnownKey('wall/cliff_temperate')).toBe(true);
+    expect(isKnownKey('prop/tree_conifer_7')).toBe(false);
   });
 
   it('stimmen mit dem Prüfskript überein', () => {

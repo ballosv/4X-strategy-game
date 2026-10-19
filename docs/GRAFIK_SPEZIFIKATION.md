@@ -239,7 +239,7 @@ links, Werten in der Mitte und großen Aktionsbuttons rechts; Ressourcenleiste o
 
 | Phase | Inhalt | Ergebnis |
 |---|---|---|
-| A – Renderer | Kamera/Höhen nach Kapitel 3, Schichtmodell nach Kapitel 4 (Weltkoordinaten-Texturen, Übergänge, Fels-Wände, Gitter-Overlay, Objekt-Streuung, zusammengesetzte Siedlungen) – mit Platzhaltern | Landschaft wirkt durchgehend |
+| A – Renderer ✅ | Kamera/Höhen nach Kapitel 3, Schichtmodell nach Kapitel 4 (Weltkoordinaten-Texturen, Übergänge, Fels-Wände, Gitter-Overlay, Objekt-Streuung, zusammengesetzte Siedlungen) – mit Platzhaltern | Landschaft wirkt durchgehend (umgesetzt, prozedurale Platzhalter; Katalog in `assetKeys.ts`/`catalogV2.json`, Backlog gefüllt) |
 | B – Vertical Slice | Stilmodelle trainieren; ~30 Assets: Gras, Wald, Fels/Klippe, Wasser/Küste, Fluss/Wasserfall, Speerträger (+ Porträt), Steinzeit-/Mittelalterdorf, Mine, Farm, Steg | Vergleich mit dem Zielbild, Freigabe des Stils |
 | C – Bibliothek | restliche ≈ 200 Assets in Familien, laufende Abnahme | vollständiger Katalog |
 | D – Feinschliff | Atmosphäre, Animationen (Wasser, Rauch, Fahnen – optional), Porträts | Release |

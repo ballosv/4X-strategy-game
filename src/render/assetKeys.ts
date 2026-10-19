@@ -1,8 +1,9 @@
 import { ERAS } from '../core/data/eras';
 import { IMPROVEMENTS } from '../core/data/improvements';
-import { FEATURES, TERRAIN } from '../core/data/terrain';
+import { FEATURES, RESOURCES, TERRAIN } from '../core/data/terrain';
 import { UNIT_TYPES } from '../core/data/units';
 import type { SettlementKind } from '../core/state';
+import CATALOG_V2 from './catalogV2.json';
 
 /**
  * Reine Logik der Asset-Pipeline (ohne DOM, in Node testbar):
@@ -21,9 +22,15 @@ import type { SettlementKind } from '../core/state';
 
 export const MANIFEST_VERSION = 1;
 
-export type AssetCategory = 'terrain' | 'overlay' | 'improvement' | 'settlement' | 'unit' | 'ui';
+/**
+ * Kategorien. Version 2 der Grafik-Spezifikation (Kap. 4/5) setzt die Landschaft aus Bausteinen zusammen:
+ * texture (nahtlose Bodentexturen), wall (Wände/Kanten), path (Flüsse/Wege), prop (Einzelobjekte),
+ * building (Siedlungsbausteine), portrait, fx (Atmosphäre). terrain/overlay/settlement sind die
+ * feldgebundenen Grafiken aus Version 1 – nur noch optional (Asset-Vorschau, Platzhalter).
+ */
+export type AssetCategory = 'terrain' | 'overlay' | 'improvement' | 'settlement' | 'unit' | 'ui' | 'texture' | 'wall' | 'path' | 'prop' | 'building' | 'portrait' | 'fx';
 
-export const ASSET_CATEGORIES: AssetCategory[] = ['terrain', 'overlay', 'improvement', 'settlement', 'unit', 'ui'];
+export const ASSET_CATEGORIES: AssetCategory[] = ['texture', 'wall', 'path', 'prop', 'building', 'improvement', 'unit', 'portrait', 'fx', 'terrain', 'overlay', 'settlement', 'ui'];
 
 export interface SpriteEntry {
   file: string;
@@ -45,7 +52,37 @@ export const CATEGORY_DEFAULTS: Record<AssetCategory, Omit<SpriteEntry, 'file'>>
   settlement: { anchorX: 0.5, anchorY: 0.7, scale: 1 },
   unit: { anchorX: 0.5, anchorY: 0.92, scale: 0.8 },
   ui: { anchorX: 0.5, anchorY: 0.5, scale: 1 },
+  // scale bei Texturen: Weltbreite einer Kachel in Vielfachen von HEX_W
+  texture: { anchorX: 0, anchorY: 0, scale: 2 },
+  wall: { anchorX: 0, anchorY: 0, scale: 2 },
+  path: { anchorX: 0.5, anchorY: 0.5, scale: 1 },
+  prop: { anchorX: 0.5, anchorY: 0.95, scale: 0.45 },
+  building: { anchorX: 0.5, anchorY: 0.85, scale: 0.42 },
+  portrait: { anchorX: 0.5, anchorY: 0.5, scale: 1 },
+  fx: { anchorX: 0.5, anchorY: 0.5, scale: 1 },
 };
+
+export const CATALOG = CATALOG_V2;
+export type BuildingStyle = keyof typeof CATALOG_V2.buildingStyles;
+export type BuildingType = keyof typeof CATALOG_V2.buildingTypes;
+export type PropKind = keyof typeof CATALOG_V2.props;
+export const BUILDING_STYLES = Object.keys(CATALOG_V2.buildingStyles) as BuildingStyle[];
+
+/** Epochenstil der Siedlungsbausteine: Steinzeit · Bronze/Eisen · Mittelalter/Renaissance · Industrie/Moderne · Information/Zukunft. */
+export function buildingStyle(era: number): BuildingStyle {
+  const e = Math.max(0, Math.floor(era));
+  return e === 0 ? 'stone' : e <= 2 ? 'antiquity' : e <= 4 ? 'medieval' : e <= 6 ? 'industrial' : 'modern';
+}
+
+/** Alle Varianten-Schlüssel einer Objektart, z. B. prop/tree_conifer_1 … _6. */
+export function propKeys(kind: PropKind): string[] {
+  const n = CATALOG_V2.props[kind][1] as number;
+  return Array.from({ length: n }, (_, k) => `prop/${kind}_${k + 1}`);
+}
+
+export function textureKeys(terrain: string): string[] {
+  return Array.from({ length: CATALOG_V2.textures.variants }, (_, k) => `texture/${terrain}_${k + 1}`);
+}
 
 export const SETTLEMENT_KINDS: SettlementKind[] = ['camp', 'settlement', 'city'];
 
@@ -74,22 +111,38 @@ export interface ExpectedKey {
 export function expectedAssetKeys(): ExpectedKey[] {
   const out: ExpectedKey[] = [];
   const add = (key: string, label: string, optional = false) => out.push({ key, category: categoryOf(key)!, label, optional });
-  for (const t of Object.values(TERRAIN)) add(`terrain/${t.id}`, t.name);
-  for (const f of Object.values(FEATURES)) add(`overlay/${f.id}`, f.name);
-  add('overlay/mountain', 'Gebirge (Stufe 4)');
-  add('overlay/highMountain', 'Hochgebirge (Stufe 5)');
-  add(`overlay/forest${CONIFER_SUFFIX}`, 'Nadelwald (Variante)', true);
-  add(`overlay/denseForest${CONIFER_SUFFIX}`, 'Dichter Nadelwald (Variante)', true);
-  for (const imp of Object.values(IMPROVEMENTS)) add(`improvement/${imp.id}`, imp.name);
-  const kindNames: Record<SettlementKind, string> = { camp: 'Lager', settlement: 'Siedlung', city: 'Stadt' };
-  for (const kind of SETTLEMENT_KINDS) {
-    for (const era of ERAS) add(`settlement/${kind}_${era.index}`, `${kindNames[kind]} – ${era.name}`, era.index > 0);
+  const C = CATALOG_V2;
+  // Version 2 (Pflicht)
+  for (const id of C.textures.terrains) {
+    const name = TERRAIN[id as keyof typeof TERRAIN].name;
+    textureKeys(id).forEach((key, k) => add(key, `${name} – Textur ${k + 1}`));
   }
-  add('settlement/machine', 'Maschinenkern (Die KI)', true);
+  for (const [id, name] of Object.entries(C.walls)) add(`wall/${id}`, name);
+  for (const [id, name] of Object.entries(C.paths)) add(`path/${id}`, name);
+  for (const kind of Object.keys(C.props) as PropKind[]) propKeys(kind).forEach((key, k) => add(key, `${C.props[kind][0]} ${k + 1}`));
+  for (const r of Object.values(RESOURCES)) add(`prop/resource_${r.id}`, `Ressource: ${r.name}`);
+  for (const imp of Object.values(IMPROVEMENTS)) add(`improvement/${imp.id}`, imp.name);
+  for (const [style, styleName] of Object.entries(C.buildingStyles)) {
+    for (const [type, typeName] of Object.entries(C.buildingTypes)) add(`building/${style}_${type}`, `${typeName} – ${styleName}`);
+  }
   for (const u of Object.values(UNIT_TYPES)) {
     add(`unit/${u.id}`, u.name);
     add(`unit/${u.id}${MASK_SUFFIX}`, `${u.name} – Farbmaske`, true);
   }
+  for (const u of Object.values(UNIT_TYPES)) add(`portrait/${u.id}`, `Porträt: ${u.name}`);
+  for (const [id, name] of Object.entries(C.fx)) add(`fx/${id}`, name);
+  // Version 1 (feldgebundene Platzhalter, optional)
+  for (const t of Object.values(TERRAIN)) add(`terrain/${t.id}`, `${t.name} (v1)`, true);
+  for (const f of Object.values(FEATURES)) add(`overlay/${f.id}`, `${f.name} (v1)`, true);
+  add('overlay/mountain', 'Gebirge (v1)', true);
+  add('overlay/highMountain', 'Hochgebirge (v1)', true);
+  add(`overlay/forest${CONIFER_SUFFIX}`, 'Nadelwald (v1)', true);
+  add(`overlay/denseForest${CONIFER_SUFFIX}`, 'Dichter Nadelwald (v1)', true);
+  const kindNames: Record<SettlementKind, string> = { camp: 'Lager', settlement: 'Siedlung', city: 'Stadt' };
+  for (const kind of SETTLEMENT_KINDS) {
+    for (const era of ERAS) add(`settlement/${kind}_${era.index}`, `${kindNames[kind]} – ${era.name} (v1)`, true);
+  }
+  add('settlement/machine', 'Maschinenkern (Die KI)', true);
   return out;
 }
 

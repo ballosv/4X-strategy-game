@@ -1,20 +1,4 @@
-import type { TerrainId } from '../core/data/terrain';
-
-/** Farbpalette der Spielwelt: kräftig, aber nicht übersättigt (Grafik-Spezifikation Kap. 6). */
-export const TERRAIN_COLORS: Record<TerrainId, { top: string; dark: string; light: string }> = {
-  ocean: { top: '#2b6ca3', dark: '#1f5383', light: '#3a7fb8' },
-  coast: { top: '#3c93c6', dark: '#2d78a8', light: '#5aa9d6' },
-  lake: { top: '#4a9fcf', dark: '#3684b3', light: '#69b5de' },
-  grassland: { top: '#86b84a', dark: '#6a9a37', light: '#a2cc63' },
-  plains: { top: '#b9b45a', dark: '#9b9644', light: '#cfca72' },
-  desert: { top: '#e0c486', dark: '#c8a965', light: '#eed6a0' },
-  tundra: { top: '#9aa486', dark: '#7f8a6c', light: '#b3bca0' },
-  snow: { top: '#e9eff3', dark: '#c9d4dc', light: '#ffffff' },
-  marsh: { top: '#6b8a57', dark: '#566f45', light: '#83a26d' },
-};
-
-export const CLIFF = { lit: '#9c8f7e', shade: '#6e6458', strata: 'rgba(60,50,40,0.35)', top: '#b3a693' };
-export const EARTH = { lit: '#8a6e4e', shade: '#64503a' };
+/** Farbpalette der Spielwelt (Grafik-Spezifikation Kap. 2). Bodenfarben stehen in textures.ts. */
 export const RIVER = { deep: '#2f7fbd', light: '#79c2ee' };
 export const FOREST = { leaf: '#3f7a35', leafLight: '#5c9a45', leafDark: '#2c5a26', conifer: '#2f5f3a', coniferLight: '#43794b', trunk: '#5b4130' };
 export const ROCK = { light: '#b9b2a8', mid: '#948c82', dark: '#6b645c', snow: '#f4f8fb' };

@@ -1,5 +1,670 @@
 {
   "version": 1,
   "description": "Grafik-Backlog: Pflicht-Grafiken, die noch nicht geliefert sind, mit Ziel-Release. Ein Release schlägt fehl, solange eingeplante Grafiken fehlen.",
-  "pending": {}
+  "pending": {
+    "texture/grassland_1": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "texture/grassland_2": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "texture/plains_1": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "texture/plains_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "texture/desert_1": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "texture/desert_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "texture/tundra_1": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "texture/tundra_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "texture/snow_1": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "texture/snow_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "texture/marsh_1": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "texture/marsh_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "texture/coast_1": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "texture/coast_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "texture/ocean_1": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "texture/ocean_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "texture/lake_1": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "texture/lake_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "wall/cliff_temperate": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "wall/cliff_desert": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "wall/cliff_snow": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "wall/slope": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "wall/overhang": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "wall/beach": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "wall/foam": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "wall/scree": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "path/river": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "path/waterfall_1": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "path/waterfall_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "path/trail": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "path/road": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "path/rail": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "path/bridge_wood": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "path/bridge_stone": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "path/bridge_steel": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/tree_broadleaf_1": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "prop/tree_broadleaf_2": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "prop/tree_broadleaf_3": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "prop/tree_broadleaf_4": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/tree_broadleaf_5": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/tree_broadleaf_6": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/tree_conifer_1": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "prop/tree_conifer_2": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "prop/tree_conifer_3": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "prop/tree_conifer_4": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/tree_conifer_5": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/tree_conifer_6": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/tree_palm_1": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/tree_palm_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/tree_palm_3": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/tree_bare_1": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/tree_bare_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/tree_bare_3": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/bush_1": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/bush_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/bush_3": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/bush_4": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/bush_5": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/bush_6": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/rock_1": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "prop/rock_2": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "prop/rock_3": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/rock_4": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/rock_5": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/rock_6": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/mountain_1": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "prop/mountain_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/mountain_3": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/mountain_4": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/peak_1": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/peak_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/peak_3": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/resource_game": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "prop/resource_fish": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/resource_wheat": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/resource_sheep": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/resource_flint": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/resource_clay": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/resource_copper": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/resource_tin": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/resource_iron": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/resource_coal": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/resource_oil": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/resource_cotton": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/resource_horses": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/resource_precious": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "prop/resource_rare_earth": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/stone_house_small": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "building/stone_house_large": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/stone_center": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "building/stone_tower": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/stone_workshop": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/stone_storage": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/stone_wall": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/antiquity_house_small": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/antiquity_house_large": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/antiquity_center": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/antiquity_tower": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/antiquity_workshop": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/antiquity_storage": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/antiquity_wall": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/medieval_house_small": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "building/medieval_house_large": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "building/medieval_center": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "building/medieval_tower": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "building/medieval_workshop": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/medieval_storage": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/medieval_wall": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "building/industrial_house_small": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/industrial_house_large": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/industrial_center": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/industrial_tower": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/industrial_workshop": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/industrial_storage": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/industrial_wall": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/modern_house_small": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/modern_house_large": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/modern_center": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/modern_tower": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/modern_workshop": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/modern_storage": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "building/modern_wall": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/tribe": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/scout": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/worker": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/clubman": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/slinger": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/settler": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/spearman": {
+      "release": "0.4.0",
+      "note": "Vertical Slice (Grafik-Spezifikation v2, Phase B)"
+    },
+    "portrait/archer": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/chariot": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/galley": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/merchant": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/swordsman": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/horseman": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/catapult": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/trireme": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/pikeman": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/crossbow": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/knight": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/cog": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/musketeer": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/cannon": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/frigate": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/rifleman": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/cavalry": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/artillery": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/ironclad": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/infantry": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/tank": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/fighter": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/destroyer": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/mechInfantry": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/modernArmor": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/jet": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/exoSoldier": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/empCannon": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/drone": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "portrait/warMachine": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "fx/cloud_1": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "fx/cloud_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "fx/cloud_3": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "fx/deco_1": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "fx/deco_2": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "fx/deco_3": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    },
+    "fx/deco_4": {
+      "release": "0.5.0",
+      "note": "Bibliothek (Grafik-Spezifikation v2, Phase C)"
+    }
+  }
 }

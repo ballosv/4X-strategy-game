@@ -27,7 +27,7 @@ import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const CATEGORIES = ['terrain', 'overlay', 'improvement', 'settlement', 'unit', 'ui'];
+const CATEGORIES = ['texture', 'wall', 'path', 'prop', 'building', 'improvement', 'unit', 'portrait', 'fx', 'terrain', 'overlay', 'settlement', 'ui'];
 const SETTLEMENT_KINDS = ['camp', 'settlement', 'city'];
 
 function read(rel) {
@@ -49,25 +49,38 @@ export function expectedKeys() {
   const terrainSrc = read('src/core/data/terrain.ts');
   const terrains = quoted(/export type TerrainId =([^;]+);/.exec(terrainSrc)[1]);
   const features = quoted(/export type FeatureId =([^;]+);/.exec(terrainSrc)[1]);
+  const resourcesSrc = block(terrainSrc, 'export const RESOURCES');
+  const resources = [...resourcesSrc.slice(0, resourcesSrc.indexOf('};')).matchAll(/\{ id: '(\w+)'/g)].map((m) => m[1]);
+  const C = JSON.parse(read('src/render/catalogV2.json'));
   const improvements = [...block(read('src/core/data/improvements.ts'), 'export const IMPROVEMENTS').matchAll(/\{ id: '(\w+)', name:/g)].map((m) => m[1]);
   const units = [...read('src/core/data/units.ts').matchAll(/u\(\{ id: '(\w+)'/g)].map((m) => m[1]);
   const erasSrc = block(read('src/core/data/eras.ts'), 'export const ERAS');
   const eras = [...erasSrc.slice(0, erasSrc.indexOf('];')).matchAll(/index: (\d+)/g)].map((m) => Number(m[1]));
   const out = [];
   const add = (key, optional = false) => out.push({ key, optional });
-  for (const t of terrains) add(`terrain/${t}`);
-  for (const f of features) add(`overlay/${f}`);
-  add('overlay/mountain');
-  add('overlay/highMountain');
-  add('overlay/forest_conifer', true);
-  add('overlay/denseForest_conifer', true);
+  // Version 2 (Pflicht), Katalog in src/render/catalogV2.json
+  for (const t of C.textures.terrains) for (let k = 1; k <= C.textures.variants; k++) add(`texture/${t}_${k}`);
+  for (const id of Object.keys(C.walls)) add(`wall/${id}`);
+  for (const id of Object.keys(C.paths)) add(`path/${id}`);
+  for (const [kind, [, n]] of Object.entries(C.props)) for (let k = 1; k <= n; k++) add(`prop/${kind}_${k}`);
+  for (const r of resources) add(`prop/resource_${r}`);
   for (const id of improvements) add(`improvement/${id}`);
-  for (const kind of SETTLEMENT_KINDS) for (const e of eras) add(`settlement/${kind}_${e}`, e > 0);
-  add('settlement/machine', true);
+  for (const style of Object.keys(C.buildingStyles)) for (const type of Object.keys(C.buildingTypes)) add(`building/${style}_${type}`);
   for (const id of units) {
     add(`unit/${id}`);
     add(`unit/${id}_mask`, true);
   }
+  for (const id of units) add(`portrait/${id}`);
+  for (const id of Object.keys(C.fx)) add(`fx/${id}`);
+  // Version 1 (optional)
+  for (const t of terrains) add(`terrain/${t}`, true);
+  for (const f of features) add(`overlay/${f}`, true);
+  add('overlay/mountain', true);
+  add('overlay/highMountain', true);
+  add('overlay/forest_conifer', true);
+  add('overlay/denseForest_conifer', true);
+  for (const kind of SETTLEMENT_KINDS) for (const e of eras) add(`settlement/${kind}_${e}`, true);
+  add('settlement/machine', true);
   return out;
 }
 

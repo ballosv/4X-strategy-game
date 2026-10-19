@@ -10,11 +10,18 @@ import { h } from './dom';
  */
 
 const CATEGORY_NAMES: Record<AssetCategory, string> = {
-  terrain: 'Gelände (Oberseite)',
-  overlay: 'Overlays',
+  texture: 'Bodentexturen',
+  wall: 'Wände & Kanten',
+  path: 'Flüsse & Wege',
+  prop: 'Vegetation, Felsen, Ressourcen',
+  building: 'Gebäude (Siedlungsbausteine)',
   improvement: 'Ausbauten',
-  settlement: 'Siedlungen',
   unit: 'Einheiten',
+  portrait: 'Porträts',
+  fx: 'Atmosphäre',
+  terrain: 'Gelände (v1, Platzhalter)',
+  overlay: 'Overlays (v1, Platzhalter)',
+  settlement: 'Siedlungen (v1, Platzhalter)',
   ui: 'Oberfläche',
 };
 
@@ -35,7 +42,7 @@ function thumbnail(key: string): HTMLCanvasElement {
     const type = key.slice(5).replace(MASK_SUFFIX, '');
     const footY = THUMB_H / ZOOM - 8;
     if (!drawUnitAsset(ctx, type, PREVIEW_COLOR, cx, footY)) drawUnitFigure(ctx, type, PREVIEW_COLOR, cx, footY);
-  } else if (cat === 'ui') {
+  } else if (cat === 'ui' || cat === 'portrait' || cat === 'fx' || cat === 'path') {
     const s = assets.get(key);
     if (s) {
       const f = Math.min((THUMB_W / ZOOM - 8) / s.width, (THUMB_H / ZOOM - 8) / s.height);
