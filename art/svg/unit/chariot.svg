@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="108" cy="183" rx="78" ry="12" fill="url(#shadow)"/>
+  <!-- fernes Rad -->
+  <ellipse cx="160" cy="154" rx="11" ry="22" fill="#3f2c18"/>
+  <!-- Pferd (verkleinert) -->
+  <g transform="translate(68 184) scale(0.78) translate(-100 -184)">
+    <!-- ferne Beine -->
+    <path d="M86 134 Q98 132 98 142 L94 162 L95 178 L88 178 L87 162 Z" fill="#9c958b"/>
+    <path d="M146 128 Q162 130 160 146 L154 160 L156 176 L149 176 L146 160 Q146 150 142 144 Z" fill="#9c958b"/>
+    <path d="M87 182 h10 v-6 h-10 z M148 180 h10 v-6 h-10 z" fill="#3a2c20"/>
+    <!-- Schweif -->
+    <path d="M160 110 Q178 116 176 152 Q168 146 164 134 Q160 124 154 118 Z" fill="#6b645c"/>
+    <!-- Rumpf -->
+    <path d="M66 116 Q70 100 92 100 L134 98 Q156 98 162 114 Q166 130 158 142 Q150 150 138 148 L88 148 Q70 146 66 132 Z" fill="#cfc8be"/>
+    <path d="M66 116 Q70 100 92 100 L134 98 Q150 98 156 106 Q120 106 96 110 Q76 114 70 132 Q66 126 66 116 Z" fill="#f2e7d2"/>
+    <path d="M162 114 Q166 130 158 142 Q150 150 138 148 L100 148 Q140 142 152 126 Q158 118 160 108 Z" fill="#9c958b"/>
+    <!-- nahe Beine -->
+    <path d="M70 132 Q86 130 86 142 L82 162 L84 180 L76 180 L75 162 Z" fill="#cfc8be"/>
+    <path d="M70 132 Q76 132 78 140 L77 162 L78 180 L76 180 L75 162 Z" fill="#f2e7d2"/>
+    <path d="M134 128 Q154 128 152 146 L144 160 L146 180 L138 180 L136 160 Q136 150 130 144 Z" fill="#9c958b"/>
+    <path d="M75 184 h11 v-6 h-11 z M137 184 h11 v-6 h-11 z" fill="#3a2c20"/>
+    <!-- Hals und Kopf -->
+    <path d="M104 104 Q94 76 68 56 L54 66 Q60 92 64 124 Z" fill="#cfc8be"/>
+    <path d="M54 66 L68 56 Q62 60 60 66 Q62 92 64 124 Q60 92 54 66 Z" fill="#f2e7d2"/>
+    <path d="M48 52 Q60 48 68 58 L58 84 Q52 92 42 90 Q32 88 34 80 Z" fill="#cfc8be"/>
+    <path d="M48 52 Q56 50 62 54 Q50 66 40 88 Q32 86 34 80 Z" fill="#f2e7d2"/>
+    <path d="M56 50 L58 40 L64 52 Z" fill="#9c958b"/>
+    <path d="M66 54 Q94 72 104 104 L110 102 Q100 68 72 50 Z" fill="#6b645c"/>
+    <circle cx="50" cy="64" r="2" fill="#2e2016"/>
+    <path d="M36 80 L58 70 L62 56" fill="none" stroke="#3a2c20" stroke-width="2"/>
+    <!-- Brustgurt und Joch -->
+    <path d="M72 108 Q84 120 100 112 L100 118 Q84 126 70 114 Z" fill="#7a5a36"/>
+    <path d="M92 100 L112 100 L112 106 L92 106 Z" fill="#553c22"/>
+  </g>
+  <!-- Deichsel -->
+  <path d="M124 150 L66 120" stroke="#553c22" stroke-width="5" stroke-linecap="round"/>
+  <!-- Zügel -->
+  <path d="M130 104 L24 102" stroke="#3a2c20" stroke-width="1.5"/>
+  <!-- Wagenkasten -->
+  <path d="M118 112 Q118 104 126 104 L170 100 L174 154 L120 158 Z" fill="#7a5a36"/>
+  <!-- Wagenkasten-Bemalung (Fraktion) -->
+  <path class="faction" d="M121 112 Q121 107 127 107 L150 106 L151 154 L122 156 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M121 112 Q121 107 127 107 L134 107 L134 155 L122 156 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M150 106 L170 104 L172 151 L151 154 Z" fill="#a8a8a8"/>
+  <path d="M120 128 L172 124 L172 130 L120 134 Z" fill="#9c7a3a"/>
+  <path d="M118 112 Q118 104 126 104 L170 100 L170 104 L126 108 Q122 108 122 112 Z" fill="#b08559"/>
+  <!-- Wagenlenker -->
+  <path class="faction" d="M132 74 Q146 68 160 74 L160 104 L132 106 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M132 74 Q139 71 146 70 L146 105 L132 106 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M154 71 Q158 72 160 74 L160 104 L154 104 Z" fill="#a8a8a8"/>
+  <!-- Speer schräg im Wagen -->
+  <path d="M172 150 L150 22" stroke="#7a5a36" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M148 8 L144 28 L155 27 Z" fill="#aab3ba"/>
+  <path d="M148 8 L150 27 L155 27 Z" fill="#6d767d"/>
+  <!-- Arm mit Zügeln -->
+  <path d="M136 78 Q124 88 126 104 L134 104 Q132 92 142 84 Z" fill="#e0b48a"/>
+  <circle cx="130" cy="105" r="5" fill="#e0b48a"/>
+  <!-- Kopf mit Bronzehelm -->
+  <circle cx="146" cy="58" r="13" fill="#e0b48a"/>
+  <path d="M146 58 m0 -13 a13 13 0 0 1 13 13 l-5 0 a8 8 0 0 0 -8 -8 z" fill="#b88a62" opacity="0.5"/>
+  <path d="M132 58 Q132 42 146 41 Q160 42 160 58 Z" fill="#c9a45a"/>
+  <path d="M146 41 Q160 42 160 58 L150 58 Z" fill="#8a6a2a"/>
+  <path d="M134 54 Q136 44 144 42 Q138 48 138 56 Z" fill="#e8cf8a"/>
+  <circle cx="141" cy="61" r="1.5" fill="#3a2c20"/>
+  <!-- nahes Rad -->
+  <ellipse cx="146" cy="160" rx="13" ry="24" fill="#3f2c18"/>
+  <ellipse cx="144" cy="160" rx="11" ry="21" fill="#7a5a36"/>
+  <ellipse cx="144" cy="160" rx="7" ry="14" fill="#3f2c18"/>
+  <path d="M144 139 L144 181 M133 160 L155 160 M136 146 L152 174 M136 174 L152 146" stroke="#b08559" stroke-width="2"/>
+  <circle cx="144" cy="160" r="3.5" fill="#c9a45a"/>
+</svg>

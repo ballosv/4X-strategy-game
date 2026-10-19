@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="108" cy="186" rx="36" ry="10" fill="url(#shadow)"/>
+  <!-- Beine (nackt, mit Fellwickeln) -->
+  <path d="M88 148 L85 182 L95 182 L98 148 Z" fill="#e0b48a"/>
+  <path d="M104 148 L105 182 L115 182 L113 148 Z" fill="#b88a62"/>
+  <path d="M84 166 h13 l-1 18 h-14 z" fill="#9a7048"/>
+  <path d="M103 166 h13 l1 18 h-14 z" fill="#6b4a2c"/>
+  <path d="M84 168 h13 M84 174 h13" stroke="#553c22" stroke-width="1.5"/>
+  <path d="M103 168 h13 M103 174 h13" stroke="#3f2c18" stroke-width="1.5"/>
+  <!-- Lendentunika (Fraktion, ausgefranster Saum) -->
+  <path class="faction" d="M80 100 Q100 92 120 100 L124 150 L118 157 L112 150 L106 158 L100 151 L94 158 L88 151 L82 157 L76 150 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M80 100 Q90 96 100 95 L99 150 L94 158 L88 151 L82 157 L76 150 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M111 98 Q116 99 120 100 L124 150 L118 157 L113 150 Z" fill="#a8a8a8"/>
+  <!-- Gürtel (Strick) -->
+  <path d="M78 128 Q100 134 122 128 L122 134 Q100 140 78 134 Z" fill="#7a5a36"/>
+  <circle cx="90" cy="135" r="2.5" fill="#b08559"/>
+  <!-- linker Arm (hängt) -->
+  <path d="M116 104 Q126 112 126 132 L118 132 Q118 116 112 110 Z" fill="#b88a62"/>
+  <circle cx="122" cy="134" r="5.5" fill="#b88a62"/>
+  <!-- Fellumhang über den Schultern -->
+  <path d="M77 106 Q100 88 123 106 L121 120 L115 114 L110 122 L104 115 L98 123 L92 115 L86 122 L82 114 L78 120 Z" fill="#9a7048"/>
+  <path d="M77 106 Q88 96 100 94 L98 115 L92 115 L86 122 L82 114 L78 120 Z" fill="#b08559"/>
+  <path d="M112 98 Q119 101 123 106 L121 120 L115 114 L110 122 Z" fill="#6b4a2c"/>
+  <!-- Keule (über der Schulter erhoben) -->
+  <path d="M84 126 L66 62" stroke="#553c22" stroke-width="7" stroke-linecap="round"/>
+  <path d="M84 126 L66 62" stroke="#7a5a36" stroke-width="4" stroke-linecap="round"/>
+  <path d="M62 76 Q46 62 46 42 Q48 24 62 22 Q76 24 78 40 Q78 58 72 72 Z" fill="#7a5a36"/>
+  <path d="M62 76 Q46 62 46 42 Q48 24 62 22 Q54 34 56 50 Q58 64 66 74 Z" fill="#b08559"/>
+  <path d="M72 72 Q78 58 78 40 Q76 24 62 22 Q72 32 70 50 Q69 62 66 74 Z" fill="#553c22"/>
+  <circle cx="54" cy="40" r="3" fill="#553c22"/>
+  <circle cx="66" cy="54" r="2.6" fill="#553c22"/>
+  <circle cx="60" cy="30" r="2.2" fill="#553c22"/>
+  <!-- rechter Arm hält die Keule -->
+  <path d="M82 104 Q70 112 74 126 L84 126 Q82 116 88 110 Z" fill="#e0b48a"/>
+  <circle cx="80" cy="124" r="6" fill="#e0b48a"/>
+  <!-- Kopf mit wildem Haar und Bart -->
+  <circle cx="100" cy="80" r="15" fill="#e0b48a"/>
+  <path d="M100 80 m0 -15 a15 15 0 0 1 15 15 l-6 0 a9 9 0 0 0 -9 -9 z" fill="#b88a62" opacity="0.5"/>
+  <path d="M83 84 Q78 66 88 60 Q96 52 108 58 Q120 60 119 76 Q121 84 116 90 Q114 74 104 70 Q92 70 88 80 Z" fill="#4a3324"/>
+  <path d="M88 60 Q96 54 106 57 Q96 60 90 70 Z" fill="#6b4a32"/>
+  <path d="M87 86 Q92 102 102 100 Q112 98 114 86 Q108 92 100 92 Q92 92 87 86 Z" fill="#4a3324"/>
+  <circle cx="94" cy="81" r="1.7" fill="#2e2016"/>
+  <path d="M90 76 L97 77" stroke="#3a2a1c" stroke-width="2" stroke-linecap="round"/>
+</svg>

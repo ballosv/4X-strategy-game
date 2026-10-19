@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="116" cy="184" rx="68" ry="12" fill="url(#shadow)"/>
+  <!-- Kamel: ferne Beine -->
+  <path d="M112 132 L114 178 L120 178 L120 132 Z" fill="#a8803e"/>
+  <path d="M160 128 L166 176 L172 176 L168 128 Z" fill="#a8803e"/>
+  <path d="M113 182 h9 v-5 h-9 z M165 180 h9 v-5 h-9 z" fill="#5a4324"/>
+  <!-- Schweif -->
+  <path d="M174 108 Q182 120 178 140 L174 140 Q176 122 170 112 Z" fill="#7a5a2e"/>
+  <!-- Rumpf -->
+  <path d="M98 118 Q100 104 114 102 Q128 96 140 98 Q160 98 172 106 Q180 118 174 132 Q166 142 150 140 L112 140 Q98 136 98 118 Z" fill="#c9a060"/>
+  <path d="M98 118 Q100 104 114 102 Q128 96 140 98 Q120 106 108 112 Q102 120 102 134 Q98 128 98 118 Z" fill="#e2c486"/>
+  <path d="M174 132 Q166 142 150 140 L120 140 Q156 136 170 116 Q176 112 172 106 Q180 118 174 132 Z" fill="#a8803e"/>
+  <!-- nahe Beine -->
+  <path d="M100 128 L98 180 L106 180 L110 130 Z" fill="#c9a060"/>
+  <path d="M148 128 L150 180 L158 180 L158 128 Z" fill="#a8803e"/>
+  <path d="M97 184 h11 v-5 h-11 z M149 184 h11 v-5 h-11 z" fill="#5a4324"/>
+  <!-- Hals und Kopf -->
+  <path d="M106 118 Q88 118 82 98 Q78 82 76 70 L68 70 Q70 88 74 104 Q82 128 102 132 Z" fill="#c9a060"/>
+  <path d="M74 104 Q70 88 68 70 L72 70 Q74 88 80 104 Q88 122 102 130 Q82 128 74 104 Z" fill="#e2c486"/>
+  <path d="M64 56 Q76 50 84 58 Q86 68 80 74 L58 80 Q48 80 48 72 Q50 64 64 56 Z" fill="#c9a060"/>
+  <path d="M64 56 Q76 50 84 58 Q70 60 56 78 Q48 78 48 72 Q50 64 64 56 Z" fill="#e2c486"/><path d="M50 74 Q54 78 60 76" fill="none" stroke="#7a5a2e" stroke-width="1.5"/>
+  <path d="M78 54 L84 46 L86 56 Z" fill="#a8803e"/>
+  <circle cx="70" cy="62" r="2" fill="#3a2c20"/>
+  <!-- Satteldecke über dem Höcker (Fraktion) -->
+  <path class="faction" d="M114 104 Q120 76 140 74 Q160 76 164 104 L166 126 Q140 132 112 126 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M114 104 Q120 76 140 74 Q128 84 128 104 L128 129 Q120 128 112 126 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M152 78 Q162 86 164 104 L166 126 Q160 128 152 128 Z" fill="#a8a8a8"/>
+  <path d="M112 120 Q140 128 166 120 L166 126 Q140 134 112 126 Z" fill="#9c7a3a"/>
+  <!-- Warenballen und Amphore -->
+  <path d="M120 72 Q120 58 140 58 Q160 58 160 72 Q160 84 140 84 Q120 84 120 72 Z" fill="#b48a4a"/>
+  <path d="M120 72 Q120 58 140 58 Q128 64 128 80 Q120 78 120 72 Z" fill="#e2c27a"/>
+  <path d="M136 58 L138 84 M146 58 L144 84" stroke="#86622e" stroke-width="2"/>
+  <path d="M106 108 Q100 92 110 86 L114 80 L120 80 L122 86 Q132 92 124 108 Q115 114 106 108 Z" fill="#b8573a"/>
+  <path d="M106 108 Q100 92 110 86 L114 80 L116 80 Q112 96 112 111 Q108 110 106 108 Z" fill="#d07a5a"/>
+  <path d="M112 80 h10 v-3 h-10 z" fill="#843a25"/>
+  <path d="M150 104 Q148 90 162 88 Q174 90 172 104 Q162 110 150 104 Z" fill="#7a5a36"/>
+  <path d="M150 104 Q148 90 162 88 Q156 94 156 106 Z" fill="#9a7048"/>
+  <!-- Händler (vorne links) -->
+  <g transform="translate(70 186) scale(0.84) translate(-100 -184)">
+    <path d="M88 150 L84 184 L94 184 L98 150 Z" fill="#5a4636"/>
+    <path d="M104 150 L106 184 L116 184 L112 150 Z" fill="#4a3a2c"/>
+    <path d="M82 184 h14 v-5 h-14 z M104 184 h14 v-5 h-14 z" fill="#7a5a36"/>
+    <!-- langes Gewand (Fraktion) -->
+    <path class="faction" d="M80 100 Q100 92 120 100 L128 172 Q100 178 72 172 Z" fill="#d6d6d6"/>
+    <path class="faction" d="M80 100 Q90 96 100 95 L98 175 Q84 174 72 172 Z" fill="#f4f4f4"/>
+    <path class="faction" d="M110 98 Q116 99 120 100 L128 172 Q120 174 112 175 Z" fill="#a8a8a8"/>
+    <path d="M96 98 L104 98 L106 174 L98 175 Z" fill="#9c7a3a"/>
+    <path d="M78 128 Q100 134 122 128 L122 136 Q100 142 78 136 Z" fill="#b8573a"/>
+    <!-- Geldbeutel -->
+    <path d="M112 136 Q122 136 122 146 Q120 152 113 151 Q106 148 108 140 Z" fill="#7a5a36"/>
+    <circle cx="114" cy="136" r="2.5" fill="#e2c27a"/>
+    <!-- Arme -->
+    <path d="M116 104 Q126 114 122 132 L115 130 Q118 116 112 110 Z" fill="#a8a8a8" class="faction"/>
+    <path d="M84 104 Q72 112 76 124 L84 122 Q82 114 88 110 Z" fill="#f4f4f4" class="faction"/>
+    <circle cx="79" cy="123" r="5.5" fill="#e0b48a"/>
+    <!-- Kopf mit Turban und Bart -->
+    <circle cx="100" cy="82" r="15" fill="#e0b48a"/>
+    <path d="M100 82 m0 -15 a15 15 0 0 1 15 15 l-6 0 a9 9 0 0 0 -9 -9 z" fill="#b88a62" opacity="0.5"/>
+    <path d="M87 88 Q92 104 101 102 Q110 102 113 88 Q106 94 100 94 Q93 94 87 88 Z" fill="#3a2a1c"/>
+    <path d="M82 78 Q80 58 100 56 Q120 58 118 78 Q100 70 82 78 Z" fill="#e3dccb"/>
+    <path d="M82 78 Q80 62 94 57 Q88 66 90 74 Z" fill="#f7f2e6"/>
+    <path d="M110 58 Q120 64 118 78 Q112 74 106 73 Z" fill="#b8ae98"/>
+    <path d="M84 70 Q100 62 116 70" fill="none" stroke="#b8ae98" stroke-width="2"/>
+    <circle cx="94" cy="84" r="1.6" fill="#3a2c20"/>
+  </g>
+  <!-- Führstrick -->
+  <path d="M52 134 Q46 104 54 78" fill="none" stroke="#553c22" stroke-width="2"/>
+</svg>

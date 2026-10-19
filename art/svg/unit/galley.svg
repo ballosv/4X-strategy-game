@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Wasserschatten und Bugwelle (Wasserlinie bei y = 184) -->
+  <ellipse cx="104" cy="186" rx="80" ry="12" fill="#1f5383" opacity="0.35"/>
+  <!-- ferne Ruder -->
+  <path d="M60 166 L50 190 M80 166 L72 192 M100 166 L94 192 M120 166 L116 192 M140 166 L138 190" stroke="#553c22" stroke-width="3" stroke-linecap="round"/>
+  <!-- Mast und Rah -->
+  <path d="M100 172 L100 30" stroke="#553c22" stroke-width="6" stroke-linecap="round"/>
+  <path d="M99 172 L99 30" stroke="#9a7048" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Rahsegel (Fraktion) -->
+  <path class="faction" d="M62 44 L138 44 Q146 86 136 124 L64 124 Q56 86 62 44 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M62 44 L88 44 Q84 86 86 124 L64 124 Q56 86 62 44 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M120 44 L138 44 Q146 86 136 124 L120 124 Q124 86 120 44 Z" fill="#a8a8a8"/>
+  <path d="M62 84 Q100 90 140 84 L140 87 Q100 93 62 87 Z" fill="#a8a8a8" opacity="0.6"/>
+  <path d="M58 42 L142 42 L142 47 L58 47 Z" fill="#7a5a36"/>
+  <path d="M64 124 L100 166 L136 124" fill="none" stroke="#553c22" stroke-width="1.2"/>
+  <!-- Rumpf -->
+  <path d="M22 140 Q34 150 48 152 L156 152 Q170 146 178 128 Q184 140 180 156 L172 176 Q140 186 100 186 Q58 186 38 176 Q26 162 22 140 Z" fill="#7a5a36"/>
+  <path d="M22 140 Q34 150 48 152 L156 152 Q170 146 178 128 L180 138 Q170 156 156 160 L48 160 Q32 156 26 152 Z" fill="#b08559"/>
+  <path d="M38 176 Q58 186 100 186 Q140 186 172 176 L170 182 Q140 190 100 190 Q60 190 40 182 Z" fill="#553c22"/>
+  <path d="M30 166 Q100 176 176 164" fill="none" stroke="#553c22" stroke-width="2"/>
+  <path d="M176 128 Q186 118 182 108 Q176 104 172 112" fill="none" stroke="#7a5a36" stroke-width="5" stroke-linecap="round"/>
+  <!-- Ruderpforten und nahe Ruder -->
+  <path d="M56 160 L40 194 M76 160 L62 196 M96 160 L84 196 M116 160 L106 196 M136 160 L130 196 M154 158 L152 194" stroke="#9a7048" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M56 160 L48 177 M76 160 L69 177 M96 160 L90 177 M116 160 L111 177 M136 160 L133 177" stroke="#553c22" stroke-width="1.2"/>
+  <!-- Bugauge -->
+  <ellipse cx="36" cy="158" rx="5" ry="3.5" fill="#f2e7d2"/>
+  <circle cx="35" cy="158" r="2" fill="#2e2016"/>
+  <!-- Wasser: Wellen an der Wasserlinie -->
+  <path d="M30 182 Q60 190 100 190 Q144 190 176 180 L182 186 Q140 198 100 198 Q56 198 24 188 Z" fill="#5aa9d6" opacity="0.8"/>
+  <path d="M18 186 Q30 182 40 188 Q30 190 18 186 Z M164 188 Q176 182 190 186 Q178 192 164 188 Z" fill="#e9eff3" opacity="0.85"/>
+</svg>
