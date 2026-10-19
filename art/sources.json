@@ -201,6 +201,29 @@
           "art/scenario/raw/wall/cliff_temperate/3.png"
         ]
       }
+    ],
+    "wall/slope": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "seamless tileable painted texture of a vertical surface seen straight from the front in exactly the hand-painted stylized look of the reference images, light from upper left, no sky, no ground, no objects, no borders, no text, edges must tile seamlessly in both directions, hillside bank of brown earth with small pebbles and a few green grass tufts, painted terrain texture",
+        "params": {
+          "aspectRatio": "16:9",
+          "resolution": "512",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/props_cliff.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_SQi116y2RA3xt4y9WFJ3VMHw",
+        "cu": 30,
+        "files": [
+          "art/scenario/raw/wall/slope/1.png",
+          "art/scenario/raw/wall/slope/2.png",
+          "art/scenario/raw/wall/slope/3.png"
+        ]
+      }
     ]
   }
 }
