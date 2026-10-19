@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs>
+    <!-- @defs -->
+    <!-- Baumwollstrauch -->
+    <g id="c" transform="scale(1.25)">
+      <circle cx="0" cy="-5" r="5.4" fill="#3f7a35"/>
+      <circle cx="-1.5" cy="-6.5" r="3.4" fill="#6aa84f"/>
+      <circle cx="-2.5" cy="-8" r="2.1" fill="#ffffff"/>
+      <circle cx="2.6" cy="-6" r="1.9" fill="#e9eff3"/>
+      
+    </g>
+  </defs>
+  <!-- Felder -->
+  <path d="M121.8 226.4 L121.8 311.9 L9.2 269.1 L9.2 183.6 Z" fill="#4a3220" transform="translate(0 3)"/>
+  <path d="M134.2 226.4 L246.8 183.6 L246.8 269.1 L134.2 311.9 Z" fill="#4a3220" transform="translate(0 3)"/>
+  <path d="M121.8 226.4 L121.8 311.9 L9.2 269.1 L9.2 183.6 Z" fill="#7a5a3a"/>
+  <path d="M134.2 226.4 L246.8 183.6 L246.8 269.1 L134.2 311.9 Z" fill="#6e5034"/>
+  <path d="M121.8 303.3 L9.2 260.6 M121.8 286.2 L9.2 243.5 M121.8 269.1 L9.2 226.4 M121.8 252.0 L9.2 209.3 M121.8 234.9 L9.2 192.2 M134.2 234.9 L246.8 192.2 M134.2 252.0 L246.8 209.3 M134.2 269.1 L246.8 226.4 M134.2 286.2 L246.8 243.5 M134.2 303.3 L246.8 260.6" stroke="#5a4028" stroke-width="7" stroke-linecap="round"/>
+  <!-- Hof mit Schuppen und Ballen -->
+  <path d="M128 216 L40 182 L128 148 L216 182 Z" fill="#b89c6e" opacity="0.5"/>
+  <g transform="translate(116 196) scale(1.1)">
+    <ellipse cx="-4" cy="-6" rx="36" ry="12" fill="url(#shadow)" transform="translate(8 3)"/>
+    <path d="M0 0 L-40 -15.2 L-40 -33 L0 -17.8 Z" fill="#d9c7a5"/>
+    <path d="M-14 -5.3 L-14 -23.1 M-27 -10.3 L-27 -28.1" stroke="#a8946f" stroke-width="1.4"/>
+    <path d="M0 0 L22 -8.4 L22 -26.2 L11 -38 L0 -17.8 Z" fill="#a8946f"/>
+    <path d="M6 -2.3 L16 -6.1 L16 -20 L6 -16.2 Z" fill="#3e2a18"/>
+    <path d="M2 -15.5 L-43 -32.6 L-31 -56 L12.5 -39.5 Z" fill="#7a5a36" stroke="#553c22" stroke-width="1.2" stroke-linejoin="round"/>
+    <path d="M-10 -21 L1 -43 M-22 -26 L-11 -48 M-34 -30 L-23 -52" stroke="#9a7348" stroke-width="1.3" opacity="0.7"/>
+    <path d="M12.5 -39.5 L25 -25 L22 -24 L11.5 -36.5 Z" fill="#553c22"/>
+  </g>
+  <g transform="translate(168 196)">
+    <ellipse cx="6" cy="2" rx="18" ry="5" fill="url(#shadow)"/>
+    <path d="M-10 0 L-10 -14 L2 -18 L14 -14 L14 0 L2 4 Z" fill="#e9eff3"/>
+    <path d="M2 -4 L14 -8 L14 0 L2 4 Z M2 -18 L14 -14 L14 -8 L2 -4 Z" fill="#c3cfd8"/>
+    <path d="M-10 -7 L2 -3 L14 -7" stroke="#86622e" stroke-width="1.4" fill="none"/>
+  </g>
+  <g transform="translate(60 196)">
+    <ellipse cx="4" cy="2" rx="10" ry="3.5" fill="url(#shadow)"/>
+    <path d="M-7 0 L-8 -10 L8 -10 L7 0 Q0 3 -7 0 Z" fill="#b48a4a"/>
+    <path d="M0 -10 L8 -10 L7 0 Q3 2 0 2 Z" fill="#86622e"/>
+    <ellipse cx="0" cy="-11" rx="8" ry="3" fill="#ffffff"/>
+  </g>
+  <!-- Sträucher -->
+    <use href="#c" x="16" y="195"/>
+  <use href="#c" x="240" y="195"/>
+  <use href="#c" x="28" y="199"/>
+  <use href="#c" x="228" y="199"/>
+  <use href="#c" x="40" y="204"/>
+  <use href="#c" x="216" y="204"/>
+  <use href="#c" x="53" y="209"/>
+  <use href="#c" x="203" y="209"/>
+  <use href="#c" x="16" y="212"/>
+  <use href="#c" x="240" y="212"/>
+  <use href="#c" x="66" y="214"/>
+  <use href="#c" x="190" y="214"/>
+  <use href="#c" x="28" y="216"/>
+  <use href="#c" x="228" y="216"/>
+  <use href="#c" x="78" y="218"/>
+  <use href="#c" x="178" y="218"/>
+  <use href="#c" x="40" y="221"/>
+  <use href="#c" x="216" y="221"/>
+  <use href="#c" x="90" y="223"/>
+  <use href="#c" x="166" y="223"/>
+  <use href="#c" x="53" y="226"/>
+  <use href="#c" x="203" y="226"/>
+  <use href="#c" x="103" y="228"/>
+  <use href="#c" x="153" y="228"/>
+  <use href="#c" x="16" y="229"/>
+  <use href="#c" x="240" y="229"/>
+  <use href="#c" x="66" y="231"/>
+  <use href="#c" x="190" y="231"/>
+  <use href="#c" x="116" y="233"/>
+  <use href="#c" x="140" y="233"/>
+  <use href="#c" x="28" y="234"/>
+  <use href="#c" x="228" y="234"/>
+  <use href="#c" x="78" y="235"/>
+  <use href="#c" x="178" y="235"/>
+  <use href="#c" x="40" y="238"/>
+  <use href="#c" x="216" y="238"/>
+  <use href="#c" x="90" y="240"/>
+  <use href="#c" x="166" y="240"/>
+  <use href="#c" x="53" y="243"/>
+  <use href="#c" x="203" y="243"/>
+  <use href="#c" x="103" y="245"/>
+  <use href="#c" x="153" y="245"/>
+  <use href="#c" x="16" y="246"/>
+  <use href="#c" x="240" y="246"/>
+  <use href="#c" x="66" y="248"/>
+  <use href="#c" x="190" y="248"/>
+  <use href="#c" x="116" y="250"/>
+  <use href="#c" x="140" y="250"/>
+  <use href="#c" x="28" y="251"/>
+  <use href="#c" x="228" y="251"/>
+  <use href="#c" x="78" y="252"/>
+  <use href="#c" x="178" y="252"/>
+  <use href="#c" x="40" y="255"/>
+  <use href="#c" x="216" y="255"/>
+  <use href="#c" x="90" y="257"/>
+  <use href="#c" x="166" y="257"/>
+  <use href="#c" x="53" y="260"/>
+  <use href="#c" x="203" y="260"/>
+  <use href="#c" x="103" y="262"/>
+  <use href="#c" x="153" y="262"/>
+  <use href="#c" x="16" y="263"/>
+  <use href="#c" x="240" y="263"/>
+  <use href="#c" x="66" y="265"/>
+  <use href="#c" x="190" y="265"/>
+  <use href="#c" x="116" y="267"/>
+  <use href="#c" x="140" y="267"/>
+  <use href="#c" x="28" y="268"/>
+  <use href="#c" x="228" y="268"/>
+  <use href="#c" x="78" y="270"/>
+  <use href="#c" x="178" y="270"/>
+  <use href="#c" x="40" y="272"/>
+  <use href="#c" x="216" y="272"/>
+  <use href="#c" x="90" y="274"/>
+  <use href="#c" x="166" y="274"/>
+  <use href="#c" x="53" y="277"/>
+  <use href="#c" x="203" y="277"/>
+  <use href="#c" x="103" y="279"/>
+  <use href="#c" x="153" y="279"/>
+  <use href="#c" x="66" y="282"/>
+  <use href="#c" x="190" y="282"/>
+  <use href="#c" x="116" y="284"/>
+  <use href="#c" x="140" y="284"/>
+  <use href="#c" x="78" y="287"/>
+  <use href="#c" x="178" y="287"/>
+  <use href="#c" x="90" y="291"/>
+  <use href="#c" x="166" y="291"/>
+  <use href="#c" x="103" y="296"/>
+  <use href="#c" x="153" y="296"/>
+  <use href="#c" x="116" y="301"/>
+  <use href="#c" x="140" y="301"/>
+</svg>

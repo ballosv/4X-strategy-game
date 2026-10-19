@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs><!-- @defs --></defs>
+  <!-- Abraum und Staub -->
+  <ellipse cx="132" cy="250" rx="104" ry="54" fill="#b3aca2" opacity="0.45"/>
+  <ellipse cx="146" cy="228" rx="84" ry="30" fill="url(#shadow)"/>
+  <!-- Felsrücken hinter den Terrassen -->
+  <path d="M44 196 L58 160 L84 142 L100 116 L124 120 L146 96 L170 112 L192 108 L212 140 L230 156 L236 194 L150 222 Z" fill="#9c958b"/>
+  <path d="M44 196 L58 160 L84 142 L100 116 L124 120 L146 96 L140 130 L112 140 L92 160 L76 190 Z" fill="#cfc8be"/>
+  <path d="M170 112 L192 108 L212 140 L230 156 L236 194 L214 196 L208 160 L186 130 Z" fill="#6b645c"/>
+  <path d="M100 116 L112 140 M146 96 L156 132 M192 108 L186 130 M84 142 L92 160" stroke="#6b645c" stroke-width="1.4" fill="none" opacity="0.7"/>
+  <!-- Terrassen (geschnittener Stein) -->
+  <path d="M150.0 212.0 L76.0 183.9 L76.0 143.9 L150.0 172.0 Z" fill="#b3ab9d" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M150.0 212.0 L212.0 188.4 L212.0 148.4 L150.0 172.0 Z" fill="#80786c" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M150.0 172.0 L76.0 143.9 L138.0 120.3 L212.0 148.4 Z" fill="#e8e2d6" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M80 190 L150 216.6 M80 198 L150 224.6 M150 216.6 L212 193 M150 224.6 L212 201" stroke="#6b645c" stroke-width="1.2" opacity="0.6"/>
+  <path d="M142.0 236.0 L76.0 210.9 L76.0 182.9 L142.0 208.0 Z" fill="#b3ab9d" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M142.0 236.0 L188.0 218.5 L188.0 190.5 L142.0 208.0 Z" fill="#80786c" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M142.0 208.0 L76.0 182.9 L122.0 165.4 L188.0 190.5 Z" fill="#e8e2d6" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M100 210 L100 222 M120 214 L121 226 M162 218 L162 226" stroke="#6b645c" stroke-width="1.2" opacity="0.6"/>
+  <path d="M132.0 262.0 L88.0 245.3 L88.0 233.3 L132.0 250.0 Z" fill="#b3ab9d" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M132.0 262.0 L162.0 250.6 L162.0 238.6 L132.0 250.0 Z" fill="#80786c" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M132.0 250.0 L88.0 233.3 L118.0 221.9 L162.0 238.6 Z" fill="#e8e2d6" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+  <!-- Bohrlöcher / Keilspuren -->
+  <path d="M96 186 l0 6 M104 189 l0 6 M112 192 l0 6" stroke="#6b645c" stroke-width="1.6"/>
+  <!-- Holzkran mit Block -->
+  <g transform="translate(206 238)">
+    <path d="M-14 6 L0 -46 L10 4 M0 -46 L4 8" fill="none" stroke="#7a5a36" stroke-width="3" stroke-linecap="round"/>
+    <path d="M0 -46 L-22 -40" stroke="#7a5a36" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M-22 -40 L-22 -20" stroke="#e2c27a" stroke-width="1.2"/>
+    <path d="M-29 -20 L-15 -20 L-15 -10 L-29 -10 Z" fill="#cfc8be"/>
+    <path d="M-22 -20 L-15 -20 L-15 -10 L-22 -10 Z" fill="#9c958b"/>
+  </g>
+  <!-- Blöcke -->
+  <path d="M64.0 268.0 L50.0 262.7 L50.0 253.7 L64.0 259.0 Z" fill="#bdb6ab" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M64.0 268.0 L74.0 264.2 L74.0 255.2 L64.0 259.0 Z" fill="#8a8378" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M64.0 259.0 L50.0 253.7 L60.0 249.9 L74.0 255.2 Z" fill="#e3ddd3" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M80.0 274.0 L66.0 268.7 L66.0 259.7 L80.0 265.0 Z" fill="#bdb6ab" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M80.0 274.0 L90.0 270.2 L90.0 261.2 L80.0 265.0 Z" fill="#8a8378" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M80.0 265.0 L66.0 259.7 L76.0 255.9 L90.0 261.2 Z" fill="#e3ddd3" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M70.0 259.0 L56.0 253.7 L56.0 244.7 L70.0 250.0 Z" fill="#bdb6ab" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M70.0 259.0 L80.0 255.2 L80.0 246.2 L70.0 250.0 Z" fill="#8a8378" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M70.0 250.0 L56.0 244.7 L66.0 240.9 L80.0 246.2 Z" fill="#e3ddd3" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M196.0 276.0 L182.0 270.7 L182.0 261.7 L196.0 267.0 Z" fill="#bdb6ab" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M196.0 276.0 L206.0 272.2 L206.0 263.2 L196.0 267.0 Z" fill="#8a8378" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M196.0 267.0 L182.0 261.7 L192.0 257.9 L206.0 263.2 Z" fill="#e3ddd3" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M208.0 268.0 L194.0 262.7 L194.0 253.7 L208.0 259.0 Z" fill="#bdb6ab" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M208.0 268.0 L218.0 264.2 L218.0 255.2 L208.0 259.0 Z" fill="#8a8378" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M208.0 259.0 L194.0 253.7 L204.0 249.9 L218.0 255.2 Z" fill="#e3ddd3" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M202.0 262.0 L189.4 257.2 L189.4 249.1 L202.0 253.9 Z" fill="#bdb6ab" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M202.0 262.0 L211.0 258.6 L211.0 250.5 L202.0 253.9 Z" fill="#8a8378" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+<path d="M202.0 253.9 L189.4 249.1 L198.4 245.7 L211.0 250.5 Z" fill="#e3ddd3" stroke="#6b645c" stroke-width="1.2" stroke-linejoin="round"/>
+  <!-- Splitter -->
+  <g fill="#9c958b"><circle cx="110" cy="284" r="2.4"/><circle cx="160" cy="288" r="2"/><circle cx="46" cy="246" r="2.2"/><circle cx="232" cy="248" r="2"/></g>
+  <g fill="#cfc8be"><circle cx="118" cy="290" r="1.8"/><circle cx="170" cy="282" r="1.6"/></g>
+</svg>

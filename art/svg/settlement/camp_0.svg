@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs>
+    <!-- @defs -->
+    <!-- Fellzelt (Ursprung = Mitte der Grundfläche) -->
+    <g id="tent">
+      <ellipse cx="8" cy="4" rx="30" ry="10" fill="url(#shadow)"/>
+      <path d="M-22 0 Q-10 6 3 6 L0 -46 Z" fill="#d8b98a"/>
+      <path d="M3 6 Q15 5 22 -1 L0 -46 Z" fill="#9a7650"/>
+      <path d="M-22 0 Q-10 6 3 6 L2 -6 Q-10 -6 -19 -10 Z" fill="#b8956a"/>
+      <path d="M2 -6 L3 6 Q15 5 22 -1 L18 -10 Q10 -6 2 -6 Z" fill="#7d5c3a"/>
+      <path d="M-17 -12 L-12 -9 L-7 -12 L-2 -9 L3 -12 L8 -9 L14 -12" stroke="#a4472f" stroke-width="2" fill="none" stroke-linejoin="round"/>
+      <path d="M-5 5 L1 -20 L8 5 Z" fill="#3e2a18"/>
+      <path d="M1 -20 L8 5 L4 5 Z" fill="#2a1c10"/>
+      <path d="M0 -42 L-6 -55 M0 -42 L3 -57 M0 -42 L9 -53" stroke="#553c22" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M-11 -26 L0 -46" stroke="#f0dcb4" stroke-width="1.4" opacity="0.6"/>
+    </g>
+  </defs>
+  <!-- festgetretener Lagerplatz -->
+  <ellipse cx="128" cy="228" rx="92" ry="58" fill="#8a7048" opacity="0.45"/>
+  <ellipse cx="124" cy="226" rx="60" ry="36" fill="#c2a476" opacity="0.5"/>
+  <!-- Totempfahl -->
+  <ellipse cx="134" cy="200" rx="12" ry="4" fill="url(#shadow)"/>
+  <path d="M124 198 L124 128 L134 128 L134 198 Z" fill="#9a7348"/>
+  <path d="M130 198 L130 128 L134 128 L134 198 Z" fill="#6a4b2c"/>
+  <path d="M123 150 h12 v6 h-12 z M123 172 h12 v6 h-12 z" fill="#a4472f"/>
+  <path d="M130 150 h5 v6 h-5 z M130 172 h5 v6 h-5 z" fill="#7a2f22"/>
+  <circle cx="126.5" cy="140" r="1.6" fill="#2a1c10"/><circle cx="131" cy="140" r="1.6" fill="#2a1c10"/>
+  <circle cx="126.5" cy="163" r="1.6" fill="#2a1c10"/><circle cx="131" cy="163" r="1.6" fill="#2a1c10"/>
+  <path d="M124 130 L106 120 L112 132 Z" fill="#e2d5bd"/>
+  <path d="M134 130 L152 120 L146 132 Z" fill="#b8a888"/>
+  <path d="M129 128 L122 116 M129 128 L136 116" stroke="#e9dfc6" stroke-width="2.4" stroke-linecap="round"/>
+  <!-- Zelte hinten -->
+  <use href="#tent" transform="translate(74 204) scale(1.1)"/>
+  <use href="#tent" transform="translate(184 200) scale(1.05)"/>
+  <!-- Feuerstelle -->
+  <ellipse cx="128" cy="232" rx="17" ry="8" fill="#6b645c"/>
+  <ellipse cx="128" cy="231" rx="13" ry="5.5" fill="#3a2c20"/>
+  <circle cx="114" cy="231" r="3" fill="#cfc8be"/><circle cx="121" cy="237" r="3" fill="#9c958b"/>
+  <circle cx="135" cy="237" r="3" fill="#9c958b"/><circle cx="142" cy="231" r="3" fill="#6b645c"/>
+  <path d="M118 233 L138 227 M118 227 L138 234" stroke="#553c22" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M120 231 Q119 220 126 212 Q125 222 131 214 Q137 222 136 231 Z" fill="#f08a2e"/>
+  <path d="M124 231 Q123 223 128 218 Q130 225 133 231 Z" fill="#ffd25a"/>
+  <circle cx="132" cy="198" r="6" fill="#d6d6d6" opacity="0.45"/>
+  <circle cx="137" cy="186" r="8" fill="#e3e7ea" opacity="0.35"/>
+  <circle cx="141" cy="172" r="9" fill="#e3e7ea" opacity="0.22"/>
+  <!-- Sitzstämme -->
+  <path d="M96 244 L110 250" stroke="#7a5a36" stroke-width="6" stroke-linecap="round"/>
+  <path d="M148 250 L162 244" stroke="#7a5a36" stroke-width="6" stroke-linecap="round"/>
+  <!-- Trockengestell mit Fell -->
+  <path d="M38 236 L42 212 M64 244 L66 220 M40 214 L66 222" stroke="#553c22" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M44 215 L62 221 L60 238 Q52 240 45 234 Z" fill="#b8956a"/>
+  <path d="M53 218 L62 221 L60 238 Q56 239 53 238 Z" fill="#86622e"/>
+  <!-- Zelte vorn -->
+  <use href="#tent" transform="translate(86 276) scale(1.1)"/>
+  <use href="#tent" transform="translate(180 270) scale(1.15)"/>
+  <!-- Vorräte -->
+  <ellipse cx="216" cy="232" rx="9" ry="6" fill="#b48a4a"/>
+  <ellipse cx="214" cy="229" rx="6" ry="3" fill="#e2c27a"/>
+  <ellipse cx="132" cy="276" rx="7" ry="5" fill="#86622e"/>
+  <ellipse cx="130" cy="273" rx="5" ry="2.5" fill="#b48a4a"/>
+</svg>

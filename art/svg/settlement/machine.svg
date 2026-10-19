@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs>
+    <!-- @defs -->
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#14d2c8" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#14d2c8" stop-opacity="0"/>
+    </radialGradient>
+    <!-- Nebenpylon (Ursprung Fuß) -->
+    <g id="pylon">
+      <ellipse cx="6" cy="2" rx="14" ry="4" fill="url(#shadow)"/>
+      <path d="M-7 0 L-5 -30 L0 -36 L0 2 Z" fill="#2a3644"/>
+      <path d="M0 2 L0 -36 L5 -30 L7 0 Z" fill="#141b24"/>
+      <path d="M-3 -6 L-3 -26" stroke="#14d2c8" stroke-width="1.8"/>
+      <circle cx="0" cy="-38" r="2.6" fill="#7ff5ee"/>
+    </g>
+  </defs>
+  <!-- Plattform -->
+  <ellipse cx="128" cy="226" rx="104" ry="64" fill="url(#glow)"/>
+  <path d="M128 286 L40 252 L40 198 L128 164 L216 198 L216 252 Z" fill="#141b24"/>
+  <path d="M128 280 L44 248 L44 200 L128 168 L212 200 L212 248 Z" fill="#1b2430"/>
+  <path d="M128 280 L44 248 L44 252 L128 284 Z" fill="#2a3644"/>
+  <path d="M128 280 L212 248 L212 252 L128 284 Z" fill="#0e141b"/>
+  <!-- Leiterbahnen -->
+  <g stroke="#14d2c8" stroke-width="1.6" fill="none" opacity="0.85" stroke-linecap="round">
+    <path d="M128 252 L128 276 M100 240 L64 226 L64 214 M156 240 L194 226 L194 212 M110 220 L84 210 L84 196 M146 220 L172 210 L172 196"/>
+    <path d="M60 236 L92 248 M196 236 L164 248"/>
+  </g>
+  <g fill="#7ff5ee"><circle cx="128" cy="276" r="2.4"/><circle cx="64" cy="214" r="2.4"/><circle cx="194" cy="212" r="2.4"/><circle cx="84" cy="196" r="2"/><circle cx="172" cy="196" r="2"/></g>
+  <!-- Pylone hinten -->
+  <use href="#pylon" transform="translate(84 196)"/>
+  <use href="#pylon" transform="translate(172 196)"/>
+  <!-- Kern -->
+  <ellipse cx="136" cy="246" rx="44" ry="12" fill="url(#shadow)"/>
+  <ellipse cx="128" cy="240" rx="40" ry="16" fill="#0e141b"/>
+  <ellipse cx="128" cy="238" rx="36" ry="13" fill="none" stroke="#14d2c8" stroke-width="2.4"/>
+  <path d="M104 238 L110 140 L128 112 L128 248 Z" fill="#2a3644"/>
+  <path d="M128 248 L128 112 L146 140 L152 238 Z" fill="#141b24"/>
+  <path d="M110 140 L128 112 L146 140 L128 150 Z" fill="#3a4a5c"/>
+  <path d="M104 238 L128 248 L152 238" stroke="#0e141b" stroke-width="2" fill="none"/>
+  <!-- leuchtende Fugen -->
+  <path d="M116 230 L120 152 M128 246 L128 152 M128 150 L110 140" stroke="#14d2c8" stroke-width="2" fill="none"/>
+  <path d="M138 228 L142 160" stroke="#14d2c8" stroke-width="1.4" opacity="0.6"/>
+  <path d="M112 196 L128 202 L146 196" stroke="#14d2c8" stroke-width="1.6" fill="none" opacity="0.8"/>
+  <!-- Auge -->
+  <ellipse cx="120" cy="172" rx="6" ry="8" fill="#14d2c8"/>
+  <ellipse cx="119" cy="171" rx="2.6" ry="3.6" fill="#e6fffd"/>
+  <circle cx="128" cy="104" r="5" fill="#7ff5ee"/>
+  <circle cx="128" cy="104" r="12" fill="url(#glow)"/>
+  <!-- Pylone vorn -->
+  <use href="#pylon" transform="translate(64 232)"/>
+  <use href="#pylon" transform="translate(194 230)"/>
+  <use href="#pylon" transform="translate(128 278) scale(0.9)"/>
+</svg>

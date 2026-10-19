@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs>
+    <!-- @defs -->
+    <clipPath id="netc"><ellipse cx="196" cy="226" rx="32" ry="15"/></clipPath>
+  </defs>
+  <!-- Stellnetz mit Schwimmern im Wasser -->
+  <ellipse cx="196" cy="226" rx="32" ry="15" fill="#1f5383" opacity="0.35"/>
+  <g clip-path="url(#netc)" stroke="#e9eff3" stroke-width="0.8" opacity="0.45">
+    <path d="M160 210 l60 30 M170 206 l60 30 M150 216 l60 30 M180 202 l60 30 M160 242 l60 -30 M170 246 l60 -30 M180 250 l60 -30 M150 238 l60 -30"/>
+  </g>
+  <g fill="#e0782e"><circle cx="164" cy="226" r="2.6"/><circle cx="172" cy="215" r="2.6"/><circle cx="186" cy="211" r="2.6"/><circle cx="202" cy="211" r="2.6"/><circle cx="216" cy="214" r="2.6"/><circle cx="226" cy="222" r="2.6"/><circle cx="224" cy="233" r="2.6"/><circle cx="210" cy="240" r="2.6"/><circle cx="192" cy="241" r="2.6"/><circle cx="176" cy="237" r="2.6"/></g>
+  <!-- Pfähle mit Wellenringen -->
+  <g fill="none" stroke="#cfe6f2" stroke-width="1.4" opacity="0.7">
+    <ellipse cx="74" cy="236" rx="8" ry="3"/><ellipse cx="114" cy="251" rx="8" ry="3"/><ellipse cx="154" cy="266" rx="8" ry="3"/><ellipse cx="180" cy="257" rx="8" ry="3"/>
+  </g>
+  <path d="M72 222 v14 M112 237 v14 M152 252 v14 M178 243 v14" stroke="#553c22" stroke-width="4.5"/>
+  <path d="M73.5 222 v14 M113.5 237 v14 M153.5 252 v14 M179.5 243 v14" stroke="#3a2818" stroke-width="1.5"/>
+  <!-- Steg (Ursprung O = 46/218, Länge entlang 1/0.38, Breite entlang 1/-0.38) -->
+  <path d="M46 218 L156 259.8 L156 265.8 L46 224 Z" fill="#553c22"/>
+  <path d="M156 259.8 L180 250.7 L180 256.7 L156 265.8 Z" fill="#3e2a18"/>
+  <path d="M46 218 L156 259.8 L180 250.7 L70 208.9 Z" fill="#b08559"/>
+  <path d="M56 221.8 L80 212.7 M66 225.6 L90 216.5 M76 229.4 L100 220.3 M86 233.2 L110 224.1 M96 237 L120 227.9 M106 240.8 L130 231.7 M116 244.6 L140 235.5 M126 248.4 L150 239.3 M136 252.2 L160 243.1 M146 256 L170 246.9" stroke="#7a5a36" stroke-width="1.2"/>
+  <path d="M70 208.9 L180 250.7" stroke="#d4b088" stroke-width="1.6"/>
+  <!-- Fischerhütte auf dem Steg -->
+  <g transform="translate(80 228)">
+    <ellipse cx="2" cy="-4" rx="22" ry="7" fill="url(#shadow)" transform="translate(5 2)"/>
+    <path d="M0 0 L-26 -9.9 L-26 -30 L0 -20 Z" fill="#b08559"/>
+    <path d="M-9 -3.4 L-9 -23.4 M-18 -6.8 L-18 -26.8" stroke="#7a5a36" stroke-width="1.2"/>
+    <path d="M0 0 L20 -7.6 L20 -27.6 L10 -38 L0 -20 Z" fill="#7a5a36"/>
+    <path d="M5 -2 L13 -5 L13 -17 L5 -14 Z" fill="#3e2a18"/>
+    <path d="M2 -18 L-29 -29.8 L-18 -50 L11.5 -39 Z" fill="#b48a4a" stroke="#86622e" stroke-width="1.2" stroke-linejoin="round"/>
+    <path d="M11.5 -39 L23 -26.5 L20.5 -25.5 L10.5 -36 Z" fill="#86622e"/>
+    <path d="M-8 -22 L2 -40 M-18 -26 L-8 -44" stroke="#86622e" stroke-width="1.2" opacity="0.5"/>
+  </g>
+  <!-- Netz-Trockengestell -->
+  <g transform="translate(138 238)">
+    <path d="M-12 4 L-12 -24 M14 -6 L14 -32 M-14 -22 L16 -33" stroke="#553c22" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M-12 -21 L14 -31 L13 -12 Q4 -4 -11 -2 Z" fill="#9c958b" opacity="0.75"/>
+    <path d="M-10 -18 L12 -27 M-10 -12 L12 -21 M-10 -6 L12 -15 M-6 -22 L-6 -2 M0 -24 L0 -4 M6 -27 L6 -8" stroke="#6b645c" stroke-width="0.8"/>
+  </g>
+  <!-- Fischkorb -->
+  <g transform="translate(166 252)">
+    <path d="M-6 0 L-7 -9 L7 -9 L6 0 Q0 2 -6 0 Z" fill="#b48a4a"/>
+    <path d="M0 -9 L7 -9 L6 0 Q3 1.6 0 1.8 Z" fill="#86622e"/>
+    <path d="M-5 -10 Q-1 -14 4 -10 M-3 -11 Q2 -15 6 -11" stroke="#cfd8de" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+  </g>
+  <!-- Ruderboot -->
+  <g transform="translate(116 286) rotate(-21)">
+    <ellipse cx="4" cy="6" rx="34" ry="8" fill="#1f5383" opacity="0.35"/>
+    <path d="M-30 -2 Q-22 10 0 10 Q22 10 32 -3 Z" fill="#7a5a36"/>
+    <path d="M-30 -2 Q-22 4 0 5 Q22 4 32 -3 L30 0 Q20 7 0 7.5 Q-20 7 -28 0 Z" fill="#553c22"/>
+    <path d="M-30 -2 Q0 -12 32 -3 Q0 6 -30 -2 Z" fill="#b08559"/>
+    <path d="M-24 -2 Q0 -9 26 -3 Q0 3 -24 -2 Z" fill="#7a5a36"/>
+    <path d="M-4 -6 L-2 2 M10 -5 L11 2" stroke="#d4b088" stroke-width="3"/>
+    <path d="M-14 -2 L-34 10 M14 -2 L28 12" stroke="#d4b088" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <!-- Leine zum Steg -->
+  <path d="M136 274 Q142 268 152 264" stroke="#e2c27a" stroke-width="1" fill="none"/>
+  <!-- Lichtreflexe -->
+  <path d="M60 268 q8 -3 16 0 M190 288 q8 -3 16 0 M206 196 q6 -2 12 0" stroke="#cfe6f2" stroke-width="1.6" fill="none" opacity="0.6" stroke-linecap="round"/>
+</svg>

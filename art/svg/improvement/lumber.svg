@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="320" viewBox="0 0 256 320" data-anchor-y="0.7">
+  <defs>
+    <!-- @defs -->
+    <!-- Stamm (Ursprung = Mitte der vorderen Schnittfläche, liegt nach hinten links) -->
+    <g id="log">
+      <path d="M0 -7 L-44 -23.7 L-44 -9.7 L0 7 Z" fill="#7a5a36"/>
+      <path d="M0 -7 L-44 -23.7 L-44 -19 L0 -2.3 Z" fill="#9a7348"/>
+      <path d="M0 4 L-44 -12.7 L-44 -9.7 L0 7 Z" fill="#553c22"/>
+      <path d="M-12 -4 L-30 -11 M-20 -2 L-36 -8" stroke="#553c22" stroke-width="1" opacity="0.7"/>
+      <ellipse cx="0" cy="0" rx="5.2" ry="7" fill="#e2c49a"/>
+      <ellipse cx="0" cy="0" rx="2.8" ry="3.8" fill="none" stroke="#c49a6c" stroke-width="1"/>
+    </g>
+    <!-- Baumstumpf -->
+    <g id="stump">
+      <ellipse cx="5" cy="2" rx="13" ry="4" fill="url(#shadow)"/>
+      <path d="M-8 -10 L-8 0 Q0 4 8 0 L8 -10 Z" fill="#7a5a36"/>
+      <path d="M0 -10 L8 -10 L8 0 Q4 2.4 0 2.6 Z" fill="#553c22"/>
+      <path d="M-8 0 L-12 3 M8 0 L12 2" stroke="#553c22" stroke-width="2.4" stroke-linecap="round"/>
+      <ellipse cx="0" cy="-10" rx="8" ry="3.6" fill="#e2c49a"/>
+      <ellipse cx="0" cy="-10" rx="4.5" ry="2" fill="none" stroke="#c49a6c" stroke-width="0.9"/>
+    </g>
+  </defs>
+  <!-- Arbeitsplatz mit Sägespänen -->
+  <ellipse cx="130" cy="270" rx="72" ry="28" fill="#a88a5a" opacity="0.45"/>
+  <ellipse cx="96" cy="270" rx="18" ry="6" fill="#e2c49a" opacity="0.6"/>
+  <!-- Stümpfe -->
+  <use href="#stump" transform="translate(196 246)"/>
+  <use href="#stump" transform="translate(40 252) scale(0.9)"/>
+  <!-- Stammstapel -->
+  <g transform="translate(170 290)">
+    <ellipse cx="-14" cy="-6" rx="40" ry="10" fill="url(#shadow)" transform="translate(6 3)"/>
+    <use href="#log" transform="translate(26 -9.9)"/>
+    <use href="#log" transform="translate(13 -4.9)"/>
+    <use href="#log" transform="translate(0 0)"/>
+    <use href="#log" transform="translate(19.5 -21.4)"/>
+    <use href="#log" transform="translate(6.5 -16.4)"/>
+    <use href="#log" transform="translate(13 -32.9)"/>
+    <path d="M-6 8 L-6 -14 M34 -4 L34 -30" stroke="#553c22" stroke-width="2.6" stroke-linecap="round"/>
+  </g>
+  <!-- Sägebock mit Stamm -->
+  <g transform="translate(96 266)">
+    <ellipse cx="4" cy="4" rx="28" ry="6" fill="url(#shadow)"/>
+    <path d="M-20 4 L-12 -14 L-6 4 M10 -4 L18 -22 L24 -4" stroke="#553c22" stroke-width="2.6" stroke-linecap="round" fill="none"/>
+    <use href="#log" transform="translate(30 -10) scale(1.05 0.9)"/>
+    <path d="M6 -16 L16 -34" stroke="#7a5a36" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M1 -16 L6 -21 L11 -14 L5 -12 Z" fill="#aab3ba"/>
+    <path d="M6 -21 L11 -14 L9 -13 Z" fill="#6d767d"/>
+  </g>
+  <!-- Stumpf mit Axt -->
+  <use href="#stump" transform="translate(132 300) scale(1.15)"/>
+  <path d="M130 288 L140 276" stroke="#7a5a36" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M126 288 L131 284 L135 290 L130 292 Z" fill="#aab3ba"/>
+  <path d="M131 284 L135 290 L133 291 Z" fill="#6d767d"/>
+  <!-- Späne -->
+  <g fill="#e2c49a"><rect x="70" y="282" width="4" height="2" transform="rotate(20 72 283)"/><rect x="112" y="276" width="4" height="2"/><rect x="150" y="300" width="4" height="2" transform="rotate(-25 152 301)"/></g>
+</svg>
