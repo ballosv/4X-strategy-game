@@ -5,6 +5,7 @@ Zuerst für Android, später für PC.
 
 - [Game Design Document](docs/GAME_DESIGN.md)
 - [Grafik-Spezifikation](docs/GRAFIK_SPEZIFIKATION.md)
+- [Übergabe für die nächste Sitzung](docs/UEBERGABE.md)
 - [Architektur](docs/ARCHITEKTUR.md)
 
 ## Entwicklung
