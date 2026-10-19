@@ -46,6 +46,14 @@
     "wall/cliff_temperate": {
       "from": "art/scenario/raw/wall/cliff_temperate/1.png",
       "type": "wall"
+    },
+    "wall/slope": {
+      "from": "art/scenario/raw/wall/slope/1.png",
+      "type": "wall"
+    },
+    "wall/beach": {
+      "from": "art/scenario/raw/wall/beach/1.png",
+      "type": "wall"
     }
   }
 }

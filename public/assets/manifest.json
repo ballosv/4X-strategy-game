@@ -455,8 +455,14 @@
     "unit/worker_mask": {
       "file": "unit/worker_mask.png"
     },
+    "wall/beach": {
+      "file": "wall/beach.webp"
+    },
     "wall/cliff_temperate": {
       "file": "wall/cliff_temperate.webp"
+    },
+    "wall/slope": {
+      "file": "wall/slope.webp"
     }
   }
 }
