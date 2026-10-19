@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="104" cy="186" rx="42" ry="10" fill="url(#shadow)"/>
+  <!-- Spitzhacke über der linken Schulter -->
+  <path d="M112 124 L142 56" stroke="#553c22" stroke-width="6" stroke-linecap="round"/>
+  <path d="M112 124 L142 56" stroke="#9a7048" stroke-width="3" stroke-linecap="round"/>
+  <path d="M118 50 Q132 48 142 54 Q156 60 166 76 Q150 66 140 64 Q128 60 118 50 Z" fill="#9c958b"/>
+  <path d="M118 50 Q132 48 142 54 Q132 54 118 50 Z" fill="#cfc8be"/>
+  <path d="M166 76 Q150 66 140 64 Q152 72 166 76 Z" fill="#6b645c"/>
+  <path d="M136 52 L148 58 L146 64 L134 58 Z" fill="#7a5a36"/>
+  <!-- Beine -->
+  <path d="M88 150 L86 184 L96 184 L98 150 Z" fill="#5a4636"/>
+  <path d="M104 150 L104 184 L114 184 L112 150 Z" fill="#4a3a2c"/>
+  <path d="M84 184 h14 v-6 h-14 z M102 184 h14 v-6 h-14 z" fill="#3a2c20"/>
+  <!-- Tunika (Fraktion) -->
+  <path class="faction" d="M80 100 Q100 92 120 100 L124 154 Q100 160 76 154 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M80 100 Q90 96 100 95 L98 157 Q86 157 76 154 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M110 98 Q116 99 120 100 L124 154 Q118 156 112 157 Z" fill="#a8a8a8"/>
+  <!-- Schürze aus Leder -->
+  <path d="M86 132 L112 132 L114 156 Q100 160 84 156 Z" fill="#9a7048"/>
+  <path d="M86 132 L98 132 L97 158 Q90 158 84 156 Z" fill="#b08559"/>
+  <path d="M78 128 Q100 134 122 128 L122 134 Q100 140 78 134 Z" fill="#5a3d22"/>
+  <!-- linker Arm hält den Stiel -->
+  <path d="M116 104 Q126 112 120 126 L112 124 Q118 114 112 110 Z" fill="#b88a62"/>
+  <circle cx="114" cy="124" r="5.5" fill="#b88a62"/>
+  <!-- Korb mit Steinen -->
+  <path d="M46 138 Q62 132 78 138 L74 168 Q62 172 50 168 Z" fill="#b48a4a"/>
+  <path d="M46 138 Q54 135 60 134 L58 170 Q54 170 50 168 Z" fill="#e2c27a"/>
+  <path d="M70 136 Q75 137 78 138 L74 168 Q71 169 68 170 Z" fill="#86622e"/>
+  <path d="M47 148 Q62 152 77 148 M48 158 Q62 162 75 158" fill="none" stroke="#86622e" stroke-width="1.5"/>
+  <ellipse cx="62" cy="138" rx="16" ry="5" fill="#86622e"/>
+  <circle cx="55" cy="134" r="6" fill="#9c958b"/>
+  <circle cx="54" cy="132" r="3.5" fill="#cfc8be"/>
+  <circle cx="68" cy="133" r="5.5" fill="#6b645c"/>
+  <circle cx="62" cy="130" r="5" fill="#9c958b"/>
+  <circle cx="61" cy="128" r="2.6" fill="#cfc8be"/>
+  <!-- rechter Arm trägt den Korb -->
+  <path d="M84 104 Q72 112 72 132 L80 132 Q80 116 88 110 Z" fill="#e0b48a"/>
+  <circle cx="76" cy="134" r="5.5" fill="#e0b48a"/>
+  <!-- Kopf mit Kopftuch -->
+  <circle cx="100" cy="80" r="15" fill="#e0b48a"/>
+  <path d="M100 80 m0 -15 a15 15 0 0 1 15 15 l-6 0 a9 9 0 0 0 -9 -9 z" fill="#b88a62" opacity="0.5"/>
+  <path d="M84 78 Q84 60 100 60 Q116 60 117 78 Q108 70 100 70 Q90 70 84 78 Z" fill="#b48a4a"/>
+  <path d="M84 78 Q84 64 96 61 Q88 68 88 76 Z" fill="#e2c27a"/>
+  <path d="M100 60 Q116 60 117 78 Q112 72 106 71 Z" fill="#86622e"/>
+  <path d="M115 74 L124 80 L118 84 Z" fill="#86622e"/>
+  <path d="M89 88 Q100 96 110 88 Q100 92 89 88 Z" fill="#5a3d22"/>
+  <circle cx="94" cy="83" r="1.6" fill="#3a2c20"/>
+</svg>

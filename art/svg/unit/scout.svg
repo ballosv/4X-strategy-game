@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="106" cy="186" rx="36" ry="10" fill="url(#shadow)"/>
+  <!-- Wanderstab -->
+  <path d="M66 184 L62 48" stroke="#553c22" stroke-width="5" stroke-linecap="round"/>
+  <path d="M65 184 L61 48" stroke="#9a7048" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M56 46 Q62 36 68 46 Q62 52 56 46 Z" fill="#7a5a36"/>
+  <!-- Umhang hinten (Fraktion, Schattenseite) -->
+  <path class="faction" d="M110 100 Q128 116 136 160 Q124 166 110 160 Z" fill="#a8a8a8"/>
+  <!-- Beine (Schrittstellung, Lederwickel) -->
+  <path d="M90 146 L78 180 L89 182 L99 148 Z" fill="#7a5a36"/>
+  <path d="M103 146 L110 182 L120 181 L113 146 Z" fill="#553c22"/>
+  <path d="M80 172 l10 2 M82 166 l10 2 M108 172 l10 -1 M107 166 l10 -1" stroke="#3f2c18" stroke-width="1.5"/>
+  <path d="M75 184 h15 v-6 h-13 z M108 184 h15 v-6 h-14 z" fill="#3a2c20"/>
+  <!-- Ledertunika -->
+  <path d="M84 102 Q100 94 116 102 L118 150 Q100 155 82 150 Z" fill="#9a7048"/>
+  <path d="M84 102 Q92 98 100 97 L99 153 Q90 152 82 150 Z" fill="#b08559"/>
+  <path d="M80 128 Q100 133 120 128 L120 134 Q100 139 80 134 Z" fill="#553c22"/>
+  <!-- Beutel und Horn am Gürtel -->
+  <path d="M112 132 Q122 132 122 142 Q120 150 112 148 Q106 144 108 136 Z" fill="#7a5a36"/>
+  <path d="M84 134 Q88 146 98 148 L98 143 Q90 141 88 134 Z" fill="#e2c27a"/>
+  <!-- Umhang (Fraktion), vorne offen -->
+  <path class="faction" d="M82 100 Q74 124 68 156 Q78 162 88 158 L92 112 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M82 100 Q74 124 68 156 Q73 158 77 158 L86 108 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M118 100 Q126 124 130 156 Q120 162 110 158 L108 112 Z" fill="#a8a8a8"/>
+  <path class="faction" d="M78 104 Q100 86 122 104 L120 116 Q100 106 80 116 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M78 104 Q88 96 100 94 L99 108 Q88 110 80 116 Z" fill="#f4f4f4"/>
+  <path d="M96 104 a4 4 0 1 0 8 0 a4 4 0 1 0 -8 0" fill="#9c7a3a"/>
+  <!-- Hand am Stab -->
+  <path d="M84 110 Q74 112 66 116 L68 122 Q78 120 88 118 Z" fill="#7a5a36"/>
+  <circle cx="64" cy="119" r="5" fill="#e0b48a"/>
+  <!-- Kapuze (Fraktion) mit Gesicht -->
+  <path class="faction" d="M82 86 Q80 58 102 54 Q122 58 120 86 Q118 100 100 102 Q84 100 82 86 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M102 54 Q114 56 118 70 Q120 80 120 86 Q118 98 104 101 Q112 92 112 82 Q112 64 102 54 Z" fill="#a8a8a8"/>
+  <path class="faction" d="M82 86 Q80 62 98 55 Q88 64 88 80 Z" fill="#f4f4f4"/>
+  <ellipse cx="98" cy="84" rx="11" ry="13" fill="#e0b48a"/>
+  <path d="M98 71 a11 13 0 0 1 11 13 l-5 0 a7 9 0 0 0 -6 -8 z" fill="#b88a62" opacity="0.5"/>
+  <path d="M89 76 Q98 68 108 76 Q98 72 89 78 Z" fill="#5a3d22"/>
+  <circle cx="93" cy="84" r="1.6" fill="#3a2c20"/>
+  <path d="M90 92 Q96 98 104 92 Q98 95 90 92 Z" fill="#7a5a36"/>
+</svg>

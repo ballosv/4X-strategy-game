@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="108" cy="185" rx="54" ry="12" fill="url(#shadow)"/>
+  <!-- Frau mit Bündel (hinten rechts) -->
+  <g transform="translate(130 176) scale(0.8) translate(-100 -184)">
+    <!-- Bündel auf dem Rücken -->
+    <path d="M110 90 Q140 84 146 110 Q150 138 128 146 Q110 148 106 128 Z" fill="#b48a4a"/>
+    <path d="M110 90 Q126 86 136 94 Q120 100 112 120 Q106 108 110 90 Z" fill="#e2c27a"/>
+    <path d="M146 110 Q150 138 128 146 Q140 132 140 112 Z" fill="#86622e"/>
+    <path d="M114 96 L140 136" stroke="#7a5a36" stroke-width="3"/>
+    <!-- Kleid (Fraktion) -->
+    <path class="faction" d="M82 100 Q100 92 118 100 L126 182 Q100 188 74 182 Z" fill="#d6d6d6"/>
+    <path class="faction" d="M82 100 Q91 96 100 95 L98 185 Q86 184 74 182 Z" fill="#f4f4f4"/>
+    <path class="faction" d="M110 98 Q115 99 118 100 L126 182 Q120 184 113 185 Z" fill="#a8a8a8"/>
+    <path d="M80 128 Q100 134 120 128 L120 134 Q100 140 80 134 Z" fill="#7a5a36"/>
+    <path d="M84 104 Q74 114 78 130 L86 128 Q84 116 90 110 Z" fill="#e0b48a"/>
+    <circle cx="82" cy="130" r="5" fill="#e0b48a"/>
+    <path d="M86 102 L116 92 L118 98 L88 108 Z" fill="#7a5a36"/>
+    <!-- Kopf mit Haarknoten -->
+    <circle cx="100" cy="80" r="15" fill="#e0b48a"/>
+    <path d="M100 80 m0 -15 a15 15 0 0 1 15 15 l-6 0 a9 9 0 0 0 -9 -9 z" fill="#b88a62" opacity="0.5"/>
+    <path d="M84 82 Q82 62 100 62 Q118 62 117 84 Q112 72 100 71 Q90 72 84 82 Z" fill="#6b4a2c"/>
+    <circle cx="114" cy="66" r="7" fill="#6b4a2c"/>
+    <circle cx="94" cy="83" r="1.7" fill="#3a2c20"/>
+  </g>
+  <!-- Mann mit Stammesbanner (links) -->
+  <g transform="translate(84 182) scale(0.86) translate(-100 -184)">
+    <!-- Bannerstange -->
+    <path d="M68 186 L68 22" stroke="#553c22" stroke-width="5" stroke-linecap="round"/>
+    <path d="M67 186 L67 22" stroke="#9a7048" stroke-width="2.5" stroke-linecap="round"/>
+    <path d="M46 26 L90 26" stroke="#7a5a36" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Banner (Fraktion) -->
+    <path class="faction" d="M48 27 L88 27 L88 74 L78 66 L68 76 L58 66 L48 74 Z" fill="#d6d6d6"/>
+    <path class="faction" d="M48 27 L66 27 L66 74 L58 66 L48 74 Z" fill="#f4f4f4"/>
+    <path class="faction" d="M78 27 L88 27 L88 74 L78 66 Z" fill="#a8a8a8"/>
+    <circle cx="68" cy="46" r="7" fill="#7a5a36" opacity="0.55"/>
+    <path d="M62 20 Q68 10 74 20 Z" fill="#e2c27a"/>
+    <!-- Beine -->
+    <path d="M88 150 L86 184 L96 184 L98 150 Z" fill="#7a5a36"/>
+    <path d="M104 150 L104 184 L114 184 L112 150 Z" fill="#553c22"/>
+    <path d="M84 184 h14 v-5 h-14 z M102 184 h14 v-5 h-14 z" fill="#3a2c20"/>
+    <!-- Tunika (Fraktion) -->
+    <path class="faction" d="M80 100 Q100 92 120 100 L124 156 Q100 162 76 156 Z" fill="#d6d6d6"/>
+    <path class="faction" d="M80 100 Q90 96 100 95 L98 158 Q86 158 76 156 Z" fill="#f4f4f4"/>
+    <path class="faction" d="M110 98 Q116 99 120 100 L124 156 Q118 158 112 159 Z" fill="#a8a8a8"/>
+    <!-- Fellkragen und Gürtel -->
+    <path d="M78 104 Q100 90 122 104 L120 114 Q100 104 80 114 Z" fill="#9a7048"/>
+    <path d="M78 104 Q88 96 100 95 L99 106 Q88 108 80 114 Z" fill="#b08559"/>
+    <path d="M78 130 Q100 136 122 130 L122 136 Q100 142 78 136 Z" fill="#5a3d22"/>
+    <!-- Arme -->
+    <path d="M116 104 Q126 114 124 130 L117 130 Q118 116 112 110 Z" fill="#b88a62"/>
+    <circle cx="120" cy="132" r="5" fill="#b88a62"/>
+    <path d="M84 106 Q72 110 70 120 L78 124 Q80 114 90 112 Z" fill="#e0b48a"/>
+    <circle cx="69" cy="120" r="6" fill="#e0b48a"/>
+    <!-- Kopf mit Bart -->
+    <circle cx="100" cy="80" r="15" fill="#e0b48a"/>
+    <path d="M100 80 m0 -15 a15 15 0 0 1 15 15 l-6 0 a9 9 0 0 0 -9 -9 z" fill="#b88a62" opacity="0.5"/>
+    <path d="M84 80 Q82 62 100 61 Q118 62 117 80 Q112 70 100 70 Q90 70 84 80 Z" fill="#4a3324"/>
+    <path d="M88 87 Q93 100 101 99 Q110 98 113 87 Q106 92 100 92 Q93 92 88 87 Z" fill="#4a3324"/>
+    <circle cx="94" cy="82" r="1.7" fill="#2e2016"/>
+  </g>
+  <!-- Kind (vorne) -->
+  <g transform="translate(112 188) scale(0.56) translate(-100 -184)">
+    <path d="M88 150 L86 184 L96 184 L98 150 Z" fill="#e0b48a"/>
+    <path d="M104 150 L104 184 L114 184 L112 150 Z" fill="#b88a62"/>
+    <path class="faction" d="M80 100 Q100 92 120 100 L124 156 Q100 162 76 156 Z" fill="#d6d6d6"/>
+    <path class="faction" d="M80 100 Q90 96 100 95 L98 158 Q86 158 76 156 Z" fill="#f4f4f4"/>
+    <path class="faction" d="M110 98 Q116 99 120 100 L124 156 Q118 158 112 159 Z" fill="#a8a8a8"/>
+    <path d="M78 130 Q100 136 122 130 L122 137 Q100 143 78 137 Z" fill="#7a5a36"/>
+    <path d="M84 104 Q70 112 72 128 L80 128 Q80 114 88 110 Z" fill="#e0b48a"/>
+    <circle cx="100" cy="76" r="19" fill="#e0b48a"/>
+    <path d="M100 76 m0 -19 a19 19 0 0 1 19 19 l-7 0 a12 12 0 0 0 -12 -12 z" fill="#b88a62" opacity="0.5"/>
+    <path d="M80 78 Q78 54 100 54 Q122 54 120 78 Q114 64 100 64 Q88 64 80 78 Z" fill="#6b4a2c"/>
+    <circle cx="93" cy="79" r="2.2" fill="#3a2c20"/>
+  </g>
+</svg>

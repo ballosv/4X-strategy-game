@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" data-anchor-y="0.92" data-scale="0.8">
+  <defs><!-- @defs --></defs>
+  <!-- Schatten -->
+  <ellipse cx="114" cy="182" rx="80" ry="14" fill="url(#shadow)"/>
+  <g transform="translate(136 184) scale(1.14) translate(-136 -184)">
+  <!-- ferne Räder -->
+  <ellipse cx="126" cy="160" rx="8" ry="13" fill="#3f2c18"/>
+  <ellipse cx="180" cy="150" rx="8" ry="13" fill="#3f2c18"/>
+  <!-- ferner Längsbalken und Pfosten -->
+  <path d="M104 156 L186 140 L186 148 L104 164 Z" fill="#553c22"/>
+  <path d="M168 144 L172 96 L178 96 L176 144 Z" fill="#553c22"/>
+  <path d="M130 152 L130 124 L136 124 L136 150 Z" fill="#553c22"/>
+  <!-- Torsionsbündel (Seil) -->
+  <path d="M114 138 L140 132 L142 146 L116 152 Z" fill="#b48a4a"/>
+  <path d="M114 138 L140 132 L140 136 L114 142 Z" fill="#e2c27a"/>
+  <path d="M120 137 L122 151 M127 135 L129 149 M134 134 L136 147" stroke="#86622e" stroke-width="1.5"/>
+  <!-- Wurfarm mit Schale und Stein -->
+  <path d="M124 144 L166 66" stroke="#553c22" stroke-width="9" stroke-linecap="round"/>
+  <path d="M124 144 L166 66" stroke="#9a7048" stroke-width="5" stroke-linecap="round"/>
+  <path d="M154 62 Q156 52 170 52 Q182 54 180 64 Q176 74 164 72 Q154 70 154 62 Z" fill="#7a5a36"/>
+  <path d="M154 62 Q156 52 170 52 Q160 56 160 66 Z" fill="#b08559"/>
+  <circle cx="168" cy="56" r="8" fill="#9c958b"/>
+  <circle cx="165" cy="53" r="4" fill="#cfc8be"/>
+  <path d="M171 62 a8 8 0 0 0 5 -6 l-3 0 z" fill="#6b645c"/>
+  <!-- Querbalken mit Prellpolster (Fraktion) -->
+  <path d="M140 98 L182 90 L182 98 L140 106 Z" fill="#7a5a36"/>
+  <path class="faction" d="M146 88 Q160 82 170 86 L172 98 Q160 100 146 102 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M146 88 Q152 85 158 84 L158 100 L146 102 Z" fill="#f4f4f4"/>
+  <path class="faction" d="M166 85 L170 86 L172 98 L166 99 Z" fill="#a8a8a8"/>
+  <!-- naher Pfosten -->
+  <path d="M144 152 L148 98 L155 98 L152 150 Z" fill="#7a5a36"/>
+  <path d="M144 152 L148 98 L151 98 L148 151 Z" fill="#b08559"/>
+  <!-- Wimpel (Fraktion) -->
+  <path d="M176 92 L176 26" stroke="#553c22" stroke-width="3"/>
+  <path class="faction" d="M175 28 L154 34 L175 42 Z" fill="#d6d6d6"/>
+  <path class="faction" d="M175 28 L154 34 L175 34 Z" fill="#f4f4f4"/>
+  <!-- naher Längsbalken -->
+  <path d="M96 164 L182 148 L184 158 L98 174 Z" fill="#7a5a36"/>
+  <path d="M96 164 L182 148 L182 151 L96 167 Z" fill="#b08559"/>
+  <path d="M98 174 L184 158 L184 160 L98 176 Z" fill="#553c22"/>
+  <!-- Seilwinde -->
+  <ellipse cx="104" cy="166" rx="5" ry="8" fill="#553c22"/>
+  <path d="M98 156 L110 174 M110 158 L98 174" stroke="#9a7048" stroke-width="3"/>
+  <!-- nahe Räder -->
+  <ellipse cx="120" cy="170" rx="10" ry="15" fill="#3f2c18"/>
+  <ellipse cx="118" cy="170" rx="8.5" ry="13" fill="#7a5a36"/>
+  <ellipse cx="118" cy="170" rx="4" ry="7" fill="#3f2c18"/>
+  <path d="M118 157 L118 183 M110 170 L126 170" stroke="#b08559" stroke-width="2"/>
+  <ellipse cx="174" cy="160" rx="10" ry="15" fill="#3f2c18"/>
+  <ellipse cx="172" cy="160" rx="8.5" ry="13" fill="#7a5a36"/>
+  <ellipse cx="172" cy="160" rx="4" ry="7" fill="#3f2c18"/>
+  <path d="M172 147 L172 173 M164 160 L180 160" stroke="#b08559" stroke-width="2"/>
+  </g>
+  <!-- Bedienmann (links, an der Winde) -->
+  <g transform="translate(56 184) scale(0.82) translate(-100 -184)">
+    <path d="M88 150 L82 184 L92 184 L98 150 Z" fill="#5a4636"/>
+    <path d="M104 150 L106 184 L116 184 L112 150 Z" fill="#4a3a2c"/>
+    <path d="M80 184 h14 v-5 h-14 z M104 184 h14 v-5 h-14 z" fill="#3a2c20"/>
+    <path class="faction" d="M80 100 Q100 92 120 100 L124 156 Q100 162 76 156 Z" fill="#d6d6d6"/>
+    <path class="faction" d="M80 100 Q90 96 100 95 L98 158 Q86 158 76 156 Z" fill="#f4f4f4"/>
+    <path class="faction" d="M110 98 Q116 99 120 100 L124 156 Q118 158 112 159 Z" fill="#a8a8a8"/>
+    <path d="M78 130 Q100 136 122 130 L122 137 Q100 143 78 137 Z" fill="#5a3d22"/>
+    <!-- Lederweste -->
+    <path d="M84 100 Q100 94 116 100 L117 130 L83 130 Z" fill="#7a5a36"/>
+    <path d="M84 100 Q92 97 100 96 L99 130 L83 130 Z" fill="#9a7048"/>
+    <!-- Arme zur Winde -->
+    <path d="M114 104 Q130 112 138 124 L132 130 Q124 118 110 112 Z" fill="#b88a62"/>
+    <circle cx="137" cy="128" r="5.5" fill="#b88a62"/>
+    <path d="M84 104 Q72 112 74 128 L82 128 Q82 114 88 110 Z" fill="#e0b48a"/>
+    <circle cx="78" cy="129" r="5" fill="#e0b48a"/>
+    <!-- Kopf mit Kappe -->
+    <circle cx="100" cy="80" r="15" fill="#e0b48a"/>
+    <path d="M100 80 m0 -15 a15 15 0 0 1 15 15 l-6 0 a9 9 0 0 0 -9 -9 z" fill="#b88a62" opacity="0.5"/>
+    <path d="M84 76 Q84 60 100 60 Q116 60 116 76 Z" fill="#9c7a3a"/>
+    <path d="M100 60 Q116 60 116 76 L106 76 Z" fill="#6b5226"/>
+    <path d="M88 87 Q100 98 112 87 Q100 92 88 87 Z" fill="#4a3324"/>
+    <circle cx="94" cy="83" r="1.6" fill="#3a2c20"/>
+  </g>
+</svg>
