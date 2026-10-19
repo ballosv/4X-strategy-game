@@ -507,7 +507,7 @@ function drawBuildingProc(ctx: CanvasRenderingContext2D, style: BuildingStyle, t
   }
 }
 
-function drawBuilding(ctx: CanvasRenderingContext2D, style: BuildingStyle, type: BuildingType, x: number, y: number, s: number, flip: boolean): void {
+export function drawBuilding(ctx: CanvasRenderingContext2D, style: BuildingStyle, type: BuildingType, x: number, y: number, s: number, flip: boolean): void {
   const sprite = assets.get(`building/${style}_${type}`);
   if (sprite) drawProp(ctx, sprite, x, y, s / 9, flip);
   else drawBuildingProc(ctx, style, type, x, y, s);

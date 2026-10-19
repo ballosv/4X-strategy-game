@@ -2,10 +2,10 @@ import { TERRAIN } from '../core/data/terrain';
 import type { HexGrid } from '../core/hex';
 import type { Tile } from '../core/map/types';
 import type { GameState, Settlement } from '../core/state';
-import { improvementKeyCandidates } from './assetKeys';
+import { improvementKeyCandidates, type BuildingStyle, type BuildingType } from './assetKeys';
 import { assets, type LoadedSprite } from './assets';
 import { effElevation, hexPath, isWaterTile, paintFace, paintGridLine, paintGroundDetails, paintRiver, paintWalls } from './ground';
-import { drawProp, drawTree, paintForest, paintLooseVegetation, paintMountain, paintRocks, paintSettlementComposed, type TreeKind } from './objects';
+import { drawBuilding, drawProp, drawTree, paintForest, paintLooseVegetation, paintMountain, paintRocks, paintSettlementComposed, type TreeKind } from './objects';
 import { ROCK, shade } from './palette';
 import { paintRoads } from './roads';
 import { HEX_R, HEX_W, SQUASH, tileTop, type Point } from './projection';
@@ -496,7 +496,9 @@ export function paintPreviewTile(ctx: CanvasRenderingContext2D, key: string, c: 
     }
     case 'building': {
       face(tile('grassland'));
-      paintSettlementComposed(ctx, { kind: 'camp', buildings: [] }, 0, 0, '#2f6fb5', c, i);
+      // Schlüssel building/<stil>_<typ>; der Stil enthält keinen Unterstrich
+      const sep = rest.indexOf('_');
+      drawBuilding(ctx, rest.slice(0, sep) as BuildingStyle, rest.slice(sep + 1) as BuildingType, c.x, c.y + 6, 16, false);
       return true;
     }
     case 'overlay': {

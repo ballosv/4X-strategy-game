@@ -58,5 +58,73 @@
   "909fcfcd024ef9d1": {
     "file": "art/scenario/ref/building_tower.png",
     "assetId": "asset_tAqu3PMVeKtqhU37naDtif6d"
+  },
+  "9d4220816630babf": {
+    "file": "art/scenario/raw/prop/tree_broadleaf_1/1.png",
+    "assetId": "asset_s4hTfv49KNfsu8k6aB9Ydvsd"
+  },
+  "a4ef8bfe7f6b4d5d": {
+    "file": "art/scenario/raw/prop/tree_broadleaf_1/2.png",
+    "assetId": "asset_w6TaEdwReDzXjsAZg6EzJyK7"
+  },
+  "72784d462c166773": {
+    "file": "art/scenario/raw/prop/tree_broadleaf_1/3.png",
+    "assetId": "asset_qgQAuVq9xP4Rnk8VuourVpK8"
+  },
+  "4e09cba0b55d2241": {
+    "file": "art/scenario/raw/prop/tree_broadleaf_2/1.png",
+    "assetId": "asset_f8kXLiY7TtnsuveQm6c7gBhs"
+  },
+  "eed8c90fe3f61643": {
+    "file": "art/scenario/raw/prop/tree_broadleaf_3/2.png",
+    "assetId": "asset_E88KLUrcbgPcjkW1cEFvWsBJ"
+  },
+  "4b9d0562e1db19ce": {
+    "file": "art/scenario/raw/prop/tree_conifer_3/3.png",
+    "assetId": "asset_fESGLgUsEAPKr8gYpWJE7S7Z"
+  },
+  "c865e3298492d1d6": {
+    "file": "art/scenario/raw/prop/tree_conifer_3/1.png",
+    "assetId": "asset_xWkUVK4PKpqMpYZG9d8cPyHd"
+  },
+  "5db2856cbf5ad328": {
+    "file": "art/scenario/raw/prop/mountain_1/2.png",
+    "assetId": "asset_aS1EGnNW8n5QXM4PZjk2jS4D"
+  },
+  "76d57afc18142549": {
+    "file": "art/scenario/raw/prop/mountain_1/3.png",
+    "assetId": "asset_shcyh4JVbXQgFFLgHoYyKiDD"
+  },
+  "7b42a0424c966fbf": {
+    "file": "art/scenario/raw/prop/resource_game/1.png",
+    "assetId": "asset_JX9mtf9ZXfufnf4Pc3wmmGyX"
+  },
+  "cc5376b045bb5e64": {
+    "file": "art/scenario/raw/building/stone_house_small/1.png",
+    "assetId": "asset_YiL5w45nJJtv6tet9jMpstxW"
+  },
+  "f591eb5c7bd5a062": {
+    "file": "art/scenario/raw/building/stone_center/1.png",
+    "assetId": "asset_ot6p5kfkhSk6zz7nhxga7qMj"
+  },
+  "06ddb4ebd15fb36b": {
+    "file": "art/scenario/raw/building/medieval_house_small/3.png",
+    "assetId": "asset_EGcy8Be1mxKf7y4vyk6k9qWS"
+  },
+  "223eef7f1faa5808": {
+    "file": "art/scenario/raw/building/medieval_house_large/1.png",
+    "assetId": "asset_KXRiGKSTZ92xXDeUckwz5mHe"
+  },
+  "1f39bcdabf1f793d": {
+    "file": "art/scenario/raw/building/medieval_center/3.png",
+    "assetId": "asset_UkcWpsX7ESVqUoKcQMhSWs31"
+  },
+  "42ab713690783990": {
+    "file": "art/scenario/raw/building/medieval_tower/2.png",
+    "assetId": "asset_Sf3wdcrAvhekoJAWbkpR2xD5"
+  },
+  "8aaca716b114dcc9": {
+    "file": "art/scenario/raw/building/medieval_wall/2.png",
+    "assetId": "asset_aZisd9bFihvSy6KiK6JzhBv8"
   }
 }

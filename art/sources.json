@@ -269,6 +269,453 @@
           "art/scenario/raw/prop/tree_broadleaf_1/2.png",
           "art/scenario/raw/prop/tree_broadleaf_1/3.png"
         ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/prop/tree_broadleaf_1/1.png",
+        "jobId": "job_Za4isyE3eMvGRpDVhc3sTDJc",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/prop/tree_broadleaf_1/1_nobg.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/prop/tree_broadleaf_1/2.png",
+        "jobId": "job_yauGgCETmdncAQophahFPT47",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/prop/tree_broadleaf_1/2_nobg.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/prop/tree_broadleaf_1/3.png",
+        "jobId": "job_26DR8iRVztS9TRkEK8xpNARv",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/prop/tree_broadleaf_1/3_nobg.png"
+        ]
+      }
+    ],
+    "prop/tree_broadleaf_2": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, one single tall deciduous beech tree with an oval light green crown and a slim trunk",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/props_conifer.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_TY23VYR81sDjhURQDhfHugov",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/prop/tree_broadleaf_2/1.png",
+          "art/scenario/raw/prop/tree_broadleaf_2/2.png",
+          "art/scenario/raw/prop/tree_broadleaf_2/3.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/prop/tree_broadleaf_2/1.png",
+        "jobId": "job_XUG2hLDcieQF1dokTjkDzEGZ",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/prop/tree_broadleaf_2/1_nobg.png"
+        ]
+      }
+    ],
+    "prop/tree_broadleaf_3": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, one single small young deciduous birch tree with a white trunk and a light yellow-green airy crown",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/props_conifer.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_WhoV8KsWtX9yh73kykHJLfsn",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/prop/tree_broadleaf_3/1.png",
+          "art/scenario/raw/prop/tree_broadleaf_3/2.png",
+          "art/scenario/raw/prop/tree_broadleaf_3/3.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/prop/tree_broadleaf_3/2.png",
+        "jobId": "job_CihgSEjTEFJ2cyv2RKjG1uk5",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/prop/tree_broadleaf_3/2_nobg.png"
+        ]
+      }
+    ],
+    "prop/tree_conifer_3": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, one single tall slim spruce fir tree, dark blue-green, narrow silhouette, short brown trunk",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/props_conifer.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_9tAD3Q2jdNtwbhdFFRNanJNq",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/prop/tree_conifer_3/1.png",
+          "art/scenario/raw/prop/tree_conifer_3/2.png",
+          "art/scenario/raw/prop/tree_conifer_3/3.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/prop/tree_conifer_3/3.png",
+        "jobId": "job_bzxypxRkiSnQsCjiqNytqmfP",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/prop/tree_conifer_3/3_nobg.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/prop/tree_conifer_3/1.png",
+        "jobId": "job_mdgtU2B8iXe7mXMt3ASACDz9",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/prop/tree_conifer_3/1_nobg.png"
+        ]
+      }
+    ],
+    "prop/mountain_1": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, one single rocky grey mountain massif with two or three peaks, steep cliffs, only small patches of snow on the very top, a few pine trees at its foot, wider than tall",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/props_mountain.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_qQwVav4LtawixfBaw1WmSGhA",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/prop/mountain_1/1.png",
+          "art/scenario/raw/prop/mountain_1/2.png",
+          "art/scenario/raw/prop/mountain_1/3.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/prop/mountain_1/2.png",
+        "jobId": "job_X8hfYUiMSKeUfSnn4fHHBjTs",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/prop/mountain_1/2_nobg.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/prop/mountain_1/3.png",
+        "jobId": "job_9AEpZsEKmXwYp7BnDxTuZVDp",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/prop/mountain_1/3_nobg.png"
+        ]
+      }
+    ],
+    "prop/resource_game": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, a small group of two red deer, a stag with antlers and a doe, standing on a tiny patch of grass",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/props_deer.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_z4ayzPh3viMbSoGXWLpHP6h6",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/prop/resource_game/1.png",
+          "art/scenario/raw/prop/resource_game/2.png",
+          "art/scenario/raw/prop/resource_game/3.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/prop/resource_game/1.png",
+        "jobId": "job_kepf8bFwJsJ9GKcDB48GqQcA",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/prop/resource_game/1_nobg.png"
+        ]
+      }
+    ],
+    "building/stone_house_small": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, one single small stone age hut, round, made of wooden poles covered with animal hides and thatch, with a smoke hole",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/village.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_rAFryYeivBEHoRT8UdEFsi9c",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/building/stone_house_small/1.png",
+          "art/scenario/raw/building/stone_house_small/2.png",
+          "art/scenario/raw/building/stone_house_small/3.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/building/stone_house_small/1.png",
+        "jobId": "job_D4JgC4jhpfAz31ij6Rt67E9F",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/building/stone_house_small/1_nobg.png"
+        ]
+      }
+    ],
+    "building/stone_center": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, one single large stone age tribal long house with a thatched roof, wooden poles, a fire pit and a small totem pole in front",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/village.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_o2VHnFP9fcG1376G7V7hNjmB",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/building/stone_center/1.png",
+          "art/scenario/raw/building/stone_center/2.png",
+          "art/scenario/raw/building/stone_center/3.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/building/stone_center/1.png",
+        "jobId": "job_wK5SzzScRVC9EUTS6cSDpHhF",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/building/stone_center/1_nobg.png"
+        ]
+      }
+    ],
+    "building/medieval_house_small": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, one single small medieval peasant cottage with a straw thatched roof and timber-framed walls",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/village.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_Q9ttZ4ri72mjYzQnEjAEsq7A",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/building/medieval_house_small/1.png",
+          "art/scenario/raw/building/medieval_house_small/2.png",
+          "art/scenario/raw/building/medieval_house_small/3.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/building/medieval_house_small/3.png",
+        "jobId": "job_RXVesVtipGiZchCfxcLYDY5Y",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/building/medieval_house_small/3_nobg.png"
+        ]
+      }
+    ],
+    "building/medieval_house_large": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, one single large medieval half-timbered house with an orange-red tiled roof and white plaster walls",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/village.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_EQ1QDbbF13oE4G97QLc741GK",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/building/medieval_house_large/1.png",
+          "art/scenario/raw/building/medieval_house_large/2.png",
+          "art/scenario/raw/building/medieval_house_large/3.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/building/medieval_house_large/1.png",
+        "jobId": "job_yfHebJ1HuwEdPCNwiCiwvDZb",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/building/medieval_house_large/1_nobg.png"
+        ]
+      }
+    ],
+    "building/medieval_center": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, one single medieval town hall with a stone ground floor, timber-framed upper floor, red tiled roof and a small clock turret, with a neutral light grey banner",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/village.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_hfFTzjHARG21C3UAUm6F9wk9",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/building/medieval_center/1.png",
+          "art/scenario/raw/building/medieval_center/2.png",
+          "art/scenario/raw/building/medieval_center/3.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/building/medieval_center/3.png",
+        "jobId": "job_uXhE65m7s9mBKf75DNjn9Fsy",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/building/medieval_center/3_nobg.png"
+        ]
+      }
+    ],
+    "building/medieval_tower": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, one single tall square medieval stone church tower with a pointed dark roof and small windows",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/building_tower.png",
+          "art/scenario/ref/village.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_7P2eYW2n53ycUvMURddRfsQU",
+        "cu": 42,
+        "files": [
+          "art/scenario/raw/building/medieval_tower/1.png",
+          "art/scenario/raw/building/medieval_tower/2.png",
+          "art/scenario/raw/building/medieval_tower/3.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/building/medieval_tower/2.png",
+        "jobId": "job_LtZEA5aGsKTZQdaM3wib7hPj",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/building/medieval_tower/2_nobg.png"
+        ]
+      }
+    ],
+    "building/medieval_wall": [
+      {
+        "date": "2026-10-19",
+        "model": "model_google-gemini-3-1-flash",
+        "prompt": "isometric strategy game asset in exactly the hand-painted stylized look of the reference images, soft painterly texture, light from upper left, soft short shadow to lower right, view from above at about 30 degrees, single isolated object centered on a plain flat pure white background, no ground plane, no text, no border, one single short straight segment of a medieval grey stone town wall with crenellations, seen diagonally",
+        "params": {
+          "aspectRatio": "1:1",
+          "resolution": "1K",
+          "numOutputs": 3
+        },
+        "references": [
+          "art/scenario/ref/village.png",
+          "docs/referenz/einheitenpanel.png"
+        ],
+        "jobId": "job_U9LRbLNMw3fHswJ6bHYFeKRy",
+        "cu": 39,
+        "files": [
+          "art/scenario/raw/building/medieval_wall/1.png",
+          "art/scenario/raw/building/medieval_wall/2.png",
+          "art/scenario/raw/building/medieval_wall/3.png"
+        ]
+      },
+      {
+        "date": "2026-10-19",
+        "model": "model_photoroom-background-removal",
+        "input": "art/scenario/raw/building/medieval_wall/2.png",
+        "jobId": "job_dxMT496FBw5ko2aGTjpFhRgU",
+        "cu": 3,
+        "files": [
+          "art/scenario/raw/building/medieval_wall/2_nobg.png"
+        ]
       }
     ]
   }

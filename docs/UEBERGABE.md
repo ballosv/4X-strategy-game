@@ -1,31 +1,36 @@
 # Übergabe für die nächste Entwicklungssitzung
 
-Stand: 19.10.2026 (3. Sitzung) · letztes Release: **v0.2.0** · `develop` enthält zusätzlich Grafik-Workflow,
-67 SVG-Platzhaltergrafiken und die Grafik-Spezifikation Version 2. Branch `ccr-87e8aee1-4etlkm` enthält
-zusätzlich den **Renderer-Umbau (Phase A)** und den **Probelauf von Phase B** (noch kein PR nach `develop`).
+Stand: 19.10.2026 (3. Sitzung) · letztes Release: **v0.2.0** · PR #22 (`ccr-87e8aee1-4etlkm` → `develop`)
+enthält den **Renderer-Umbau (Phase A)** und den **Vertical Slice (Phase B)**.
+
+## Stand Phase B
+
+- Stil vom Nutzer freigegeben; Entscheidung: **ohne LoRA-Stilmodelle**, Gemini 3.1 Flash
+  (`model_google-gemini-3-1-flash`) mit Zielbild-Ausschnitten (`art/scenario/ref/`) als Referenz.
+- Geliefert (32 Grafiken): Texturen Gras 1/2, Küste 1, Meer 1; Wände Felswand (gemäßigt), Erdhang, Strand;
+  Laubbaum 1–5, Nadelbaum 1–4, Fels 1/2, Berg 1/2, Wild; Gebäude Steinzeit (Hütte, Zentrum) und Mittelalter
+  (Haus klein/groß, Zentrum, Turm, Mauer); Porträt Speerträger. Vergleichsbogen:
+  [`docs/referenz/vertical-slice-phase-b.jpg`](referenz/vertical-slice-phase-b.jpg).
+- Verbraucht: **879 CU** (Probelauf 168, Slice 711). Kosten: 13 CU/Bild bei 1K, 10 CU/Bild bei Auflösung 512
+  (Texturen/Wände), Freistellen 3 CU. Einmal hat der Sicherheitsfilter einen harmlosen Prompt („Erdhang … roots“)
+  blockiert – umformuliert, das Skript überspringt solche Aufträge jetzt.
+- Ablauf und Dateien: [ASSET_PIPELINE.md](ASSET_PIPELINE.md), Abschnitt „KI-Produktion mit Scenario“.
 
 ## Nächste Aufgaben (Reihenfolge)
 
-1. **Probelauf Phase B vom Nutzer freigeben lassen** – Vergleichsbogen
-   [`docs/referenz/probelauf-phase-b.jpg`](referenz/probelauf-phase-b.jpg)
-   - Scenario-Zugang funktioniert (Sitzung 3). Projekt `proj_tgX9ZV1YKNGpBZnkZwRNYxJj`.
-   - Probelauf: 4 Aufträge × 3 Varianten mit **Gemini 3.1 Flash + Zielbild-Ausschnitten als Referenz, ohne
-     LoRA-Training** (156 CU) + 4 × Freistellen (12 CU) = **168 CU verbraucht**.
-   - Eingebunden: `texture/grassland_1/2`, `prop/tree_conifer_1/2`, `prop/rock_1/2` (scale 0,2),
-     `portrait/spearman`. Einheitenpanel nutzt gemalte Porträts; Renderer zeichnet Kontaktschatten für Bäume/Felsen.
-   - Ergebnis: Stil, Perspektive und Licht treffen das Zielbild gut; Porträt fast identisch zur Vorlage.
-     Textur-Variante 1 von Gemini zeigte sichtbare Wiederholung → `art-postprocess.py` macht Texturen nahtlos.
-2. **Entscheidung des Nutzers zum Rest des Vertical Slice** (25 offene 0.4.0-Schlüssel in `art/backlog.json`)
-   - Option A: weiter ohne LoRA mit Gemini + Referenzen (≈ 40 CU je Schlüssel bei 3 Varianten, gesamt ≈ 1.000 CU);
-     freigegebene Bilder später als Trainingsdaten für die LoRA-Modelle in Phase C.
-   - Option B: wie Spezifikation Kap. 7.1 zuerst LoRA-Stilmodelle trainieren (92–156 CU je Modell).
-   - Vorgehen: Aufträge in `art/scenario/jobs.json` ergänzen → `--dry-run` → generieren → freistellen →
-     `selection.json` → `art-postprocess.py` (siehe [ASSET_PIPELINE.md](ASSET_PIPELINE.md), Abschnitt Scenario).
-   - Offen: Fraktionsmaske für Einheiten-Sprites (Fraktionsflächen hellgrau generieren, Maske per Farbbereich),
-     Wände/Kanten als horizontal kachelbare Texturen, Gebäudebausteine (Anker Bodenmitte).
-3. **PR nach `develop`** für Phase A + Probelauf, sobald der Nutzer zustimmt.
-4. Offen aus Phase A: Wolkendecke für unerkundete Felder (Kap. 4, Schicht 9), Brücken-/Steg-Darstellung,
-   Einheiten etwas größer, Chunk-Zeichenzeit auf echten Android-Geräten messen.
+1. **PR #22 nach `develop` mergen** (CI grün), danach neue Feature-Branches.
+2. **Renderer erweitern für die 7 offenen 0.4.0-Schlüssel**, die er noch prozedural zeichnet und nicht lädt:
+   `wall/overhang`, `wall/foam`, `wall/scree`, `path/river`, `path/waterfall_1`, `path/trail`, `path/bridge_stone`.
+   Erst Einbindung (Format festlegen: Kantenstreifen bzw. Bandtextur), dann generieren. Sie blockieren das Release 0.4.0.
+3. **Gemischte Siedlungen:** Für Mittelalter fehlen `workshop`/`storage`, für Steinzeit `house_large`, `tower`,
+   `workshop`, `storage` – bis dahin stehen gemalte neben prozeduralen Bausteinen. Größenverhältnis in einer
+   Mittelalter-Stadt im Spiel prüfen (Turm hat `scale` 0,55).
+4. **Einheiten-Sprites mit Fraktionsmaske** (Fraktionsflächen hellgrau generieren, Maske per Farbbereich) –
+   Speerträger zuerst; Prompt-Vorlage Kap. 7.2.
+5. **Phase C (Bibliothek)** nach gleichem Muster; freigegebene Bilder können später als Trainingsdaten für
+   LoRA-Modelle dienen, falls die Konsistenz bei vielen Assets nachlässt.
+6. Offen aus Phase A: Wolkendecke für unerkundete Felder (Kap. 4, Schicht 9), Einheiten etwas größer,
+   Chunk-Zeichenzeit auf echten Android-Geräten messen.
 
 ## Arbeitsweise (vom Nutzer vorgegeben)
 

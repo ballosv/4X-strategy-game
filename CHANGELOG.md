@@ -16,13 +16,16 @@
 - Asset-Katalog v2 (Texturen, Wände, Wege, Objekte, Gebäude, Porträts, Atmosphäre) in Vorschau und
   Prüfskript; Grafik-Backlog mit Ziel-Release (Vertical Slice 0.4.0, Bibliothek 0.5.0)
 
-### Grafik (Phase B – Probelauf mit Scenario)
-- Erste KI-generierte Grafiken: Grastextur (2 Varianten, nahtlos), Nadelbäume (2), Felsbrocken (2)
-  und gemaltes Porträt des Speerträgers
+### Grafik (Phase B – Vertical Slice mit Scenario)
+- KI-generierte Grafiken im Stil des Zielbilds (Gemini 3.1 Flash mit Zielbild-Ausschnitten als Referenz):
+  Bodentexturen Gras (2), Küste, Meer; Wandtexturen Felswand, Erdhang, Strand; Laubbäume (5),
+  Nadelbäume (4), Felsbrocken (2), Bergmassive (2), Wild; Steinzeit-Hütte und -Langhaus; mittelalterliches
+  Wohnhaus klein/groß, Rathaus, Kirchturm, Mauerstück; Porträt des Speerträgers
+- Asset-Vorschau zeigt je Gebäudeschlüssel den einzelnen Baustein statt eines ganzen Lagers
 - Einheitenpanel zeigt gemalte Porträts (`portrait/<einheit>`), sobald vorhanden
 - Gemalte Bäume und Felsen erhalten einen Kontaktschatten vom Renderer
 - Skripte: `scripts/scenario-generate.mjs` (Generierung mit Kostenprüfung per dryRun und Budgetgrenze,
-  Freistellen) und `scripts/art-postprocess.py` (Zuschnitt, Anker, nahtlose Texturen, WebP, Manifest);
+  Freistellen; vom Sicherheitsfilter blockierte Aufträge werden übersprungen) und `scripts/art-postprocess.py` (Zuschnitt, Anker, nahtlose Boden- und Wandtexturen, WebP, Manifest);
   Herkunft je Grafik in `art/sources.json`
 
 ## v0.2.0 – Wirtschaft & Infrastruktur (2026-10-18)
